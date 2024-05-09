@@ -1,0 +1,9 @@
+*.jar
+*.bat
+application.conf
+log-service.conf
+**/logs/*
+.idea/
+**/target
+projects.json
+checkpoint
