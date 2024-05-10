@@ -1,0 +1,194 @@
+{
+  "id" : "CPRD-GOLD-Clinical",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-GOLD-Clinical",
+  "name" : "CPRD-GOLD-Clinical",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-GOLD-Clinical",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-GOLD-Clinical",
+      "path" : "CPRD-GOLD-Clinical",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-GOLD-Clinical.patid",
+      "path" : "CPRD-GOLD-Clinical.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD GOLD"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.eventdate",
+      "path" : "CPRD-GOLD-Clinical.eventdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date associated with the event, as entered by the GP"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sysdate",
+      "path" : "CPRD-GOLD-Clinical.sysdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the event was entered into Vision"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.constype",
+      "path" : "CPRD-GOLD-Clinical.constype",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Code for the category of event recorded within the GP system (e.g.\ndiagnosis or symptom)"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.consid",
+      "path" : "CPRD-GOLD-Clinical.consid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Identifier that allows information about the consultation to be retrieved,\nwhen used in combination with pracid"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.medcode",
+      "path" : "CPRD-GOLD-Clinical.medcode",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "CPRD unique code for the medical term selected by the GP"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctid",
+      "path" : "CPRD-GOLD-Clinical.sctid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The mapped SNOMED CT Concept ID. Mapping is conducted prior to data\ntransfer and will vary by mapping version used."
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctdescid",
+      "path" : "CPRD-GOLD-Clinical.sctdescid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "When direct selection and entry of SNOMED CT terms is permitted this will\ncontain the description ID of the selected term. This field will be NULL when\nmap type = 4 (data entered as Read code)"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctexpression",
+      "path" : "CPRD-GOLD-Clinical.sctexpression",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "A placeholder for SNOMED CT post-coordinated expressions. This is not\nsupported in early phases of SNOMED implementation."
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctmaptype",
+      "path" : "CPRD-GOLD-Clinical.sctmaptype",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "ndicates the native encoding of the record in the Vision software (4 = term\nselected from Read dictionary, 5= term selected from SNOMED CT)"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctmapversion",
+      "path" : "CPRD-GOLD-Clinical.sctmapversion",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The version of the READ-SNOMED CT mapping table applied"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctisindicative",
+      "path" : "CPRD-GOLD-Clinical.sctisindicative",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "definition" : "Reserved for use when systems write SNOMED CT terms natively. Used to\nindicate the reliability of the reverse SNOMED CT-Read map. Where\nSNOMED CT codes do not have a direct mapping to READ, the code\n‘Rz…00’ will be utilised."
+    }, {
+      "id" : "CPRD-GOLD-Clinical.sctisassured",
+      "path" : "CPRD-GOLD-Clinical.sctisassured",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "definition" : "Indicates whether the Read to SNOMED mapping has been verified by a\npanel of physicians"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.staffid",
+      "path" : "CPRD-GOLD-Clinical.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Identifier of the practice staff member entering the data. A value of 0\nindicates that the staffid is unknown"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.episode",
+      "path" : "CPRD-GOLD-Clinical.episode",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Episode type for a specific clinical event"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.enttype",
+      "path" : "CPRD-GOLD-Clinical.enttype",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Identifier that represents the structured data area in Vision where the data\nwas entered"
+    }, {
+      "id" : "CPRD-GOLD-Clinical.adid",
+      "path" : "CPRD-GOLD-Clinical.adid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Identifier that allows additional information to be retrieved for this event,\nwhen used in combination with pracid. A value of 0 signifies that there is no\nadditional information associated with the event."
+    } ]
+  }
+}

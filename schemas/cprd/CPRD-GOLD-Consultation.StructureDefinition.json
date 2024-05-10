@@ -1,0 +1,94 @@
+{
+  "id" : "CPRD-GOLD-Consultation",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-GOLD-Consultation",
+  "name" : "CPRD-GOLD-Consultation",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-GOLD-Consultation",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-GOLD-Consultation",
+      "path" : "CPRD-GOLD-Consultation",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-GOLD-Consultation.patid",
+      "path" : "CPRD-GOLD-Consultation.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD GOLD"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.eventdate",
+      "path" : "CPRD-GOLD-Consultation.eventdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : " Date associated with the event, as entered by the GP"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.sysdate",
+      "path" : "CPRD-GOLD-Consultation.sysdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the event was entered into Vision"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.constype",
+      "path" : "CPRD-GOLD-Consultation.constype",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Type of consultation (e.g. Surgery Consultation, Night Visit, Emergency etc.)"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.consid",
+      "path" : "CPRD-GOLD-Consultation.consid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The consultation identifier linking events at the same consultation, when\nused in combination with pracid"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.staffid",
+      "path" : "CPRD-GOLD-Consultation.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The identifier of the practice staff member entering the data. A value of 0\nindicates that the staffid is unknown"
+    }, {
+      "id" : "CPRD-GOLD-Consultation.duration",
+      "path" : "CPRD-GOLD-Consultation.duration",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The length of time (minutes) between the opening, and closing of the\nconsultation record"
+    } ]
+  }
+}

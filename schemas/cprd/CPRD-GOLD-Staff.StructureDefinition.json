@@ -1,0 +1,54 @@
+{
+  "id" : "CPRD-GOLD-Staff",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-GOLD-Staff",
+  "name" : "CPRD-GOLD-Staff",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-GOLD-Staff",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-GOLD-Staff",
+      "path" : "CPRD-GOLD-Staff",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-GOLD-Staff.staffid",
+      "path" : "CPRD-GOLD-Staff.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to the practice staff member entering the\ndata"
+    }, {
+      "id" : "CPRD-GOLD-Staff.gender",
+      "path" : "CPRD-GOLD-Staff.gender",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Staff member’s gender"
+    }, {
+      "id" : "CPRD-GOLD-Staff.role",
+      "path" : "CPRD-GOLD-Staff.role",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Role of the member of staff who created the event"
+    } ]
+  }
+}
