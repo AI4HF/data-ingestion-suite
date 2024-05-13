@@ -1,0 +1,33 @@
+{
+  "id" : "CPRD-GOLD-Encounter-Mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-GOLD-Encounter-Mapping",
+  "name" : "CPRD-GOLD-Encounter-Mapping",
+  "title" : "CPRD-GOLD-Encounter-Mapping",
+  "source" : [ {
+    "alias" : "consultation",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-GOLD-Consultation",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "encounter",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "class" : "",
+        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
+        "actualPeriod" : {
+          "start" : "{{eventdate.toDateTime()}}",
+          "end" : "{{eventdate.toDateTime() + (duration.toString() minutes)}}"
+        },
+        "status" : "completed",
+        "id" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid.toString())}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
+        },
+        "resourceType" : "Encounter"
+      }
+    }
+  } ]
+}
