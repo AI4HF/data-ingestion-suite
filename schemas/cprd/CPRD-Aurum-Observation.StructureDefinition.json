@@ -1,0 +1,174 @@
+{
+  "id" : "CPRD-Aurum-Observation",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Observation",
+  "name" : "CPRD-Aurum-Observation",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-Aurum-Observation",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-Aurum-Observation",
+      "path" : "CPRD-Aurum-Observation",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-Aurum-Observation.patid",
+      "path" : "CPRD-Aurum-Observation.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum. The\npatient identifier is unique to CPRD Aurum and may represent a\ndifferent patient in the CPRD GOLD database."
+    }, {
+      "id" : "CPRD-Aurum-Observation.consid",
+      "path" : "CPRD-Aurum-Observation.consid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Linked consultation identifier. In EMIS Web® it is not necessary to\nenter observations within a consultation, so this identifier may be\nmissing."
+    }, {
+      "id" : "CPRD-Aurum-Observation.pracid",
+      "path" : "CPRD-Aurum-Observation.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "CPRD-Aurum-Observation.obsid",
+      "path" : "CPRD-Aurum-Observation.obsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier given to the observation. This is the primary key for\nthis table."
+    }, {
+      "id" : "CPRD-Aurum-Observation.obsdate",
+      "path" : "CPRD-Aurum-Observation.obsdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date associated with the event"
+    }, {
+      "id" : "CPRD-Aurum-Observation.enterdate",
+      "path" : "CPRD-Aurum-Observation.enterdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the event was entered into EMIS Web®"
+    }, {
+      "id" : "CPRD-Aurum-Observation.staffid",
+      "path" : "CPRD-Aurum-Observation.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to the practice staff member who\ntook the consultation in CPRD Aurum"
+    }, {
+      "id" : "CPRD-Aurum-Observation.parentobsid",
+      "path" : "CPRD-Aurum-Observation.parentobsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Observation identifier (obsid) that is the parent to the observation.\nThis enables grouping of multiple observations, such as systolic and\ndiastolic blood pressure, or blood test results."
+    }, {
+      "id" : "CPRD-Aurum-Observation.medcodeid",
+      "path" : "CPRD-Aurum-Observation.medcodeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "CPRD unique code for the medical term selected by the GP"
+    }, {
+      "id" : "CPRD-Aurum-Observation.value",
+      "path" : "CPRD-Aurum-Observation.value",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Measurement or test value "
+    }, {
+      "id" : "CPRD-Aurum-Observation.numunitid",
+      "path" : "CPRD-Aurum-Observation.numunitid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Unit of measurement"
+    }, {
+      "id" : "CPRD-Aurum-Observation.obstypeid",
+      "path" : "CPRD-Aurum-Observation.obstypeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Type of observation (allergy, family history, observation)"
+    }, {
+      "id" : "CPRD-Aurum-Observation.numrangelow",
+      "path" : "CPRD-Aurum-Observation.numrangelow",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Value representing the low boundary of the normal range for this\nmeasurement"
+    }, {
+      "id" : "CPRD-Aurum-Observation.numrangehigh",
+      "path" : "CPRD-Aurum-Observation.numrangehigh",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Value representing the high boundary of the normal range for this\nmeasurement"
+    }, {
+      "id" : "CPRD-Aurum-Observation.probobsid",
+      "path" : "CPRD-Aurum-Observation.probobsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Observation identifier (obsid) of any problem that an observation is\nassociated with. An example of this might be an overarching\ncondition that the current observation is associated with such as\n‘wheezing’ with the problem observation identifier that links to an observation of ‘asthma’, that in turn contains information in the\nproblem table."
+    } ]
+  }
+}

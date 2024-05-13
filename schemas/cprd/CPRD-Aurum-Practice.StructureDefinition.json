@@ -1,0 +1,64 @@
+{
+  "id" : "CPRD-Aurum-Practice",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Practice",
+  "name" : "CPRD-Aurum-Practice",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-Aurum-Practice",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-Aurum-Practice",
+      "path" : "CPRD-Aurum-Practice",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-Aurum-Practice.pracid",
+      "path" : "CPRD-Aurum-Practice.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum. This is\nthe primary key for this table."
+    }, {
+      "id" : "CPRD-Aurum-Practice.lcd",
+      "path" : "CPRD-Aurum-Practice.lcd",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of the most recent CPRD data collection for the practice."
+    }, {
+      "id" : "CPRD-Aurum-Practice.uts",
+      "path" : "CPRD-Aurum-Practice.uts",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "The date at which the practice data is deemed to be of research quality,\nbased on CPRD algorithm."
+    }, {
+      "id" : "CPRD-Aurum-Practice.region",
+      "path" : "CPRD-Aurum-Practice.region",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Value to indicate where in the UK the practice is based. The region\ndenotes the ONS Region for English practices."
+    } ]
+  }
+}

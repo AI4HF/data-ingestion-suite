@@ -1,0 +1,104 @@
+{
+  "id" : "CPRD-Aurum-Referral",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Referral",
+  "name" : "CPRD-Aurum-Referral",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "CPRD-Aurum-Referral",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "CPRD-Aurum-Referral",
+      "path" : "CPRD-Aurum-Referral",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "CPRD-Aurum-Referral.patid",
+      "path" : "CPRD-Aurum-Referral.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum.\nThe patient identifier is unique to CPRD Aurum and may\nrepresent a different patient in the CPRD GOLD database"
+    }, {
+      "id" : "CPRD-Aurum-Referral.obsid",
+      "path" : "CPRD-Aurum-Referral.obsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier given to the observation. This is the primary key\nfor this table."
+    }, {
+      "id" : "CPRD-Aurum-Referral.pracid",
+      "path" : "CPRD-Aurum-Referral.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "CPRD-Aurum-Referral.refsourceorgid",
+      "path" : "CPRD-Aurum-Referral.refsourceorgid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Source organisation of the referral. Organisations are identified\nby an ID number and each organisation has a type (e.g. hospital\ninpatient department, community clinic). Both the organisation\ntable and the OrgType lookup are required. The lookups are\nundergoing anonymisation work."
+    }, {
+      "id" : "CPRD-Aurum-Referral.reftargetorgid",
+      "path" : "CPRD-Aurum-Referral.reftargetorgid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Source organisation of the referral. Organisations are identified\nby an ID number and each organisation has a type (e.g. hospital\ninpatient department, community clinic). Both the organisation\ntable and the OrgType lookup are required. The lookups are\nundergoing anonymisation work. "
+    }, {
+      "id" : "CPRD-Aurum-Referral.refurgencyid",
+      "path" : "CPRD-Aurum-Referral.refurgencyid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Urgency of the referral e.g. routine, urgent, dated"
+    }, {
+      "id" : "CPRD-Aurum-Referral.refservicetypeid",
+      "path" : "CPRD-Aurum-Referral.refservicetypeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Type of service the referral relates to e.g. assessment,\nmanagement, investigation"
+    }, {
+      "id" : "CPRD-Aurum-Referral.refmodeid",
+      "path" : "CPRD-Aurum-Referral.refmodeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Mode by which the referral was made e.g. telephone, written"
+    } ]
+  }
+}
