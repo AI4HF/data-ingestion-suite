@@ -1,0 +1,29 @@
+{
+  "id" : "CPRD-Aurum-Patient-Mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Patient-Mapping",
+  "name" : "CPRD-Aurum-Patient-Mapping",
+  "title" : "CPRD-Aurum-Patient-Mapping",
+  "source" : [ {
+    "alias" : "patient",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Patient",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "patient",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "gender" : "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
+        "birthDate" : "{{iif(mob = 0, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).toDate())}}",
+        "deceasedDateTime" : "{{ ? iif(cprd_ddate.exists(), cprd_ddate.toDateTime(), iif(emis_ddate.exists(), emis_ddate.toDateTime(), {}))}}",
+        "id" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient" ]
+        },
+        "resourceType" : "Patient"
+      }
+    }
+  } ]
+}
