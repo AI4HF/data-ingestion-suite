@@ -50,7 +50,7 @@
         "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
         "effectiveDateTime" : "{{ obsdate.toDate() }}",
         "status" : "",
-        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "id" : "{{mpp:createFhirReferenceWithHashedId('Observation', obsid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus" ]
         },
