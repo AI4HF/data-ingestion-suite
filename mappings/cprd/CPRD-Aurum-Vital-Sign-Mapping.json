@@ -1,0 +1,65 @@
+{
+  "id" : "CPRD-Aurum-Vital-Sign-Mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Vital-Sign-Mapping",
+  "name" : "CPRD-Aurum-Vital-Sign-Mapping",
+  "title" : "CPRD-Aurum-Vital-Sign-Mapping",
+  "source" : [ {
+    "alias" : "observation",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Observation",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "vitalSignContext" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/cprd/ cprd_aurum_vital_sign_code_mapping.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "vitalSignCode",
+    "language" : "text/fhirpath",
+    "expression" : " mpp:getConcept(%vitalSignContext, medcodeid) "
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "vitalsign",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "vital-signs",
+            "display" : "Vital Signs"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "{{ %vitalSignCode.target_code }}",
+            "display" : "{{ %vitalSignCode.target_name }}",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{ obsdate.toDate() }}",
+        "valueQuantity" : {
+          "value" : "{{ value }}",
+          "unit" : "{{ %vitalSignCode.target_unit }}",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "{{ %vitalSignCode.target_unit }}"
+        },
+        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
+        "status" : "",
+        "id" : "{{mpp:createFhirReferenceWithHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isVitalSign",
+      "language" : "text/fhirpath",
+      "expression" : " %vitalSignCode.exists() "
+    }
+  } ]
+}
