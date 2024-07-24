@@ -16,13 +16,13 @@
       "language" : "application/fhir-template+json",
       "value" : {
         "class" : "",
-        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "actualPeriod" : {
-          "start" : "{{consdate.toDateTime()}}",
-          "end" : "{{consdate.toDateTime()}}"
+          "start" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+          "end" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
         },
         "status" : "completed",
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "id" : "{{mpp:getHashedId('Encounter', consid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
         },

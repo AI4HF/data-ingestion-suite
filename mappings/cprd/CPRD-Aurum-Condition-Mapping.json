@@ -11,7 +11,7 @@
   "context" : {
     "conditionContext" : {
       "category" : "concept-map",
-      "url" : "$CONTEXT_REPO/cprd/ cprd_aurum_condition_code_mapping.csv"
+      "url" : "$CONTEXT_REPO/cprd/cprd_aurum_condition_code_mapping.csv"
     }
   },
   "variable" : [ {
@@ -32,9 +32,9 @@
             "@sliceName" : "icd10Code"
           } ]
         },
-        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "onsetDateTime" : "{{ obsdate.toDate() }}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "onsetDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "clinicalStatus" : {
           "coding" : [ {
             "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
@@ -42,7 +42,7 @@
             "display" : "Unknown"
           } ]
         },
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Condition', obsid)}}",
+        "id" : "{{mpp:getHashedId('Condition', obsid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition" ]
         },
