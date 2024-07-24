@@ -16,9 +16,9 @@
       "language" : "application/fhir-template+json",
       "value" : {
         "gender" : "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
-        "birthDate" : "{{iif(mob = 0, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).toDate())}}",
-        "deceasedDateTime" : "{{ ? iif(cprd_ddate.exists(), cprd_ddate.toDateTime(), iif(emis_ddate.exists(), emis_ddate.toDateTime(), {}))}}",
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "birthDate" : "{{iif(mob = 0, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).utl:toFhirDate('yyyy-M'))}}",
+        "deceasedDateTime" : "{{ ? iif(cprd_ddate.exists(), cprd_ddate.utl:toFhirDateTime('dd/MM/yyyy'), iif(emis_ddate.exists(), emis_ddate.utl:toFhirDateTime('dd/MM/yyyy'), {}))}}",
+        "id" : "{{mpp:getHashedId('Patient', patid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient" ]
         },

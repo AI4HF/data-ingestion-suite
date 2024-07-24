@@ -46,11 +46,11 @@
             "display" : "{{ %smokingStatus.target_name }}"
           } ]
         },
-        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "effectiveDateTime" : "{{ obsdate.toDate() }}",
-        "status" : "",
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Observation', obsid)}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus" ]
         },

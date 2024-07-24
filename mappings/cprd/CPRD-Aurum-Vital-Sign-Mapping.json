@@ -11,7 +11,7 @@
   "context" : {
     "vitalSignContext" : {
       "category" : "concept-map",
-      "url" : "$CONTEXT_REPO/cprd/ cprd_aurum_vital_sign_code_mapping.csv"
+      "url" : "$CONTEXT_REPO/cprd/cprd_aurum_vital_sign_code_mapping.csv"
     }
   },
   "variable" : [ {
@@ -39,17 +39,17 @@
             "@sliceName" : "loincCode"
           } ]
         },
-        "effectiveDateTime" : "{{ obsdate.toDate() }}",
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "valueQuantity" : {
           "value" : "{{ value }}",
           "unit" : "{{ %vitalSignCode.target_unit }}",
           "system" : "http://unitsofmeasure.org",
           "code" : "{{ %vitalSignCode.target_unit }}"
         },
-        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "status" : "",
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Observation', obsid)}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign" ]
         },

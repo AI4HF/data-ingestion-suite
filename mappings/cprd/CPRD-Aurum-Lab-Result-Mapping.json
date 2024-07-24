@@ -40,16 +40,25 @@
             "@sliceName" : "loincCode"
           } ]
         },
-        "effectiveDateTime" : "{{ obsdate.toDate() }}",
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "valueQuantity" : {
           "value" : "{{ value }}",
           "unit" : "{{ %labResultCode.target_unit }}",
           "system" : "http://unitsofmeasure.org",
           "code" : "{{ %labResultCode.target_unit }}"
         },
-        "subject" : "{{mpp:getHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "id" : "{{mpp:createFhirReferenceWithHashedId('Observation', obsid)}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "referenceRange" : [ {
+          "low" : {
+            "value" : "{{? numrangelow }}"
+          },
+          "high" : {
+            "value" : "{{? numrangehigh }}"
+          }
+        } ],
+        "derivedFrom" : "{{* mpp:createFhirReferenceWithHashedId('Observation', parentobsid)}}",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult" ]
         },
