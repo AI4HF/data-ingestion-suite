@@ -37,6 +37,16 @@
         "sourceRef" : "cprd-synthetic"
       }
     }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ONS-Cause-Of-Death-Mapping",
+    "sourceContext" : {
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Death_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
   } ],
   "dataProcessingSettings" : {
     "saveErroneousRecords" : false,

@@ -1,0 +1,55 @@
+{
+  "id" : "ONS-Cause-Of-Death-Mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/ONS-Cause-Of-Death-Mapping",
+  "name" : "ONS-Cause-Of-Death-Mapping",
+  "title" : "ONS-Cause-Of-Death-Mapping",
+  "source" : [ {
+    "alias" : "deathRegistration",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/ONS-Death-Registration",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "causeOfDeath",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "status" : "final",
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "exam",
+            "display" : "Exam"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "79378-6",
+            "display" : "Cause of death",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{ dod.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/sid/icd-10",
+            "code" : "{{ cause }}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "id" : "{{mpp:getHashedId('Observation', patid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isCauseDefined",
+      "language" : "text/fhirpath",
+      "expression" : " cause.exists() "
+    }
+  } ]
+}
