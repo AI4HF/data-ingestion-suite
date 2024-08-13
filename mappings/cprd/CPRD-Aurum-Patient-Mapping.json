@@ -6,10 +6,26 @@
   "source" : [ {
     "alias" : "patient",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Aurum-Patient",
-    "joinOn" : [ ]
+    "joinOn" : [ "patid" ]
+  }, {
+    "alias" : "linkageEligibility",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Linkage-Eligibility",
+    "joinOn" : [ "patid" ]
+  }, {
+    "alias" : "deathRegistration",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/ONS-Death-Registration",
+    "joinOn" : [ "patid" ]
   } ],
   "context" : { },
-  "variable" : [ ],
+  "variable" : [ {
+    "name" : "isEligible",
+    "language" : "text/fhirpath",
+    "expression" : " %linkageEligibility.death_e = 1"
+  }, {
+    "name" : "deathDate",
+    "language" : "text/fhirpath",
+    "expression" : " %deathRegistration.dod "
+  } ],
   "mapping" : [ {
     "expression" : {
       "name" : "patient",
@@ -18,7 +34,7 @@
         "gender" : "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
         "birthDate" : "{{iif(mob.exists() = false, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).utl:toFhirDate('yyyy-M'))}}",
         "deceasedDateTime" : {
-          "{{#deceasedDateTimeVar}}" : "{{iif(cprd_ddate.exists(), cprd_ddate.utl:toFhirDateTime('dd/MM/yyyy'), iif(emis_ddate.exists(), emis_ddate.utl:toFhirDateTime('dd/MM/yyyy'), {}))}}",
+          "{{#deceasedDateTimeVar}}" : "{{iif(%isEligible = true and %deathDate.exists(), %deathDate.utl:toFhirDateTime('dd/MM/yyyy'), {})}}",
           "{{?}}" : "{{ %deceasedDateTimeVar }}"
         },
         "id" : "{{mpp:getHashedId('Patient', patid)}}",

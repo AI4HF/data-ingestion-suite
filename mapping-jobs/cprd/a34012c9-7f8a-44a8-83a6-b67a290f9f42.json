@@ -23,6 +23,18 @@
         "path" : "GP_Patient_Data_(combined).csv",
         "options" : { },
         "sourceRef" : "cprd-synthetic"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Linkage_Eligibility.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      },
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Death_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
       }
     }
   } ],
