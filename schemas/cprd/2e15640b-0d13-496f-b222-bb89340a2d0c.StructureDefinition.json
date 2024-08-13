@@ -1,0 +1,264 @@
+{
+  "id" : "2e15640b-0d13-496f-b222-bb89340a2d0c",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/ONS-Death-Registration",
+  "name" : "ONS-Death-Registration",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "ONS-Death-Registration",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "ONS-Death-Registration",
+      "path" : "ONS-Death-Registration",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "ONS-Death-Registration.patid",
+      "path" : "ONS-Death-Registration.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique key given to a patient in CPRD\nGOLD or CPRD Aurum [primary key] "
+    }, {
+      "id" : "ONS-Death-Registration.pracid",
+      "path" : "ONS-Death-Registration.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique key given to a practice in CPRD\nGOLD or CPRD Aurum"
+    }, {
+      "id" : "ONS-Death-Registration.gen_death_id",
+      "path" : "ONS-Death-Registration.gen_death_id",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "A generated unique key assigned to a patient in the\ndeath registration data. An individual that has\ncontributed data to more than one CPRD practice\nhas the same gen_death_id"
+    }, {
+      "id" : "ONS-Death-Registration.n_patid_death",
+      "path" : "ONS-Death-Registration.n_patid_death",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Number of individuals in CPRD GOLD or CPRD\nAurum assigned the same gen_death_id"
+    }, {
+      "id" : "ONS-Death-Registration.match_rank",
+      "path" : "ONS-Death-Registration.match_rank",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Indicates the quality of matching between a record in\ndeath registration data and CPRD primary care data\nand gives the level of confidence that an ONS death\nregistration record has been correctly matched to a\npatient in CPRD GOLD or CPRD Aurum"
+    }, {
+      "id" : "ONS-Death-Registration.dor",
+      "path" : "ONS-Death-Registration.dor",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of registration of death"
+    }, {
+      "id" : "ONS-Death-Registration.dod",
+      "path" : "ONS-Death-Registration.dod",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of death"
+    }, {
+      "id" : "ONS-Death-Registration.dod_partial",
+      "path" : "ONS-Death-Registration.dod_partial",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Partial date of death: where exact date of death is\nnot known, a missing month or day is represented as\n“00”. This field is only used for some patients where\nthe date of death is missing"
+    }, {
+      "id" : "ONS-Death-Registration.cause",
+      "path" : "ONS-Death-Registration.cause",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Underlying cause of death"
+    }, {
+      "id" : "ONS-Death-Registration.cause1",
+      "path" : "ONS-Death-Registration.cause1",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause2",
+      "path" : "ONS-Death-Registration.cause2",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause3",
+      "path" : "ONS-Death-Registration.cause3",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause4",
+      "path" : "ONS-Death-Registration.cause4",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause5",
+      "path" : "ONS-Death-Registration.cause5",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause6",
+      "path" : "ONS-Death-Registration.cause6",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause7",
+      "path" : "ONS-Death-Registration.cause7",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause8",
+      "path" : "ONS-Death-Registration.cause8",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause9",
+      "path" : "ONS-Death-Registration.cause9",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause10",
+      "path" : "ONS-Death-Registration.cause10",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause11",
+      "path" : "ONS-Death-Registration.cause11",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause12",
+      "path" : "ONS-Death-Registration.cause12",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause13",
+      "path" : "ONS-Death-Registration.cause13",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause14",
+      "path" : "ONS-Death-Registration.cause14",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    }, {
+      "id" : "ONS-Death-Registration.cause15",
+      "path" : "ONS-Death-Registration.cause15",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Cause of death mention ICD10\n(non-neonatal deaths only)"
+    } ]
+  }
+}
