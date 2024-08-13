@@ -2,7 +2,7 @@
   "id" : "34fffa32-47b0-4fd0-ba64-fdaba97ef7d2",
   "name" : "cprd",
   "sourceSettings" : {
-    "source" : {
+    "cprd-data" : {
       "jsonClass" : "FileSystemSourceSettings",
       "name" : "cprd-data",
       "sourceUri" : "https://ai4hf.eu/data-ingestion-suite/cprd-data",

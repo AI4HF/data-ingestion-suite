@@ -1,0 +1,34 @@
+{
+  "id" : "a34012c9-7f8a-44a8-83a6-b67a290f9f42",
+  "name" : "cprd-synthetic",
+  "sourceSettings" : {
+    "cprd-synthetic" : {
+      "jsonClass" : "FileSystemSourceSettings",
+      "name" : "cprd-synthetic",
+      "sourceUri" : "https://ai4hf.eu/data-ingestion-suite/cprd-synthetic",
+      "dataFolderPath" : "test-data/synthetic_data",
+      "asStream" : false
+    }
+  },
+  "sinkSettings" : {
+    "jsonClass" : "FhirRepositorySinkSettings",
+    "fhirRepoUrl" : "http://localhost:8080/fhir",
+    "returnMinimal" : true
+  },
+  "mappings" : [ {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Patient-Mapping",
+    "sourceContext" : {
+      "patient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Patient_Data_(combined).csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  } ],
+  "dataProcessingSettings" : {
+    "saveErroneousRecords" : false,
+    "archiveMode" : "off"
+  },
+  "useFhirSinkAsIdentityService" : false
+}
