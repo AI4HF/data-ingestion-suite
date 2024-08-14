@@ -60,7 +60,7 @@
     "precondition" : {
       "name" : "isSmokingStatus",
       "language" : "text/fhirpath",
-      "expression" : " %smokingStatus.exists() "
+      "expression" : " %smokingStatus.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists()"
     }
   } ]
 }
