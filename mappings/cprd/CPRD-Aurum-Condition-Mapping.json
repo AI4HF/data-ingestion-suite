@@ -52,7 +52,7 @@
     "precondition" : {
       "name" : "isCondition",
       "language" : "text/fhirpath",
-      "expression" : " %conditionCode.exists() "
+      "expression" : " %conditionCode.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
     }
   } ]
 }

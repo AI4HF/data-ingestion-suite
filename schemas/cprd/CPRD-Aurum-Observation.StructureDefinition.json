@@ -22,7 +22,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.patid",
       "path" : "CPRD-Aurum-Observation.patid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -32,7 +32,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.consid",
       "path" : "CPRD-Aurum-Observation.consid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -42,7 +42,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.pracid",
       "path" : "CPRD-Aurum-Observation.pracid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "integer",
@@ -52,7 +52,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.obsid",
       "path" : "CPRD-Aurum-Observation.obsid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -62,7 +62,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.obsdate",
       "path" : "CPRD-Aurum-Observation.obsdate",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "date",
@@ -72,7 +72,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.enterdate",
       "path" : "CPRD-Aurum-Observation.enterdate",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "date",
@@ -82,7 +82,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.staffid",
       "path" : "CPRD-Aurum-Observation.staffid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -92,7 +92,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.parentobsid",
       "path" : "CPRD-Aurum-Observation.parentobsid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -102,7 +102,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.medcodeid",
       "path" : "CPRD-Aurum-Observation.medcodeid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -112,7 +112,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.value",
       "path" : "CPRD-Aurum-Observation.value",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "decimal",
@@ -122,7 +122,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.numunitid",
       "path" : "CPRD-Aurum-Observation.numunitid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "integer",
@@ -132,7 +132,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.obstypeid",
       "path" : "CPRD-Aurum-Observation.obstypeid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "integer",
@@ -142,7 +142,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.numrangelow",
       "path" : "CPRD-Aurum-Observation.numrangelow",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "decimal",
@@ -152,7 +152,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.numrangehigh",
       "path" : "CPRD-Aurum-Observation.numrangehigh",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "decimal",
@@ -162,7 +162,7 @@
     }, {
       "id" : "CPRD-Aurum-Observation.probobsid",
       "path" : "CPRD-Aurum-Observation.probobsid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",

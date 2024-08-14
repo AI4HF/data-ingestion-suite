@@ -47,6 +47,66 @@
         "sourceRef" : "cprd-synthetic"
       }
     }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Symptom-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-NYHA-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Lab-Result-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Vital-Sign-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Condition-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/CPRD-Aurum-Smoking-Status-Mapping",
+    "sourceContext" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
   } ],
   "dataProcessingSettings" : {
     "saveErroneousRecords" : false,
