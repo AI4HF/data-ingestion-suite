@@ -68,7 +68,7 @@
     "precondition" : {
       "name" : "isLabResult",
       "language" : "text/fhirpath",
-      "expression" : " %labResultCode.exists() "
+      "expression" : " %labResultCode.exists() and obsdate.exists() and value.exists() and patid.exists() and consid.exists() and obsid.exists()"
     }
   } ]
 }
