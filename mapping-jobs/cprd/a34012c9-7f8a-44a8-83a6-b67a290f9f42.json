@@ -35,6 +35,12 @@
         "path" : "Death_Data.csv",
         "options" : { },
         "sourceRef" : "cprd-synthetic"
+      },
+      "hesPatient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Patient_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
       }
     }
   }, {
@@ -103,6 +109,26 @@
       "observation" : {
         "jsonClass" : "FileSystemSource",
         "path" : "GP_Diagnosis_Data.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/HES-Condition-Mapping",
+    "sourceContext" : {
+      "diagnosis" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Diagnosis_Hosp.csv",
+        "options" : { },
+        "sourceRef" : "cprd-synthetic"
+      }
+    }
+  }, {
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/HES-Encounter-Mapping",
+    "sourceContext" : {
+      "hospitalization" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Hospitalizations.csv",
         "options" : { },
         "sourceRef" : "cprd-synthetic"
       }

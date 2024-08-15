@@ -15,6 +15,10 @@
     "alias" : "deathRegistration",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/ONS-Death-Registration",
     "joinOn" : [ "patid" ]
+  }, {
+    "alias" : "hesPatient",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-Patient",
+    "joinOn" : [ "patid" ]
   } ],
   "context" : { },
   "variable" : [ {
@@ -41,6 +45,15 @@
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient" ]
         },
+        "extension" : [ {
+          "url" : "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
+          "valueCodeableConcept" : {
+            "coding" : [ {
+              "system" : "http://snomed.info/sct",
+              "code" : "{{ iif(%hesPatient.gen_ethnicity = 'Bangladesi' or %hesPatient.gen_ethnicity = 'Indian' or %hesPatient.gen_ethnicity = 'Chinese' or %hesPatient.gen_ethnicity = 'Pakistani' or %hesPatient.gen_ethnicity = 'Oth_Asian', 'Asian', iif( %hesPatient.gen_ethnicity = 'White', 'Caucasian', iif(%hesPatient.gen_ethnicity = 'Bl_Afric', 'African', 'Unknown'))) }}"
+            } ]
+          }
+        } ],
         "resourceType" : "Patient"
       }
     }

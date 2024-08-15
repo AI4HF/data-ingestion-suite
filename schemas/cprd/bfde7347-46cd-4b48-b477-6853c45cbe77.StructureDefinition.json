@@ -1,0 +1,124 @@
+{
+  "id" : "bfde7347-46cd-4b48-b477-6853c45cbe77",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-Hospitalization",
+  "name" : "Hes-Hospitalization",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Hes-Hospitalization",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Hes-Hospitalization",
+      "path" : "Hes-Hospitalization",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Hes-Hospitalization.patid",
+      "path" : "Hes-Hospitalization.patid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique key given to a patient in CPRD GOLD or\nCPRD Aurum [primary key, in combination with spno]"
+    }, {
+      "id" : "Hes-Hospitalization.spno",
+      "path" : "Hes-Hospitalization.spno",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Spell number uniquely identifying a hospitalisation [primary\nkey, in combination with patid]"
+    }, {
+      "id" : "Hes-Hospitalization.admidate",
+      "path" : "Hes-Hospitalization.admidate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of admission"
+    }, {
+      "id" : "Hes-Hospitalization.discharged",
+      "path" : "Hes-Hospitalization.discharged",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of discharge"
+    }, {
+      "id" : "Hes-Hospitalization.admimeth",
+      "path" : "Hes-Hospitalization.admimeth",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Method of admission"
+    }, {
+      "id" : "Hes-Hospitalization.admisorc",
+      "path" : "Hes-Hospitalization.admisorc",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Source of admission"
+    }, {
+      "id" : "Hes-Hospitalization.disdest",
+      "path" : "Hes-Hospitalization.disdest",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Destination on discharge "
+    }, {
+      "id" : "Hes-Hospitalization.dismeth",
+      "path" : "Hes-Hospitalization.dismeth",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : " Method of discharge "
+    }, {
+      "id" : "Hes-Hospitalization.duration",
+      "path" : "Hes-Hospitalization.duration",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Duration of hospitalisation spell in days "
+    }, {
+      "id" : "Hes-Hospitalization.elecdate",
+      "path" : "Hes-Hospitalization.elecdate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of decision to admit patient "
+    } ]
+  }
+}
