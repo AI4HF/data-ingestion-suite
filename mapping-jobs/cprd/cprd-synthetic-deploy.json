@@ -1,6 +1,6 @@
 {
-  "id" : "a34012c9-7f8a-44a8-83a6-b67a290f9f42",
-  "name" : "cprd-synthetic",
+  "id" : "cprd-synthetic-deploy",
+  "name" : "cprd-synthetic-deploy",
   "sourceSettings" : {
     "cprd-synthetic" : {
       "jsonClass" : "FileSystemSourceSettings",
@@ -12,7 +12,7 @@
   },
   "sinkSettings" : {
     "jsonClass" : "FhirRepositorySinkSettings",
-    "fhirRepoUrl" : "http://localhost:8080/fhir",
+    "fhirRepoUrl" : "http://onfhir:8080/fhir",
     "returnMinimal" : true
   },
   "mappings" : [ {
