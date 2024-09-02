@@ -1,5 +1,5 @@
 {
-  "id" : "bfde7347-46cd-4b48-b477-6853c45cbe77",
+  "id" : "Hes-Hospitalization",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-Hospitalization",
   "name" : "Hes-Hospitalization",

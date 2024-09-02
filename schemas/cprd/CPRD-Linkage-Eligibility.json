@@ -1,5 +1,5 @@
 {
-  "id" : "9eaf2df2-915f-4c57-8013-f66acd77ea6d",
+  "id" : "CPRD-Linkage-Eligibility",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/CPRD-Linkage-Eligibility",
   "name" : "CPRD-Linkage-Eligibility",

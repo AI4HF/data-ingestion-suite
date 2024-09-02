@@ -1,5 +1,5 @@
 {
-  "id" : "3f75442c-4116-4861-a125-f9211953eaa6",
+  "id" : "Hes-Patient",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-Patient",
   "name" : "Hes-Patient",

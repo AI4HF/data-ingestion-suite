@@ -1,5 +1,5 @@
 {
-  "id" : "2e15640b-0d13-496f-b222-bb89340a2d0c",
+  "id" : "ONS-Death-Registration",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/ONS-Death-Registration",
   "name" : "ONS-Death-Registration",

@@ -1,5 +1,5 @@
 {
-  "id" : "5176e844-619b-4907-b7cd-9ba93e083686",
+  "id" : "Hes-Diagnosis",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-Diagnosis",
   "name" : "Hes-Diagnosis",
