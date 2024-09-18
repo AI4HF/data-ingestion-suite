@@ -1,0 +1,54 @@
+{
+  "id" : "Aurum-staff",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-staff",
+  "name" : "Aurum-staff",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Aurum-staff",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Aurum-staff",
+      "path" : "Aurum-staff",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Aurum-staff.staffid",
+      "path" : "Aurum-staff.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to the practice staff member in CPRD\nAurum. This is the primary key for this table."
+    }, {
+      "id" : "Aurum-staff.pracid",
+      "path" : "Aurum-staff.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "Aurum-staff.jobcatid",
+      "path" : "Aurum-staff.jobcatid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Job category of the staff member who created the event"
+    } ]
+  }
+}

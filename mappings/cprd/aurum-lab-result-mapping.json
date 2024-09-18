@@ -1,0 +1,74 @@
+{
+  "id" : "aurum-lab-result-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-lab-result-mapping",
+  "name" : "aurum-lab-result-mapping",
+  "title" : "aurum-lab-result-mapping",
+  "source" : [ {
+    "alias" : "observation",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "labResultContext" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/cprd/aurum-lab-result-code-mapping.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "labResultCode",
+    "language" : "text/fhirpath",
+    "expression" : " mpp:getConcept(%labResultContext, medcodeid) "
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "lab_result",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "status" : "final",
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "laboratory",
+            "display" : "Laboratory"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "{{ %labResultCode.target_code }}",
+            "display" : "{{ %labResultCode.target_name }}",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "valueQuantity" : {
+          "value" : "{{ value }}",
+          "unit" : "{{ %labResultCode.target_unit }}",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "{{ %labResultCode.target_unit }}"
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "referenceRange" : [ {
+          "low" : {
+            "value" : "{{? numrangelow }}"
+          },
+          "high" : {
+            "value" : "{{? numrangehigh }}"
+          }
+        } ],
+        "derivedFrom" : "{{* mpp:createFhirReferenceWithHashedId('Observation', parentobsid)}}",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isLabResult",
+      "language" : "text/fhirpath",
+      "expression" : " %labResultCode.exists() and obsdate.exists() and value.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    }
+  } ]
+}

@@ -1,0 +1,66 @@
+{
+  "id" : "aurum-nyha-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-nyha-mapping",
+  "name" : "aurum-nyha-mapping",
+  "title" : "aurum-nyha-mapping",
+  "source" : [ {
+    "alias" : "observation",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "nyhaContext" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/cprd/aurum-nyha-code-mapping.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "nyhaCode",
+    "language" : "text/fhirpath",
+    "expression" : " mpp:getConcept(%nyhaContext, medcodeid) "
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "nyha",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "exam",
+            "display" : "Exam"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "88020-3",
+            "display" : "Functional capacity NYHA",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "{{ %nyhaCode.target_code }}",
+            "display" : "{{ %nyhaCode.target_name }}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isNyhaCode",
+      "language" : "text/fhirpath",
+      "expression" : " %nyhaCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    }
+  } ]
+}

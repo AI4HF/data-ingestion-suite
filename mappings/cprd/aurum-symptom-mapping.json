@@ -1,0 +1,60 @@
+{
+  "id" : "aurum-symptom-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-symptom-mapping",
+  "name" : "aurum-symptom-mapping",
+  "title" : "aurum-symptom-mapping",
+  "source" : [ {
+    "alias" : "observation",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "symptomContext" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/cprd/aurum-symptom-code-mapping.csv"
+    }
+  },
+  "variable" : [ {
+    "name" : "symptomCode",
+    "language" : "text/fhirpath",
+    "expression" : " mpp:getConcept(%symptomContext, medcodeid) "
+  } ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "symptom",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "{{ %symptomCode.target_category }}",
+            "display" : "{{ %symptomCode.target_category }}"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://snomed.info/sct",
+            "code" : "{{ %symptomCode.target_code }}",
+            "display" : "{{ %symptomCode.target_name }}",
+            "@sliceName" : "snomedCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "valueBoolean" : true,
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isSymptomCode",
+      "language" : "text/fhirpath",
+      "expression" : " %symptomCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    }
+  } ]
+}

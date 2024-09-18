@@ -1,0 +1,134 @@
+{
+  "id" : "Aurum-problem",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-problem",
+  "name" : "Aurum-problem",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Aurum-problem",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Aurum-problem",
+      "path" : "Aurum-problem",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Aurum-problem.patid",
+      "path" : "Aurum-problem.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum. The\npatient identifier is unique to CPRD Aurum and may represent a\ndifferent patient in the CPRD GOLD database."
+    }, {
+      "id" : "Aurum-problem.obsid",
+      "path" : "Aurum-problem.obsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier given to the observation. This is the primary key for\nthis table."
+    }, {
+      "id" : "Aurum-problem.pracid",
+      "path" : "Aurum-problem.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "Aurum-problem.parentprobobsid",
+      "path" : "Aurum-problem.parentprobobsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Observation identifier for the parent observation of the problem.\nThis can be used to group problems via the Observation table."
+    }, {
+      "id" : "Aurum-problem.probenddate",
+      "path" : "Aurum-problem.probenddate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the problem ended"
+    }, {
+      "id" : "Aurum-problem.expduration",
+      "path" : "Aurum-problem.expduration",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Expected duration of the problem in days"
+    }, {
+      "id" : "Aurum-problem.lastrevdate",
+      "path" : "Aurum-problem.lastrevdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the problem was last reviewed"
+    }, {
+      "id" : "Aurum-problem.lastrevstaffid",
+      "path" : "Aurum-problem.lastrevstaffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Staff member who last reviewed the problem"
+    }, {
+      "id" : "Aurum-problem.parentprobrelid",
+      "path" : "Aurum-problem.parentprobrelid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Description of the relationship of the problem to another problem\ne.g. the problem may have evolved or been merged with another\nproblem as the problem, or the GP’s understanding of the problem,\nchanges"
+    }, {
+      "id" : "Aurum-problem.probstatusid",
+      "path" : "Aurum-problem.probstatusid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Status of the problem (active, past)"
+    }, {
+      "id" : "Aurum-problem.signid",
+      "path" : "Aurum-problem.signid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Significance of the problem (minor, significant)"
+    } ]
+  }
+}

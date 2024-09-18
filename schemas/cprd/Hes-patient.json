@@ -1,0 +1,84 @@
+{
+  "id" : "Hes-patient",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-patient",
+  "name" : "Hes-patient",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Hes-patient",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Hes-patient",
+      "path" : "Hes-patient",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Hes-patient.patid",
+      "path" : "Hes-patient.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique key given to a patient in CPRD GOLD or\nCPRD Aurum [primary key]"
+    }, {
+      "id" : "Hes-patient.pracid",
+      "path" : "Hes-patient.pracid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique key given to a practice in CPRD GOLD or\nCPRD Aurum "
+    }, {
+      "id" : "Hes-patient.gen_hesid",
+      "path" : "Hes-patient.gen_hesid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "A CPRD generated unique key assigned to a patient across\nall CPRD linked HES datasets within a linkage set. An\nindividual that has contributed data to more than one CPRD\npractice has the same gen_hesid but this may change\nbetween linkage sets"
+    }, {
+      "id" : "Hes-patient.n_patid_hes",
+      "path" : "Hes-patient.n_patid_hes",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Number of individuals in CPRD GOLD or CPRD Aurum\nassigned the same gen_hesid.\nLinked HES data for patients where n_patid_hes is large (>20)\nmay not be reliable. Users should consider excluding these\npatients from analysis."
+    }, {
+      "id" : "Hes-patient.gen_ethnicity",
+      "path" : "Hes-patient.gen_ethnicity",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Ethnicity derived from HES data (including Admitted patient\ncare, Outpatient, A&E, PROMs and DID)"
+    }, {
+      "id" : "Hes-patient.match_rank",
+      "path" : "Hes-patient.match_rank",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Indicates the quality of matching between a record in HES and\nCPRD primary care data and gives the level of confidence that\nan HES record has been correctly matched to a patient in\nCPRD GOLD or CPRD Aurum."
+    } ]
+  }
+}

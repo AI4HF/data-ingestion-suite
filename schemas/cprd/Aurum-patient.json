@@ -1,0 +1,144 @@
+{
+  "id" : "Aurum-patient",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+  "name" : "Aurum-patient",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Aurum-patient",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Aurum-patient",
+      "path" : "Aurum-patient",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Aurum-patient.patid",
+      "path" : "Aurum-patient.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum. The patient\nidentifier is unique to CPRD Aurum and may represent a different patient\nin the CPRD GOLD database. This is the primary key for this table. The\nlast 5 characters will be same as the CPRD practice identifier"
+    }, {
+      "id" : "Aurum-patient.pracid",
+      "path" : "Aurum-patient.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "Aurum-patient.usualgpstaffid",
+      "path" : "Aurum-patient.usualgpstaffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The GP that the patient is nominally registered with. To be used with the\nStaff table for reference"
+    }, {
+      "id" : "Aurum-patient.gender",
+      "path" : "Aurum-patient.gender",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Patient’s gender"
+    }, {
+      "id" : "Aurum-patient.yob",
+      "path" : "Aurum-patient.yob",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Patient’s year of birth. This is actual year of birth e.g. 1984."
+    }, {
+      "id" : "Aurum-patient.mob",
+      "path" : "Aurum-patient.mob",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Patient’s month of birth (for those aged under 16). "
+    }, {
+      "id" : "Aurum-patient.emis_ddate",
+      "path" : "Aurum-patient.emis_ddate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of death as recorded in the EMIS® software. Researchers are\nadvised to treat the emis_ddate with caution and consider using the\ncprd_ddate variable below."
+    }, {
+      "id" : "Aurum-patient.regstartdate",
+      "path" : "Aurum-patient.regstartdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "The date that the patient registered with the CPRD contributing practice.\nMost recent date the patient is recorded as having registered at the\npractice. If a patient deregistered for a period of time and returned, the\nreturn date would be recorded."
+    }, {
+      "id" : "Aurum-patient.patienttypeid",
+      "path" : "Aurum-patient.patienttypeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The category that the patient has been assigned to e.g. private, regular,\ntemporary."
+    }, {
+      "id" : "Aurum-patient.regenddate",
+      "path" : "Aurum-patient.regenddate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the patient's registration at the practice ended. This may represent a\ntransfer-out date or death date."
+    }, {
+      "id" : "Aurum-patient.acceptable",
+      "path" : "Aurum-patient.acceptable",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag to indicate whether the patient has met certain quality standards: 1\n=acceptable, 0 = unacceptable"
+    }, {
+      "id" : "Aurum-patient.cprd_ddate",
+      "path" : "Aurum-patient.cprd_ddate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Estimated date of death of patient – derived using a CPRD algorithm"
+    } ]
+  }
+}

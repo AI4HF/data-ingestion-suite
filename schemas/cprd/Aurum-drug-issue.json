@@ -1,0 +1,164 @@
+{
+  "id" : "Aurum-drug-issue",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-drug-issue",
+  "name" : "Aurum-drug-issue",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Aurum-drug-issue",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Aurum-drug-issue",
+      "path" : "Aurum-drug-issue",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Aurum-drug-issue.patid",
+      "path" : "Aurum-drug-issue.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum. The\npatient identifier is unique to CPRD Aurum and may represent a\ndifferent patient in the CPRD GOLD database."
+    }, {
+      "id" : "Aurum-drug-issue.issueid",
+      "path" : "Aurum-drug-issue.issueid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier given to the issue record. This is the primary key\nfor this table"
+    }, {
+      "id" : "Aurum-drug-issue.pracid",
+      "path" : "Aurum-drug-issue.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "Aurum-drug-issue.probobsid",
+      "path" : "Aurum-drug-issue.probobsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier for the observation that links to a problem under\nwhich this prescription was issued. This refers to an ‘obsid’ in the\nObservation table which, in turn, can be linked to a record in the\nProblem table using ‘obsid’."
+    }, {
+      "id" : "Aurum-drug-issue.drugrecid",
+      "path" : "Aurum-drug-issue.drugrecid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier to a drug template record, which is not currently for\nrelease. At present this may be used to group repeat prescriptions\nfrom the same template."
+    }, {
+      "id" : "Aurum-drug-issue.issuedate",
+      "path" : "Aurum-drug-issue.issuedate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date associated with the event"
+    }, {
+      "id" : "Aurum-drug-issue.enterdate",
+      "path" : "Aurum-drug-issue.enterdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date the event was entered into EMIS Web®"
+    }, {
+      "id" : "Aurum-drug-issue.staffid",
+      "path" : "Aurum-drug-issue.staffid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to the practice staff member\nissued the treatment in CPRD Aurum"
+    }, {
+      "id" : "Aurum-drug-issue.prodcodeid",
+      "path" : "Aurum-drug-issue.prodcodeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique CPRD code for the treatment selected by the GP"
+    }, {
+      "id" : "Aurum-drug-issue.dosageid",
+      "path" : "Aurum-drug-issue.dosageid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Identifier that allows dosage information on the event to be\nretrieved. Not included in first release"
+    }, {
+      "id" : "Aurum-drug-issue.quantity",
+      "path" : "Aurum-drug-issue.quantity",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Total quantity entered by the GP for the prescribed treatment"
+    }, {
+      "id" : "Aurum-drug-issue.quantunitid",
+      "path" : "Aurum-drug-issue.quantunitid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Unit of the treatment (capsule, tablet)"
+    }, {
+      "id" : "Aurum-drug-issue.duration",
+      "path" : "Aurum-drug-issue.duration",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Duration of the treatment in days"
+    }, {
+      "id" : "Aurum-drug-issue.estnhscost",
+      "path" : "Aurum-drug-issue.estnhscost",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "decimal",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/decimal" ]
+      } ],
+      "definition" : "Estimated cost of the treatment to the NHS"
+    } ]
+  }
+}

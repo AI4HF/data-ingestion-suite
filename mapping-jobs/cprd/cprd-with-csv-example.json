@@ -1,0 +1,153 @@
+{
+  "id" : "cprd-with-csv-example",
+  "name" : "cprd-with-csv-example",
+  "sourceSettings" : {
+    "cprd-with-csv-example" : {
+      "jsonClass" : "FileSystemSourceSettings",
+      "name" : "cprd-with-csv-example",
+      "sourceUri" : "https://ai4hf.eu/data-ingestion-suite/cprd-with-csv-example",
+      "dataFolderPath" : "test-data/cprd-with-csv-example",
+      "asStream" : false
+    }
+  },
+  "sinkSettings" : {
+    "jsonClass" : "FhirRepositorySinkSettings",
+    "fhirRepoUrl" : "http://localhost:8080/fhir",
+    "returnMinimal" : true
+  },
+  "mappings" : [ {
+    "name" : "aurum-patient-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-patient-mapping",
+    "sourceBinding" : {
+      "patient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Patient_Data_(combined).csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Linkage_Eligibility.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      },
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Death_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      },
+      "hesPatient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Patient_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "ons-cause-of-death-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
+    "sourceBinding" : {
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Death_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "aurum-symptom-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-symptom-mapping",
+    "sourceBinding" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "aurum-nyha-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-nyha-mapping",
+    "sourceBinding" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "aurum-lab-result-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-lab-result-mapping",
+    "sourceBinding" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "aurum-condition-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-condition-mapping",
+    "sourceBinding" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "aurum-smoking-status-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-smoking-status-mapping",
+    "sourceBinding" : {
+      "observation" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "GP_Diagnosis_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "hes-condition-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/hes-condition-mapping",
+    "sourceBinding" : {
+      "diagnosis" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Diagnosis_Hosp.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  }, {
+    "name" : "hes-encounter-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/hes-encounter-mapping",
+    "sourceBinding" : {
+      "hospitalization" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "HES_Hospitalizations.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      }
+    }
+  } ],
+  "dataProcessingSettings" : {
+    "saveErroneousRecords" : false,
+    "archiveMode" : "off"
+  },
+  "useFhirSinkAsIdentityService" : false
+}

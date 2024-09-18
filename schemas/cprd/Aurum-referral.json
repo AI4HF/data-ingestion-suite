@@ -1,0 +1,104 @@
+{
+  "id" : "Aurum-referral",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-referral",
+  "name" : "Aurum-referral",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Aurum-referral",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Aurum-referral",
+      "path" : "Aurum-referral",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Aurum-referral.patid",
+      "path" : "Aurum-referral.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a patient in CPRD Aurum.\nThe patient identifier is unique to CPRD Aurum and may\nrepresent a different patient in the CPRD GOLD database"
+    }, {
+      "id" : "Aurum-referral.obsid",
+      "path" : "Aurum-referral.obsid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Unique identifier given to the observation. This is the primary key\nfor this table."
+    }, {
+      "id" : "Aurum-referral.pracid",
+      "path" : "Aurum-referral.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique identifier given to a practice in CPRD Aurum"
+    }, {
+      "id" : "Aurum-referral.refsourceorgid",
+      "path" : "Aurum-referral.refsourceorgid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Source organisation of the referral. Organisations are identified\nby an ID number and each organisation has a type (e.g. hospital\ninpatient department, community clinic). Both the organisation\ntable and the OrgType lookup are required. The lookups are\nundergoing anonymisation work."
+    }, {
+      "id" : "Aurum-referral.reftargetorgid",
+      "path" : "Aurum-referral.reftargetorgid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Source organisation of the referral. Organisations are identified\nby an ID number and each organisation has a type (e.g. hospital\ninpatient department, community clinic). Both the organisation\ntable and the OrgType lookup are required. The lookups are\nundergoing anonymisation work. "
+    }, {
+      "id" : "Aurum-referral.refurgencyid",
+      "path" : "Aurum-referral.refurgencyid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Urgency of the referral e.g. routine, urgent, dated"
+    }, {
+      "id" : "Aurum-referral.refservicetypeid",
+      "path" : "Aurum-referral.refservicetypeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Type of service the referral relates to e.g. assessment,\nmanagement, investigation"
+    }, {
+      "id" : "Aurum-referral.refmodeid",
+      "path" : "Aurum-referral.refmodeid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Mode by which the referral was made e.g. telephone, written"
+    } ]
+  }
+}

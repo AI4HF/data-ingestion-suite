@@ -1,0 +1,48 @@
+{
+  "id" : "hes-condition-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/cprd/hes-condition-mapping",
+  "name" : "hes-condition-mapping",
+  "title" : "hes-condition-mapping",
+  "source" : [ {
+    "alias" : "diagnosis",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-diagnosis",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "condition",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "code" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/sid/icd-10",
+            "code" : "{{ iif( ICDx.exists(), (ICD + ICDx), ICD) }}",
+            "@sliceName" : "icd10Code"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', spno)}}",
+        "onsetDateTime" : "{{ admidate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "clinicalStatus" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
+            "code" : "unknown",
+            "display" : "Unknown"
+          } ]
+        },
+        "id" : "{{mpp:getHashedId('Condition', (patid + '-' + spno + '-' + ICD))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition" ]
+        },
+        "resourceType" : "Condition"
+      }
+    },
+    "precondition" : {
+      "name" : "isCondition",
+      "language" : "text/fhirpath",
+      "expression" : "ICD.exists() and patid.exists() and spno.exists() and admidate.exists() "
+    }
+  } ]
+}

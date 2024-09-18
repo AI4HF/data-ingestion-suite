@@ -1,0 +1,104 @@
+{
+  "id" : "Linkage-eligibility",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
+  "name" : "Linkage-eligibility",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Linkage-eligibility",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Linkage-eligibility",
+      "path" : "Linkage-eligibility",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Linkage-eligibility.patid",
+      "path" : "Linkage-eligibility.patid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "The encrypted unique identifier given to a patient in CPRD\nGOLD or CPRD Aurum [primary key]"
+    }, {
+      "id" : "Linkage-eligibility.pracid",
+      "path" : "Linkage-eligibility.pracid",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "The encrypted unique identifier given to a practice in CPRD\nGOLD or CPRD Aurum"
+    }, {
+      "id" : "Linkage-eligibility.linkdate",
+      "path" : "Linkage-eligibility.linkdate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Patient linkage date – the date when patient information was\nsent to the trusted third party (TTP) for linkage"
+    }, {
+      "id" : "Linkage-eligibility.hes_e",
+      "path" : "Linkage-eligibility.hes_e",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag (0,1) indicating whether patient is eligible for linkage to\nHES data"
+    }, {
+      "id" : "Linkage-eligibility.death_e",
+      "path" : "Linkage-eligibility.death_e",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag (0,1) indicating whether patient is eligible for linkage to\nONS death registration data"
+    }, {
+      "id" : "Linkage-eligibility.cr_e",
+      "path" : "Linkage-eligibility.cr_e",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag (0,1) indicating whether patient is eligible for linkage to\nNCRAS data (Cancer Registration, SACT, CPES, RTDS,\nQOLP and QOLC)"
+    }, {
+      "id" : "Linkage-eligibility.lsoa_e",
+      "path" : "Linkage-eligibility.lsoa_e",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag (0,1) indicating whether patient is eligible for linkage to\npatient small area level data based on LSOA"
+    }, {
+      "id" : "Linkage-eligibility.mh_e",
+      "path" : "Linkage-eligibility.mh_e",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "definition" : "Flag (0,1) indicating whether patient is eligible for linkage to\nthe Mental Health dataset "
+    } ]
+  }
+}

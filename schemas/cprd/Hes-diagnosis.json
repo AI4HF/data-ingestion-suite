@@ -1,0 +1,84 @@
+{
+  "id" : "Hes-diagnosis",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-diagnosis",
+  "name" : "Hes-diagnosis",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Hes-diagnosis",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Hes-diagnosis",
+      "path" : "Hes-diagnosis",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Hes-diagnosis.patid",
+      "path" : "Hes-diagnosis.patid",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Encrypted unique key given to a patient in CPRD GOLD or\nCPRD Aurum [primary key, in combination with spno & ICD]"
+    }, {
+      "id" : "Hes-diagnosis.spno",
+      "path" : "Hes-diagnosis.spno",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "Spell number uniquely identifying a hospitalisation [primary\nkey, in combination with patid & ICD]"
+    }, {
+      "id" : "Hes-diagnosis.admidate",
+      "path" : "Hes-diagnosis.admidate",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of admission"
+    }, {
+      "id" : "Hes-diagnosis.discharged",
+      "path" : "Hes-diagnosis.discharged",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "definition" : "Date of discharge"
+    }, {
+      "id" : "Hes-diagnosis.ICD",
+      "path" : "Hes-diagnosis.ICD",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "An ICD10 diagnosis code in XXX or XXX.X format [primary\nkey, in combination with patid & spno]"
+    }, {
+      "id" : "Hes-diagnosis.ICDx",
+      "path" : "Hes-diagnosis.ICDx",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "definition" : "5\nth/6th characters of the ICD code (if available)"
+    } ]
+  }
+}
