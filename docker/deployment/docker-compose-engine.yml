@@ -1,6 +1,6 @@
 services:
   tofhir-server:
-    image: srdc/tofhir:latest
+    image: srdc/tofhir-engine:latest
     container_name: dt4h-tofhir-server
     hostname: tofhir
     command: run --job /usr/local/tofhir/conf/mapping-jobs/cprd/cprd-with-original-structure.json
