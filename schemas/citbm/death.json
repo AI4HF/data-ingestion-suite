@@ -1,0 +1,398 @@
+{
+  "id": "death",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Death",
+  "version": "latest",
+  "name": "Death",
+  "description": "The detailed record of a patient's death",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Death",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Death",
+        "path": "Death",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Death.DNI",
+        "path": "Death.DNI",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique identifier of the patient",
+        "short": "Patient ID"
+      },
+      {
+        "id": "Death.cod_participante",
+        "path": "Death.cod_participante",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The patient's unique identifier within the project.",
+        "short": "Project-specific patient identifier"
+      },
+      {
+        "id": "Death.FECHA_DEF",
+        "path": "Death.FECHA_DEF",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ],
+        "definition": "The date on which the patient passed away.",
+        "short": "Date"
+      },
+      {
+        "id": "Death.dx_causa_final",
+        "path": "Death.dx_causa_final",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The final cause of death as determined by ICD-10 codes.",
+        "short": "Final Cause"
+      },
+      {
+        "id": "Death.desc_causa_final",
+        "path": "Death.desc_causa_final",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of final cause of death.",
+        "short": "Final Cause Description"
+      },
+      {
+        "id": "Death.dx_causa_intermed",
+        "path": "Death.dx_causa_intermed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The intermediate cause of death as determined by ICD-10 codes.",
+        "short": "Intermediate Cause"
+      },
+      {
+        "id": "Death.desc_causa_intermed",
+        "path": "Death.desc_causa_intermed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of intermediate cause of death.",
+        "short": "Intermediate Cause Description"
+      },
+      {
+        "id": "Death.dx_c",
+        "path": "Death.dx_c",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The supplementary cause of death as determined by ICD-10 codes.",
+        "short": "Supplementary Cause"
+      },
+      {
+        "id": "Death.desc_causa_c",
+        "path": "Death.desc_causa_c",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of supplementary cause of death.",
+        "short": "Supplementary Cause Description"
+      },
+      {
+        "id": "Death.dx_causa_basica",
+        "path": "Death.dx_causa_basica",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The basic cause of death as determined by ICD-10 codes.",
+        "short": "Basic Cause"
+      },
+      {
+        "id": "Death.desc_causa_basica",
+        "path": "Death.desc_causa_basica",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of basic cause of death.",
+        "short": "Basic Cause Description"
+      },
+      {
+        "id": "Death.dx_causa_contrib",
+        "path": "Death.dx_causa_contrib",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The contributed cause of death as determined by ICD-10 codes.",
+        "short": "Contributed Cause"
+      },
+      {
+        "id": "Death.desc_causa_contrib",
+        "path": "Death.desc_causa_contrib",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of contributed cause of death.",
+        "short": "Contributed Cause Description"
+      },
+      {
+        "id": "Death.epi_dx_causa_final",
+        "path": "Death.epi_dx_causa_final",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The final epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Final Epidemiological Cause"
+      },
+      {
+        "id": "Death.epi_desc_causa_final",
+        "path": "Death.epi_desc_causa_final",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of final epidemiological cause of death.",
+        "short": "Final Epidemiological Cause Description"
+      },
+      {
+        "id": "Death.epi_dx_causa_intermed",
+        "path": "Death.epi_dx_causa_intermed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The intermediate epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Intermediate Epidemiological Cause"
+      },
+      {
+        "id": "Death.epi_desc_causa_intermed",
+        "path": "Death.epi_desc_causa_intermed",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of intermediate epidemiological cause of death.",
+        "short": "Intermediate Epidemiological Cause Description"
+      },
+      {
+        "id": "Death.epi_dx_c",
+        "path": "Death.epi_dx_c",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The supplementary epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Supplementary Epidemiological Cause"
+      },
+      {
+        "id": "Death.epi_desc_causa_c",
+        "path": "Death.epi_desc_causa_c",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of supplementary epidemiological cause of death.",
+        "short": "Supplementary Epidemiological Cause Description"
+      },
+      {
+        "id": "Death.Causa_basica",
+        "path": "Death.Causa_basica",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The basic epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Basic Epidemiological Cause"
+      },
+      {
+        "id": "Death.descrip",
+        "path": "Death.descrip",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of basic epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Basic Epidemiological Cause Description"
+      },
+      {
+        "id": "Death.epi_dx_causa_contrib",
+        "path": "Death.epi_dx_causa_contrib",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The contributed epidemiological cause of death as determined by ICD-10 codes.",
+        "short": "Contributed Epidemiological Cause"
+      },
+      {
+        "id": "Death.epi_desc_causa_contrib",
+        "path": "Death.epi_desc_causa_contrib",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of contributed epidemiological cause of death.",
+        "short": "Contributed Epidemiological Cause Description"
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "patient-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/patient-mapping",
+  "name": "patient-mapping",
+  "title": "Patient mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Patient",
+      "joinOn": [
+        "COD_Poryecto"
+      ]
+    },
+    {
+      "alias": "demographics",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Demographics",
+      "joinOn": [
+        "COD_Participante"
+      ]
+    },
+    {
+      "alias": "death",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Death",
+      "joinOn": [
+        "cod_participante"
+      ]
+    }
+  ],
+  "context": {
+    "genderConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/gender.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The patient.",
+      "expression": {
+        "name": "patient",
+        "language": "application/fhir-template+json",
+        "value": {
+          "gender": "{{mpp:getConcept(%genderConceptMap, Sexo, 'target_code')}}",
+          "birthDate": "{{Fecha_Nacimiento.utl:toFhirDateTime('d.M.yyyy'))}}",
+          "deceasedDateTime": "{{? %death.FECHA_DEF.utl:toFhirDateTime('d.M.yyyy')}}",
+          "address": [
+            {
+              "use": "home",
+              "city": "{{%demographics.PROVINCIA}}",
+              "district": "{{%demographics.DISTRITO_R}}",
+              "postalCode": {
+                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != \"0\",true,{})}}",
+                "{{?}}": "{{Codigo_Postal.toString()}}"
+              }
+            }
+          ],
+          "id": "{{mpp:getHashedId('Patient', COD_Poryecto)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest"
+            ]
+          },
+          "extension": [
+            {
+              "url": "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "https://datatools4heart.eu/fhir/ValueSet/ethnicity",
+                    "code": "414408004",
+                    "display": "Hispanic"
+                  }
+                ]
+              }
+            }
+          ],
+          "resourceType": "Patient"
+        }
+      }
+    }
+  ]
+}
