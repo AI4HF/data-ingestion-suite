@@ -1,0 +1,78 @@
+{
+  "id": "nyha-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/nyha-mapping",
+  "name": "nyha-mapping",
+  "title": "NYHA Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "nyhaClassificationConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/nyha-classification.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "nyha",
+        "language": "application/fhir-template+json",
+        "value": {
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "exam",
+                  "display": "Exam"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "88020-3",
+                "display": "Functional capacity NYHA",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{ fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA, 'target_code')}}",
+                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA, 'target_display')}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "status": "final",
+          "id": "{{mpp:getHashedId('Observation', numacto)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
+            ]
+          },
+          "resourceType": "Observation"
+        }
+      },
+      "precondition": {
+        "name": "nyhaExists",
+        "language": "text/fhirpath",
+        "expression": "NYHA.hasValue()"
+      },
+      "description": "New York Heart Association classification if exists."
+    }
+  ]
+}

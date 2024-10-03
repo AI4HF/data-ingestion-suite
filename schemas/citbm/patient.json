@@ -1,0 +1,142 @@
+{
+  "id": "patient",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Patient",
+  "version": "latest",
+  "name": "Patient",
+  "description": "The detailed record of a patient.",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient",
+        "path": "Patient",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Patient.Nùmero",
+        "path": "Patient.Nùmero",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "short": "Patient's correlative number",
+        "definition": "The patient's ordered number (e.g., 1, 2, 3)."
+      },
+      {
+        "id": "Patient.DNI",
+        "path": "Patient.DNI",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "short": "Patient's unique identifier (DNI)",
+        "definition": "The unique identifier (DNI) of the patient."
+      },
+      {
+        "id": "Patient.COD_Poryecto",
+        "path": "Patient.COD_Poryecto",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Project-specific patient identifier",
+        "definition": "The patient's unique identifier within the project."
+      },
+      {
+        "id": "Patient.Sexo",
+        "path": "Patient.Sexo",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Patient's gender",
+        "definition": "The gender of the patient (e.g., male, female)."
+      },
+      {
+        "id": "Patient.Fecha_Nacimiento",
+        "path": "Patient.Fecha_Nacimiento",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ],
+        "short": "Patient's birthdate",
+        "definition": "The birthdate of the patient."
+      },
+      {
+        "id": "Patient.Etnia",
+        "path": "Patient.Etnia",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Patient's ethnicity",
+        "definition": "The ethnicity of the patient."
+      },
+      {
+        "id": "Patient.Codigo_Postal",
+        "path": "Patient.Codigo_Postal",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "short": "Patient's postal code",
+        "definition": "The postal code of the patient's address."
+      }
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "id": "citbm",
+  "name": "citbm",
+  "description": "Generates FHIR Resources for the CITBM dataset.",
+  "sourceSettings": {
+    "citbm": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "citbm",
+      "sourceUri": "https://ai4hf.eu/data-ingestion-suite/citbm",
+      "dataFolderPath": "test-data/citbm",
+      "asStream": false
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "http://localhost:8080/fhir",
+    "returnMinimal": true
+  },
+  "mappings": [
+    {
+      "name": "organization-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/organization-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "nyha-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/nyha-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "condition-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/condition-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "medication-administration-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "document-reference-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "death-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/death-mapping",
+      "sourceBinding": {
+        "death": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Defunciones.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "vital-sign-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/vital-sign-mapping",
+      "sourceBinding": {
+        "vitalSigns": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Paciente_Signos_Vitales.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "patient-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/patient-mapping",
+      "sourceBinding": {
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "Pacientes_del_proyecto_AI4HF.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "demographics": {
+          "jsonClass": "FileSystemSource",
+          "path": "Demograficos.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "death": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Defunciones.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "encounter-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "practitioner-role-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/practitioner-role-mapping",
+      "sourceBinding": {
+        "procedure": {
+          "jsonClass": "FileSystemSource",
+          "path": "Procedimientos_HEMOD.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select distinct performer from procedure;",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "procedure-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
+      "sourceBinding": {
+        "procedure": {
+          "jsonClass": "FileSystemSource",
+          "path": "Procedimientos_HEMOD.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}

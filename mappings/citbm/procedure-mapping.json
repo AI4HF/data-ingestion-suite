@@ -1,0 +1,50 @@
+{
+  "id": "procedure-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
+  "name": "procedure-mapping",
+  "title": "Procedure Mapping",
+  "isDraft": true,
+  "source": [
+    {
+      "alias": "procedure",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Procedure",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "procedure",
+        "language": "application/fhir-template+json",
+        "value": {
+          "category": "",
+          "code": {
+            "coding": [
+              {
+                "@sliceName": "icdCode"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Id_proyecto)}}",
+          "occurrenceDateTime": "{{Fecha.utl:toFhirDateTime('d.M.yyyy')}}",
+          "performer": [
+            {
+              "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', performer)}}"
+            }
+          ],
+          "status": "completed",
+          "id": "{{mpp:getHashedId('Procedure', Id_proyecto & procedimiento & Fecha)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
+            ]
+          },
+          "resourceType": "Procedure"
+        }
+      },
+      "description": "The procedure of the patient."
+    }
+  ]
+}

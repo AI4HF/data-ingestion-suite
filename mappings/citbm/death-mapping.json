@@ -1,0 +1,77 @@
+{
+  "id": "death-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/death-mapping",
+  "name": "death-mapping",
+  "title": "Death Mapping",
+  "source": [
+    {
+      "alias": "death",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Death",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [
+    {
+      "name": "causeOfDeathCode",
+      "language": "text/fhirpath",
+      "expression": "iif(dx_causa_final.hasValue(), dx_causa_final, iif(dx_causa_intermed.hasValue(), dx_causa_intermed, iif(dx_c.hasValue(), dx_c, iif(dx_causa_basica.hasValue(), dx_causa_basica, iif(dx_causa_contrib.hasValue(), dx_causa_contrib, iif(epi_dx_causa_final.hasValue(), epi_dx_causa_final, iif(epi_dx_causa_intermed.hasValue(), epi_dx_causa_intermed, iif(epi_dx_c.hasValue(), epi_dx_c, iif(Causa_basica.hasValue(), Causa_basica, epi_dx_causa_contrib)))))))))"
+    },
+    {
+      "name": "causeOfDeathDescription",
+      "language": "text/fhirpath",
+      "expression": "iif(desc_causa_final.hasValue(), desc_causa_final, iif(desc_causa_intermed.hasValue(), desc_causa_intermed, iif(desc_causa_c.hasValue(), desc_causa_c, iif(desc_causa_basica.hasValue(), desc_causa_basica, iif(desc_causa_contrib.hasValue(), desc_causa_contrib, iif(epi_desc_causa_final.hasValue(), epi_desc_causa_final, iif(epi_desc_causa_intermed.hasValue(), epi_desc_causa_intermed, iif(epi_desc_causa_c.hasValue(), epi_desc_causa_c, iif(descrip.hasValue(), descrip, epi_desc_causa_contrib)))))))))"
+    }
+  ],
+  "mapping": [
+    {
+      "expression": {
+        "name": "death",
+        "language": "application/fhir-template+json",
+        "value": {
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "exam",
+                  "display": "Exam"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "79378-6",
+                "display": "Cause of death",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{ FECHA_DEF.utl:toFhirDateTime('d.M.yyyy')}}",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "code": "{{%causeOfDeathCode}}",
+                "display": "{{%causeOfDeathDescription}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', DNI)}}",
+          "id": "{{mpp:getHashedId('Observation', DNI & 'Death')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath"
+            ]
+          },
+          "resourceType": "Observation"
+        }
+      },
+      "description": "The death of the patient"
+    }
+  ]
+}

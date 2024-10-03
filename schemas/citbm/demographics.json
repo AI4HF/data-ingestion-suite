@@ -1,0 +1,302 @@
+{
+  "id": "demographics",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Demographics",
+  "version": "latest",
+  "name": "Demographics",
+  "description": "The detailed record of a patient's demographics.",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Demographics",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Demographics",
+        "path": "Demographics",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Demographics.n",
+        "path": "Demographics.n",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "short": "Correlative number of participants",
+        "definition": "Nro Correlative number of the list of participants"
+      },
+      {
+        "id": "Demographics.COD_Participante",
+        "path": "Demographics.COD_Participante",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Project-specific patient identifier",
+        "definition": "The patient's unique identifier within the project."
+      },
+      {
+        "id": "Demographics.NRODOC",
+        "path": "Demographics.NRODOC",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Participant's ID number",
+        "definition": "Participant's ID number."
+      },
+      {
+        "id": "Demographics.CONCATENADO",
+        "path": "Demographics.CONCATENADO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Participant's surnames and first names",
+        "definition": "Participant's surnames and first names."
+      },
+      {
+        "id": "Demographics.NOMBRE_PROCESO",
+        "path": "Demographics.NOMBRE_PROCESO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Participant's status in the institution",
+        "definition": "Type of participant in the institution until the date of data download."
+      },
+      {
+        "id": "Demographics.UBIGEO",
+        "path": "Demographics.UBIGEO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Geographic location code (Peru)",
+        "definition": "Geographic Location Code in Peru."
+      },
+      {
+        "id": "Demographics.DEPARTAMENTO",
+        "path": "Demographics.DEPARTAMENTO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Department where participant resides",
+        "definition": "Name of the Department of the Peruvian territory where the participant resides."
+      },
+      {
+        "id": "Demographics.PROVINCIA",
+        "path": "Demographics.PROVINCIA",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Province where participant resides",
+        "definition": "Name of the province of the Peruvian territory where the participant resides."
+      },
+      {
+        "id": "Demographics.DISTRITO_R",
+        "path": "Demographics.DISTRITO_R",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "District where participant resides",
+        "definition": "Name of the district where the participant resides."
+      },
+      {
+        "id": "Demographics.SECTOR_ESSALUD",
+        "path": "Demographics.SECTOR_ESSALUD",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Participant's sector within the healthcare network",
+        "definition": "Sector of the network to which the participant belongs."
+      },
+      {
+        "id": "Demographics.CENTRO_ASIST",
+        "path": "Demographics.CENTRO_ASIST",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Health Care Center",
+        "definition": "Name of the Health Care Center to which the participant belongs."
+      },
+      {
+        "id": "Demographics.ESTADO_CIVIL",
+        "path": "Demographics.ESTADO_CIVIL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Marital status",
+        "definition": "C = Married, D = Divorced, S = Single, V = Widower."
+      },
+      {
+        "id": "Demographics.CESANTE_ACTIVO",
+        "path": "Demographics.CESANTE_ACTIVO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Employment status",
+        "definition": "Active = If it has not yet ceased; Unemployment (Pensioner) = Active Unemployment."
+      },
+      {
+        "id": "Demographics.CONDICION",
+        "path": "Demographics.CONDICION",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Condition",
+        "definition": "Concubine, Spouse, Holder, Disabled Child, Non-incapacitated child."
+      },
+      {
+        "id": "Demographics.OBSERVACIÓN",
+        "path": "Demographics.OBSERVACIÓN",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Insurance status",
+        "definition": "If you are 'Insured' or 'Uninsured'."
+      },
+      {
+        "id": "Demographics.MDL",
+        "path": "Demographics.MDL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "MDL code",
+        "definition": "Medical Diagnosis Letter code."
+      },
+      {
+        "id": "Demographics.cod_postal",
+        "path": "Demographics.cod_postal",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "Postal Code",
+        "definition": "Participant's postal code."
+      }
+    ]
+  }
+}

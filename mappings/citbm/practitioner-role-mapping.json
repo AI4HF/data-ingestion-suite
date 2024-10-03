@@ -1,0 +1,63 @@
+{
+  "id": "practitioner-role-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/practitioner-role-mapping",
+  "name": "practitioner-role-mapping",
+  "title": "Practitioner Role Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "procedure",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Procedure",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "practitionerRoleConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/practitioner-role.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "practitionerRole",
+        "language": "application/fhir-template+json",
+        "value": {
+          "code": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/practitioner-role",
+                  "code": "{{mpp:getConcept(%practitionerRoleConceptMap, performer, 'target_code')}}",
+                  "display": "{{mpp:getConcept(%practitionerRoleConceptMap, performer, 'target_display')}}"
+                }
+              ],
+              "@sliceName": "hfrPractitionerRole"
+            }
+          ],
+          "specialty": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "394579002",
+                  "display": "Cardiology",
+                  "@sliceName": "hfrSpecialty"
+                }
+              ]
+            }
+          ],
+          "id": "{{mpp:getHashedId('PractitionerRole', performer)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-PractitionerRole"
+            ]
+          },
+          "resourceType": "PractitionerRole"
+        }
+      },
+      "description": "The practitioner role."
+    }
+  ]
+}

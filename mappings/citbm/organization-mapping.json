@@ -1,0 +1,52 @@
+{
+  "id": "organization-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/organization-mapping",
+  "name": "organization-mapping",
+  "title": "Organization Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "organizationTypeConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/organization-type.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "organization",
+        "language": "application/fhir-template+json",
+        "value": {
+          "type": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+                  "code": "{{iif(type.hasValue() ,mpp:getConcept(%organizationTypeConceptMap, type, 'target_code'),'other')}}",
+                  "display": "{{iif(type.hasValue() ,mpp:getConcept(%organizationTypeConceptMap, type, 'target_display'),'Other')}}"
+                }
+              ],
+              "@sliceName": "hfrOrganizationType"
+            }
+          ],
+          "name": "{{descen}}",
+          "id": "{{mpp:getHashedId('Organization', descen & type)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Organization"
+            ]
+          },
+          "resourceType": "Organization"
+        }
+      },
+      "description": "The care center where the medication is administered to the patient."
+    }
+  ]
+}
