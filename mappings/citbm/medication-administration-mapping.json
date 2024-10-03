@@ -1,0 +1,53 @@
+{
+  "id": "medication-administration-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
+  "name": "medication-administration-mapping",
+  "title": "The medication administration",
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "medication",
+        "language": "application/fhir-template+json",
+        "value": {
+          "medication": {
+            "concept": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "{{ATC_Code}}",
+                  "@sliceName": "atcCode"
+                }
+              ]
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "occurenceDateTime": "{{ fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "dosage": {
+            "dose": {
+              "value": "{{movcntmat}}"
+            }
+          },
+          "status": "completed",
+          "id": "{{mpp:getHashedId('MedicationAdministration', numacto & ATC_Code & fecent)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+            ]
+          },
+          "resourceType": "MedicationAdministration"
+        }
+      },
+      "description": "Medication administration"
+    }
+  ]
+}

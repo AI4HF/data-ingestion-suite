@@ -1,0 +1,60 @@
+{
+  "id": "condition-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/condition-mapping",
+  "name": "condition-mapping",
+  "title": "Condition Mapping",
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "conditionStatusConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/condition-status.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "diagnosis",
+        "language": "application/fhir-template+json",
+        "value": {
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "code": "{{diag_ICD10}}",
+                "display": "{{desdiag}}",
+                "@sliceName": "icd10Code"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "onsetDateTime": "{{ fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
+                "code": "{{mpp:getConcept(%conditionStatusConceptMap, estado, 'target_code')}}",
+                "display": "{{mpp:getConcept(%conditionStatusConceptMap, estado, 'target_display')}}"
+              }
+            ]
+          },
+          "id": "{{mpp:getHashedId('Condition',numacto)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
+            ]
+          },
+          "resourceType": "Condition"
+        }
+      },
+      "description": "The patient's diagnosis."
+    }
+  ]
+}
