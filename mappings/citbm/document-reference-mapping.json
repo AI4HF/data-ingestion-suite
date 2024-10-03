@@ -1,0 +1,52 @@
+{
+  "id": "document-reference-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
+  "name": "document-reference-mapping",
+  "title": "Document Reference Mapping",
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "documentReference",
+        "language": "application/fhir-template+json",
+        "value": {
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{examenclinico.encode()}}"
+              }
+            }
+          ],
+          "status": "current",
+          "id": "{{mpp:getHashedId('DocumentReference', numacto)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference"
+        }
+      },
+      "precondition": {
+        "name": "clinicalExaminationExists",
+        "language": "text/fhirpath",
+        "expression": "examenclinico.hasValue()"
+      },
+      "description": "Document reference for recording the clinical examination conducted during the encounter if it exists."
+    }
+  ]
+}

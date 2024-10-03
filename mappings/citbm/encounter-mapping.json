@@ -1,0 +1,59 @@
+{
+  "id": "encounter-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
+  "name": "encounter-mapping",
+  "title": "Encounter Mapping",
+  "isDraft": true,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "serviceTypeConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/encounter-service-type.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "encounter",
+        "language": "application/fhir-template+json",
+        "value": {
+          "class": "",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "actualPeriod": {
+            "start": "{{fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+          },
+          "status": "completed",
+          "serviceType": [
+            {
+              "concept": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "{{mpp:getConcept(%serviceTypeConceptMap, servicio, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%serviceTypeConceptMap, servicio, 'target_display')}}"
+                  }
+                ]
+              }
+            }
+          ],
+          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', descen & type)}}",
+          "id": "{{mpp:getHashedId('Encounter', numacto.toString())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter"
+        }
+      },
+      "description": "The encounter of the patient."
+    }
+  ]
+}
