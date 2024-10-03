@@ -1,0 +1,662 @@
+{
+  "id": "medication",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+  "version": "latest",
+  "name": "Medication",
+  "description": "The detailed record of medications administered to a patient.",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Medication",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Medication",
+        "path": "Medication",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Medication.COD_PARTICIPANTE",
+        "path": "Medication.COD_PARTICIPANTE",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique identifier of the patient in the project.",
+        "short": "Patient ID"
+      },
+      {
+        "id": "Medication.edad",
+        "path": "Medication.edad",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The age of the patient in years, months, and days at the time of care.",
+        "short": "Patient Age"
+      },
+      {
+        "id": "Medication.sexo",
+        "path": "Medication.sexo",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sex of the patient. 0 = Female, 1 = Male.",
+        "short": "Patient Sex"
+      },
+      {
+        "id": "Medication.fecnac",
+        "path": "Medication.fecnac",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "Date of birth of the participant (year, month, day).",
+        "short": "Date of Birth"
+      },
+      {
+        "id": "Medication.codred",
+        "path": "Medication.codred",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Code of the health center where care is provided.",
+        "short": "Health Center Code"
+      },
+      {
+        "id": "Medication.desred",
+        "path": "Medication.desred",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Description of the health center (network) where the patient is treated.",
+        "short": "Health Center Description"
+      },
+      {
+        "id": "Medication.codcen",
+        "path": "Medication.codcen",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Code of the care center.",
+        "short": "Care Center Code"
+      },
+      {
+        "id": "Medication.descen",
+        "path": "Medication.descen",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Name of the care center where the patient receives treatment.",
+        "short": "Care Center"
+      },
+      {
+        "id": "Medication.type",
+        "path": "Medication.type",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The category or type of care center, such as Healthcare Provider, Hospital Department, or Insurance Company.",
+        "short": "Care Center Type"
+      },
+      {
+        "id": "Medication.numacto",
+        "path": "Medication.numacto",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique identifier for the medical encounter or act.",
+        "short": "Encounter ID"
+      },
+      {
+        "id": "Medication.codarea",
+        "path": "Medication.codarea",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Code of the area where the patient is receiving care.",
+        "short": "Care Area Code"
+      },
+      {
+        "id": "Medication.area",
+        "path": "Medication.area",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The name of the area where the patient is receiving care.",
+        "short": "Care Area"
+      },
+      {
+        "id": "Medication.codser",
+        "path": "Medication.codser",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The code for the service where the care is provided.",
+        "short": "Service Code"
+      },
+      {
+        "id": "Medication.servicio",
+        "path": "Medication.servicio",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The name of the service where the care is provided.",
+        "short": "Service Name"
+      },
+      {
+        "id": "Medication.anamnesis",
+        "path": "Medication.anamnesis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Description of the interview between the healthcare provider and the patient.",
+        "short": "Anamnesis"
+      },
+      {
+        "id": "Medication.NYHA",
+        "path": "Medication.NYHA",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "New York Heart Association",
+        "short": "NYHA"
+      },
+      {
+        "id": "Medication.examenclinico",
+        "path": "Medication.examenclinico",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Clinical examination",
+        "short": "Clinical Examination"
+      },
+      {
+        "id": "Medication.plantrabajo",
+        "path": "Medication.plantrabajo",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Html tag for reference to an established procedure",
+        "short": "Procedure Tag"
+      },
+      {
+        "id": "Medication.codact",
+        "path": "Medication.codact",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Medical act code",
+        "short": "Activity Code"
+      },
+      {
+        "id": "Medication.autogenerado",
+        "path": "Medication.autogenerado",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Participant ID at the service center.",
+        "short": "Participant ID "
+      },
+      {
+        "id": "Medication.fecate",
+        "path": "Medication.fecate",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The date of encounter.",
+        "short": "Date"
+      },
+      {
+        "id": "Medication.Visita",
+        "path": "Medication.Visita",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The identifier for the patient's encounter or visit, such as 'visit1', 'visit6', etc.",
+        "short": "Visit"
+      },
+      {
+        "id": "Medication.numerosol",
+        "path": "Medication.numerosol",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The number of the request for care to be performed.",
+        "short": "Request Number"
+      },
+      {
+        "id": "Medication.almacen",
+        "path": "Medication.almacen",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.numerosoldet",
+        "path": "Medication.numerosoldet",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Detail Request Number.",
+        "short": "Detailed Request Number"
+      },
+      {
+        "id": "Medication.codmat",
+        "path": "Medication.codmat",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Material or input code.",
+        "short": "Material Code"
+      },
+      {
+        "id": "Medication.diag_ICD10",
+        "path": "Medication.diag_ICD10",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Diagnosis code according to the ICD10.",
+        "short": "Diagnosis Code"
+      },
+      {
+        "id": "Medication.ICD10_Clasificados",
+        "path": "Medication.ICD10_Clasificados",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "ICD10 Classification"
+      },
+      {
+        "id": "Medication.desdiag",
+        "path": "Medication.desdiag",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The name of the diagnosis",
+        "short": "Diagnosis Display"
+      },
+      {
+        "id": "Medication.canmat",
+        "path": "Medication.canmat",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.desmat",
+        "path": "Medication.desmat",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The description of the medication.",
+        "short": "Medication Description"
+      },
+      {
+        "id": "Medication.ATC_codes",
+        "path": "Medication.ATC_codes",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "ATC code of the medication.",
+        "short": "Medication Code"
+      },
+      {
+        "id": "Medication.Medication_group",
+        "path": "Medication.Medication_group",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Medication Group Description.",
+        "short": "Medication Group"
+      },
+      {
+        "id": "Medication.fecent",
+        "path": "Medication.fecent",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The date when the medication was administered.",
+        "short": "Medication Administration Date"
+      },
+      {
+        "id": "Medication.movcntmat",
+        "path": "Medication.movcntmat",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "Medication dosage",
+        "short": "Medication Dosage"
+      },
+      {
+        "id": "Medication.Laboratorio",
+        "path": "Medication.Laboratorio",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "short": "Laboratory Code"
+      },
+      {
+        "id": "Medication.estado",
+        "path": "Medication.estado",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The status of diagnosis",
+        "short": "Diagnosis Status"
+      },
+      {
+        "id": "Medication.dosis",
+        "path": "Medication.dosis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The dosage of the medication administered to the patient.",
+        "short": "Dosage"
+      },
+      {
+        "id": "Medication.fumador",
+        "path": "Medication.fumador",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The smoking status at the time of visit.",
+        "short": "Smoking Status"
+      },
+      {
+        "id": "Medication.flag",
+        "path": "Medication.flag",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
