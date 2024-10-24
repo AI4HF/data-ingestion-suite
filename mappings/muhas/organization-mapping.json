@@ -1,0 +1,46 @@
+{
+  "id" : "organization-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/organization-mapping",
+  "name" : "organization-mapping",
+  "title" : "organization-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "organization",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Organization",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "typeContext" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/type.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "organization",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "type" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/organization-type",
+            "code" : "{{mpp:getConcept(%typeContext, type, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%typeContext, type, 'target_name')}}"
+          } ],
+          "@sliceName" : "hfrOrganizationType"
+        } ],
+        "name" : "{{name}}",
+        "description" : {
+          "{{#descriptionVar}}" : "{{iif(description.exists() and description != 'none', true, {})}}",
+          "{{?}}" : "{{description}}"
+        },
+        "id" : "{{mpp:getHashedId('Organization', organizationId)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Organization|latest" ]
+        },
+        "resourceType" : "Organization"
+      }
+    },
+    "description" : "organization"
+  } ]
+}

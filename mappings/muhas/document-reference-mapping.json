@@ -1,0 +1,42 @@
+{
+  "id" : "document-reference-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/document-reference-mapping",
+  "name" : "document-reference-mapping",
+  "title" : "document-reference-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "documentReference",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/DocumentReference",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "documentReference",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "context" : [ "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}" ],
+        "content" : [ {
+          "attachment" : {
+            "contentType" : "{{contentType}}",
+            "language" : "",
+            "data" : {
+              "{{#dataVar}}" : "{{iif(data.exists(), true, {})}}",
+              "{{?}}" : "{{data}}"
+            },
+            "url" : "{{url}}"
+          }
+        } ],
+        "status" : "",
+        "id" : "{{mpp:getHashedId('DocumentReference', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference|latest" ]
+        },
+        "resourceType" : "DocumentReference"
+      }
+    },
+    "description" : "documentReference"
+  } ]
+}

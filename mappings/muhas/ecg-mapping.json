@@ -1,0 +1,229 @@
+{
+  "id" : "ecg-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/ecg-mapping",
+  "name" : "ecg-mapping",
+  "title" : "ecg-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "ecg",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/ECG",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "ecg",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "34534-8",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "component" : [ {
+          "{{#componentVar}}" : "{{iif(QRSduration.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8633-0"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QRSduration}}"
+            }
+          },
+          "@sliceName" : "qrsDuration"
+        }, {
+          "{{#componentVar}}" : "{{iif(raxis.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8632-2"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{raxis}}"
+            }
+          },
+          "@sliceName" : "rAxis"
+        }, {
+          "{{#componentVar}}" : "{{iif(paxis.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8626-4"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{paxis}}"
+            }
+          },
+          "@sliceName" : "pAxis"
+        }, {
+          "{{#componentVar}}" : "{{iif(taxis.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8638-9"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{taxis}}"
+            }
+          },
+          "@sliceName" : "tAxis"
+        }, {
+          "{{#componentVar}}" : "{{iif(QTinterval.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8634-8"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QTinterval}}"
+            }
+          },
+          "@sliceName" : "qtInterval"
+        }, {
+          "{{#componentVar}}" : "{{iif(QTintervalCorrectedFormula.exists() and QTintervalCorrectedFormula = 'bazett' and QTintervalCorrected.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://datatools4heart.eu/fhir/CodeSystem/qt-correction-formula",
+                "code" : "bazett"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QTintervalCorrected}}"
+            }
+          },
+          "@sliceName" : "qtIntervalCorrectedBazett"
+        }, {
+          "{{#componentVar}}" : "{{iif(QTintervalCorrectedFormula.exists() and QTintervalCorrectedFormula = 'frederica' and QTintervalCorrected.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://datatools4heart.eu/fhir/CodeSystem/qt-correction-formula",
+                "code" : "frederica"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QTintervalCorrected}}"
+            }
+          },
+          "@sliceName" : "qtIntervalCorrectedFrederica"
+        }, {
+          "{{#componentVar}}" : "{{iif(QTintervalCorrectedFormula.exists() and QTintervalCorrectedFormula = 'framingham' and QTintervalCorrected.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://datatools4heart.eu/fhir/CodeSystem/qt-correction-formula",
+                "code" : "framingham"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QTintervalCorrected}}"
+            }
+          },
+          "@sliceName" : "qtIntervalCorrectedFramingham"
+        }, {
+          "{{#componentVar}}" : "{{iif(QRSComplexCount.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8897-1"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{QRSComplexCount}}"
+            }
+          },
+          "@sliceName" : "qrsComplexCount"
+        }, {
+          "{{#componentVar}}" : "{{iif(PRinterval.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8625-6"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{PRinterval}}"
+            }
+          },
+          "@sliceName" : "prInterval"
+        }, {
+          "{{#componentVar}}" : "{{iif(atrialRate.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "AtrialRate"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{atrialRate}}"
+            }
+          },
+          "@sliceName" : "atrialRate"
+        }, {
+          "{{#componentVar}}" : "{{iif(ventricularRate.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "VentricularRate"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{ventricularRate}}"
+            }
+          },
+          "@sliceName" : "ventricularRate"
+        }, {
+          "{{#componentVar}}" : "{{iif(samplingFrequency.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "SamplingFrequency"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{samplingFrequency}}"
+            }
+          },
+          "@sliceName" : "samplingFrequency"
+        } ],
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "vital-signs",
+            "display" : "Vital Signs"
+          } ]
+        } ],
+        "effectiveDateTime" : "{{effectiveDateTime.utl:toFhirDateTime('dd.MM.yyyy hh:mm:ss')}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Electrocardiograph|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "description" : "ecg"
+  } ]
+}

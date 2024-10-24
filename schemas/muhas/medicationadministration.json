@@ -1,0 +1,86 @@
+{
+  "id" : "medicationadministration",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/MedicationAdministration",
+  "version" : "latest",
+  "name" : "MedicationAdministration",
+  "description" : "MedicationAdministration",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "MedicationAdministration",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "MedicationAdministration",
+      "path" : "MedicationAdministration",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "MedicationAdministration.identifier",
+      "path" : "MedicationAdministration.identifier",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "identifier"
+    }, {
+      "id" : "MedicationAdministration.subject",
+      "path" : "MedicationAdministration.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "MedicationAdministration.encounter",
+      "path" : "MedicationAdministration.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "MedicationAdministration.code",
+      "path" : "MedicationAdministration.code",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "code"
+    }, {
+      "id" : "MedicationAdministration.startDate",
+      "path" : "MedicationAdministration.startDate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "dateTime",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/dateTime" ]
+      } ],
+      "short" : "startDate"
+    }, {
+      "id" : "MedicationAdministration.endDate",
+      "path" : "MedicationAdministration.endDate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "dateTime",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/dateTime" ]
+      } ],
+      "short" : "endDate"
+    } ]
+  }
+}
