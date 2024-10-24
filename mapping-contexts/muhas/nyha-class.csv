@@ -1,0 +1,13 @@
+source_code,target_code,target_name
+"I","LA28404-4"," Class I"
+"II","LA28405-1"," Class II"
+"III","LA28406-9","Class III"
+"IV","LA28407-7","Class IV"
+"Class I","LA28404-4"," Class I"
+"Class II","LA28405-1"," Class II"
+"Class III","LA28406-9","Class III"
+"Class IV","LA28407-7","Class IV"
+"NYHA I","LA28404-4"," Class I"
+"NYHA II","LA28405-1"," Class II"
+"NYHA III","LA28406-9","Class III"
+"NYHA IV","LA28407-7","Class IV"
