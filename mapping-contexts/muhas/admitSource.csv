@@ -1,0 +1,4 @@
+source_code,target_code,target_name
+"out","outp","From outpatient department"
+"Emd","emd","From accident/emergency department"
+"emd","emd","From accident/emergency department"
