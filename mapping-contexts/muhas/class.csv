@@ -1,0 +1,6 @@
+source_code,target_code,target_name
+"AMB","AMB","Ambulatory"
+"IMP","IMP","Inpatient encounter"
+"EMER","EMER","Emergency"
+"AMP","AMB","Ambulatory"
+"iMP","IMP","Inpatient encounter"
