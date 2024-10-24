@@ -1,0 +1,86 @@
+{
+  "id" : "condition-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/condition-mapping",
+  "name" : "condition-mapping",
+  "title" : "condition-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "condition",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Condition",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "clinicalStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/clinicalStatus.csv"
+    },
+    "verificationStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/verificationStatus.csv"
+    },
+    "severityConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/severity.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "condition",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "code" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/sid/icd-10",
+            "code" : "{{code}}",
+            "display" : {
+              "{{#displayVar}}" : "{{iif(diagnosisName.exists(), diagnosisName, {})}}",
+              "{{?}}" : "{{diagnosisName}}"
+            },
+            "@sliceName" : "icd10Code"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : {
+          "{{#encounterVar}}" : "{{iif(encounter.exists(), encounter, {})}}",
+          "{{?}}" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}"
+        },
+        "onsetDateTime" : "{{onsetDataTime.utl:toFhirDate('d/M/yyyy')}}",
+        "abatementDateTime" : {
+          "{{#abatementDateTimeVar}}" : "{{iif(abatementDateTime.exists(), true, {})}}",
+          "{{?}}" : "{{abatementDateTime.utl:toFhirDate('d/M/yyyy')}}"
+        },
+        "clinicalStatus" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
+            "code" : "{{mpp:getConcept(%clinicalStatusConceptMap, clinicalStatus, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%clinicalStatusConceptMap, clinicalStatus, 'target_name')}}"
+          } ]
+        },
+        "verificationStatus" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/ValueSet/condition-ver-status",
+            "code" : "{{mpp:getConcept(%verificationStatusConceptMap, verificationStatus, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%verificationStatusConceptMap, verificationStatus, 'target_name')}}"
+          } ]
+        },
+        "severity" : {
+          "{{#severityVar}}" : "{{iif(severity.exists(), true, {})}}",
+          "{{?}}" : {
+            "coding" : [ {
+              "system" : "http://snomed.info/sct",
+              "code" : "{{mpp:getConcept(%severityConceptMap, severity, 'target_code')}}",
+              "display" : "{{mpp:getConcept(%severityConceptMap, severity, 'target_name')}}"
+            } ]
+          }
+        },
+        "id" : "{{iif(encounter.exists(), mpp:getHashedId('Condition', ( identifier + '-' + subject + '-' + encounter)), mpp:getHashedId('Condition', ( identifier + '-' + subject)))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition|latest" ]
+        },
+        "resourceType" : "Condition"
+      }
+    },
+    "description" : "condition"
+  } ]
+}

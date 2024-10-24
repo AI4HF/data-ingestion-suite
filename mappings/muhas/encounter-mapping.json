@@ -1,0 +1,68 @@
+{
+  "id" : "encounter-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/encounter-mapping",
+  "name" : "encounter-mapping",
+  "title" : "encounter-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "encounter",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Encounter",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "statusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/status.csv"
+    },
+    "classConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/class.csv"
+    },
+    "admitSourceConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/admitSource.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "encounter",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "class" : [ {
+          "coding" : [ {
+            "system" : "https://terminology.hl7.org/5.1.0/ValueSet-encounter-class.html",
+            "code" : "{{mpp:getConcept(%classConceptMap, class, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%classConceptMap, class, 'target_name')}}"
+          } ]
+        } ],
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "actualPeriod" : {
+          "start" : "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}",
+          "end" : "{{endDate.utl:toFhirDate('dd/MM/yyyy')}}"
+        },
+        "admission" : {
+          "origin" : "{{mpp:createFhirReferenceWithHashedId('Organization', admissionOrigin)}}",
+          "destination" : {
+            "{{#destinationVar}}" : "{{iif(admissionDestination.exists(), true, {})}}",
+            "{{?}}" : "{{mpp:createFhirReferenceWithHashedId('Organization', admissionDestination)}}"
+          },
+          "admitSource" : {
+            "coding" : [ {
+              "system" : "https://hl7.org/fhir/valueset-encounter-admit-source.html",
+              "code" : "{{mpp:getConcept(%admitSourceConceptMap, adminSource, 'target_code')}}",
+              "display" : "{{mpp:getConcept(%admitSourceConceptMap, adminSource, 'target_name')}}"
+            } ]
+          }
+        },
+        "status" : "{{mpp:getConcept(%statusConceptMap, status, 'target_code')}}",
+        "id" : "{{mpp:getHashedId('Encounter', identifier)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter|latest" ]
+        },
+        "resourceType" : "Encounter"
+      }
+    },
+    "description" : "encounter"
+  } ]
+}
