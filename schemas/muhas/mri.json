@@ -1,0 +1,386 @@
+{
+  "id" : "mri",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/MRI",
+  "version" : "latest",
+  "name" : "MRI",
+  "description" : "MRI",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "MRI",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "MRI",
+      "path" : "MRI",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "MRI.identifier",
+      "path" : "MRI.identifier",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "identifier"
+    }, {
+      "id" : "MRI.subject",
+      "path" : "MRI.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "MRI.encounter",
+      "path" : "MRI.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "MRI.effectiveDateTime",
+      "path" : "MRI.effectiveDateTime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "short" : "effectiveDateTime"
+    }, {
+      "id" : "MRI.sequenceName",
+      "path" : "MRI.sequenceName",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "sequenceName"
+    }, {
+      "id" : "MRI.repetitionTime",
+      "path" : "MRI.repetitionTime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "repetitionTime"
+    }, {
+      "id" : "MRI.echoTime",
+      "path" : "MRI.echoTime",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "echoTime"
+    }, {
+      "id" : "MRI.flipAngle",
+      "path" : "MRI.flipAngle",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "flipAngle"
+    }, {
+      "id" : "MRI.fieldOfView",
+      "path" : "MRI.fieldOfView",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "fieldOfView"
+    }, {
+      "id" : "MRI.sliceThickness",
+      "path" : "MRI.sliceThickness",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "sliceThickness"
+    }, {
+      "id" : "MRI.sliceNum",
+      "path" : "MRI.sliceNum",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "sliceNum"
+    }, {
+      "id" : "MRI.breathHold",
+      "path" : "MRI.breathHold",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "short" : "breathHold"
+    }, {
+      "id" : "MRI.BSA",
+      "path" : "MRI.BSA",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "BSA"
+    }, {
+      "id" : "MRI.LVEDV",
+      "path" : "MRI.LVEDV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVEDV"
+    }, {
+      "id" : "MRI.LVESV",
+      "path" : "MRI.LVESV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVESV"
+    }, {
+      "id" : "MRI.LVEDVi",
+      "path" : "MRI.LVEDVi",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVEDVi"
+    }, {
+      "id" : "MRI.LVESVi",
+      "path" : "MRI.LVESVi",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVESVi"
+    }, {
+      "id" : "MRI.RVEDV",
+      "path" : "MRI.RVEDV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVEDV"
+    }, {
+      "id" : "MRI.RVESV",
+      "path" : "MRI.RVESV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVESV"
+    }, {
+      "id" : "MRI.RVEF",
+      "path" : "MRI.RVEF",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVEF"
+    }, {
+      "id" : "MRI.RVEDVi",
+      "path" : "MRI.RVEDVi",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVEDVi"
+    }, {
+      "id" : "MRI.RVESVi",
+      "path" : "MRI.RVESVi",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVESVi"
+    }, {
+      "id" : "MRI.LVLAIDED",
+      "path" : "MRI.LVLAIDED",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVLAIDED"
+    }, {
+      "id" : "MRI.LVLAIDES",
+      "path" : "MRI.LVLAIDES",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVLAIDES"
+    }, {
+      "id" : "MRI.LVIT",
+      "path" : "MRI.LVIT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVIT"
+    }, {
+      "id" : "MRI.RVIT",
+      "path" : "MRI.RVIT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVIT"
+    }, {
+      "id" : "MRI.LVOT",
+      "path" : "MRI.LVOT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVOT"
+    }, {
+      "id" : "MRI.RVOT",
+      "path" : "MRI.RVOT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RVOT"
+    }, {
+      "id" : "MRI.SWT",
+      "path" : "MRI.SWT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "SWT"
+    }, {
+      "id" : "MRI.LVPWT",
+      "path" : "MRI.LVPWT",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LVPWT"
+    }, {
+      "id" : "MRI.LAA",
+      "path" : "MRI.LAA",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LAA"
+    }, {
+      "id" : "MRI.RAA",
+      "path" : "MRI.RAA",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "RAA"
+    }, {
+      "id" : "MRI.LGE-LV",
+      "path" : "MRI.LGE-LV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LGE-LV"
+    }, {
+      "id" : "MRI.LGE-RV",
+      "path" : "MRI.LGE-RV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "LGE-RV"
+    }, {
+      "id" : "MRI.ECV",
+      "path" : "MRI.ECV",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "ECV"
+    }, {
+      "id" : "MRI.NT1val",
+      "path" : "MRI.NT1val",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "integer",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/integer" ]
+      } ],
+      "short" : "NT1val"
+    } ]
+  }
+}

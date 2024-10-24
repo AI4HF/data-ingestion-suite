@@ -1,0 +1,76 @@
+{
+  "id" : "employmentstatus",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/EmploymentStatus",
+  "version" : "latest",
+  "name" : "EmploymentStatus",
+  "description" : "EmploymentStatus",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "EmploymentStatus",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "EmploymentStatus",
+      "path" : "EmploymentStatus",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "EmploymentStatus.subject",
+      "path" : "EmploymentStatus.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "EmploymentStatus.encounter",
+      "path" : "EmploymentStatus.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "EmploymentStatus.startDate",
+      "path" : "EmploymentStatus.startDate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "short" : "startDate"
+    }, {
+      "id" : "EmploymentStatus.endDate",
+      "path" : "EmploymentStatus.endDate",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "short" : "endDate"
+    }, {
+      "id" : "EmploymentStatus.code",
+      "path" : "EmploymentStatus.code",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "code"
+    } ]
+  }
+}

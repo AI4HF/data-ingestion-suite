@@ -1,0 +1,86 @@
+{
+  "id" : "documentreference",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/DocumentReference",
+  "version" : "latest",
+  "name" : "DocumentReference",
+  "description" : "DocumentReference",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "DocumentReference",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "DocumentReference",
+      "path" : "DocumentReference",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "DocumentReference.identifier",
+      "path" : "DocumentReference.identifier",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "identifier"
+    }, {
+      "id" : "DocumentReference.subject",
+      "path" : "DocumentReference.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "DocumentReference.encounter",
+      "path" : "DocumentReference.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "DocumentReference.contentType",
+      "path" : "DocumentReference.contentType",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "contentType"
+    }, {
+      "id" : "DocumentReference.url",
+      "path" : "DocumentReference.url",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "url"
+    }, {
+      "id" : "DocumentReference.data",
+      "path" : "DocumentReference.data",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "base64Binary",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/base64Binary" ]
+      } ],
+      "short" : "data"
+    } ]
+  }
+}
