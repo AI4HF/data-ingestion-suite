@@ -1,0 +1,106 @@
+{
+  "id" : "symptom",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/Symptom",
+  "version" : "latest",
+  "name" : "Symptom",
+  "description" : "Symptom",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "Symptom",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "Symptom",
+      "path" : "Symptom",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "Symptom.identifier",
+      "path" : "Symptom.identifier",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "identifier"
+    }, {
+      "id" : "Symptom.subject",
+      "path" : "Symptom.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "Symptom.encounter",
+      "path" : "Symptom.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "Symptom.category",
+      "path" : "Symptom.category",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "category"
+    }, {
+      "id" : "Symptom.symptomName",
+      "path" : "Symptom.symptomName",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "symptomName"
+    }, {
+      "id" : "Symptom.code",
+      "path" : "Symptom.code",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "code"
+    }, {
+      "id" : "Symptom.effectiveDateTime",
+      "path" : "Symptom.effectiveDateTime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "short" : "effectiveDateTime"
+    }, {
+      "id" : "Symptom.hasSymptom",
+      "path" : "Symptom.hasSymptom",
+      "min" : 0,
+      "max" : "1",
+      "type" : [ {
+        "code" : "boolean",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/boolean" ]
+      } ],
+      "short" : "hasSymptom"
+    } ]
+  }
+}

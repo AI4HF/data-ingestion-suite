@@ -1,0 +1,70 @@
+{
+  "id" : "patient-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/patient-mapping",
+  "name" : "patient-mapping",
+  "title" : "patient-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "patient",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Patient",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "ethnicityConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/ethnicity.csv"
+    },
+    "genderConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/gender.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "patient",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "gender" : "{{mpp:getConcept(%genderConceptMap, gender, 'target_code')}}",
+        "birthDate" : "{{birthDate.utl:toFhirDate('dd/MM/yyyy')}}",
+        "deceasedDateTime" : {
+          "{{#deceasedDateTimeVar}}" : "{{iif(deceasedDateTime.exists(), true, {})}}",
+          "{{?}}" : "{{deceasedDateTime.utl:toFhirDateTime()}}"
+        },
+        "address" : [ {
+          "use" : "home",
+          "city" : "{{city}}",
+          "district" : {
+            "{{#districtVar}}" : "{{iif(district.exists() and district != 'unknown', true, {})}}",
+            "{{?}}" : "{{district}}"
+          },
+          "postalCode" : {
+            "{{#postalCodeVar}}" : "{{iif(postalCode.exists() and postalCode != 'unknown', true, {})}}",
+            "{{?}}" : "{{postalCode}}"
+          }
+        } ],
+        "id" : "{{mpp:getHashedId('Patient', patientId)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest" ]
+        },
+        "extension" : [ {
+          "url" : "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
+          "valueCodeableConcept" : {
+            "coding" : [ {
+              "system" : "http://snomed.info/sct",
+              "code" : "{{mpp:getConcept(%ethnicityConceptMap, ethnicity, 'target_code')}}",
+              "display" : "{{mpp:getConcept(%ethnicityConceptMap, ethnicity, 'target_name')}}"
+            } ]
+          }
+        } ],
+        "resourceType" : "Patient"
+      }
+    },
+    "precondition" : {
+      "name" : "isBirthDateDefined",
+      "language" : "text/fhirpath",
+      "expression" : "birthDate.exists()"
+    },
+    "description" : "patient"
+  } ]
+}

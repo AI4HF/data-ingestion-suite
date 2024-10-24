@@ -1,0 +1,50 @@
+{
+  "id" : "symptom-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/symptom-mapping",
+  "name" : "symptom-mapping",
+  "title" : "symptom-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "symptom",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Symptom",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "symptom",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "{{category}}"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://snomed.info/sct",
+            "code" : "{{code}}",
+            "display" : {
+              "{{#displayVar}}" : "{{iif(symptomName.exists(), symptomName, {})}}",
+              "{{?}}" : "{{symptomName}}"
+            },
+            "@sliceName" : "snomedCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{effectiveDateTime.utl:toFhirDate('dd/MM/yyyy')}}",
+        "valueBoolean" : "{{iif(hasSymptom.exists() and hasSymptom = true, true, false)}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "description" : "symptom"
+  } ]
+}

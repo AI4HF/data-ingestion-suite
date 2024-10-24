@@ -1,0 +1,67 @@
+{
+  "id" : "employment-status-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/employment-status-mapping",
+  "name" : "employment-status-mapping",
+  "title" : "employment-status-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "eploymentStatus",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/EmploymentStatus",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "employmentStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/employment-status-code.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "eploymentStatus",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "social-history",
+            "display" : "Social History"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "67875-5",
+            "display" : "Employment status - current",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectivePeriod" : {
+          "start" : "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}",
+          "end" : "{{endDate.utl:toFhirDate('dd/MM/yyyy')}}"
+        },
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "https://loinc.org/LL1901-9",
+            "code" : "{{mpp:getConcept(%employmentStatusConceptMap, code, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%employmentStatusConceptMap, code, 'target_name')}}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', (subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-EmploymentStatus|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isEmploymentStatusCodeKnown",
+      "language" : "text/fhirpath",
+      "expression" : "code.exists() and code != 'unknown'"
+    },
+    "description" : "eploymentStatus"
+  } ]
+}

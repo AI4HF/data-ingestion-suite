@@ -1,0 +1,192 @@
+{
+  "id" : "muhas",
+  "name" : "muhas",
+  "sourceSettings" : {
+    "muhas" : {
+      "jsonClass" : "FileSystemSourceSettings",
+      "name" : "muhas",
+      "sourceUri" : "https://ai4hf.eu/data-ingestion-suite/muhas",
+      "dataFolderPath" : "test-data/muhas",
+      "asStream" : false
+    }
+  },
+  "sinkSettings" : {
+    "jsonClass" : "FhirRepositorySinkSettings",
+    "fhirRepoUrl" : "http://localhost:8080/fhir",
+    "returnMinimal" : true
+  },
+  "mappings" : [ {
+    "name" : "patient-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/patient-mapping",
+    "sourceBinding" : {
+      "patient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "patient.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "organization-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/organization-mapping",
+    "sourceBinding" : {
+      "organization" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "organization.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "encounter-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/encounter-mapping",
+    "sourceBinding" : {
+      "encounter" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "encounter.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "employment-status-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/employment-status-mapping",
+    "sourceBinding" : {
+      "eploymentStatus" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "employmentStatus.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "income-level-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/income-level-mapping",
+    "sourceBinding" : {
+      "incomeLevel" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "incomeLevel.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "smoking-status-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/smoking-status-mapping",
+    "sourceBinding" : {
+      "smokingStatus" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "smokingStatus.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "condition-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/condition-mapping",
+    "sourceBinding" : {
+      "condition" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "condition.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "symptom-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/symptom-mapping",
+    "sourceBinding" : {
+      "symptom" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "symptom.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "nyha-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/nyha-mapping",
+    "sourceBinding" : {
+      "nyha" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "nyha.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "ecg-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/ecg-mapping",
+    "sourceBinding" : {
+      "ecg" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "ecg.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "echo-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/echo-mapping",
+    "sourceBinding" : {
+      "echo" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "echo.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "mri-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/mri-mapping",
+    "sourceBinding" : {
+      "mri" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "mri.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "document-reference-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/document-reference-mapping",
+    "sourceBinding" : {
+      "documentReference" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "documentReference.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  }, {
+    "name" : "procedure-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/procedure-mapping",
+    "sourceBinding" : {
+      "procedure" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "procedure.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "muhas"
+      }
+    }
+  } ],
+  "dataProcessingSettings" : {
+    "saveErroneousRecords" : false,
+    "archiveMode" : "off"
+  },
+  "useFhirSinkAsIdentityService" : false
+}

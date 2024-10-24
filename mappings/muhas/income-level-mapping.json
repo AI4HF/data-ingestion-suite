@@ -1,0 +1,67 @@
+{
+  "id" : "income-level-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/income-level-mapping",
+  "name" : "income-level-mapping",
+  "title" : "income-level-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "incomeLevel",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/IncomeLevel",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "incomeLevelConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/income-level-code.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "incomeLevel",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "social-history",
+            "display" : "Social History"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "89566-4",
+            "display" : "Income status [CUBS]",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectivePeriod" : {
+          "start" : "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}",
+          "end" : "{{endDate.utl:toFhirDate('dd/MM/yyyy')}}"
+        },
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "https://loinc.org/LL5047-7",
+            "code" : "{{mpp:getConcept(%incomeLevelConceptMap, code, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%incomeLevelConceptMap, code, 'target_description')}}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', (subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-IncomeLevel|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isIncomeLevelCodeKnown",
+      "language" : "text/fhirpath",
+      "expression" : "code.exists() and code != 'unknown'"
+    },
+    "description" : "incomeLevel"
+  } ]
+}
