@@ -1,0 +1,5 @@
+source_code,target_code,target_name
+"confirmed","confirmed","Confirmed"
+"Confirmed","confirmed","Confirmed"
+"not confirmed","unconfirmed","Unconfirmed"
+"Uncomfirmed","uncomfirmed","Uncomfirmed"
