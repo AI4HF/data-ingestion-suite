@@ -1,0 +1,165 @@
+{
+  "id" : "mri-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/mri-mapping",
+  "name" : "mri-mapping",
+  "title" : "mri-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "mri",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/MRI",
+    "joinOn" : [ ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "mri",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "imaging",
+            "display" : "Imaging"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "24748-6",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{effectiveDateTime.utl:toFhirDate('yyyy')}}",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "component" : [ {
+          "{{#componentVar}}" : "{{iif(sequenceName.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "SequenceName"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "{{sequenceName}}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(repetitionTime.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "TR"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{repetitionTime}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(echoTime.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "TE"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{echoTime}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(flipAngle.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "FA"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{flipAngle}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(fieldOfView.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "FoV"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{fieldOfView}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(sliceThickness.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "SliceThickness"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{sliceThickness}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(sliceNum.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "NumOfSlices"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{sliceNum}}"
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(breathHold.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://www.ai4hf.com/",
+                "code" : "BreathHold"
+              } ]
+            },
+            "valueBoolean" : "{{breathHold}}"
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(LVEDV.exists(), true, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "https://loinc.org",
+                "code" : "8821-1"
+              } ]
+            },
+            "valueQuantity" : {
+              "value" : "{{LVEDV}}"
+            }
+          }
+        } ],
+        "id" : "{{mpp:getHashedId('Observation', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CardiacMRI|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "description" : "mri"
+  } ]
+}

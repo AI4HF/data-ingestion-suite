@@ -1,0 +1,76 @@
+{
+  "id" : "nyha-assesment",
+  "resourceType" : "StructureDefinition",
+  "url" : "https://ai4hf.eu/fhir/schemas/muhas/NYHA-Assesment",
+  "version" : "latest",
+  "name" : "NYHA-Assesment",
+  "description" : "NYHA-Assesment",
+  "status" : "draft",
+  "fhirVersion" : "5.0.0",
+  "kind" : "logical",
+  "abstract" : false,
+  "type" : "NYHA-Assesment",
+  "baseDefinition" : "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation" : "specialization",
+  "differential" : {
+    "element" : [ {
+      "id" : "NYHA-Assesment",
+      "path" : "NYHA-Assesment",
+      "min" : 0,
+      "max" : "*",
+      "type" : [ {
+        "code" : "Element"
+      } ]
+    }, {
+      "id" : "NYHA-Assesment.identifier",
+      "path" : "NYHA-Assesment.identifier",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "identifier"
+    }, {
+      "id" : "NYHA-Assesment.subject",
+      "path" : "NYHA-Assesment.subject",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "subject"
+    }, {
+      "id" : "NYHA-Assesment.encounter",
+      "path" : "NYHA-Assesment.encounter",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "encounter"
+    }, {
+      "id" : "NYHA-Assesment.effectiveDateTime",
+      "path" : "NYHA-Assesment.effectiveDateTime",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "date",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/date" ]
+      } ],
+      "short" : "effectiveDateTime"
+    }, {
+      "id" : "NYHA-Assesment.nyhaClass",
+      "path" : "NYHA-Assesment.nyhaClass",
+      "min" : 1,
+      "max" : "1",
+      "type" : [ {
+        "code" : "string",
+        "profile" : [ "http://hl7.org/fhir/StructureDefinition/string" ]
+      } ],
+      "short" : "nyhaClass"
+    } ]
+  }
+}

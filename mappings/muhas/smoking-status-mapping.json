@@ -1,0 +1,67 @@
+{
+  "id" : "smoking-status-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/smoking-status-mapping",
+  "name" : "smoking-status-mapping",
+  "title" : "smoking-status-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "smokingStatus",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/SmokingStatus",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "smokingStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/smoking-status-code.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "smokingStatus",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "social-history",
+            "display" : "Social History"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "72166-2",
+            "display" : "Smoking Status",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "http://snomed.info/sct",
+            "code" : "{{mpp:getConcept(%smokingStatusConceptMap, code, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%smokingStatusConceptMap, code, 'target_name')}}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "effectivePeriod" : {
+          "start" : "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}",
+          "end" : "{{endDate.utl:toFhirDate('dd/MM/yyyy')}}"
+        },
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', (subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "precondition" : {
+      "name" : "isSmokingCodeAndDatesKnown",
+      "language" : "text/fhirpath",
+      "expression" : "code.exists() and code != 'unknown' and startDate.exists() and endDate.exists()"
+    },
+    "description" : "smokingStatus"
+  } ]
+}

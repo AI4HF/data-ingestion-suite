@@ -1,0 +1,59 @@
+{
+  "id" : "nyha-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/nyha-mapping",
+  "name" : "nyha-mapping",
+  "title" : "nyha-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "nyha",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/NYHA-Assesment",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "nyhaClassConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/nyha-class.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "nyha",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code" : "exam",
+            "display" : "Exam"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "https://loinc.org",
+            "code" : "88020-3",
+            "display" : "Functional capacity NYHA",
+            "@sliceName" : "loincCode"
+          } ]
+        },
+        "effectiveDateTime" : "{{effectiveDateTime.utl:toFhirDate('dd/MM/yyyy')}}",
+        "valueCodeableConcept" : {
+          "coding" : [ {
+            "system" : "http://loinc.org",
+            "code" : "{{mpp:getConcept(%nyhaClassConceptMap, nyhaClass, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%nyhaClassConceptMap, nyhaClass, 'target_name')}}"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "status" : "final",
+        "id" : "{{mpp:getHashedId('Observation', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment|latest" ]
+        },
+        "resourceType" : "Observation"
+      }
+    },
+    "description" : "nyha"
+  } ]
+}

@@ -1,0 +1,70 @@
+{
+  "id" : "procedure-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/muhas/procedure-mapping",
+  "name" : "procedure-mapping",
+  "title" : "procedure-mapping",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "procedure",
+    "url" : "https://ai4hf.eu/fhir/schemas/muhas/Procedure",
+    "joinOn" : [ ]
+  } ],
+  "context" : {
+    "procedureStatusConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/procedure-status.csv"
+    },
+    "procedureCategoryConceptMap" : {
+      "category" : "concept-map",
+      "url" : "$CONTEXT_REPO/muhas/procedure-category.csv"
+    }
+  },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "procedure",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "category" : [ {
+          "coding" : [ {
+            "system" : "http://snomed.info/sct",
+            "code" : "{{mpp:getConcept(%procedureCategoryConceptMap, category, 'target_code')}}",
+            "display" : "{{mpp:getConcept(%procedureCategoryConceptMap, category, 'target_name')}}"
+          } ]
+        } ],
+        "code" : {
+          "coding" : [ {
+            "system" : "http://hl7.org/fhir/sid/icd-10",
+            "code" : "{{code}}",
+            "@sliceName" : "icdCode"
+          } ]
+        },
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', encounter)}}",
+        "occurrenceDateTime" : "{{occurrenceDateTime.utl:toFhirDate('dd/MM/yyyy')}}",
+        "performer" : {
+          "{{#performerVar}}" : "{{iif(performer.exists(), true, {})}}",
+          "{{?}}" : [ {
+            "actor" : "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', performer)}}"
+          } ]
+        },
+        "status" : "{{mpp:getConcept(%procedureStatusConceptMap, status, 'target_code')}}",
+        "outcome" : {
+          "coding" : {
+            "{{#codingVar}}" : "{{iif(outcome.exists(), true, {})}}",
+            "{{?}}" : [ {
+              "system" : "http://snomed.info/sct",
+              "code" : "{{outcome}}"
+            } ]
+          }
+        },
+        "id" : "{{mpp:getHashedId('Observation', ( identifier + '-' + subject + '-' + encounter))}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure|latest" ]
+        },
+        "resourceType" : "Procedure"
+      }
+    },
+    "description" : "procedure"
+  } ]
+}
