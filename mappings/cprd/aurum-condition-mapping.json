@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-condition-mapping",
   "name" : "aurum-condition-mapping",
   "title" : "aurum-condition-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
@@ -20,14 +21,24 @@
     "expression" : " mpp:getConcept(%conditionContext, medcodeid) "
   } ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isCondition",
+      "language" : "text/fhirpath",
+      "expression" : " %conditionCode.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
+    },
     "expression" : {
       "name" : "condition",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Condition', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition" ]
+        },
+        "resourceType" : "Condition",
         "code" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/sid/icd-10",
             "code" : "{{ %conditionCode.target_code }}",
+            "system" : "http://hl7.org/fhir/sid/icd-10",
             "display" : "{{ %conditionCode.target_name }}",
             "@sliceName" : "icd10Code"
           } ]
@@ -35,24 +46,15 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
         "onsetDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+        "identifier" : "{{ obsid }}",
         "clinicalStatus" : {
           "coding" : [ {
-            "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
             "code" : "unknown",
+            "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
             "display" : "Unknown"
           } ]
-        },
-        "id" : "{{mpp:getHashedId('Condition', obsid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition" ]
-        },
-        "resourceType" : "Condition"
+        }
       }
-    },
-    "precondition" : {
-      "name" : "isCondition",
-      "language" : "text/fhirpath",
-      "expression" : " %conditionCode.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
     }
   } ]
 }

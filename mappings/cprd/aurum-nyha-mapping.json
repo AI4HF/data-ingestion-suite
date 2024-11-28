@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-nyha-mapping",
   "name" : "aurum-nyha-mapping",
   "title" : "aurum-nyha-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
@@ -20,10 +21,20 @@
     "expression" : " mpp:getConcept(%nyhaContext, medcodeid) "
   } ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isNyhaCode",
+      "language" : "text/fhirpath",
+      "expression" : " %nyhaCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    },
     "expression" : {
       "name" : "nyha",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment" ]
+        },
+        "resourceType" : "Observation",
         "category" : [ {
           "coding" : [ {
             "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
@@ -49,18 +60,9 @@
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
-        "status" : "final",
-        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment" ]
-        },
-        "resourceType" : "Observation"
+        "identifier" : "{{ obsid }}",
+        "status" : "final"
       }
-    },
-    "precondition" : {
-      "name" : "isNyhaCode",
-      "language" : "text/fhirpath",
-      "expression" : " %nyhaCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
     }
   } ]
 }

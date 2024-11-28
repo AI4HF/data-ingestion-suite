@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-encounter-mapping",
   "name" : "aurum-encounter-mapping",
   "title" : "aurum-encounter-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "consultation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-consultation",
@@ -15,18 +16,21 @@
       "name" : "encounter",
       "language" : "application/fhir-template+json",
       "value" : {
-        "class" : "",
+        "id" : "{{mpp:getHashedId('Encounter', consid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
+        },
+        "resourceType" : "Encounter",
+        "class" : [ {
+          "coding" : ""
+        } ],
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "actualPeriod" : {
           "start" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
           "end" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
         },
-        "status" : "completed",
-        "id" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
-        },
-        "resourceType" : "Encounter"
+        "identifier" : "{{ consid }}",
+        "status" : "completed"
       }
     }
   } ]

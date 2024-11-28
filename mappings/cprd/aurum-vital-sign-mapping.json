@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-vital-sign-mapping",
   "name" : "aurum-vital-sign-mapping",
   "title" : "aurum-vital-sign-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
@@ -20,10 +21,20 @@
     "expression" : " mpp:getConcept(%vitalSignContext, medcodeid) "
   } ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isVitalSign",
+      "language" : "text/fhirpath",
+      "expression" : " %vitalSignCode.exists() and obsdate.exists() and value.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    },
     "expression" : {
       "name" : "vitalsign",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign" ]
+        },
+        "resourceType" : "Observation",
         "category" : [ {
           "coding" : [ {
             "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
@@ -41,25 +52,16 @@
         },
         "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "valueQuantity" : {
-          "value" : "{{ value }}",
-          "unit" : "{{ %vitalSignCode.target_unit }}",
           "system" : "http://unitsofmeasure.org",
-          "code" : "{{ %vitalSignCode.target_unit }}"
+          "code" : "{{ %vitalSignCode.target_unit }}",
+          "value" : "{{ value }}",
+          "unit" : "{{ %vitalSignCode.target_unit }}"
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
-        "status" : "final",
-        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign" ]
-        },
-        "resourceType" : "Observation"
+        "identifier" : "{{ obsid }}",
+        "status" : "final"
       }
-    },
-    "precondition" : {
-      "name" : "isVitalSign",
-      "language" : "text/fhirpath",
-      "expression" : " %vitalSignCode.exists() and obsdate.exists() and value.exists() and patid.exists() and consid.exists() and obsid.exists()"
     }
   } ]
 }

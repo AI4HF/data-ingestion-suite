@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
   "name" : "ons-cause-of-death-mapping",
   "title" : "ons-cause-of-death-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "deathRegistration",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Ons-death-registration",
@@ -11,10 +12,20 @@
   "context" : { },
   "variable" : [ ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isCauseDefined",
+      "language" : "text/fhirpath",
+      "expression" : " cause.exists() "
+    },
     "expression" : {
       "name" : "causeOfDeath",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Observation', patid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath" ]
+        },
+        "resourceType" : "Observation",
         "status" : "final",
         "category" : [ {
           "coding" : [ {
@@ -39,17 +50,8 @@
           } ]
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "id" : "{{mpp:getHashedId('Observation', patid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath" ]
-        },
-        "resourceType" : "Observation"
+        "identifier" : "{{ patid }}"
       }
-    },
-    "precondition" : {
-      "name" : "isCauseDefined",
-      "language" : "text/fhirpath",
-      "expression" : " cause.exists() "
     }
   } ]
 }

@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-smoking-status-mapping",
   "name" : "aurum-smoking-status-mapping",
   "title" : "aurum-smoking-status-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
@@ -20,10 +21,20 @@
     "expression" : " mpp:getConcept(%smokingContext, medcodeid) "
   } ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isSmokingStatus",
+      "language" : "text/fhirpath",
+      "expression" : " %smokingStatus.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists()"
+    },
     "expression" : {
       "name" : "smoking_status",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus" ]
+        },
+        "resourceType" : "Observation",
         "category" : [ {
           "coding" : [ {
             "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
@@ -49,18 +60,9 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
         "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
-        "status" : "final",
-        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus" ]
-        },
-        "resourceType" : "Observation"
+        "identifier" : "{{ obsid }}",
+        "status" : "final"
       }
-    },
-    "precondition" : {
-      "name" : "isSmokingStatus",
-      "language" : "text/fhirpath",
-      "expression" : " %smokingStatus.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists()"
     }
   } ]
 }

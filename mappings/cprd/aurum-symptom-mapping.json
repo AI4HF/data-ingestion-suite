@@ -3,6 +3,7 @@
   "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-symptom-mapping",
   "name" : "aurum-symptom-mapping",
   "title" : "aurum-symptom-mapping",
+  "isDraft" : false,
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
@@ -20,10 +21,20 @@
     "expression" : " mpp:getConcept(%symptomContext, medcodeid) "
   } ],
   "mapping" : [ {
+    "precondition" : {
+      "name" : "isSymptomCode",
+      "language" : "text/fhirpath",
+      "expression" : " %symptomCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+    },
     "expression" : {
       "name" : "symptom",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom" ]
+        },
+        "resourceType" : "Observation",
         "category" : [ {
           "coding" : [ {
             "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
@@ -43,18 +54,9 @@
         "valueBoolean" : true,
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
-        "status" : "final",
-        "id" : "{{mpp:getHashedId('Observation', obsid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom" ]
-        },
-        "resourceType" : "Observation"
+        "identifier" : "{{ obsid }}",
+        "status" : "final"
       }
-    },
-    "precondition" : {
-      "name" : "isSymptomCode",
-      "language" : "text/fhirpath",
-      "expression" : " %symptomCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
     }
   } ]
 }
