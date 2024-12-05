@@ -50,7 +50,9 @@
           } ]
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "identifier" : "{{ patid }}"
+        "identifier" : [ {
+          "value" : "{{ patid }}"
+        } ]
       }
     }
   } ]

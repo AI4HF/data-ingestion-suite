@@ -54,7 +54,9 @@
         "valueBoolean" : true,
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
-        "identifier" : "{{ obsid }}",
+        "identifier" : [ {
+          "value" : "{{ obsid }}"
+        } ],
         "status" : "final"
       }
     }

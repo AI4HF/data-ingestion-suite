@@ -22,14 +22,16 @@
         },
         "resourceType" : "Encounter",
         "class" : [ {
-          "coding" : ""
+          "coding" : [ "" ]
         } ],
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "actualPeriod" : {
           "start" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
           "end" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
         },
-        "identifier" : "{{ consid }}",
+        "identifier" : [ {
+          "value" : "{{ consid }}"
+        } ],
         "status" : "completed"
       }
     }

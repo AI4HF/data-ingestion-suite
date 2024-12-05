@@ -46,7 +46,9 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
         "onsetDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
-        "identifier" : "{{ obsid }}",
+        "identifier" : [ {
+          "value" : "{{ obsid }}"
+        } ],
         "clinicalStatus" : {
           "coding" : [ {
             "code" : "unknown",

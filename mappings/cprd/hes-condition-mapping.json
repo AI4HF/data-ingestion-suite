@@ -36,7 +36,9 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', spno)}}",
         "onsetDateTime" : "{{ admidate.utl:toFhirDateTime('dd/MM/yyyy') }}",
-        "identifier" : "{{ (patid + '-' + spno + '-' + ICD) }}",
+        "identifier" : [ {
+          "value" : "{{ (patid + '-' + spno + '-' + ICD) }}"
+        } ],
         "clinicalStatus" : {
           "coding" : [ {
             "code" : "unknown",

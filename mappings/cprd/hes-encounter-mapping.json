@@ -38,7 +38,9 @@
           "start" : "{{admidate.utl:toFhirDateTime('dd/MM/yyyy')}}",
           "end" : "{{discharged.utl:toFhirDateTime('dd/MM/yyyy')}}"
         },
-        "identifier" : "{{ (patid + '-' + spno) }}",
+        "identifier" : [ {
+          "value" : "{{ (patid + '-' + spno) }}"
+        } ],
         "status" : "completed"
       }
     }

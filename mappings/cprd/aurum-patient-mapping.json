@@ -47,7 +47,9 @@
           "{{#deceasedDateTimeVar}}" : "{{iif(%isEligible = true and %deathDate.exists(), %deathDate.utl:toFhirDateTime('dd/MM/yyyy'), {})}}",
           "{{?}}" : "{{ %deceasedDateTimeVar }}"
         },
-        "identifier" : "{{ patid }}",
+        "identifier" : [ {
+          "value" : "{{ patid }}"
+        } ],
         "extension" : [ {
           "url" : "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
           "valueCodeableConcept" : {
