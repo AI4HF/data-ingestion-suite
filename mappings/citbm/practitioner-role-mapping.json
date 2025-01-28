@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/practitioner-role-mapping",
   "name": "practitioner-role-mapping",
   "title": "Practitioner Role Mapping",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "procedure",
