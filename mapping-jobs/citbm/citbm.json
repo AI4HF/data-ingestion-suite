@@ -52,6 +52,7 @@
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ICD10 ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
@@ -144,6 +145,7 @@
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "WITH encounters AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM encounters\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
