@@ -36,8 +36,8 @@
               "@sliceName": "hfrOrganizationType"
             }
           ],
-          "name": "{{descen}}",
-          "id": "{{mpp:getHashedId('Organization', descen & type)}}",
+          "name": "{{Hospital}}",
+          "id": "{{mpp:getHashedId('Organization', Hospital & type)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Organization"

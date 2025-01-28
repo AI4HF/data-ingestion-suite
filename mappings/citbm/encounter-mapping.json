@@ -25,9 +25,9 @@
         "language": "application/fhir-template+json",
         "value": {
           "class": "",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "actualPeriod": {
-            "start": "{{fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           },
           "status": "completed",
           "serviceType": [
@@ -36,14 +36,14 @@
                 "coding": [
                   {
                     "system": "http://snomed.info/sct",
-                    "code": "{{mpp:getConcept(%serviceTypeConceptMap, servicio, 'target_code')}}",
-                    "display": "{{mpp:getConcept(%serviceTypeConceptMap, servicio, 'target_display')}}"
+                    "code": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_code')}}",
+                    "display": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_display')}}"
                   }
                 ]
               }
             }
           ],
-          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', descen & type)}}",
+          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & type)}}",
           "id": "{{mpp:getHashedId('Encounter', numacto.toString())}}",
           "meta": {
             "profile": [

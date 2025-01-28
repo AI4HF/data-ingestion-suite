@@ -50,7 +50,7 @@
               "city": "{{%demographics.PROVINCIA}}",
               "district": "{{%demographics.DISTRITO_R}}",
               "postalCode": {
-                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != \"0\",true,{})}}",
+                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != '0',true,{})}}",
                 "{{?}}": "{{Codigo_Postal.toString()}}"
               }
             }

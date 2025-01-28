@@ -18,7 +18,7 @@
         "name": "documentReference",
         "language": "application/fhir-template+json",
         "value": {
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}"
           ],
@@ -27,7 +27,7 @@
               "attachment": {
                 "contentType": "text/plain",
                 "language": "es",
-                "data": "{{examenclinico.encode()}}"
+                "data": "{{Clinical_examination.encode()}}"
               }
             }
           ],
@@ -44,7 +44,7 @@
       "precondition": {
         "name": "clinicalExaminationExists",
         "language": "text/fhirpath",
-        "expression": "examenclinico.hasValue()"
+        "expression": "Clinical_examination.hasValue()"
       },
       "description": "Document reference for recording the clinical examination conducted during the encounter if it exists."
     }

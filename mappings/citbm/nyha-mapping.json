@@ -45,17 +45,17 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{ Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "valueCodeableConcept": {
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA, 'target_code')}}",
-                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA, 'target_display')}}"
+                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA_Classification, 'target_code')}}",
+                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA_Classification, 'target_display')}}"
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
           "status": "final",
           "id": "{{mpp:getHashedId('Observation', numacto)}}",
@@ -70,7 +70,7 @@
       "precondition": {
         "name": "nyhaExists",
         "language": "text/fhirpath",
-        "expression": "NYHA.hasValue()"
+        "expression": "NYHA_Classification.hasValue()"
       },
       "description": "New York Heart Association classification if exists."
     }

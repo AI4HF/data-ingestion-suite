@@ -26,8 +26,22 @@
         ]
       },
       {
-        "id": "Medication.COD_PARTICIPANTE",
-        "path": "Medication.COD_PARTICIPANTE",
+        "id": "Medication.ID_Identity_document",
+        "path": "Medication.ID_Identity_document",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.Participant_code",
+        "path": "Medication.Participant_code",
         "min": 0,
         "max": "1",
         "type": [
@@ -42,8 +56,8 @@
         "short": "Patient ID"
       },
       {
-        "id": "Medication.edad",
-        "path": "Medication.edad",
+        "id": "Medication.Age",
+        "path": "Medication.Age",
         "min": 0,
         "max": "1",
         "type": [
@@ -58,8 +72,8 @@
         "short": "Patient Age"
       },
       {
-        "id": "Medication.sexo",
-        "path": "Medication.sexo",
+        "id": "Medication.Sex",
+        "path": "Medication.Sex",
         "min": 0,
         "max": "1",
         "type": [
@@ -74,8 +88,8 @@
         "short": "Patient Sex"
       },
       {
-        "id": "Medication.fecnac",
-        "path": "Medication.fecnac",
+        "id": "Medication.Birthdate",
+        "path": "Medication.Birthdate",
         "min": 0,
         "max": "1",
         "type": [
@@ -90,8 +104,8 @@
         "short": "Date of Birth"
       },
       {
-        "id": "Medication.codred",
-        "path": "Medication.codred",
+        "id": "Medication.Network_code",
+        "path": "Medication.Network_code",
         "min": 0,
         "max": "1",
         "type": [
@@ -106,24 +120,8 @@
         "short": "Health Center Code"
       },
       {
-        "id": "Medication.desred",
-        "path": "Medication.desred",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "definition": "Description of the health center (network) where the patient is treated.",
-        "short": "Health Center Description"
-      },
-      {
-        "id": "Medication.codcen",
-        "path": "Medication.codcen",
+        "id": "Medication.Center_Code",
+        "path": "Medication.Center_Code",
         "min": 0,
         "max": "1",
         "type": [
@@ -138,8 +136,8 @@
         "short": "Care Center Code"
       },
       {
-        "id": "Medication.descen",
-        "path": "Medication.descen",
+        "id": "Medication.Hospital",
+        "path": "Medication.Hospital",
         "min": 0,
         "max": "1",
         "type": [
@@ -202,8 +200,8 @@
         "short": "Care Area Code"
       },
       {
-        "id": "Medication.area",
-        "path": "Medication.area",
+        "id": "Medication.Attention_area",
+        "path": "Medication.Attention_area",
         "min": 0,
         "max": "1",
         "type": [
@@ -218,8 +216,8 @@
         "short": "Care Area"
       },
       {
-        "id": "Medication.codser",
-        "path": "Medication.codser",
+        "id": "Medication.Service_code",
+        "path": "Medication.Service_code",
         "min": 0,
         "max": "1",
         "type": [
@@ -234,8 +232,8 @@
         "short": "Service Code"
       },
       {
-        "id": "Medication.servicio",
-        "path": "Medication.servicio",
+        "id": "Medication.Service",
+        "path": "Medication.Service",
         "min": 0,
         "max": "1",
         "type": [
@@ -250,8 +248,8 @@
         "short": "Service Name"
       },
       {
-        "id": "Medication.anamnesis",
-        "path": "Medication.anamnesis",
+        "id": "Medication.Anamnesis",
+        "path": "Medication.Anamnesis",
         "min": 0,
         "max": "1",
         "type": [
@@ -266,8 +264,8 @@
         "short": "Anamnesis"
       },
       {
-        "id": "Medication.NYHA",
-        "path": "Medication.NYHA",
+        "id": "Medication.NYHA_Classification",
+        "path": "Medication.NYHA_Classification",
         "min": 0,
         "max": "1",
         "type": [
@@ -282,8 +280,8 @@
         "short": "NYHA"
       },
       {
-        "id": "Medication.examenclinico",
-        "path": "Medication.examenclinico",
+        "id": "Medication.Clinical_examination",
+        "path": "Medication.Clinical_examination",
         "min": 0,
         "max": "1",
         "type": [
@@ -298,8 +296,8 @@
         "short": "Clinical Examination"
       },
       {
-        "id": "Medication.plantrabajo",
-        "path": "Medication.plantrabajo",
+        "id": "Medication.Work_Plan",
+        "path": "Medication.Work_Plan",
         "min": 0,
         "max": "1",
         "type": [
@@ -314,8 +312,8 @@
         "short": "Procedure Tag"
       },
       {
-        "id": "Medication.codact",
-        "path": "Medication.codact",
+        "id": "Medication.Exam_code",
+        "path": "Medication.Exam_code",
         "min": 0,
         "max": "1",
         "type": [
@@ -330,8 +328,8 @@
         "short": "Activity Code"
       },
       {
-        "id": "Medication.autogenerado",
-        "path": "Medication.autogenerado",
+        "id": "Medication.Patient_code",
+        "path": "Medication.Patient_code",
         "min": 0,
         "max": "1",
         "type": [
@@ -346,8 +344,8 @@
         "short": "Participant ID "
       },
       {
-        "id": "Medication.fecate",
-        "path": "Medication.fecate",
+        "id": "Medication.Attention_date",
+        "path": "Medication.Attention_date",
         "min": 0,
         "max": "1",
         "type": [
@@ -440,8 +438,8 @@
         "short": "Material Code"
       },
       {
-        "id": "Medication.diag_ICD10",
-        "path": "Medication.diag_ICD10",
+        "id": "Medication.ICD10",
+        "path": "Medication.ICD10",
         "min": 0,
         "max": "1",
         "type": [
@@ -471,8 +469,8 @@
         "short": "ICD10 Classification"
       },
       {
-        "id": "Medication.desdiag",
-        "path": "Medication.desdiag",
+        "id": "Medication.Description_of_diagnosis",
+        "path": "Medication.Description_of_diagnosis",
         "min": 0,
         "max": "1",
         "type": [
@@ -501,8 +499,8 @@
         ]
       },
       {
-        "id": "Medication.desmat",
-        "path": "Medication.desmat",
+        "id": "Medication.Medication",
+        "path": "Medication.Medication",
         "min": 0,
         "max": "1",
         "type": [
@@ -581,8 +579,8 @@
         "short": "Medication Dosage"
       },
       {
-        "id": "Medication.Laboratorio",
-        "path": "Medication.Laboratorio",
+        "id": "Medication.Laboratory",
+        "path": "Medication.Laboratory",
         "min": 0,
         "max": "1",
         "type": [
@@ -596,8 +594,8 @@
         "short": "Laboratory Code"
       },
       {
-        "id": "Medication.estado",
-        "path": "Medication.estado",
+        "id": "Medication.Status",
+        "path": "Medication.Status",
         "min": 0,
         "max": "1",
         "type": [
@@ -628,8 +626,8 @@
         "short": "Dosage"
       },
       {
-        "id": "Medication.fumador",
-        "path": "Medication.fumador",
+        "id": "Medication.smoker",
+        "path": "Medication.smoker",
         "min": 0,
         "max": "1",
         "type": [
