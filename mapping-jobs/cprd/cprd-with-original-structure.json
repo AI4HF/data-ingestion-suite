@@ -17,63 +17,6 @@
     "returnMinimal" : true
   },
   "mappings" : [ {
-    "name" : "ons-cause-of-death-mapping-1",
-    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
-    "sourceBinding" : {
-      "deathRegistration" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage/20_095_Results/Results-one/Aurum_linked/Final/death_patient_20_095_DM.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      },
-      "linkageEligibility" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      }
-    }
-  }, {
-    "name" : "ons-cause-of-death-mapping-2",
-    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
-    "sourceBinding" : {
-      "deathRegistration" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage/20_095_Results/Results-two/Aurum_linked/Final/death_patient_20_095_DM.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      },
-      "linkageEligibility" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      }
-    }
-  }, {
-    "name" : "ons-cause-of-death-mapping-3",
-    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
-    "sourceBinding" : {
-      "deathRegistration" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage/20_095_Results/Results-three/Aurum_linked/Final/death_patient_20_095_DM.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      },
-      "linkageEligibility" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
-        "contentType" : "tsv",
-        "options" : { },
-        "sourceRef" : "cprd-with-original-structure"
-      }
-    }
-  }, {
     "name" : "aurum-nyha-mapping-13278-13905",
     "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-nyha-mapping",
     "sourceBinding" : {
@@ -1730,6 +1673,63 @@
       "hesPatient" : {
         "jsonClass" : "FileSystemSource",
         "path" : "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_patient_20_095_DM.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      }
+    }
+  }, {
+    "name" : "ons-cause-of-death-mapping-1",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
+    "sourceBinding" : {
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage/20_095_Results/Results-one/Aurum_linked/Final/death_patient_20_095_DM.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      }
+    }
+  }, {
+    "name" : "ons-cause-of-death-mapping-2",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
+    "sourceBinding" : {
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage/20_095_Results/Results-two/Aurum_linked/Final/death_patient_20_095_DM.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      }
+    }
+  }, {
+    "name" : "ons-cause-of-death-mapping-3",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/cprd/ons-cause-of-death-mapping",
+    "sourceBinding" : {
+      "deathRegistration" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage/20_095_Results/Results-three/Aurum_linked/Final/death_patient_20_095_DM.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
         "contentType" : "tsv",
         "options" : { },
         "sourceRef" : "cprd-with-original-structure"
