@@ -392,6 +392,21 @@
         ],
         "definition": "Type of procedure, limited to 'Electrophysiology' and 'Hemodynamics'.",
         "short": "Procedure type"
+      },
+      {
+        "id": "Procedure.Estado_Condicion",
+        "path": "Procedure.Estado_Condicion",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "short": "State"
       }
     ]
   }
