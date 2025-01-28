@@ -29,6 +29,23 @@
           "actualPeriod": {
             "start": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           },
+          "reason": [
+            {
+              "use": [
+                {
+                  "coding": [
+                    "{{utl:createFhirCoding('http://hl7.org/fhir/encounter-reason-use', 'AD', 'Admitting Diagnosis')}}"
+                  ]
+                }
+              ],
+              "value": [
+                {
+                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', numacto.toString() )}}"
+                }
+              ],
+              "@sliceName": "admittingDiagnosis"
+            }
+          ],
           "status": "completed",
           "serviceType": [
             {
