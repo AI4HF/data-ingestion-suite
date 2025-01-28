@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/condition-mapping",
   "name": "condition-mapping",
   "title": "Condition Mapping",
+  "isDraft": false,
   "source": [
     {
       "alias": "medication",
@@ -34,7 +35,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto.toString())}}",
           "onsetDateTime": "{{ Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "clinicalStatus": {
             "coding": [
@@ -45,7 +46,7 @@
               }
             ]
           },
-          "id": "{{mpp:getHashedId('Condition',numacto)}}",
+          "id": "{{mpp:getHashedId('Condition',numacto.toString())}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
