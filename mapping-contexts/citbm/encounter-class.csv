@@ -1,0 +1,2 @@
+source_code,target_code,target_system,target_display
+"CONSULTA EXTERNA","AMB","http://terminology.hl7.org/CodeSystem/v3-ActCode","ambulatory"

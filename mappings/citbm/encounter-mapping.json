@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
   "name": "encounter-mapping",
   "title": "Encounter Mapping",
-  "isDraft": true,
+  "isDraft": false,
   "source": [
     {
       "alias": "medication",
@@ -15,16 +15,36 @@
     "serviceTypeConceptMap": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/encounter-service-type.csv"
+    },
+    "encounterClassConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/encounter-class.csv"
     }
   },
-  "variable": [],
+  "variable": [
+    {
+      "name": "encounterClassConcept",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%encounterClassConceptMap, Attention_area)"
+    }
+  ],
   "mapping": [
     {
       "expression": {
         "name": "encounter",
         "language": "application/fhir-template+json",
         "value": {
-          "class": "",
+          "class": [
+            {
+              "coding": [
+                {
+                  "system": "{{%encounterClassConcept.target_system}}",
+                  "code": "{{%encounterClassConcept.target_code}}",
+                  "display": "{{%encounterClassConcept.target_display}}"
+                }
+              ]
+            }
+          ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "actualPeriod": {
             "start": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
