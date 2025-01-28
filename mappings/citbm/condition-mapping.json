@@ -27,21 +27,21 @@
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "code": "{{diag_ICD10}}",
-                "display": "{{desdiag}}",
+                "code": "{{ICD10}}",
+                "display": "{{Description_of_diagnosis}}",
                 "@sliceName": "icd10Code"
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
-          "onsetDateTime": "{{ fecate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "onsetDateTime": "{{ Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "clinicalStatus": {
             "coding": [
               {
                 "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
-                "code": "{{mpp:getConcept(%conditionStatusConceptMap, estado, 'target_code')}}",
-                "display": "{{mpp:getConcept(%conditionStatusConceptMap, estado, 'target_display')}}"
+                "code": "{{mpp:getConcept(%conditionStatusConceptMap, Status, 'target_code')}}",
+                "display": "{{mpp:getConcept(%conditionStatusConceptMap, Status, 'target_display')}}"
               }
             ]
           },

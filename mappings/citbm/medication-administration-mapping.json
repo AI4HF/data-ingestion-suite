@@ -23,13 +23,13 @@
               "coding": [
                 {
                   "system": "http://www.whocc.no/atc",
-                  "code": "{{ATC_Code}}",
+                  "code": "{{ATC_codes}}",
                   "@sliceName": "atcCode"
                 }
               ]
             }
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_PARTICIPANTE)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
           "occurenceDateTime": "{{ fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "dosage": {
@@ -38,7 +38,7 @@
             }
           },
           "status": "completed",
-          "id": "{{mpp:getHashedId('MedicationAdministration', numacto & ATC_Code & fecent)}}",
+          "id": "{{mpp:getHashedId('MedicationAdministration', numacto & ATC_Codes & fecent)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
