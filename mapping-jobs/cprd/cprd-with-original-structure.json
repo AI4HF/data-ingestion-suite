@@ -1,6 +1,7 @@
 {
   "id" : "cprd-with-original-structure",
   "name" : "cprd-with-original-structure",
+  "description" : "",
   "sourceSettings" : {
     "cprd-with-original-structure" : {
       "jsonClass" : "FileSystemSourceSettings",
@@ -25,6 +26,13 @@
         "contentType" : "tsv",
         "options" : { },
         "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
       }
     }
   }, {
@@ -37,6 +45,13 @@
         "contentType" : "tsv",
         "options" : { },
         "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
       }
     }
   }, {
@@ -46,6 +61,13 @@
       "deathRegistration" : {
         "jsonClass" : "FileSystemSource",
         "path" : "linkage/20_095_Results/Results-three/Aurum_linked/Final/death_patient_20_095_DM.txt",
+        "contentType" : "tsv",
+        "options" : { },
+        "sourceRef" : "cprd-with-original-structure"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "linkage_eligibility_Set21/linkage_eligibility.txt",
         "contentType" : "tsv",
         "options" : { },
         "sourceRef" : "cprd-with-original-structure"

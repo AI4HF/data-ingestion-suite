@@ -2,6 +2,7 @@
   "id" : "Ons-death-registration",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/Ons-death-registration",
+  "version" : "latest",
   "name" : "Ons-death-registration",
   "status" : "draft",
   "fhirVersion" : "5.0.0",

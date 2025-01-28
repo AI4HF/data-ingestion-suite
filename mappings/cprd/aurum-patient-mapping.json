@@ -22,15 +22,7 @@
     "joinOn" : [ "patid" ]
   } ],
   "context" : { },
-  "variable" : [ {
-    "name" : "isEligible",
-    "language" : "text/fhirpath",
-    "expression" : " %linkageEligibility.death_e = 1"
-  }, {
-    "name" : "deathDate",
-    "language" : "text/fhirpath",
-    "expression" : " %deathRegistration.dod "
-  } ],
+  "variable" : [ ],
   "mapping" : [ {
     "expression" : {
       "name" : "patient",
@@ -43,10 +35,6 @@
         "resourceType" : "Patient",
         "gender" : "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
         "birthDate" : "{{iif(mob.exists() = false, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).utl:toFhirDate('yyyy-M'))}}",
-        "deceasedDateTime" : {
-          "{{#deceasedDateTimeVar}}" : "{{iif(%isEligible = true and %deathDate.exists(), %deathDate.utl:toFhirDateTime('dd/MM/yyyy'), {})}}",
-          "{{?}}" : "{{ %deceasedDateTimeVar }}"
-        },
         "identifier" : [ {
           "value" : "{{ patid }}"
         } ],

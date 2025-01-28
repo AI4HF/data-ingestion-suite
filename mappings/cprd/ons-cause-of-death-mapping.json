@@ -7,7 +7,11 @@
   "source" : [ {
     "alias" : "deathRegistration",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Ons-death-registration",
-    "joinOn" : [ ]
+    "joinOn" : [ "patid" ]
+  }, {
+    "alias" : "linkageEligibility",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
+    "joinOn" : [ "patid" ]
   } ],
   "context" : { },
   "variable" : [ ],
@@ -52,6 +56,43 @@
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "identifier" : [ {
           "value" : "{{ patid }}"
+        } ]
+      }
+    }
+  }, {
+    "description" : "patch-patient-deceasedDateTime",
+    "precondition" : {
+      "name" : "isEligibleAndDodExists",
+      "language" : "text/fhirpath",
+      "expression" : " %linkageEligibility.death_e = 1 and dod.exists()"
+    },
+    "fhirInteraction" : {
+      "type" : "patch",
+      "rid" : "Patient/{{mpp:getHashedId('Patient', patid)}}"
+    },
+    "expression" : {
+      "name" : "patch-patient-deceasedDateTime",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "meta" : {
+          "profile" : [ "http://hl7.org/fhir/StructureDefinition/Parameters|5.0.0" ]
+        },
+        "resourceType" : "Parameters",
+        "parameter" : [ {
+          "name" : "operation",
+          "part" : [ {
+            "name" : "type",
+            "valueCode" : "add"
+          }, {
+            "name" : "path",
+            "valueString" : "Patient"
+          }, {
+            "name" : "name",
+            "valueString" : "deceasedDateTime"
+          }, {
+            "name" : "value",
+            "valueDateTime" : "{{ dod.utl:toFhirDateTime('dd/MM/yyyy') }}"
+          } ]
         } ]
       }
     }

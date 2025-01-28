@@ -1,6 +1,7 @@
 {
   "id" : "cprd-with-csv-example",
   "name" : "cprd-with-csv-example",
+  "description" : "",
   "sourceSettings" : {
     "cprd-with-csv-example" : {
       "jsonClass" : "FileSystemSourceSettings",
@@ -55,6 +56,13 @@
       "deathRegistration" : {
         "jsonClass" : "FileSystemSource",
         "path" : "Death_Data.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "cprd-with-csv-example"
+      },
+      "linkageEligibility" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "Linkage_Eligibility.csv",
         "contentType" : "csv",
         "options" : { },
         "sourceRef" : "cprd-with-csv-example"
