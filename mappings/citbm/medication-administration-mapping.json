@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
   "name": "medication-administration-mapping",
   "title": "The medication administration",
+  "isDraft": false,
   "source": [
     {
       "alias": "medication",
@@ -38,7 +39,7 @@
             }
           },
           "status": "completed",
-          "id": "{{mpp:getHashedId('MedicationAdministration', numacto & ATC_Codes & fecent)}}",
+          "id": "{{mpp:getHashedId('MedicationAdministration', Participant_code & Visita & ATC_codes & fecent)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
