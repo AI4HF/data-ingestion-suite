@@ -1,0 +1,55 @@
+{
+  "id": "surgery-condition-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-condition-mapping",
+  "name": "surgery-condition-mapping",
+  "title": "Diagnosis leading to the surgery.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "surgery",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Surgery",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The condition.",
+      "expression": {
+        "name": "diagnosis",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Condition', Participante & encounter)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
+            ]
+          },
+          "resourceType": "Condition",
+          "code": {
+            "coding": [
+              {
+                "code": "{{DIAG}}",
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "display": "{{DIAGNOSTICO}}",
+                "@sliceName": "icd10Code"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter)}}",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "unknown",
+                "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
+                "display": "Unknown"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
