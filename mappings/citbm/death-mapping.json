@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/death-mapping",
   "name": "death-mapping",
   "title": "Death Mapping",
+  "isDraft": false,
   "source": [
     {
       "alias": "death",
@@ -25,10 +26,18 @@
   ],
   "mapping": [
     {
+      "description": "The death of the patient",
       "expression": {
         "name": "death",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', cod_participante & 'Death')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath"
+            ]
+          },
+          "resourceType": "Observation",
           "status": "final",
           "category": [
             {
@@ -61,17 +70,9 @@
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', DNI)}}",
-          "id": "{{mpp:getHashedId('Observation', DNI & 'Death')}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath"
-            ]
-          },
-          "resourceType": "Observation"
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', cod_participante)}}"
         }
-      },
-      "description": "The death of the patient"
+      }
     }
   ]
 }

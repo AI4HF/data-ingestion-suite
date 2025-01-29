@@ -20,10 +20,23 @@
   "variable": [],
   "mapping": [
     {
+      "description": "New York Heart Association classification if exists.",
+      "precondition": {
+        "name": "nyhaExists",
+        "language": "text/fhirpath",
+        "expression": "NYHA_Classification.hasValue()"
+      },
       "expression": {
         "name": "nyha",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita.lower())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
+            ]
+          },
+          "resourceType": "Observation",
           "category": [
             {
               "coding": [
@@ -56,23 +69,10 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita)}}",
-          "status": "final",
-          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
-            ]
-          },
-          "resourceType": "Observation"
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
+          "status": "final"
         }
-      },
-      "precondition": {
-        "name": "nyhaExists",
-        "language": "text/fhirpath",
-        "expression": "NYHA_Classification.hasValue()"
-      },
-      "description": "New York Heart Association classification if exists."
+      }
     }
   ]
 }

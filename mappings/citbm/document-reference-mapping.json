@@ -15,13 +15,26 @@
   "variable": [],
   "mapping": [
     {
+      "description": "Document reference for recording the clinical examination conducted during the encounter if it exists.",
+      "precondition": {
+        "name": "clinicalExaminationExists",
+        "language": "text/fhirpath",
+        "expression": "Clinical_examination.hasValue()"
+      },
       "expression": {
         "name": "documentReference",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "context": [
-            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita)}}"
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
           ],
           "content": [
             {
@@ -32,22 +45,9 @@
               }
             }
           ],
-          "status": "current",
-          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
-            ]
-          },
-          "resourceType": "DocumentReference"
+          "status": "current"
         }
-      },
-      "precondition": {
-        "name": "clinicalExaminationExists",
-        "language": "text/fhirpath",
-        "expression": "Clinical_examination.hasValue()"
-      },
-      "description": "Document reference for recording the clinical examination conducted during the encounter if it exists."
+      }
     }
   ]
 }

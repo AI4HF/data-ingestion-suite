@@ -30,10 +30,18 @@
   ],
   "mapping": [
     {
+      "description": "The encounter of the patient.",
       "expression": {
         "name": "encounter",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Encounter', Participant_code & Visita.lower())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter",
           "class": [
             {
               "coding": [
@@ -60,7 +68,7 @@
               ],
               "value": [
                 {
-                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', numacto.toString() )}}"
+                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participant_code & Visita.lower() )}}"
                 }
               ],
               "@sliceName": "admittingDiagnosis"
@@ -80,17 +88,9 @@
               }
             }
           ],
-          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & type)}}",
-          "id": "{{mpp:getHashedId('Encounter', numacto.toString())}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
-            ]
-          },
-          "resourceType": "Encounter"
+          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & type)}}"
         }
-      },
-      "description": "The encounter of the patient."
+      }
     }
   ]
 }

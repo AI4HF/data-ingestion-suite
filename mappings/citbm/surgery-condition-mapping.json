@@ -20,7 +20,7 @@
         "name": "diagnosis",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition', Participante & encounter)}}",
+          "id": "{{mpp:getHashedId('Condition', Participante & encounter.lower())}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -38,7 +38,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
           "clinicalStatus": {
             "coding": [
               {
