@@ -15,10 +15,18 @@
   "variable": [],
   "mapping": [
     {
+      "description": "Medication administration",
       "expression": {
         "name": "medication",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('MedicationAdministration', Participant_code & Visita.lower() & ATC_codes & fecent)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+            ]
+          },
+          "resourceType": "MedicationAdministration",
           "medication": {
             "concept": {
               "coding": [
@@ -31,24 +39,16 @@
             }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
           "occurenceDateTime": "{{ fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "dosage": {
             "dose": {
               "value": "{{movcntmat}}"
             }
           },
-          "status": "completed",
-          "id": "{{mpp:getHashedId('MedicationAdministration', Participant_code & Visita & ATC_codes & fecent)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
-            ]
-          },
-          "resourceType": "MedicationAdministration"
+          "status": "completed"
         }
-      },
-      "description": "Medication administration"
+      }
     }
   ]
 }
