@@ -56,9 +56,9 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', numacto)}}",
+          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
