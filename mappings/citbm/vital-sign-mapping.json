@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/vital-sign-mapping",
   "name": "vital-sign-mapping",
   "title": "The Vital Sign Mapping",
+  "isDraft": false,
   "source": [
     {
       "alias": "vitalSigns",
@@ -14,10 +15,23 @@
   "variable": [],
   "mapping": [
     {
+      "description": "The weight of patient.",
+      "precondition": {
+        "name": "weightExists",
+        "language": "text/fhirpath",
+        "expression": "PESO.hasValue() and PESO != '0'"
+      },
       "expression": {
         "name": "weight",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Weight')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
           "category": [
             {
               "coding": [
@@ -41,31 +55,24 @@
           },
           "effectiveDateTime": "{{ FECHA_ATENCION.utl:toFhirDateTime('d/M/yyyy')}}",
           "valueQuantity": {
-            "value": "{{PESO.replace(',','.').toDecimal()}}",
-            "unit": "Kilogram",
             "system": "http://unitsofmeasure.org",
-            "code": "kg"
+            "code": "kg",
+            "value": "{{PESO.replace(',','.').toDecimal()}}",
+            "unit": "Kilogram"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
-          "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Weight')}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
-            ]
-          },
-          "resourceType": "Observation"
+          "status": "final"
         }
-      },
-      "precondition": {
-        "name": "weightExists",
-        "language": "text/fhirpath",
-        "expression": "PESO.hasValue() and PESO != '0'"
-      },
-      "description": "The weight of patient."
+      }
     },
     {
+      "description": "The height of the patient.",
+      "precondition": {
+        "name": "heightExists",
+        "language": "text/fhirpath",
+        "expression": "TALLA.hasValue() and TALLA != '0'"
+      },
       "expression": {
         "name": "height",
         "language": "application/fhir-template+json",
@@ -101,7 +108,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Weight')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Height')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -109,15 +116,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "heightExists",
-        "language": "text/fhirpath",
-        "expression": "TALLA.hasValue() and TALLA != '0'"
-      },
-      "description": "The height of the patient."
+      }
     },
     {
+      "description": "The systolic blood pressure of the patient.",
+      "precondition": {
+        "name": "systolicBloodPressureExists",
+        "language": "text/fhirpath",
+        "expression": "P_A_S.hasValue() and P_A_S != 0"
+      },
       "expression": {
         "name": "systolicBloodPressure",
         "language": "application/fhir-template+json",
@@ -153,7 +160,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Systolic Blood Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Systolic Blood Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -161,15 +168,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "systolicBloodPressureExists",
-        "language": "text/fhirpath",
-        "expression": "P_A_S.hasValue() and P_A_S != 0"
-      },
-      "description": "The systolic blood pressure of the patient."
+      }
     },
     {
+      "description": "Diastolic blood pressure of the patient.",
+      "precondition": {
+        "name": "diastolicBloodPressureExists",
+        "language": "text/fhirpath",
+        "expression": "P_A_D.hasValue() and P_A_D != 0"
+      },
       "expression": {
         "name": "diastolicBloodPressure",
         "language": "application/fhir-template+json",
@@ -205,7 +212,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Diastolic Blood Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Diastolic Blood Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -213,15 +220,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "diastolicBloodPressureExists",
-        "language": "text/fhirpath",
-        "expression": "P_A_D.hasValue() and P_A_D != 0"
-      },
-      "description": "Diastolic blood pressure of the patient."
+      }
     },
     {
+      "description": "Body Surface Are of the patient.",
+      "precondition": {
+        "name": "bodySurfaceAreaExists",
+        "language": "text/fhirpath",
+        "expression": "MSA.hasValue() and MSA != '0'"
+      },
       "expression": {
         "name": "bodySurfaceArea",
         "language": "application/fhir-template+json",
@@ -257,7 +264,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'BSA')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'BSA')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -265,15 +272,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "bodySurfaceAreaExists",
-        "language": "text/fhirpath",
-        "expression": "MSA.hasValue() and MSA != '0'"
-      },
-      "description": "Body Surface Are of the patient."
+      }
     },
     {
+      "description": "Oxygen Saturation of the patient.",
+      "precondition": {
+        "name": "oxygenSaturationExists",
+        "language": "text/fhirpath",
+        "expression": "SAT_O2.hasValue() and SAT_O2 != 0"
+      },
       "expression": {
         "name": "oxygenSaturation",
         "language": "application/fhir-template+json",
@@ -309,7 +316,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Oxygen Saturation')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Oxygen Saturation')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -317,15 +324,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "oxygenSaturationExists",
-        "language": "text/fhirpath",
-        "expression": "SAT_O2.hasValue() and SAT_O2 != 0"
-      },
-      "description": "Oxygen Saturation of the patient."
+      }
     },
     {
+      "description": "Heart rate of the patient.",
+      "precondition": {
+        "name": "heartRateExists",
+        "language": "text/fhirpath",
+        "expression": "PULSO.hasValue() and PULSO != 0"
+      },
       "expression": {
         "name": "heartRate",
         "language": "application/fhir-template+json",
@@ -361,7 +368,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Heart Rate')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Heart Rate')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -369,15 +376,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "heartRateExists",
-        "language": "text/fhirpath",
-        "expression": "PULSO.hasValue() and PULSO != 0"
-      },
-      "description": "Heart rate of the patient."
+      }
     },
     {
+      "description": "Body temperature of the patient.",
+      "precondition": {
+        "name": "bodyTemperatureExists",
+        "language": "text/fhirpath",
+        "expression": "T.hasValue() and T != 0"
+      },
       "expression": {
         "name": "bodyTemperature",
         "language": "application/fhir-template+json",
@@ -413,7 +420,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Body Temperature')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Body Temperature')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -421,15 +428,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "bodyTemperatureExists",
-        "language": "text/fhirpath",
-        "expression": "T.hasValue() and T != 0"
-      },
-      "description": "Body temperature of the patient."
+      }
     },
     {
+      "description": "Respiratory rate of the patient.",
+      "precondition": {
+        "name": "respiratoryRateExists",
+        "language": "text/fhirpath",
+        "expression": "sigvitresp.hasValue() and sigvitresp != 0"
+      },
       "expression": {
         "name": "respiratoryRate",
         "language": "application/fhir-template+json",
@@ -465,7 +472,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Respiratory Rate')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Respiratory Rate')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -473,15 +480,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "respiratoryRateExists",
-        "language": "text/fhirpath",
-        "expression": "sigvitresp.hasValue() and sigvitresp != 0"
-      },
-      "description": "Respiratory rate of the patient."
+      }
     },
     {
+      "description": "Central venous pressure of the patient.",
+      "precondition": {
+        "name": "centralVenousPressureExists",
+        "language": "text/fhirpath",
+        "expression": "P_V_C.hasValue() and P_V_C != 0"
+      },
       "expression": {
         "name": "centralVenousPressure",
         "language": "application/fhir-template+json",
@@ -517,7 +524,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Central Venous Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Central Venous Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -525,15 +532,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "centralVenousPressureExists",
-        "language": "text/fhirpath",
-        "expression": "P_V_C.hasValue() and P_V_C != 0"
-      },
-      "description": "Central venous pressure of the patient."
+      }
     },
     {
+      "description": "Waist Circumference of the patient.",
+      "precondition": {
+        "name": "waistCircumferenceExists",
+        "language": "text/fhirpath",
+        "expression": "PER_ABD.hasValue() and PER_ABD != 0"
+      },
       "expression": {
         "name": "waistCircumference",
         "language": "application/fhir-template+json",
@@ -569,7 +576,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Waist Circumference')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Waist Circumference')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -577,15 +584,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "waistCircumferenceExists",
-        "language": "text/fhirpath",
-        "expression": "PER_ABD.hasValue() and PER_ABD != 0"
-      },
-      "description": "Waist Circumference of the patient."
+      }
     },
     {
+      "description": "Pain Severity of the patient.",
+      "precondition": {
+        "name": "painSeverityExists",
+        "language": "text/fhirpath",
+        "expression": "Esc_Dolor.hasValue()"
+      },
       "expression": {
         "name": "painSeverity",
         "language": "application/fhir-template+json",
@@ -621,7 +628,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Pain Severity')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Pain Severity')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -629,15 +636,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "painSeverityExists",
-        "language": "text/fhirpath",
-        "expression": "Esc_Dolor.hasValue()"
-      },
-      "description": "Pain Severity of the patient."
+      }
     },
     {
+      "description": "Inhaled oxygen concentration of the patient.",
+      "precondition": {
+        "name": "inhaledOxygenConcentrationExists",
+        "language": "text/fhirpath",
+        "expression": "FIO2.hasValue() and FIO2 != 0"
+      },
       "expression": {
         "name": "inhaledOxygenConcentration",
         "language": "application/fhir-template+json",
@@ -673,7 +680,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Inhaled Oxygen Concentration')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Inhaled Oxygen Concentration')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -681,15 +688,15 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "inhaledOxygenConcentrationExists",
-        "language": "text/fhirpath",
-        "expression": "FIO2.hasValue() and FIO2 != 0"
-      },
-      "description": "Inhaled oxygen concentration of the patient."
+      }
     },
     {
+      "description": "Glasgow coma scale of the patient.",
+      "precondition": {
+        "name": "glasgowComaScaleExists",
+        "language": "text/fhirpath",
+        "expression": "GLASGOW.hasValue()"
+      },
       "expression": {
         "name": "glasgowComaScale",
         "language": "application/fhir-template+json",
@@ -725,7 +732,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & 'Glasgow Coma Scale')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Glasgow Coma Scale')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -733,13 +740,7 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "glasgowComaScaleExists",
-        "language": "text/fhirpath",
-        "expression": "GLASGOW.hasValue()"
-      },
-      "description": "Glasgow coma scale of the patient."
+      }
     }
   ]
 }
