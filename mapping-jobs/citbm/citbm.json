@@ -176,6 +176,32 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "surgery-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "surgery-condition-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-condition-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
