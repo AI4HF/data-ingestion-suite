@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
   "name": "document-reference-mapping",
   "title": "Document Reference Mapping",
+  "isDraft": false,
   "source": [
     {
       "alias": "medication",
@@ -20,7 +21,7 @@
         "value": {
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "context": [
-            "{{mpp:createFhirReferenceWithHashedId('Encounter', numacto)}}"
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita)}}"
           ],
           "content": [
             {
@@ -32,7 +33,7 @@
             }
           ],
           "status": "current",
-          "id": "{{mpp:getHashedId('DocumentReference', numacto)}}",
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
