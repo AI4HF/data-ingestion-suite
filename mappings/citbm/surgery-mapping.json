@@ -61,7 +61,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
           "occurrenceDateTime": "{{OcurrenceDateTime.utl:toFhirDate('dd.MM.yyyy')}}",
           "performer": [
             {
@@ -70,7 +70,7 @@
           ],
           "reason": [
             {
-              "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participante & encounter )}}",
+              "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participante & encounter.lower())}}",
               "@sliceName": "procedureReason"
             }
           ],

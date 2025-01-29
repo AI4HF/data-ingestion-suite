@@ -25,7 +25,7 @@
         "name": "weight",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Weight')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Weight')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -61,7 +61,7 @@
             "unit": "Kilogram"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final"
         }
       }
@@ -106,9 +106,9 @@
             "code": "cm"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Height')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Height')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -158,9 +158,9 @@
             "code": "mm[Hg]"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Systolic Blood Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Systolic Blood Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -210,9 +210,9 @@
             "code": "mm[Hg]"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Diastolic Blood Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Diastolic Blood Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -262,9 +262,9 @@
             "code": "m2"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'BSA')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'BSA')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -314,9 +314,9 @@
             "code": "%"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Oxygen Saturation')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Oxygen Saturation')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -366,9 +366,9 @@
             "code": "{beats}/min"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Heart Rate')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Heart Rate')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -418,9 +418,9 @@
             "code": "Cel"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Body Temperature')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Body Temperature')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -470,9 +470,9 @@
             "code": "/min"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Respiratory Rate')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Respiratory Rate')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -522,9 +522,9 @@
             "code": "mm[Hg]"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Central Venous Pressure')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Central Venous Pressure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -574,9 +574,9 @@
             "code": "cm"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Waist Circumference')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Waist Circumference')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -626,9 +626,9 @@
             "code": "{score}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Pain Severity')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Pain Severity')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -678,9 +678,9 @@
             "code": "%"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Inhaled Oxygen Concentration')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Inhaled Oxygen Concentration')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -730,9 +730,9 @@
             "code": "{score}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', ACTO_MEDICO)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
           "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita & 'Glasgow Coma Scale')}}",
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Glasgow Coma Scale')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
