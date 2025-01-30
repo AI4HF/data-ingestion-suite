@@ -11,15 +11,32 @@
       "joinOn": []
     }
   ],
-  "context": {},
+  "context": {
+    "procedureStatusConcept": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/procedure-status.csv"
+    }
+  },
   "variable": [],
   "mapping": [
     {
+      "description": "The procedure of the patient.",
       "expression": {
         "name": "procedure",
         "language": "application/fhir-template+json",
         "value": {
-          "category": "",
+          "id": "{{mpp:getHashedId('Procedure', Id_proyecto & procedimiento & Fecha)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
+            ]
+          },
+          "resourceType": "Procedure",
+          "category": [
+            {
+              "coding": ""
+            }
+          ],
           "code": {
             "coding": [
               {
@@ -34,17 +51,9 @@
               "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', performer)}}"
             }
           ],
-          "status": "completed",
-          "id": "{{mpp:getHashedId('Procedure', Id_proyecto & procedimiento & Fecha)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
-            ]
-          },
-          "resourceType": "Procedure"
+          "status": "{{mpp:getConcept(%procedureStatusConcept, Estado_Condicion, 'target_code')}}"
         }
-      },
-      "description": "The procedure of the patient."
+      }
     }
   ]
 }
