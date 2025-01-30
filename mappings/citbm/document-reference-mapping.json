@@ -22,10 +22,10 @@
         "expression": "Clinical_examination.hasValue()"
       },
       "expression": {
-        "name": "documentReference",
+        "name": "clinicalExamination",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower())}}",
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Clinical Examination')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
@@ -42,6 +42,76 @@
                 "contentType": "text/plain",
                 "language": "es",
                 "data": "{{Clinical_examination.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "Description of the interview between the health professional and the participant",
+      "precondition": {
+        "name": "interviewExists",
+        "language": "text/fhirpath",
+        "expression": "Anamnesis.hasValue()"
+      },
+      "expression": {
+        "name": "interview",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Interview')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{Anamnesis.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "HTML tag for referencing an established procedure",
+      "precondition": {
+        "name": "workPlanExists",
+        "language": "text/fhirpath",
+        "expression": "Work_Plan.hasValue()"
+      },
+      "expression": {
+        "name": "workPlan",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Work Plan')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/html",
+                "language": "es",
+                "data": "{{Work_Plan.encode()}}"
               }
             }
           ],
