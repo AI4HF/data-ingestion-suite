@@ -41,6 +41,13 @@
         "name": "patient",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Patient', COD_Poryecto)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest"
+            ]
+          },
+          "resourceType": "Patient",
           "gender": "{{mpp:getConcept(%genderConceptMap, Sexo, 'target_code')}}",
           "birthDate": "{{Fecha_Nacimiento.utl:toFhirDateTime('d.M.yyyy'))}}",
           "deceasedDateTime": "{{? %death.FECHA_DEF.utl:toFhirDateTime('d.M.yyyy')}}",
@@ -50,17 +57,11 @@
               "city": "{{%demographics.PROVINCIA}}",
               "district": "{{%demographics.DISTRITO_R}}",
               "postalCode": {
-                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != '0',true,{})}}",
-                "{{?}}": "{{Codigo_Postal.toString()}}"
+                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != '0',Codigo_Postal.toString(),iif(%demographics.cod_postal.exists() and %demographics.cod_postal != '0', %demographics.cod_postal,{}))}}",
+                "{{?}}": "{{%postalCodeVar}}"
               }
             }
           ],
-          "id": "{{mpp:getHashedId('Patient', COD_Poryecto)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest"
-            ]
-          },
           "extension": [
             {
               "url": "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
@@ -74,8 +75,7 @@
                 ]
               }
             }
-          ],
-          "resourceType": "Patient"
+          ]
         }
       }
     }
