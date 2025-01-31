@@ -117,6 +117,111 @@
           ]
         }
       }
+    },
+    {
+      "description": "Description of the findings.",
+      "precondition": {
+        "name": "findingExists",
+        "language": "text/fhirpath",
+        "expression": "HALLAZGOS.hasValue()"
+      },
+      "expression": {
+        "name": "findings",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Findings')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{HALLAZGOS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "Description of the incidents.",
+      "precondition": {
+        "name": "incidentsExists",
+        "language": "text/fhirpath",
+        "expression": "INCIDENCIAS.hasValue()"
+      },
+      "expression": {
+        "name": "incidents",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Incidents')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{INCIDENCIAS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "The detail description of the procedure.",
+      "precondition": {
+        "name": "procedureDescriptionExists",
+        "language": "text/fhirpath",
+        "expression": "PROCEDIMIENTOS.hasValue()"
+      },
+      "expression": {
+        "name": "procedureDescription",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Procedure')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{PROCEDIMIENTOS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
     }
   ]
 }

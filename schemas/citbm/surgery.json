@@ -194,6 +194,20 @@
         ]
       },
       {
+        "id": "Surgery.PROCEDIMIENTOS",
+        "path": "Surgery.PROCEDIMIENTOS",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Surgery.INCIDENCIAS",
         "path": "Surgery.INCIDENCIAS",
         "min": 0,
