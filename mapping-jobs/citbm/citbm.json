@@ -143,12 +143,11 @@
       "name": "encounter-mapping",
       "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
       "sourceBinding": {
-        "medication": {
+        "encounters": {
           "jsonClass": "FileSystemSource",
-          "path": "Incor_Farmaco.csv",
+          "path": "Encounters.csv",
           "contentType": "csv",
           "options": {},
-          "preprocessSql": "WITH encounters AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM encounters\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
