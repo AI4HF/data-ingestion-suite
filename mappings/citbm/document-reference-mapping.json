@@ -33,6 +33,15 @@
           },
           "resourceType": "DocumentReference",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "34117-2",
+                "display": "History and physical note"
+              }
+            ]
+          },
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
           ],
@@ -68,6 +77,15 @@
           },
           "resourceType": "DocumentReference",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "34117-2",
+                "display": "History and physical note"
+              }
+            ]
+          },
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
           ],
@@ -103,6 +121,15 @@
           },
           "resourceType": "DocumentReference",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "11504-8",
+                "display": "Surgical operation note"
+              }
+            ]
+          },
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
           ],
