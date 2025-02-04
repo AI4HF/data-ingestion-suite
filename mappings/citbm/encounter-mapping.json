@@ -6,8 +6,8 @@
   "isDraft": false,
   "source": [
     {
-      "alias": "medication",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "alias": "encounters",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
       "joinOn": []
     }
   ],
@@ -25,7 +25,7 @@
     {
       "name": "encounterClassConcept",
       "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%encounterClassConceptMap, Attention_area)"
+      "expression": "mpp:getConcept(%encounterClassConceptMap, AttentionArea)"
     }
   ],
   "mapping": [
@@ -35,7 +35,7 @@
         "name": "encounter",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Encounter', Participant_code & Visita.lower())}}",
+          "id": "{{mpp:getHashedId('Encounter', ParticipantCode & Visita.lower())}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
@@ -53,9 +53,9 @@
               ]
             }
           ],
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', ParticipantCode)}}",
           "actualPeriod": {
-            "start": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{AttentionDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           },
           "reason": [
             {
