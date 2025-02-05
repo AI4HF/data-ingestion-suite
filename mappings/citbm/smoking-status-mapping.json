@@ -1,0 +1,79 @@
+{
+  "id": "smoking-status-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/smoking-status-mapping",
+  "name": "smoking-status-mapping",
+  "title": "Smoking Status Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "smokingStatusContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/smoking-status.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "smokingStatus",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%smokingStatusContext, smoker.toString())"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "The smoking status of patient.",
+      "expression": {
+        "name": "smokingStatus",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita & 'Smoking Status')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "72166-2",
+                "display": "Tobacco smoking status",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "{{%smokingStatus.target_system}}",
+                "code": "{{%smokingStatus.target_code}}",
+                "display": "{{%smokingStatus.target_display}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita)}}",
+          "effectiveDateTime": "{{fecent.utl:toFhirDateTime()}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}
