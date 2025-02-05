@@ -204,6 +204,27 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "employment-status-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/employment-status-mapping",
+      "sourceBinding": {
+        "demographics": {
+          "jsonClass": "FileSystemSource",
+          "path": "Demograficos.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "visits": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounters.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select * from visits where Visita = 'Visita1'",
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
