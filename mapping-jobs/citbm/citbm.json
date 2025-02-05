@@ -225,6 +225,20 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "smoking-status-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/smoking-status-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
