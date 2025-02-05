@@ -77,18 +77,24 @@
           "status": "completed",
           "serviceType": [
             {
-              "concept": {
-                "coding": [
-                  {
-                    "system": "http://snomed.info/sct",
-                    "code": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_code')}}",
-                    "display": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_display')}}"
-                  }
-                ]
+              "{{#serviceTypeVar}}": "{{iif(Service.hasValue(), true, {})}}",
+              "{{?}}": {
+                "concept": {
+                  "coding": [
+                    {
+                      "system": "http://snomed.info/sct",
+                      "code": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_code')}}",
+                      "display": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_display')}}"
+                    }
+                  ]
+                }
               }
             }
           ],
-          "serviceProvider": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & type)}}"
+          "serviceProvider": {
+            "{{#serviceProviderVar}}": "{{iif(Hospital.hasValue() or Type.hasValue(), true, {})}}",
+            "{{?}}": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & Type)}}"
+          }
         }
       }
     }
