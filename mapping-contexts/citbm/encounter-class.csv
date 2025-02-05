@@ -1,2 +1,6 @@
 source_code,target_code,target_system,target_display
 "CONSULTA EXTERNA","AMB","http://terminology.hl7.org/CodeSystem/v3-ActCode","ambulatory"
+"URGENCIAS / EMERGENCIA","EMER","http://terminology.hl7.org/CodeSystem/v3-ActCode","emergency"
+"HOSPITALIZACION","IMP","http://terminology.hl7.org/CodeSystem/v3-ActCode","inpatient encounter"
+"CENTRO QUIRURGICO","IMP","http://terminology.hl7.org/CodeSystem/v3-ActCode","inpatient encounter"
+"CENTRO OBSTETRICO","IMP","http://terminology.hl7.org/CodeSystem/v3-ActCode","inpatient encounter"
