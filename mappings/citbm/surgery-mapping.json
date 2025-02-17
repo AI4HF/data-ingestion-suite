@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
   "name": "surgery-mapping",
   "title": "Surgery Mapping",
-  "isDraft": true,
+  "isDraft": false,
   "source": [
     {
       "alias": "surgery",
@@ -19,6 +19,10 @@
     "practitionerRoleConcept": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/practitioner-role.csv"
+    },
+    "cpmsProcedureCodes": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/cpms-procedure-codes.csv"
     }
   },
   "variable": [
@@ -35,6 +39,7 @@
         "name": "surgery",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Procedure', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime )}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
@@ -53,12 +58,14 @@
             }
           ],
           "code": {
-            "coding": [
-              {
-                "system": "http://hl7.org/fhir/sid/icd-10-pcs",
-                "@sliceName": "icdCode"
+            "coding": {
+              "{{#codingVar}}": "{{mpp:getConcept(%cpmsProcedureCodes, COD_CPMS)}}",
+              "{{*}}": {
+                "system": "{{%codingVar.target_system}}",
+                "code": "{{%codingVar.target_code}}",
+                "display": "{{%codingVar.target_display}}"
               }
-            ]
+            }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
