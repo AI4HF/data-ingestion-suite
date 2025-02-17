@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
   "name": "procedure-mapping",
   "title": "Procedure Mapping",
-  "isDraft": true,
+  "isDraft": false,
   "source": [
     {
       "alias": "procedure",
@@ -15,6 +15,10 @@
     "procedureStatusConcept": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/procedure-status.csv"
+    },
+    "freeTextProcedureCodes": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/free-text-procedure-codes.csv"
     }
   },
   "variable": [],
@@ -34,15 +38,24 @@
           "resourceType": "Procedure",
           "category": [
             {
-              "coding": ""
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "387713003",
+                  "display": "Surgical procedure (procedure)"
+                }
+              ]
             }
           ],
           "code": {
-            "coding": [
-              {
-                "@sliceName": "icdCode"
+            "coding": {
+              "{{#codingVar}}": "{{mpp:getConcept(%freeTextProcedureCodes, procedimiento)}}",
+              "{{*}}": {
+                "system": "{{%codingVar.target_system}}",
+                "code": "{{%codingVar.target_code}}",
+                "display": "{{%codingVar.target_display}}"
               }
-            ]
+            }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Id_proyecto)}}",
           "occurrenceDateTime": "{{Fecha.utl:toFhirDateTime('d.M.yyyy')}}",
