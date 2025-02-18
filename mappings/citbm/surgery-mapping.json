@@ -16,21 +16,12 @@
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/procedure-status.csv"
     },
-    "practitionerRoleConcept": {
-      "category": "concept-map",
-      "url": "$CONTEXT_REPO/citbm/practitioner-role.csv"
-    },
     "cpmsProcedureCodes": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/cpms-procedure-codes.csv"
     }
   },
   "variable": [
-    {
-      "name": "practitionerRole",
-      "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%practitionerRoleConcept, Performer)"
-    }
   ],
   "mapping": [
     {
@@ -82,46 +73,6 @@
             }
           ],
           "status": "{{mpp:getConcept(%procedureStatusConcept, Estado, 'target_code')}}"
-        }
-      }
-    },
-    {
-      "description": "The role of the practitioner who performed the surgery.",
-      "expression": {
-        "name": "practitionerRole",
-        "language": "application/fhir-template+json",
-        "value": {
-          "id": "{{mpp:getHashedId('PractitionerRole', Performer)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-PractitionerRole"
-            ]
-          },
-          "resourceType": "PractitionerRole",
-          "code": [
-            {
-              "coding": [
-                {
-                  "code": "{{%practitionerRole.target_code}}",
-                  "system": "http://terminology.hl7.org/CodeSystem/practitioner-role",
-                  "display": "{{%practitionerRole.target_display}}"
-                }
-              ],
-              "@sliceName": "hfrPractitionerRole"
-            }
-          ],
-          "specialty": [
-            {
-              "coding": [
-                {
-                  "code": "394814009",
-                  "system": "http://snomed.info/sct",
-                  "display": "General practice",
-                  "@sliceName": "hfrSpecialty"
-                }
-              ]
-            }
-          ]
         }
       }
     },
