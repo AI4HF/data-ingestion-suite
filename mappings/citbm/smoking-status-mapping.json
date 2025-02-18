@@ -69,7 +69,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita.lower())}}",
           "effectiveDateTime": "{{fecent.utl:toFhirDateTime()}}",
           "status": "final"
         }
