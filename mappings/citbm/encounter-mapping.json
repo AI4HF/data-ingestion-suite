@@ -68,7 +68,7 @@
               ],
               "value": [
                 {
-                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participant_code & Visita.lower() )}}"
+                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', ParticipantCode & Visita.lower() )}}"
                 }
               ],
               "@sliceName": "admittingDiagnosis"
