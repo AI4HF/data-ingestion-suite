@@ -239,6 +239,20 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "surgery-practitioner-role-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-practitioner-role-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select distinct Performer from surgery;",
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
