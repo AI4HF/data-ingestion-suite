@@ -15,20 +15,20 @@
     "precondition" : {
       "name" : "isCondition",
       "language" : "text/fhirpath",
-      "expression" : "ICD.exists() and patid.exists() and spno.exists() and admidate.exists() "
+      "expression" : "ICD_Primary.exists() and patid.exists() and spno.exists() and admidate.exists() "
     },
     "expression" : {
       "name" : "condition",
       "language" : "application/fhir-template+json",
       "value" : {
-        "id" : "{{iif(ICDx.exists(), mpp:getHashedId('Condition', (patid + '-' + spno + '-' + ICD + '-' + ICDx)), mpp:getHashedId('Condition', (patid + '-' + spno + '-' + ICD)))}}",
+        "id" : "{{iif(ICDx.exists(), mpp:getHashedId('Condition', (patid + '-' + spno + '-' + ICD_Primary + '-' + ICDx)), mpp:getHashedId('Condition', (patid + '-' + spno + '-' + ICD_Primary)))}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition" ]
         },
         "resourceType" : "Condition",
         "code" : {
           "coding" : [ {
-            "code" : "{{ iif( ICDx.exists(), (ICD + ICDx), ICD) }}",
+            "code" : "{{ iif( ICDx.exists(), (ICD_Primary + ICDx), ICD_Primary) }}",
             "system" : "http://hl7.org/fhir/sid/icd-10",
             "@sliceName" : "icd10Code"
           } ]
@@ -37,7 +37,7 @@
         "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', spno)}}",
         "onsetDateTime" : "{{ admidate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "identifier" : [ {
-          "value" : "{{ (patid + '-' + spno + '-' + ICD) }}"
+          "value" : "{{ (patid + '-' + spno + '-' + ICD_Primary) }}"
         } ],
         "clinicalStatus" : {
           "coding" : [ {

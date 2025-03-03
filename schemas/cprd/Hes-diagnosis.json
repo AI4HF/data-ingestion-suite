@@ -2,6 +2,7 @@
   "id" : "Hes-diagnosis",
   "resourceType" : "StructureDefinition",
   "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-diagnosis",
+  "version" : "latest",
   "name" : "Hes-diagnosis",
   "status" : "draft",
   "fhirVersion" : "5.0.0",
@@ -60,8 +61,8 @@
       } ],
       "definition" : "Date of discharge"
     }, {
-      "id" : "Hes-diagnosis.ICD",
-      "path" : "Hes-diagnosis.ICD",
+      "id" : "Hes-diagnosis.ICD_Primary",
+      "path" : "Hes-diagnosis.ICD_Primary",
       "min" : 0,
       "max" : "1",
       "type" : [ {
