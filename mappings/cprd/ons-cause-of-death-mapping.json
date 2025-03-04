@@ -53,6 +53,277 @@
             "code" : "{{ cause }}"
           } ]
         },
+        "component" : [ {
+          "{{#componentVar}}" : "{{iif(cause1.exists(), cause1, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause1 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause2.exists(), cause2, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause2 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause3.exists(), cause3, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause3 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause4.exists(), cause4, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause4 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause5.exists(), cause5, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause5 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause6.exists(), cause6, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause6 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause7.exists(), cause7, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause7 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause8.exists(), cause8, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause8 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause9.exists(), cause9, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause9 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause10.exists(), cause10, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause10 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause11.exists(), cause11, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause11 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause12.exists(), cause12, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause12 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause13.exists(), cause13, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause13 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause14.exists(), cause14, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause14 }}"
+              } ]
+            }
+          }
+        }, {
+          "{{#componentVar}}" : "{{iif(cause15.exists(), cause15, {})}}",
+          "{{?}}" : {
+            "code" : {
+              "coding" : [ {
+                "system" : "http://loinc.org",
+                "code" : "69453-9",
+                "display" : "Cause of death [US Standard Certificate of Death]",
+                "@sliceName" : "loincCode"
+              } ]
+            },
+            "valueCodeableConcept" : {
+              "coding" : [ {
+                "system" : "http://hl7.org/fhir/sid/icd-10",
+                "code" : "{{ cause15 }}"
+              } ]
+            }
+          }
+        } ],
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "identifier" : [ {
           "value" : "{{ patid }}"
