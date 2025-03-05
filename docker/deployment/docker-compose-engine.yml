@@ -9,7 +9,7 @@ services:
       - APP_CONF_FILE=/usr/local/tofhir/conf/docker/tofhir-server.conf
       - FLUENT_HOST=fluentd
       - CONTEXT_PATH=conf
-      - JAVA_OPTIONS=-Xms256m -Xmx7g
+      - JAVA_OPTIONS=-Xms50g -Xmx500g
     ports:
       - "6085:8085"
     networks:
@@ -17,13 +17,18 @@ services:
     volumes:
       - './data-ingestion-suite:/usr/local/tofhir/conf'
       - './tofhir-docker-logs:/usr/local/tofhir/logs'
+    deploy:
+      resources:
+        limits:
+          cpus: "72.0"
+          memory: "510G"
   # Elasticsearch, Fluentd and Kibana stack for mapping job log management
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
     container_name: dt4h-elasticsearch
     environment:
       - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms256m -Xmx2g"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx8g"
     ports:
       - "9200:9200"
     networks:
