@@ -22,7 +22,11 @@
         },
         "resourceType" : "Encounter",
         "class" : [ {
-          "coding" : [ "" ]
+          "coding" : [ {
+            "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+            "code" : "AMB",
+            "display" : "ambulatory"
+          } ]
         } ],
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
         "actualPeriod" : {

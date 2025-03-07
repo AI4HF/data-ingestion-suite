@@ -55,7 +55,10 @@
             "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
             "display" : "Unknown"
           } ]
-        }
+        },
+        "category" : [ {
+          "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
+        } ]
       }
     }
   } ]
