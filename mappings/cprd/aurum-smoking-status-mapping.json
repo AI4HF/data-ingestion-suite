@@ -35,6 +35,11 @@
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus" ]
         },
         "resourceType" : "Observation",
+        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "effectivePeriod" : {
+          "start" : "{{obsdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+        },
         "category" : [ {
           "coding" : [ {
             "system" : "http://terminology.hl7.org/CodeSystem/observation-category",
@@ -57,9 +62,6 @@
             "display" : "{{ %smokingStatus.target_name }}"
           } ]
         },
-        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
-        "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "identifier" : [ {
           "value" : "{{ obsid }}"
         } ],
