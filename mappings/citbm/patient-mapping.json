@@ -49,13 +49,13 @@
           },
           "resourceType": "Patient",
           "gender": "{{mpp:getConcept(%genderConceptMap, Sexo, 'target_code')}}",
-          "birthDate": "{{Fecha_Nacimiento.utl:toFhirDateTime('d.M.yyyy'))}}",
-          "deceasedDateTime": "{{? %death.FECHA_DEF.utl:toFhirDateTime('d.M.yyyy')}}",
+          "birthDate": "{{Fecha_Nacimiento.substring(0,10)}}",
+          "deceasedDateTime": "{{? %death.FECHA_DEF.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "address": [
             {
               "use": "home",
-              "city": "{{%demographics.PROVINCIA}}",
-              "district": "{{%demographics.DISTRITO_R}}",
+              "city": "{{? %demographics.PROVINCIA}}",
+              "district": "{{? %demographics.DISTRITO_R}}",
               "postalCode": {
                 "{{#postalCodeVar}}": "{{iif(Codigo_Postal != '0',Codigo_Postal.toString(),iif(%demographics.cod_postal.exists() and %demographics.cod_postal != '0', %demographics.cod_postal,{}))}}",
                 "{{?}}": "{{%postalCodeVar}}"
