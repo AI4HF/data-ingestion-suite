@@ -71,12 +71,19 @@
       "precondition": {
         "name": "heightExists",
         "language": "text/fhirpath",
-        "expression": "TALLA.hasValue() and TALLA != '0'"
+        "expression": "TALLA.hasValue() and TALLA != '0' and TALLE != '0,00'"
       },
       "expression": {
         "name": "height",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Height')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
           "category": [
             {
               "coding": [
@@ -100,21 +107,14 @@
           },
           "effectiveDateTime": "{{ FECHA_ATENCION.utl:toFhirDateTime('d/M/yyyy')}}",
           "valueQuantity": {
-            "value": "{{TALLA.toDecimal()}}",
-            "unit": "Centimeter",
             "system": "http://unitsofmeasure.org",
-            "code": "cm"
+            "code": "cm",
+            "value": "{{TALLA.toDecimal()}}",
+            "unit": "Centimeter"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
-          "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Height')}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
-            ]
-          },
-          "resourceType": "Observation"
+          "status": "final"
         }
       }
     },
@@ -701,6 +701,13 @@
         "name": "glasgowComaScale",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Glasgow Coma Scale')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
           "category": [
             {
               "coding": [
@@ -724,21 +731,14 @@
           },
           "effectiveDateTime": "{{ FECHA_ATENCION.utl:toFhirDateTime('d/M/yyyy')}}",
           "valueQuantity": {
-            "value": "{{GLASGOW}}",
-            "unit": "Score",
             "system": "http://unitsofmeasure.org",
-            "code": "{score}"
+            "code": "{score}",
+            "value": "{{GLASGOW.replace(',','.').toDecimal()}}",
+            "unit": "Score"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
-          "status": "final",
-          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'Glasgow Coma Scale')}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
-            ]
-          },
-          "resourceType": "Observation"
+          "status": "final"
         }
       }
     }

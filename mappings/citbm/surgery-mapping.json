@@ -21,8 +21,7 @@
       "url": "$CONTEXT_REPO/citbm/cpms-procedure-codes.csv"
     }
   },
-  "variable": [
-  ],
+  "variable": [],
   "mapping": [
     {
       "description": "The surgery.",
@@ -60,7 +59,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
-          "occurrenceDateTime": "{{OcurrenceDateTime.utl:toFhirDate('dd.MM.yyyy')}}",
+          "occurrenceDateTime": "{{OcurrenceDateTime.substring(0,10)}}",
           "performer": [
             {
               "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', Performer)}}"
@@ -68,7 +67,7 @@
           ],
           "reason": [
             {
-              "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participante & encounter.lower())}}",
+              "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participante & encounter.lower() & DIAG)}}",
               "@sliceName": "procedureReason"
             }
           ],
@@ -87,14 +86,13 @@
         "name": "findings",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Findings')}}",
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Findings')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
             ]
           },
           "resourceType": "DocumentReference",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "type": {
             "coding": [
               {
@@ -104,6 +102,7 @@
               }
             ]
           },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
           ],
@@ -131,14 +130,13 @@
         "name": "incidents",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Incidents')}}",
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Incidents')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
             ]
           },
           "resourceType": "DocumentReference",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "type": {
             "coding": [
               {
@@ -148,6 +146,7 @@
               }
             ]
           },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
           ],
@@ -175,14 +174,13 @@
         "name": "procedureDescription",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & 'Procedure')}}",
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Procedure')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
             ]
           },
           "resourceType": "DocumentReference",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "type": {
             "coding": [
               {
@@ -192,6 +190,7 @@
               }
             ]
           },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "context": [
             "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
           ],

@@ -25,7 +25,10 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "preprocessSql": "WITH hospitals AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Hospital, type ORDER BY Hospital) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM hospitals\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
@@ -39,7 +42,10 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
@@ -53,8 +59,11 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
-          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ICD10 ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ICD10 ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n    WHERE ICD10 is not NULL\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
@@ -67,7 +76,11 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH meds AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ATC_codes, fecent ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM meds\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
@@ -80,7 +93,10 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
@@ -95,6 +111,7 @@
           "path": "Incor_Defunciones.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "select distinct * from death;",
           "sourceRef": "citbm"
         }
       }
@@ -128,6 +145,7 @@
           "path": "Demograficos.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "WITH patientDemographics AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY COD_Participante ORDER BY COD_Participante) AS rn\r\n    FROM demographics\r\n)\r\nSELECT *\r\nFROM patientDemographics\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         },
         "death": {
@@ -135,6 +153,7 @@
           "path": "Incor_Defunciones.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "select distinct * from death;",
           "sourceRef": "citbm"
         }
       }
@@ -175,6 +194,7 @@
           "path": "Procedimientos_HEMOD.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "WITH prods AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Id_proyecto, procedimiento, Fecha ORDER BY Id_proyecto) AS rn\r\n    FROM procedure\r\n)\r\nSELECT *\r\nFROM prods\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
@@ -187,7 +207,10 @@
           "jsonClass": "FileSystemSource",
           "path": "CentroQuirurgico.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "sourceRef": "citbm"
         }
       }
@@ -200,7 +223,11 @@
           "jsonClass": "FileSystemSource",
           "path": "CentroQuirurgico.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participante, encounter, DIAG ORDER BY Participante) AS rn\r\n    FROM surgery\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
       }
@@ -214,6 +241,7 @@
           "path": "Demograficos.csv",
           "contentType": "csv",
           "options": {},
+          "preprocessSql": "WITH demog AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY COD_Participante ORDER BY COD_Participante) AS rn\r\n    FROM demographics\r\n)\r\nSELECT *\r\nFROM demog\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         },
         "visits": {
@@ -234,7 +262,10 @@
           "jsonClass": "FileSystemSource",
           "path": "Incor_Farmaco.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
           "sourceRef": "citbm"
         }
@@ -248,7 +279,10 @@
           "jsonClass": "FileSystemSource",
           "path": "CentroQuirurgico.csv",
           "contentType": "csv",
-          "options": {},
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
           "preprocessSql": "select distinct Performer from surgery;",
           "sourceRef": "citbm"
         }

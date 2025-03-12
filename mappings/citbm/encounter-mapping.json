@@ -25,7 +25,7 @@
     {
       "name": "encounterClassConcept",
       "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%encounterClassConceptMap, AttentionArea)"
+      "expression": "iif(AttentionArea.hasValue(), mpp:getConcept(%encounterClassConceptMap, AttentionArea), mpp:getConcept(%encounterClassConceptMap, 'CONSULTA EXTERNA'))"
     }
   ],
   "mapping": [
@@ -55,25 +55,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', ParticipantCode)}}",
           "actualPeriod": {
-            "start": "{{AttentionDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{? AttentionDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd HH:mm:ss')}}"
           },
-          "reason": [
-            {
-              "use": [
-                {
-                  "coding": [
-                    "{{utl:createFhirCoding('http://hl7.org/fhir/encounter-reason-use', 'AD', 'Admitting Diagnosis')}}"
-                  ]
-                }
-              ],
-              "value": [
-                {
-                  "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', ParticipantCode & Visita.lower() )}}"
-                }
-              ],
-              "@sliceName": "admittingDiagnosis"
-            }
-          ],
           "status": "completed",
           "serviceType": [
             {

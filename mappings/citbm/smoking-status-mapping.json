@@ -27,6 +27,11 @@
   "mapping": [
     {
       "description": "The smoking status of patient.",
+      "precondition": {
+        "name": "smokingStatusExists",
+        "language": "text/fhirpath",
+        "expression": "%smokingStatus.hasValue()"
+      },
       "expression": {
         "name": "smokingStatus",
         "language": "application/fhir-template+json",
@@ -38,6 +43,11 @@
             ]
           },
           "resourceType": "Observation",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita.lower())}}",
+          "effectivePeriod": {
+            "start": "{{fecent.utl:toFhirDateTime()}}"
+          },
           "category": [
             {
               "coding": [
@@ -68,9 +78,6 @@
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita.lower())}}",
-          "effectiveDateTime": "{{fecent.utl:toFhirDateTime()}}",
           "status": "final"
         }
       }

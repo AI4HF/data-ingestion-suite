@@ -58,7 +58,7 @@
             }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Id_proyecto)}}",
-          "occurrenceDateTime": "{{Fecha.utl:toFhirDateTime('d.M.yyyy')}}",
+          "occurrenceDateTime": "{{Fecha.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "performer": [
             {
               "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', performer)}}"
