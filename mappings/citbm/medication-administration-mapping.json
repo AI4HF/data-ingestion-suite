@@ -40,10 +40,10 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
-          "occurenceDateTime": "{{ fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "occurenceDateTime": "{{fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "dosage": {
             "dose": {
-              "value": "{{movcntmat}}"
+              "value": "{{? movcntmat.toDecimal()}}"
             }
           },
           "status": "completed"
