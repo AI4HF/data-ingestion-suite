@@ -20,7 +20,7 @@
         "name": "diagnosis",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition', Participante & encounter.lower())}}",
+          "id": "{{mpp:getHashedId('Condition', Participante & encounter.lower() & DIAG)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -47,7 +47,14 @@
                 "display": "Unknown"
               }
             ]
-          }
+          },
+          "category": [
+            {
+              "coding": [
+                "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}"
+              ]
+            }
+          ]
         }
       }
     }

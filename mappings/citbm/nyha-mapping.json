@@ -58,7 +58,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "valueCodeableConcept": {
             "coding": [
               {

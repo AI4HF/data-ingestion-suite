@@ -60,7 +60,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ FECHA_DEF.utl:toFhirDateTime('d.M.yyyy')}}",
+          "effectiveDateTime": "{{FECHA_DEF.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "valueCodeableConcept": {
             "coding": [
               {
