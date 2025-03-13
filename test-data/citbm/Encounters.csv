@@ -1,0 +1,3 @@
+ParticipantCode,Hospital,Type,Service,AttentionDate,Visita,AttentionArea
+P1,Hospital A,Healthcare Provider,CARDIOLOGIA,2020-07-20 09:00:00,Visita1,CONSULTA EXTERNA
+P1,Hospital A,Healthcare Provider,CARDIOLOGIA,2022-02-12 10:00:00,Visita2,CONSULTA EXTERNA
