@@ -50,7 +50,7 @@
           "resourceType": "Patient",
           "gender": "{{mpp:getConcept(%genderConceptMap, Sexo, 'target_code')}}",
           "birthDate": "{{Fecha_Nacimiento.substring(0,10)}}",
-          "deceasedDateTime": "{{? %death.FECHA_DEF.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "deceasedDateTime": "{{? %death.FECHA_DEF.substring(0,10)}}",
           "address": [
             {
               "use": "home",
