@@ -55,7 +55,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', ParticipantCode)}}",
           "actualPeriod": {
-            "start": "{{? AttentionDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{? StartDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+            "end": "{{? EndDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
           },
           "status": "completed",
           "serviceType": [
