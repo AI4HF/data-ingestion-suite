@@ -110,15 +110,15 @@
         ]
       },
       {
-        "id": "Surgery.FECHA_SOL_OPERACIÓN",
-        "path": "Surgery.FECHA_SOL_OPERACIÓN",
+        "id": "Surgery.FECHA_SOL_OPERACION",
+        "path": "Surgery.FECHA_SOL_OPERACION",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "dateTime",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
