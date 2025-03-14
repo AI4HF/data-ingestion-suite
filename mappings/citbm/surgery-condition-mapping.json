@@ -39,12 +39,13 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
+          "onsetDateTime": "{{FECHA_SOL_OPERACION.substring(0,10)}}",
           "clinicalStatus": {
             "coding": [
               {
-                "code": "unknown",
+                "code": "active",
                 "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
-                "display": "Unknown"
+                "display": "Active"
               }
             ]
           },

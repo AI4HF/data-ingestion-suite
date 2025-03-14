@@ -11,12 +11,7 @@
       "joinOn": []
     }
   ],
-  "context": {
-    "conditionStatusConceptMap": {
-      "category": "concept-map",
-      "url": "$CONTEXT_REPO/citbm/condition-status.csv"
-    }
-  },
+  "context": {},
   "variable": [],
   "mapping": [
     {
@@ -48,9 +43,9 @@
           "clinicalStatus": {
             "coding": [
               {
-                "code": "{{mpp:getConcept(%conditionStatusConceptMap, Status, 'target_code')}}",
+                "code": "active",
                 "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
-                "display": "{{mpp:getConcept(%conditionStatusConceptMap, Status, 'target_display')}}"
+                "display": "Active"
               }
             ]
           },
