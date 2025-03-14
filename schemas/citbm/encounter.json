@@ -36,7 +36,9 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ]
+        ],
+        "definition": "The unique identifier of the patient.",
+        "short": "Patient ID"
       },
       {
         "id": "Encounter.Hospital",
@@ -81,8 +83,8 @@
         ]
       },
       {
-        "id": "Encounter.AttentionDate",
-        "path": "Encounter.AttentionDate",
+        "id": "Encounter.StartDate",
+        "path": "Encounter.StartDate",
         "min": 0,
         "max": "1",
         "type": [
@@ -92,7 +94,25 @@
               "http://hl7.org/fhir/StructureDefinition/dateTime"
             ]
           }
-        ]
+        ],
+        "definition": "Represents the admission time of the encounter. This date corresponds to the earliest recorded event (e.g., medication administration, surgery) associated with the encounter.",
+        "short": "Admission Time"
+      },
+      {
+        "id": "Encounter.EndDate",
+        "path": "Encounter.EndDate",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "Represents the admission time of the encounter. This date corresponds to the latest recorded event (e.g., medication administration, surgery) associated with the encounter.",
+        "short": "Discharge Time"
       },
       {
         "id": "Encounter.Visita",
