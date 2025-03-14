@@ -74,7 +74,7 @@
             ]
           },
           "effectivePeriod": {
-            "start": "{{%visits.AttentionDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}"
+            "start": "{{%visits.StartDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}"
           },
           "valueCodeableConcept": {
             "coding": [
