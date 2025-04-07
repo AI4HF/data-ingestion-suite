@@ -3,6 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/nhfa/NHFA-v5",
   "name": "NHFA-v5",
   "title": "NHFA-v5",
+  "isDraft": false,
   "source": [
     {
       "alias": "nhfa",
@@ -49,6 +50,13 @@
         "name": "encounter",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Encounter', (hospital_identifier + '-' + local_patient_identifier+ '-' + date_of_admission))}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter",
           "class": [
             {
               "coding": [
@@ -60,19 +68,12 @@
               ]
             }
           ],
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', local_patient_identifier)}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
           "actualPeriod": {
             "start": "{{ %admissionDate }}",
             "end": "{{ %dischargeDate }}"
           },
-          "status": "completed",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Encounter', (hospital_identifier + '-' + local_patient_identifier+ '-' + date_of_admission))}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
-            ]
-          },
-          "resourceType": "Encounter"
+          "status": "completed"
         }
       }
     },
@@ -81,21 +82,22 @@
         "name": "patient",
         "language": "application/fhir-template+json",
         "value": {
-          "gender": "{{iif(patient_sex.startsWith('1'), 'male', iif(patient_sex.startsWith('2'), 'female', 'unknown'))}}",
-          "birthDate": "{{(date_of_birth.substring(6) + '-' + date_of_birth.substring(3, 2) + '-' + date_of_birth.substring(0, 2)).toDate()}}",
-          "deceasedDateTime": "{{ ? iif(death_in_hospital.startsWith('1'),(date_of_discharge_or_death.substring(6) + '-' + date_of_discharge_or_death.substring(3, 2) + '-' + date_of_discharge_or_death.substring(0, 2)).toDate(), {})}}",
-          "identifier": "{{ ? iif(death_in_hospital.startsWith('1'),(date_of_discharge_or_death.substring(6) + '-' + date_of_discharge_or_death.substring(3, 2) + '-' + date_of_discharge_or_death.substring(0, 2)).toDate(), {})}}",
-          "address": [
-            {
-              "postalCode": "{{postcode}}"
-            }
-          ],
           "id": "{{ %patientId }}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient"
             ]
           },
+          "resourceType": "Patient",
+          "gender": "{{iif(patient_sex.startsWith('1'), 'male', iif(patient_sex.startsWith('2'), 'female', 'unknown'))}}",
+          "birthDate": "{{(date_of_birth.substring(6) + '-' + date_of_birth.substring(3, 2) + '-' + date_of_birth.substring(0, 2)).toDate()}}",
+          "deceasedDateTime": "{{? iif(death_in_hospital.startsWith('1'),(date_of_discharge_or_death.substring(6) + '-' + date_of_discharge_or_death.substring(3, 2) + '-' + date_of_discharge_or_death.substring(0, 2)).toDate(), {})}}",
+          "identifier": "{{? iif(death_in_hospital.startsWith('1'),(date_of_discharge_or_death.substring(6) + '-' + date_of_discharge_or_death.substring(3, 2) + '-' + date_of_discharge_or_death.substring(0, 2)).toDate(), {})}}",
+          "address": [
+            {
+              "postalCode": "{{postcode}}"
+            }
+          ],
           "extension": {
             "{{#extensionVar}}": "{{iif(ethnic_category != '',ethnic_category, {})}}",
             "{{?}}": [
@@ -112,8 +114,7 @@
                 }
               }
             ]
-          },
-          "resourceType": "Patient"
+          }
         }
       }
     },
@@ -138,6 +139,7 @@
               {
                 "system": "http://loinc.org",
                 "code": "88020-3",
+                "display": "Functional capacity NYHA",
                 "@sliceName": "loincCode"
               }
             ]
@@ -151,10 +153,10 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'breathlessness'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'breathlessness'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
@@ -165,6 +167,11 @@
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " peripheral_oedema.startsWith('9') = false "
+      },
       "expression": {
         "name": "peripheral_oedema_admission",
         "language": "application/fhir-template+json",
@@ -192,10 +199,10 @@
           },
           "effectiveDateTime": "{{ %admissionDateTime }}",
           "valueBoolean": "{{peripheral_oedema.startsWith('0') = false}}",
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'peripheral_oedema'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'peripheral_oedema'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom"
@@ -203,14 +210,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " peripheral_oedema.startsWith('9') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ihd.startsWith('9') = false and ihd.startsWith('0') = false "
+      },
       "expression": {
         "name": "ihd_admission",
         "language": "application/fhir-template+json",
@@ -225,8 +232,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -237,7 +244,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'ihd'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'ihd'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -245,14 +252,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ihd.startsWith('9') = false and ihd.startsWith('0') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " device_therapy.startsWith('0') = false and  device_therapy.startsWith('5') = false and device_therapy.startsWith('9') = false and device_therapy.startsWith('12') = false"
+      },
       "expression": {
         "name": "device_therapy",
         "language": "application/fhir-template+json",
@@ -267,8 +274,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -279,7 +286,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'device_therapy'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'device_therapy'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -287,14 +294,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " device_therapy.startsWith('0') = false and  device_therapy.startsWith('5') = false and device_therapy.startsWith('9') = false and device_therapy.startsWith('12') = false"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " valve_disease.startsWith('9') = false and valve_disease.startsWith('0') = false"
+      },
       "expression": {
         "name": "valve_disease",
         "language": "application/fhir-template+json",
@@ -309,8 +316,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -321,7 +328,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'valve_disease'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'valve_disease'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -329,14 +336,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " valve_disease.startsWith('9') = false and valve_disease.startsWith('0') = false"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " congenital_heart_disease.startsWith('9') = false"
+      },
       "expression": {
         "name": "congenital_heart_disease",
         "language": "application/fhir-template+json",
@@ -351,8 +358,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -363,7 +370,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'congenital_heart_disease'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'congenital_heart_disease'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -371,14 +378,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " congenital_heart_disease.startsWith('9') = false"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " hypertension.startsWith('9') = false and hypertension.startsWith('0') = false "
+      },
       "expression": {
         "name": "hypertension",
         "language": "application/fhir-template+json",
@@ -393,8 +400,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -405,7 +412,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'hypertansion'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'hypertansion'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -413,14 +420,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " hypertension.startsWith('9') = false and hypertension.startsWith('0') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " diabetes.startsWith('1') = true "
+      },
       "expression": {
         "name": "diabetes",
         "language": "application/fhir-template+json",
@@ -435,8 +442,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -447,7 +454,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'diabetes'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'diabetes'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -455,14 +462,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " diabetes.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " asthma.startsWith('1') = true"
+      },
       "expression": {
         "name": "asthma",
         "language": "application/fhir-template+json",
@@ -477,8 +484,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -489,7 +496,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'asthma'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'asthma'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -497,14 +504,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " asthma.startsWith('1') = true"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " cerebral_vascular_accident.startsWith('1') = true "
+      },
       "expression": {
         "name": "cerebral_vascular_accident",
         "language": "application/fhir-template+json",
@@ -519,8 +526,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -531,7 +538,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'cerebral_vascular_accident'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'cerebral_vascular_accident'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -539,14 +546,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " cerebral_vascular_accident.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " chronic_obstructive_pulmonary_disease.startsWith('1') = true "
+      },
       "expression": {
         "name": "chronic_obstructive_pulmonary_disease",
         "language": "application/fhir-template+json",
@@ -561,8 +568,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -573,7 +580,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'chronic_obstructive_pulmonary_disease'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'chronic_obstructive_pulmonary_disease'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -581,14 +588,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " chronic_obstructive_pulmonary_disease.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " atrial_fibrillation_flutter.startsWith('2') = false and atrial_fibrillation_flutter.startsWith('9') = false "
+      },
       "expression": {
         "name": "atrial_fibrillation",
         "language": "application/fhir-template+json",
@@ -603,8 +610,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -615,7 +622,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'atrial_fibrillation_flutter'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'atrial_fibrillation_flutter'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -623,14 +630,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " atrial_fibrillation_flutter.startsWith('2') = false and atrial_fibrillation_flutter.startsWith('9') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " cardiomyopathy.startsWith('0') = false and cardiomyopathy.startsWith('9') = false "
+      },
       "expression": {
         "name": "cardiomyopathy",
         "language": "application/fhir-template+json",
@@ -645,8 +652,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -657,7 +664,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'cardiomyopathy'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'cardiomyopathy'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -665,14 +672,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " cardiomyopathy.startsWith('0') = false and cardiomyopathy.startsWith('9') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " smoking_history.length() > 0 and smoking_history.startsWith('9') = false"
+      },
       "expression": {
         "name": "smoking_history",
         "language": "application/fhir-template+json",
@@ -693,6 +700,7 @@
               {
                 "system": "http://loinc.org",
                 "code": "72166-2",
+                "display": "Tobacco smoking status",
                 "@sliceName": "loincCode"
               }
             ]
@@ -706,11 +714,11 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectiveDateTime": "{{ %admissionDateTime }}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'smoking_history'))}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'smoking_history'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus"
@@ -718,14 +726,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " smoking_history.length() > 0 and smoking_history.startsWith('9') = false"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " current_malignancy.startsWith('1') = true or (current_malignancy.startsWith('0') = true and previous_malignancy.startsWith('1') = true) "
+      },
       "expression": {
         "name": "malignancy",
         "language": "application/fhir-template+json",
@@ -740,8 +748,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -752,7 +760,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'malignancy'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'malignancy'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -760,14 +768,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " current_malignancy.startsWith('1') = true or (current_malignancy.startsWith('0') = true and previous_malignancy.startsWith('1') = true) "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "amyloid.startsWith('1') = true "
+      },
       "expression": {
         "name": "amyloid",
         "language": "application/fhir-template+json",
@@ -782,8 +790,8 @@
               }
             ]
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId }}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{ %admissionDateTime }}",
           "clinicalStatus": {
             "coding": [
@@ -794,7 +802,7 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'amyloidosis'))}}",
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'amyloidosis'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -802,14 +810,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "amyloid.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "ace_inhibitor.startsWith('0') = false and ace_inhibitor.startsWith('8') = false and ace_inhibitor.startsWith('9') = false and ace_inhibitor.startsWith('11') = false and ace_inhibitor != '' "
+      },
       "expression": {
         "name": "ace_inhibitor_admission",
         "language": "application/fhir-template+json",
@@ -825,8 +833,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -853,22 +861,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ace_inhibitor'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ace_inhibitor'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "ace_inhibitor.startsWith('0') = false and ace_inhibitor.startsWith('8') = false and ace_inhibitor.startsWith('9') = false and ace_inhibitor.startsWith('11') = false and ace_inhibitor != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "arb.startsWith('0') = false and arb.startsWith('8') = false and arb.startsWith('9') = false and arb.startsWith('11') = false and arb != '' "
+      },
       "expression": {
         "name": "arb_admission",
         "language": "application/fhir-template+json",
@@ -884,8 +892,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -912,22 +920,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arb'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arb'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "arb.startsWith('0') = false and arb.startsWith('8') = false and arb.startsWith('9') = false and arb.startsWith('11') = false and arb != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "beta_blocker.startsWith('0') = false and beta_blocker.startsWith('8') = false and beta_blocker.startsWith('9') = false and beta_blocker.startsWith('11') = false and beta_blocker.startsWith('12') and beta_blocker != '' "
+      },
       "expression": {
         "name": "beta_blocker_admission",
         "language": "application/fhir-template+json",
@@ -943,8 +951,8 @@
               ]
             }
           },
-          "subject": "{{%encounterId}}",
-          "encounter": "{{%patientId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -971,22 +979,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'beta_blocker'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'beta_blocker'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "beta_blocker.startsWith('0') = false and beta_blocker.startsWith('8') = false and beta_blocker.startsWith('9') = false and beta_blocker.startsWith('11') = false and beta_blocker.startsWith('12') and beta_blocker != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "loop_diuretic.startsWith('0') = false and loop_diuretic.startsWith('9') = false and loop_diuretic != '' "
+      },
       "expression": {
         "name": "loop_diuretic_admission",
         "language": "application/fhir-template+json",
@@ -1002,8 +1010,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1030,22 +1038,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'loop_diuretic'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'loop_diuretic'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "loop_diuretic.startsWith('0') = false and loop_diuretic.startsWith('9') = false and loop_diuretic != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "thiazide_or_metolazone.startsWith('0') = false and thiazide_or_metolazone.startsWith('9') = false and thiazide_or_metolazone != '' "
+      },
       "expression": {
         "name": "thiazide_or_metolazone_admission",
         "language": "application/fhir-template+json",
@@ -1061,8 +1069,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1089,22 +1097,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'thiazide_or_metolazone'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'thiazide_or_metolazone'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "thiazide_or_metolazone.startsWith('0') = false and thiazide_or_metolazone.startsWith('9') = false and thiazide_or_metolazone != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "mra.startsWith('0') = false and mra.startsWith('8') = false and mra.startsWith('9') = false and mra.startsWith('11') = false and mra != '' "
+      },
       "expression": {
         "name": "mra_admission",
         "language": "application/fhir-template+json",
@@ -1120,8 +1128,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1145,22 +1153,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'mra_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'mra_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "mra.startsWith('0') = false and mra.startsWith('8') = false and mra.startsWith('9') = false and mra.startsWith('11') = false and mra != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " aspirin.startsWith('1') = true or other_oral_anti_platelet = true "
+      },
       "expression": {
         "name": "aspirin_admission",
         "language": "application/fhir-template+json",
@@ -1176,8 +1184,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1204,22 +1212,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', %encounterId + '-' + %patientId + 'aspirin_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', %encounterId + '-' + %patientId + 'aspirin_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " aspirin.startsWith('1') = true or other_oral_anti_platelet = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " digoxin.startsWith('1') = true "
+      },
       "expression": {
         "name": "digoxin_admission",
         "language": "application/fhir-template+json",
@@ -1235,8 +1243,8 @@
               ]
             }
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1260,22 +1268,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'digoxin_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'digoxin_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " digoxin.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ccb.startsWith('0') = false and ccb.startsWith('9') = false and ccb != '' "
+      },
       "expression": {
         "name": "ccb_admission",
         "language": "application/fhir-template+json",
@@ -1291,8 +1299,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1319,22 +1327,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ccb_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ccb_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ccb.startsWith('0') = false and ccb.startsWith('9') = false and ccb != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " statin.startsWith('1') = true "
+      },
       "expression": {
         "name": "statin_admission",
         "language": "application/fhir-template+json",
@@ -1350,8 +1358,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1375,22 +1383,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'statin_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'statin_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " statin.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " warfarin.startsWith('1') = true "
+      },
       "expression": {
         "name": "warfarin_admission",
         "language": "application/fhir-template+json",
@@ -1406,28 +1414,28 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
           "status": "recorded",
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'warfarin_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'warfarin_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " warfarin.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "other_oral_anticoagulant.startsWith('0') = false and other_oral_anticoagulant.startsWith('9') = false and other_oral_anticoagulant != '' "
+      },
       "expression": {
         "name": "other_oral_anticoagulant_admission",
         "language": "application/fhir-template+json",
@@ -1443,8 +1451,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1471,22 +1479,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'other_oral_anticoagulant_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'other_oral_anticoagulant_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "other_oral_anticoagulant.startsWith('0') = false and other_oral_anticoagulant.startsWith('9') = false and other_oral_anticoagulant != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " amiodarone.startsWith('1') = true "
+      },
       "expression": {
         "name": "amiodarone_admission",
         "language": "application/fhir-template+json",
@@ -1502,8 +1510,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1527,22 +1535,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'amiodarone_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'amiodarone_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " amiodarone.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " allopurinol.startsWith('1') = true "
+      },
       "expression": {
         "name": "allopurinol_admission",
         "language": "application/fhir-template+json",
@@ -1558,8 +1566,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1583,22 +1591,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'allopurinol_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'allopurinol_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " allopurinol.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " nsaid.startsWith('1') = true "
+      },
       "expression": {
         "name": "nsaid_admission",
         "language": "application/fhir-template+json",
@@ -1614,28 +1622,28 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
           "status": "recorded",
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'nsaid_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'nsaid_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " nsaid.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " oral_nitrates.startsWith('0') = false and oral_nitrates.startsWith('9') = false and oral_nitrates != ''"
+      },
       "expression": {
         "name": "oral_nitrates_admission",
         "language": "application/fhir-template+json",
@@ -1651,8 +1659,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1676,22 +1684,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'oral_nitrates_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'oral_nitrates_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " oral_nitrates.startsWith('0') = false and oral_nitrates.startsWith('9') = false and oral_nitrates != ''"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " bronchodilators.startsWith('1') = true "
+      },
       "expression": {
         "name": "bronchodilators_admission",
         "language": "application/fhir-template+json",
@@ -1707,28 +1715,28 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
           "status": "recorded",
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'bronchodilators_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'bronchodilators_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " bronchodilators.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " diabetes_therapy.contains('0') = false and diabetes_therapy.contains('9') = false and diabetes_therapy.contains('10') = false "
+      },
       "expression": {
         "name": "diabetes_therapy_admission",
         "language": "application/fhir-template+json",
@@ -1746,29 +1754,29 @@
                 ]
               }
             },
-            "subject": "{{%patientId}}",
-            "encounter": "{{%encounterId}}",
+            "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+            "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
             "effectivePeriod": {
               "start": "{{%admissionDateTime}}"
             },
             "status": "recorded",
-            "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + %rootVar + '_admission'))}}",
+            "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + %rootVar + '_admission'))}}",
             "meta": {
               "profile": [
-                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
               ]
             },
             "resourceType": "MedicationStatement"
           }
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " diabetes_therapy.contains('0') = false and diabetes_therapy.contains('9') = false and diabetes_therapy.contains('10') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ivabradine.startsWith('1') = true "
+      },
       "expression": {
         "name": "ivabradine_admission",
         "language": "application/fhir-template+json",
@@ -1784,8 +1792,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1809,22 +1817,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ivabradine_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ivabradine_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ivabradine.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " hydralazine.startsWith('1') = true "
+      },
       "expression": {
         "name": "hydralazine_admission",
         "language": "application/fhir-template+json",
@@ -1840,8 +1848,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1865,22 +1873,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'hydralazine_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'hydralazine_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " hydralazine.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " arni.startsWith('1') = true or arni.startsWith('4') = true "
+      },
       "expression": {
         "name": "arni_admission",
         "language": "application/fhir-template+json",
@@ -1896,8 +1904,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}"
           },
@@ -1924,22 +1932,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', %encounterId + '-' + %patientId + 'arni_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', %encounterId + '-' + %patientId + 'arni_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " arni.startsWith('1') = true or arni.startsWith('4') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " height > 0 "
+      },
       "expression": {
         "name": "height",
         "language": "application/fhir-template+json",
@@ -1960,19 +1968,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "8302-2",
+                "display": "Body height",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ height }}",
-            "unit": "cm"
+            "unit": "cm",
+            "code": "cm"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'height'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'height'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -1980,14 +1991,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " height > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " weight_admission > 0 "
+      },
       "expression": {
         "name": "weight_admission",
         "language": "application/fhir-template+json",
@@ -2008,19 +2019,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "29463-7",
+                "display": "Body weight",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ weight_admission }}",
-            "unit": "kg"
+            "unit": "kg",
+            "code": "kg"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'weight_admission'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'weight_admission'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2028,14 +2042,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " weight_admission > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " weight_discharge > 0 "
+      },
       "expression": {
         "name": "weight_discharge",
         "language": "application/fhir-template+json",
@@ -2056,19 +2070,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "29463-7",
+                "display": "Body weight",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ weight_discharge }}",
-            "unit": "kg"
+            "unit": "kg",
+            "code": "kg"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'weight_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'weight_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2076,14 +2093,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " weight_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " heart_rate_discharge > 0 "
+      },
       "expression": {
         "name": "heart_rate_discharge",
         "language": "application/fhir-template+json",
@@ -2104,19 +2121,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "8867-4",
+                "display": "Heart rate",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ heart_rate_discharge }}",
-            "unit": "bpm"
+            "unit": "bpm",
+            "code": "bpm"
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'heart_rate_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'heart_rate_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2124,14 +2144,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " heart_rate_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " heart_rate_admission > 0 "
+      },
       "expression": {
         "name": "heart_rate_admission",
         "language": "application/fhir-template+json",
@@ -2152,19 +2172,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "8867-4",
+                "display": "Heart rate",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ heart_rate_admission }}",
-            "unit": "bpm"
+            "unit": "bpm",
+            "code": "bpm"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'heart_rate_admission'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'heart_rate_admission'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2172,14 +2195,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " heart_rate_admission > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " systolic_blood_pressure_discharge > 0 "
+      },
       "expression": {
         "name": "systolic_blood_pressure_discharge",
         "language": "application/fhir-template+json",
@@ -2200,19 +2223,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "8480-6",
+                "display": "Systolic blood pressure",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ systolic_blood_pressure_discharge }}",
-            "unit": "mmHg"
+            "unit": "mmHg",
+            "code": "mmHg"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'systolic_blood_pressure_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'systolic_blood_pressure_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2220,14 +2246,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " systolic_blood_pressure_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " systolic_blood_pressure_admission > 0 "
+      },
       "expression": {
         "name": "systolic_blood_pressure_admission",
         "language": "application/fhir-template+json",
@@ -2248,19 +2274,22 @@
               {
                 "system": "http://loinc.org",
                 "code": "8480-6",
+                "display": "Systolic blood pressure",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ systolic_blood_pressure_admission }}",
-            "unit": "mmHg"
+            "unit": "mmHg",
+            "code": "mmHg"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'systolic_blood_pressure_admission'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'systolic_blood_pressure_admission'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
@@ -2268,14 +2297,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " systolic_blood_pressure_admission > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " hb_discharge > 0 "
+      },
       "expression": {
         "name": "hb_discharge",
         "language": "application/fhir-template+json",
@@ -2297,18 +2326,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "718-7",
+                "display": "Hemoglobin [Mass/volume] in Blood",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ hb_discharge * 10 }}",
-            "unit": "g/dL"
+            "unit": "g/dL",
+            "code": "g/dL"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'hb_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'hb_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2316,14 +2348,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " hb_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " urea_discharge > 0 "
+      },
       "expression": {
         "name": "urea_discharge",
         "language": "application/fhir-template+json",
@@ -2345,18 +2377,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "6299-2",
+                "display": "Urea nitrogen [Mass/volume] in Blood",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ urea_discharge }}",
-            "unit": "mmol/L"
+            "unit": "mmol/L",
+            "code": "mmol/L"
           },
-          "subject": "{{ %patientId }}",
-          "encounter": "{{ %encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'urea_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'urea_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2364,14 +2399,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " urea_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " serum_sodium_discharge > 0 "
+      },
       "expression": {
         "name": "serum_sodium_discharge",
         "language": "application/fhir-template+json",
@@ -2393,18 +2428,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "2951-2",
+                "display": "Sodium [Moles/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ serum_sodium_discharge }}",
-            "unit": "mmol/L"
+            "unit": "mmol/L",
+            "code": "mmol/L"
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'serum_sodium_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'serum_sodium_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2412,14 +2450,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " serum_sodium_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " serum_potassium_discharge > 0 "
+      },
       "expression": {
         "name": "serum_potassium_discharge",
         "language": "application/fhir-template+json",
@@ -2441,18 +2479,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "2823-3",
+                "display": "Potassium [Moles/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ serum_potassium_discharge }}",
-            "unit": "mmol/L"
+            "unit": "mmol/L",
+            "code": "mmol/L"
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'serum_potassium_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'serum_potassium_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2460,14 +2501,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " serum_potassium_discharge > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " bnp > 0 "
+      },
       "expression": {
         "name": "bnp",
         "language": "application/fhir-template+json",
@@ -2489,18 +2530,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "30934-4",
+                "display": "Natriuretic peptide B [Mass/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ bnp }}",
-            "unit": "pg/ml"
+            "unit": "pg/ml",
+            "code": "pg/ml"
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'bnp'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'bnp'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2508,14 +2552,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " bnp > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " nt_pro_bnp > 0 "
+      },
       "expression": {
         "name": "nt_probnp",
         "language": "application/fhir-template+json",
@@ -2537,18 +2581,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "33762-6",
+                "display": "Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{ %admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ nt_pro_bnp }}",
-            "unit": "pg/ml"
+            "unit": "pg/ml",
+            "code": "pg/ml"
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'nt_pro_bnp'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'nt_pro_bnp'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -2556,14 +2603,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " nt_pro_bnp > 0 "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "ace_inhibitor_discharge.startsWith('0') = false and ace_inhibitor_discharge.startsWith('8') = false and ace_inhibitor_discharge.startsWith('9') = false and ace_inhibitor_discharge.startsWith('11') = false and ace_inhibitor_discharge.startsWith('12') = false and ace_inhibitor_discharge != '' "
+      },
       "expression": {
         "name": "ace_inhibitor_discharge",
         "language": "application/fhir-template+json",
@@ -2579,8 +2626,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2607,22 +2654,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ace_inhibitor_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ace_inhibitor_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "ace_inhibitor_discharge.startsWith('0') = false and ace_inhibitor_discharge.startsWith('8') = false and ace_inhibitor_discharge.startsWith('9') = false and ace_inhibitor_discharge.startsWith('11') = false and ace_inhibitor_discharge.startsWith('12') = false and ace_inhibitor_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "arb_discharge.startsWith('0') = false and arb_discharge.startsWith('8') = false and arb_discharge.startsWith('9') = false and arb_discharge.startsWith('11') = false and arb_discharge.startsWith('12') = false and arb != '' "
+      },
       "expression": {
         "name": "arb_discharge",
         "language": "application/fhir-template+json",
@@ -2638,8 +2685,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2666,22 +2713,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arb_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arb_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "arb_discharge.startsWith('0') = false and arb_discharge.startsWith('8') = false and arb_discharge.startsWith('9') = false and arb_discharge.startsWith('11') = false and arb_discharge.startsWith('12') = false and arb != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "beta_blocker_discharge.startsWith('0') = false and beta_blocker_discharge.startsWith('8') = false and beta_blocker_discharge.startsWith('9') = false and beta_blocker_discharge.startsWith('10') = false and beta_blocker_discharge.startsWith('11') = false and beta_blocker_discharge.startsWith('12') and beta_blocker_discharge != '' "
+      },
       "expression": {
         "name": "beta_blocker_discharge",
         "language": "application/fhir-template+json",
@@ -2697,8 +2744,8 @@
               ]
             }
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2725,22 +2772,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'beta_blocker_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'beta_blocker_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "beta_blocker_discharge.startsWith('0') = false and beta_blocker_discharge.startsWith('8') = false and beta_blocker_discharge.startsWith('9') = false and beta_blocker_discharge.startsWith('10') = false and beta_blocker_discharge.startsWith('11') = false and beta_blocker_discharge.startsWith('12') and beta_blocker_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "loop_diuretic_discharge.startsWith('0') = false and loop_diuretic_discharge.startsWith('8') = false and loop_diuretic_discharge.startsWith('9') = false and loop_diuretic_discharge.startsWith('10') = false and loop_diuretic_discharge.startsWith('11') = false and loop_diuretic_discharge.startsWith('12') = false and loop_diuretic_discharge != '' "
+      },
       "expression": {
         "name": "loop_diuretic_discharge",
         "language": "application/fhir-template+json",
@@ -2756,8 +2803,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2784,22 +2831,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'loop_diuretic_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'loop_diuretic_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "loop_diuretic_discharge.startsWith('0') = false and loop_diuretic_discharge.startsWith('8') = false and loop_diuretic_discharge.startsWith('9') = false and loop_diuretic_discharge.startsWith('10') = false and loop_diuretic_discharge.startsWith('11') = false and loop_diuretic_discharge.startsWith('12') = false and loop_diuretic_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "thiazide_or_metolazone_discharge.startsWith('0') = false and thiazide_or_metolazone_discharge.startsWith('8') = false and thiazide_or_metolazone_discharge.startsWith('9') = false and thiazide_or_metolazone_discharge.startsWith('10') = false and thiazide_or_metolazone_discharge.startsWith('11') = false and thiazide_or_metolazone_discharge.startsWith('12') = false and thiazide_or_metolazone_discharge != '' "
+      },
       "expression": {
         "name": "thiazide_or_metolazone_discharge",
         "language": "application/fhir-template+json",
@@ -2815,8 +2862,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2843,22 +2890,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'thiazide_or_metolazone_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'thiazide_or_metolazone_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "thiazide_or_metolazone_discharge.startsWith('0') = false and thiazide_or_metolazone_discharge.startsWith('8') = false and thiazide_or_metolazone_discharge.startsWith('9') = false and thiazide_or_metolazone_discharge.startsWith('10') = false and thiazide_or_metolazone_discharge.startsWith('11') = false and thiazide_or_metolazone_discharge.startsWith('12') = false and thiazide_or_metolazone_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "mra_discharge.startsWith('0') = false and mra_discharge.startsWith('8') = false and mra_discharge.startsWith('9') = false and mra_discharge.startsWith('11') = false and mra_discharge.startsWith('12') = false and mra_discharge != '' "
+      },
       "expression": {
         "name": "mra_discharge",
         "language": "application/fhir-template+json",
@@ -2874,8 +2921,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2902,22 +2949,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'mra_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'mra_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "mra_discharge.startsWith('0') = false and mra_discharge.startsWith('8') = false and mra_discharge.startsWith('9') = false and mra_discharge.startsWith('11') = false and mra_discharge.startsWith('12') = false and mra_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " aspirin_discharge.startsWith('1') = true or other_oral_anti_platelet_discharge = true "
+      },
       "expression": {
         "name": "aspirin_discharge",
         "language": "application/fhir-template+json",
@@ -2933,8 +2980,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -2961,22 +3008,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (mpp:getHashedId('Encounter', (hospital_identifier + '-' + local_patient_identifier+ '-' + date_of_admission)) + '-' + (mpp:getHashedId('Patient', local_patient_identifier) + 'aspirin_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (mpp:getHashedId('Encounter', (hospital_identifier + '-' + local_patient_identifier+ '-' + date_of_admission)) + '-' + (mpp:getHashedId('Patient', local_patient_identifier) + 'aspirin_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " aspirin_discharge.startsWith('1') = true or other_oral_anti_platelet_discharge = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " digoxin_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "digoxin_discharge",
         "language": "application/fhir-template+json",
@@ -2992,8 +3039,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3017,22 +3064,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'digoxin_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'digoxin_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " digoxin_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ccb_discharge.startsWith('0') = false and ccb_discharge.startsWith('9') = false and ccb_discharge.startsWith('10') = false and ccb_discharge != '' "
+      },
       "expression": {
         "name": "ccb_discharge",
         "language": "application/fhir-template+json",
@@ -3048,8 +3095,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3076,22 +3123,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ccb_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ccb_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ccb_discharge.startsWith('0') = false and ccb_discharge.startsWith('9') = false and ccb_discharge.startsWith('10') = false and ccb_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " statin_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "statin_discharge",
         "language": "application/fhir-template+json",
@@ -3107,8 +3154,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3132,22 +3179,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'statin_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'statin_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " statin_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " warfarin_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "warfarin_discharge",
         "language": "application/fhir-template+json",
@@ -3163,8 +3210,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3188,22 +3235,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'warfarin_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'warfarin_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " warfarin_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "other_oral_anticoagulant_discharge.startsWith('0') = false and other_oral_anticoagulant_discharge.startsWith('9') = false and other_oral_anticoagulant_discharge.startsWith('10') = false and other_oral_anticoagulant_discharge != '' "
+      },
       "expression": {
         "name": "other_oral_anticoagulant_discharge",
         "language": "application/fhir-template+json",
@@ -3219,8 +3266,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3247,22 +3294,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %encounterId + 'other_oral_anticoagulant_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %encounterId + 'other_oral_anticoagulant_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "other_oral_anticoagulant_discharge.startsWith('0') = false and other_oral_anticoagulant_discharge.startsWith('9') = false and other_oral_anticoagulant_discharge.startsWith('10') = false and other_oral_anticoagulant_discharge != '' "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " amiodarone_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "amiodarone_discharge",
         "language": "application/fhir-template+json",
@@ -3278,8 +3325,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3303,22 +3350,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'amiodarone_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'amiodarone_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " amiodarone_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " allopurinol_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "allopurinol_discharge",
         "language": "application/fhir-template+json",
@@ -3334,8 +3381,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3359,22 +3406,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'allopurinol_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'allopurinol_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " allopurinol_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " nsaid_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "nsaid_discharge",
         "language": "application/fhir-template+json",
@@ -3390,28 +3437,28 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
           "status": "recorded",
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'nsaid_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'nsaid_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " nsaid_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " oral_nitrates_discharge.startsWith('0') = false and oral_nitrates_discharge.startsWith('9') = false and oral_nitrates_discharge.startsWith('10') = false and oral_nitrates_discharge != ''"
+      },
       "expression": {
         "name": "oral_nitrates_discharge",
         "language": "application/fhir-template+json",
@@ -3427,8 +3474,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3452,22 +3499,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'oral_nitrates_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'oral_nitrates_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " oral_nitrates_discharge.startsWith('0') = false and oral_nitrates_discharge.startsWith('9') = false and oral_nitrates_discharge.startsWith('10') = false and oral_nitrates_discharge != ''"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " diabetes_therapy_discharge.contains('0') = false and diabetes_therapy_discharge.contains('9') = false and diabetes_therapy_discharge.contains('10') = false "
+      },
       "expression": {
         "name": "diabetes_therapy_discharge",
         "language": "application/fhir-template+json",
@@ -3485,29 +3532,29 @@
                 ]
               }
             },
-            "subject": "{{%patientId}}",
-            "encounter": "{{%encounterId}}",
+            "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+            "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
             "effectivePeriod": {
               "start": "{{%dischargeDateTime}}"
             },
             "status": "recorded",
-            "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + %rootVar + '_discharge'))}}",
+            "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + %rootVar + '_discharge'))}}",
             "meta": {
               "profile": [
-                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
               ]
             },
             "resourceType": "MedicationStatement"
           }
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " diabetes_therapy_discharge.contains('0') = false and diabetes_therapy_discharge.contains('9') = false and diabetes_therapy_discharge.contains('10') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ivabradine_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "ivabradine_discharge",
         "language": "application/fhir-template+json",
@@ -3523,8 +3570,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3548,22 +3595,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ivabradine_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'ivabradine_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ivabradine_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " hydralazine_discharge.startsWith('1') = true "
+      },
       "expression": {
         "name": "hydralazine_discharge",
         "language": "application/fhir-template+json",
@@ -3579,8 +3626,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3604,22 +3651,22 @@
               ]
             }
           ],
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'hydralazine_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'hydralazine_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " hydralazine_discharge.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " arni_discharge.startsWith('1') = true or arni_discharge.startsWith('4') = true "
+      },
       "expression": {
         "name": "arni_discharge",
         "language": "application/fhir-template+json",
@@ -3635,8 +3682,8 @@
               ]
             }
           },
-          "subject": "{{ %patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3663,22 +3710,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arni_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'arni_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " arni_discharge.startsWith('1') = true or arni_discharge.startsWith('4') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " sglt2_inhibitors_discharge.startsWith('1') = true or sglt2_inhibitors_discharge.startsWith('2') =true or sglt2_inhibitors_discharge.startsWith('3') = true or sglt2_inhibitors_discharge.startsWith('4') = true "
+      },
       "expression": {
         "name": "sglt2_inhibitors_discharge",
         "language": "application/fhir-template+json",
@@ -3694,8 +3741,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%dischargeDateTime}}"
           },
@@ -3722,22 +3769,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'sglt2_inhibitors_discharge'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'sglt2_inhibitors_discharge'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " sglt2_inhibitors_discharge.startsWith('1') = true or sglt2_inhibitors_discharge.startsWith('2') =true or sglt2_inhibitors_discharge.startsWith('3') = true or sglt2_inhibitors_discharge.startsWith('4') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " confirmed_diagnosis_of_heart_failure.startsWith('1') = true "
+      },
       "expression": {
         "name": "heart_failure",
         "language": "application/fhir-template+json",
@@ -3746,14 +3793,13 @@
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "code": "I50",
-                "display": "Heart failure",
+                "code": "{{heart_failure_diagnosis}}",
                 "@sliceName": "icd10Code"
               }
             ]
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "onsetDateTime": "{{%admissionDateTime}}",
           "clinicalStatus": {
             "coding": [
@@ -3764,7 +3810,10 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('Condition', (%encounterId + '-' + %patientId + 'heart_failure'))}}",
+          "category" : [ {
+            "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
+          } ],
+          "id": "{{mpp:getHashedId('Condition', (%encounterId + '-' + %patientId + 'heart_failure'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -3772,14 +3821,14 @@
           },
           "resourceType": "Condition"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " confirmed_diagnosis_of_heart_failure.startsWith('1') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " sglt2_inhibitors_admission.startsWith('1') = true or sglt2_inhibitors_admission.startsWith('2') =true or sglt2_inhibitors_admission.startsWith('3') = true or sglt2_inhibitors_admission.startsWith('4') = true "
+      },
       "expression": {
         "name": "sglt2_inhibitors_admission",
         "language": "application/fhir-template+json",
@@ -3795,8 +3844,8 @@
               ]
             }
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "effectivePeriod": {
             "start": "{{%admissionDateTime}}",
             "end": "{{%admissionDateTime}}"
@@ -3824,22 +3873,22 @@
               }
             ]
           },
-          "id": "{{mpp:createFhirReferenceWithHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'sglt2_inhibitors_admission'))}}",
+          "id": "{{mpp:getHashedId('MedicationStatement', (%encounterId + '-' + %patientId + 'sglt2_inhibitors_admission'))}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Prescription"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationStatement"
             ]
           },
           "resourceType": "MedicationStatement"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " sglt2_inhibitors_admission.startsWith('1') = true or sglt2_inhibitors_admission.startsWith('2') =true or sglt2_inhibitors_admission.startsWith('3') = true or sglt2_inhibitors_admission.startsWith('4') = true "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "inr > 0"
+      },
       "expression": {
         "name": "inr_admission",
         "language": "application/fhir-template+json",
@@ -3861,6 +3910,7 @@
               {
                 "system": "http://loinc.org",
                 "code": "34714-6",
+                "display": "INR in Blood by Coagulation assay",
                 "@sliceName": "loincCode"
               }
             ]
@@ -3869,8 +3919,8 @@
           "valueQuantity": {
             "value": "{{inr}}"
           },
-          "subject": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'inr_admission'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'inr_admission'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -3878,14 +3928,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "inr > 0"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "inr_discharge > 0"
+      },
       "expression": {
         "name": "inr_discharge",
         "language": "application/fhir-template+json",
@@ -3907,6 +3957,7 @@
               {
                 "system": "http://loinc.org",
                 "code": "34714-6",
+                "display": "INR in Blood by Coagulation assay",
                 "@sliceName": "loincCode"
               }
             ]
@@ -3915,9 +3966,9 @@
           "valueQuantity": {
             "value": "{{inr_discharge}}"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'inr_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'inr_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -3925,14 +3976,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "inr_discharge > 0"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "creatinine_discharge > 0"
+      },
       "expression": {
         "name": "creatinine_discharge",
         "language": "application/fhir-template+json",
@@ -3954,18 +4005,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "14682-9",
+                "display": "Creatinine [Moles/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%dischargeDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{ creatinine_discharge }}",
-            "unit": "μmol/L"
+            "unit": "μmol/L",
+            "code": "μmol/L"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'creatinine_discharge'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'creatinine_discharge'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -3973,14 +4027,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "creatinine_discharge > 0"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": "creatinine_admission > 0"
+      },
       "expression": {
         "name": "creatinine_admission",
         "language": "application/fhir-template+json",
@@ -4002,18 +4056,21 @@
               {
                 "system": "http://loinc.org",
                 "code": "14682-9",
+                "display": "Creatinine [Moles/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{%admissionDateTime}}",
           "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
             "value": "{{creatinine_admission}}",
-            "unit": "μmol/L"
+            "unit": "μmol/L",
+            "code": "μmol/L"
           },
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'creatinine_admission'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'creatinine_admission'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -4021,14 +4078,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": "creatinine_admission > 0"
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " ecg.contains('0') = false and ecg.contains('9') = false and ecg.contains('10') = false "
+      },
       "expression": {
         "name": "ecg",
         "language": "application/fhir-template+json",
@@ -4049,13 +4106,16 @@
                 "coding": [
                   {
                     "system": "http://loinc.org",
-                    "code": "8633-0"
+                    "code": "8633-0",
+                    "display": "QRS duration"
                   }
                 ]
               },
               "valueQuantity": {
+                "system": "http://unitsofmeasure.org",
                 "value": "{{qrs_duration}}",
-                "unit": "ms"
+                "unit": "millisecond",
+                "code": "ms"
               },
               "@sliceName": "qrsDuration"
             },
@@ -4094,180 +4154,6 @@
               },
               "valueBoolean": "{{ecg.contains('5')}}",
               "@sliceName": "RBBB"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "rAxis"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "pAxis"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "tAxis"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "qtInterval"
-            },
-            {
-              "code": "",
-              "@sliceName": "qtIntervalCorrectedBazett"
-            },
-            {
-              "code": "",
-              "@sliceName": "qtIntervalCorrectedFrederica"
-            },
-            {
-              "code": "",
-              "@sliceName": "qtIntervalCorrectedFramingham"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "qrsComplexCount"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "prInterval"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "atrialRate"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "ventricularRate"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "samplingFrequency"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "filterSettings"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "rawMedianBeat"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "rawRhythm"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "pacedRhythm"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadI"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadII"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadIII"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadAVR"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadAVL"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadAVF"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV1"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV2"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV3"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV4"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV5"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "leadV6"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "stElevation"
-            },
-            {
-              "code": {
-                "coding": ""
-              },
-              "@sliceName": "ischemiaWithoutStElevation"
             }
           ],
           "category": [
@@ -4282,10 +4168,10 @@
             }
           ],
           "effectiveDateTime": "{{%admissionDateTime}}",
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'ecg'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'ecg'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Electrocardiograph"
@@ -4293,14 +4179,14 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " ecg.contains('0') = false and ecg.contains('9') = false and ecg.contains('10') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " gold_standard_test.contains('8') = false and gold_standard_test.contains('9') = false and gold_standard_test.contains('10') = false "
+      },
       "expression": {
         "name": "echo",
         "language": "application/fhir-template+json",
@@ -4321,6 +4207,7 @@
               {
                 "system": "http://loinc.org",
                 "code": "34552-0",
+                "display": "Cardiac 2D echo panel",
                 "@sliceName": "loincCode"
               }
             ]
@@ -4332,21 +4219,24 @@
                 "coding": [
                   {
                     "system": "http://loinc.org",
-                    "code": "8806-2"
+                    "code": "8806-2",
+                    "display": "Left ventricular Ejection fraction by 2D echo"
                   }
                 ]
               },
               "valueQuantity": {
+                "system": "http://unitsofmeasure.org",
                 "value": "{{iif(lvef.startsWith('1'), 75, iif(lvef.startsWith('2'), 45, iif(lvef.startsWith('3'), 37, 18)))}}",
-                "unit": "%"
+                "unit": "%",
+                "code": "%"
               },
               "@sliceName": "echoParameter"
             }
           ],
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
-          "status": "",
-          "id": "{{mpp:createFhirReferenceWithHashedId('Observation', (%encounterId + '-' + %patientId + 'echo'))}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
+          "status": "unknown",
+          "id": "{{mpp:getHashedId('Observation', (%encounterId + '-' + %patientId + 'echo'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Echocardiograph"
@@ -4354,24 +4244,24 @@
           },
           "resourceType": "Observation"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " gold_standard_test.contains('8') = false and gold_standard_test.contains('9') = false and gold_standard_test.contains('10') = false "
       }
     },
     {
+      "precondition": {
+        "name": "isKnown",
+        "language": "text/fhirpath",
+        "expression": " referral_to_the_hospital_heart_failure.contains('1') or referral_to_cardiac_rehabilitation.contains('1') or referral_for_cardiothoracic_surgery_made.contains('1') or referral_for_transplant_made.contains('1') or referral_for_transplant_made.contains('1') or referral_to_palliative_care_services_made.contains('1') or referral_to_cardiology_follow_up_made.contains('1') or referral_to_the_community_heart_failure_nurse_follow_up_made.contains('1') or referral_to_hf_cardiologist_follow_up_made.contains('1') or appointment_with_the_specialist_multidisciplinary_hf_team_made.contains('1') or patient_stable_on_oral_therapy_after_discharge_planning.contains('1') or referral_to_hf_specialist_pharmacist_follow_up_made.contains('1') or is_a_heart_failure_pre_discharge_management_plan_in_place.contains('1') or heart_failure_management_plan_been_discussed_with_the_patient.contains('1') or management_plan_been_communicated_to_the_primary_care_team.contains('1') or referral_to_gp_with_special_interest_in_hf_made.contains('1') or is_the_first_hf_follow_up_appointment_within_2_weeks.contains('1') or referral_to_geriatrician_with_interest_in_hf_made.contains('1')"
+      },
       "expression": {
         "name": "referral",
         "language": "application/fhir-template+json",
         "value": {
           "intent": "order",
-          "subject": "{{%patientId}}",
-          "encounter": "{{%encounterId}}",
+          "subject": "{{utl:createFhirReference('Patient', %patientId)}}",
+          "encounter": "{{utl:createFhirReference('Encounter', %encounterId)}}",
           "authoredOn": "{{%dischargeDateTime}}",
           "status": "unknown",
-          "id": "{{mpp:createFhirReferenceWithHashedId('ServiceRequest', (%encounterId + '-' + %patientId + 'referral'))}}",
+          "id": "{{mpp:getHashedId('ServiceRequest', (%encounterId + '-' + %patientId + 'referral'))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Referral"
@@ -4379,11 +4269,6 @@
           },
           "resourceType": "ServiceRequest"
         }
-      },
-      "precondition": {
-        "name": "isKnown",
-        "language": "text/fhirpath",
-        "expression": " referral_to_the_hospital_heart_failure.contains('1') or referral_to_cardiac_rehabilitation.contains('1') or referral_for_cardiothoracic_surgery_made.contains('1') or referral_for_transplant_made.contains('1') or referral_for_transplant_made.contains('1') or referral_to_palliative_care_services_made.contains('1') or referral_to_cardiology_follow_up_made.contains('1') or referral_to_the_community_heart_failure_nurse_follow_up_made.contains('1') or referral_to_hf_cardiologist_follow_up_made.contains('1') or appointment_with_the_specialist_multidisciplinary_hf_team_made.contains('1') or patient_stable_on_oral_therapy_after_discharge_planning.contains('1') or referral_to_hf_specialist_pharmacist_follow_up_made.contains('1') or is_a_heart_failure_pre_discharge_management_plan_in_place.contains('1') or heart_failure_management_plan_been_discussed_with_the_patient.contains('1') or management_plan_been_communicated_to_the_primary_care_team.contains('1') or referral_to_gp_with_special_interest_in_hf_made.contains('1') or is_the_first_hf_follow_up_appointment_within_2_weeks.contains('1') or referral_to_geriatrician_with_interest_in_hf_made.contains('1')"
       }
     }
   ]
