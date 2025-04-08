@@ -74,6 +74,9 @@
             } ]
           }
         },
+        "category" : [ {
+          "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
+        } ],
         "id" : "{{iif(encounter.exists(), mpp:getHashedId('Condition', ( identifier + '-' + subject + '-' + encounter)), mpp:getHashedId('Condition', ( identifier + '-' + subject)))}}",
         "meta" : {
           "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition|latest" ]

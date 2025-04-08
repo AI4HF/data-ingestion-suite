@@ -21,15 +21,26 @@
   },
   "variable" : [ ],
   "mapping" : [ {
+    "description" : "patient",
+    "precondition" : {
+      "name" : "isBirthDateDefined",
+      "language" : "text/fhirpath",
+      "expression" : "birthDate.exists()"
+    },
     "expression" : {
       "name" : "patient",
       "language" : "application/fhir-template+json",
       "value" : {
+        "id" : "{{mpp:getHashedId('Patient', patientId)}}",
+        "meta" : {
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest" ]
+        },
+        "resourceType" : "Patient",
         "gender" : "{{mpp:getConcept(%genderConceptMap, gender, 'target_code')}}",
         "birthDate" : "{{birthDate.utl:toFhirDate('dd/MM/yyyy')}}",
         "deceasedDateTime" : {
           "{{#deceasedDateTimeVar}}" : "{{iif(deceasedDateTime.exists(), true, {})}}",
-          "{{?}}" : "{{deceasedDateTime.utl:toFhirDateTime()}}"
+          "{{?}}" : "{{deceasedDateTime.utl:toFhirDate('dd/MM/yyyy')}}"
         },
         "address" : [ {
           "use" : "home",
@@ -43,10 +54,6 @@
             "{{?}}" : "{{postalCode}}"
           }
         } ],
-        "id" : "{{mpp:getHashedId('Patient', patientId)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest" ]
-        },
         "extension" : [ {
           "url" : "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
           "valueCodeableConcept" : {
@@ -56,15 +63,8 @@
               "display" : "{{mpp:getConcept(%ethnicityConceptMap, ethnicity, 'target_name')}}"
             } ]
           }
-        } ],
-        "resourceType" : "Patient"
+        } ]
       }
-    },
-    "precondition" : {
-      "name" : "isBirthDateDefined",
-      "language" : "text/fhirpath",
-      "expression" : "birthDate.exists()"
-    },
-    "description" : "patient"
+    }
   } ]
 }
