@@ -1,0 +1,2 @@
+identifier,subject,encounter,clinicalStatus,verificationStatus,severity,diagnosisName,code,onsetDataTime,abatementDateTime
+c1,p1,e1,active,confirmed,,Heart Failure,I50,03/04/2019,

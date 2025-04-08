@@ -1,0 +1,97 @@
+{
+  "id" : "muhas-test-csv",
+  "name" : "muhas-test-csv",
+  "description" : "Executes MUHAS mappings on the CSV test dataset and stores the results in the local onFHIR server.",
+  "sourceSettings" : {
+    "file-system-csv" : {
+      "jsonClass" : "FileSystemSourceSettings",
+      "name" : "file-system-csv",
+      "sourceUri" : "http://file-system-test-csv",
+      "dataFolderPath" : "test-data/muhas",
+      "asStream" : false
+    }
+  },
+  "sinkSettings" : {
+    "jsonClass" : "FhirRepositorySinkSettings",
+    "fhirRepoUrl" : "http://localhost:8080/fhir",
+    "returnMinimal" : true
+  },
+  "mappings" : [ {
+    "name" : "patient-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/patient-mapping",
+    "sourceBinding" : {
+      "patient" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "patient.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  }, {
+    "name" : "encounter-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/encounter-mapping",
+    "sourceBinding" : {
+      "encounter" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "encounter.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  }, {
+    "name" : "condition-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/condition-mapping",
+    "sourceBinding" : {
+      "condition" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "condition.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  }, {
+    "name" : "nyha-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/nyha-mapping",
+    "sourceBinding" : {
+      "nyha" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "nhya.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  }, {
+    "name" : "smoking-status-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/smoking-status-mapping",
+    "sourceBinding" : {
+      "smokingStatus" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "smoking.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  }, {
+    "name" : "echo-mapping",
+    "mappingRef" : "https://ai4hf.eu/fhir/mappings/muhas/echo-mapping",
+    "sourceBinding" : {
+      "echo" : {
+        "jsonClass" : "FileSystemSource",
+        "path" : "echo.csv",
+        "contentType" : "csv",
+        "options" : { },
+        "sourceRef" : "file-system-csv"
+      }
+    }
+  } ],
+  "dataProcessingSettings" : {
+    "saveErroneousRecords" : false,
+    "archiveMode" : "off"
+  },
+  "useFhirSinkAsIdentityService" : false
+}
