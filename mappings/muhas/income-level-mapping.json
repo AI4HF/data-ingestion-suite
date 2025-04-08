@@ -30,7 +30,7 @@
         } ],
         "code" : {
           "coding" : [ {
-            "system" : "https://loinc.org",
+            "system" : "http://loinc.org",
             "code" : "89566-4",
             "display" : "Income status [CUBS]",
             "@sliceName" : "loincCode"
@@ -42,7 +42,7 @@
         },
         "valueCodeableConcept" : {
           "coding" : [ {
-            "system" : "https://loinc.org/LL5047-7",
+            "system" : "http://loinc.org/LL5047-7",
             "code" : "{{mpp:getConcept(%incomeLevelConceptMap, code, 'target_code')}}",
             "display" : "{{mpp:getConcept(%incomeLevelConceptMap, code, 'target_description')}}"
           } ]
