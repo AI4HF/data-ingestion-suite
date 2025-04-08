@@ -30,7 +30,7 @@
         } ],
         "code" : {
           "coding" : [ {
-            "system" : "https://loinc.org",
+            "system" : "http://loinc.org",
             "code" : "67875-5",
             "display" : "Employment status - current",
             "@sliceName" : "loincCode"
@@ -42,7 +42,7 @@
         },
         "valueCodeableConcept" : {
           "coding" : [ {
-            "system" : "https://loinc.org/LL1901-9",
+            "system" : "http://loinc.org/LL1901-9",
             "code" : "{{mpp:getConcept(%employmentStatusConceptMap, code, 'target_code')}}",
             "display" : "{{mpp:getConcept(%employmentStatusConceptMap, code, 'target_name')}}"
           } ]
