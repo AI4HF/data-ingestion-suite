@@ -30,7 +30,7 @@
         } ],
         "code" : {
           "coding" : [ {
-            "system" : "https://loinc.org",
+            "system" : "http://loinc.org",
             "code" : "88020-3",
             "display" : "Functional capacity NYHA",
             "@sliceName" : "loincCode"
