@@ -1,0 +1,81 @@
+{
+  "id": "aurum-drug-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+  "name": "aurum-drug-mapping",
+  "title": "Aurum Drug Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "drug",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-drug-issue",
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias" : "linkageEligibility",
+      "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
+      "joinOn" : [ "patid" ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-hospitalization",
+      "joinOn": [
+        "patid"
+      ]
+    }
+  ],
+  "context": {
+    "medicationGroupContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/cprd/aurum-drug-issue-med-group.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "medicationGroups",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%medicationGroupContext, prodcodeid)"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "The medication.",
+      "precondition": {
+        "name": "medicationGroupExists",
+        "language": "text/fhirpath",
+        "expression": "%medicationGroups.exists()"
+      },
+      "expression": {
+        "name": "med",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('MedicationAdministration', issueid)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+            ]
+          },
+          "resourceType": "MedicationAdministration",
+          "medication": {
+            "concept": {
+              "coding": {
+                "{{#group}}": "{{%medicationGroups}}",
+                "{{*}}": "{{utl:createFhirCoding(%group.target_system, %group.target_code, %group.target_display)}}"
+              }
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.issuedate and $this.discharged >= %context.issuedate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "occurenceDateTime": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+          "dosage": {
+            "dose": {
+              "value": "{{quantity}}"
+            }
+          },
+          "status": "unknown"
+        }
+      }
+    }
+  ]
+}

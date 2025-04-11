@@ -1,0 +1,2 @@
+patid,issueid,pracid,probobsid,drugrecid,issuedate,enterdate,staffid,prodcodeid,dosageid,quantity,quantunitid,duration,estnhscost
+1,iss1,1,1,1,03/03/2022,03/03/2022,1,1132741000033111,1,5,1,1,0
