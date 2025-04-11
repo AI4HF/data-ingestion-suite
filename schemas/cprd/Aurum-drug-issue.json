@@ -52,7 +52,7 @@
     }, {
       "id" : "Aurum-drug-issue.probobsid",
       "path" : "Aurum-drug-issue.probobsid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -92,7 +92,7 @@
     }, {
       "id" : "Aurum-drug-issue.staffid",
       "path" : "Aurum-drug-issue.staffid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
@@ -132,7 +132,7 @@
     }, {
       "id" : "Aurum-drug-issue.quantunitid",
       "path" : "Aurum-drug-issue.quantunitid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "integer",

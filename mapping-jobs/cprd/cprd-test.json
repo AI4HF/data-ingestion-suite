@@ -231,6 +231,33 @@
           "sourceRef": "file-system"
         }
       }
+    },
+    {
+      "name": "aurum-drug-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumDrugIssue.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {

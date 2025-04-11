@@ -5224,6 +5224,816 @@
           "sourceRef": "cprd-with-original-structure"
         }
       }
+    },
+    {
+      "name": "drug-mapping-1",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_13278_13905/13278_13905_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-2",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_14165_22280/14165_22280_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-3",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_23434_28289/23434_28289_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-4",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_36062_39256/36062_39256_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-5",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_40495_46048/40495_46048_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-6",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_65302_76237/65302_76237_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-7",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_81426_81482/81426_81482_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-8",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_83563_87397/83563_87397_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-9",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_88907_93810/88907_93810_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-10",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_95181_98696/95181_98696_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-one/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-11",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_13278_13905/13278_13905_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-12",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_14165_22280/14165_22280_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-13",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_23434_28289/23434_28289_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-14",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_36062_39256/36062_39256_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-15",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_40495_46048/40495_46048_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-16",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_65302_76237/65302_76237_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-17",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_81426_81482/81426_81482_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-18",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_83563_87397/83563_87397_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-19",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_88907_93810/88907_93810_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-20",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_95181_98696/95181_98696_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-two/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-21",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_13278_13905/13278_13905_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-22",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_14165_22280/14165_22280_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-23",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_23434_28289/23434_28289_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-24",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_36062_39256/36062_39256_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-25",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_40495_46048/40495_46048_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-26",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_65302_76237/65302_76237_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-27",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_81426_81482/81426_81482_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-28",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_83563_87397/83563_87397_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-29",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_88907_93810/88907_93810_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
+    },
+    {
+      "name": "drug-mapping-30",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+      "sourceBinding": {
+        "drug": {
+          "jsonClass": "FileSystemSource",
+          "path": "practice_95181_98696/95181_98696_Extract_DrugIssue_001.txt.zip",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage_eligibility_Set21/linkage_eligibility.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "linkage/20_095_Results/Results-three/Aurum_linked/Final/hes_hospital_20_095_DM.txt",
+          "contentType": "tsv",
+          "options": {},
+          "sourceRef": "cprd-with-original-structure"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
