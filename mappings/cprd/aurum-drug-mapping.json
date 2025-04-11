@@ -1,0 +1,81 @@
+{
+  "id": "aurum-drug-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/cprd/aurum-drug-mapping",
+  "name": "aurum-drug-mapping",
+  "title": "Aurum Drug Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "drug",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-drug-issue",
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias": "aurumEncounter",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-consultation",
+      "joinOn": [
+        "patid"
+      ]
+    }
+  ],
+  "context": {
+    "medicationGroupContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/cprd/aurum-drug-issue-med-group.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "medicationGroups",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%medicationGroupContext, prodcodeid)"
+    },
+    {
+      "name": "aurumEncounter",
+      "language": "text/fhirpath",
+      "expression": "%aurumEncounter.select(iif($this.consdate <= %context.issuedate and $this.consdate >= %context.issuedate,mpp:createFhirReferenceWithHashedId('Encounter', $this.consid),{})).first()"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "The medication.",
+      "precondition": {
+        "name": "medicationGroupExists",
+        "language": "text/fhirpath",
+        "expression": "%medicationGroups.exists()"
+      },
+      "expression": {
+        "name": "med",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('MedicationAdministration', issueid)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+            ]
+          },
+          "resourceType": "MedicationAdministration",
+          "medication": {
+            "concept": {
+              "coding": {
+                "{{#group}}": "{{%medicationGroups}}",
+                "{{*}}": "{{utl:createFhirCoding(%group.target_system, %group.target_code, %group.target_display)}}"
+              }
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+          "encounter": "{{%aurumEncounter}}",
+          "occurenceDateTime": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+          "dosage": {
+            "dose": {
+              "value": "{{quantity}}"
+            }
+          },
+          "status": "unknown"
+        }
+      }
+    }
+  ]
+}
