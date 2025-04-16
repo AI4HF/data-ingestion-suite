@@ -114,7 +114,7 @@
           "valueQuantity" : {
             "system" : "http://unitsofmeasure.org",
             "code" : "%",
-            "value" : "{{mpp:getConcept(%ejectionFractionMap, medcodeid, 'rounding_ef_value').nav:orElse(0.65).toDecimal()}}",
+            "value" : "{{mpp:getConcept(%ejectionFractionMap, medcodeid, 'rounding_ef_value').nav:orElse(0.65).toDecimal() * 100}}",
             "unit" : "%"
           },
           "@sliceName" : "echoParameter"
