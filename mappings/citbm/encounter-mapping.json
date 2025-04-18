@@ -1,0 +1,86 @@
+{
+  "id": "encounter-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
+  "name": "encounter-mapping",
+  "title": "Encounter Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "encounters",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "serviceTypeConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/encounter-service-type.csv"
+    },
+    "encounterClassConceptMap": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/encounter-class.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "encounterClassConcept",
+      "language": "text/fhirpath",
+      "expression": "iif(AttentionArea.hasValue(), mpp:getConcept(%encounterClassConceptMap, AttentionArea), mpp:getConcept(%encounterClassConceptMap, 'CONSULTA EXTERNA'))"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "The encounter of the patient.",
+      "expression": {
+        "name": "encounter",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Encounter', ParticipantCode & Visita.lower())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter",
+          "class": [
+            {
+              "coding": [
+                {
+                  "system": "{{%encounterClassConcept.target_system}}",
+                  "code": "{{%encounterClassConcept.target_code}}",
+                  "display": "{{%encounterClassConcept.target_display}}"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', ParticipantCode)}}",
+          "actualPeriod": {
+            "start": "{{? StartDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+            "end": "{{? EndDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+          },
+          "status": "completed",
+          "serviceType": [
+            {
+              "{{#serviceTypeVar}}": "{{iif(Service.hasValue(), true, {})}}",
+              "{{?}}": {
+                "concept": {
+                  "coding": [
+                    {
+                      "system": "http://snomed.info/sct",
+                      "code": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_code')}}",
+                      "display": "{{mpp:getConcept(%serviceTypeConceptMap, Service, 'target_display')}}"
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "serviceProvider": {
+            "{{#serviceProviderVar}}": "{{iif(Hospital.hasValue() or Type.hasValue(), true, {})}}",
+            "{{?}}": "{{mpp:createFhirReferenceWithHashedId('Organization', Hospital & Type)}}"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "employment-status-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/employment-status-mapping",
+  "name": "employment-status-mapping",
+  "title": "Employment Status",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "demographics",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Demographics",
+      "joinOn": [
+        "COD_Participante"
+      ]
+    },
+    {
+      "alias": "visits",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "ParticipantCode"
+      ]
+    }
+  ],
+  "context": {
+    "employmentStatusContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/employment-status.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "employmentStatus",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%employmentStatusContext, CESANTE_ACTIVO)"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "The patient's employment status recorded during the initial visit.",
+      "precondition": {
+        "name": "employmentStatusExists",
+        "language": "text/fhirpath",
+        "expression": "CESANTE_ACTIVO.hasValue()"
+      },
+      "expression": {
+        "name": "employment",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', COD_Participante & 'Employment Status')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-EmploymentStatus"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "social-history",
+                  "display": "Social History"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "67875-5",
+                "display": "Employment status current",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectivePeriod": {
+            "start": "{{%visits.StartDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}"
+          },
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "{{%employmentStatus.target_system}}",
+                "code": "{{%employmentStatus.target_code}}",
+                "display": "{{%employmentStatus.target_display}}"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Participante)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Participante & 'visita1')}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}

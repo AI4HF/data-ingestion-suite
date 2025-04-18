@@ -1,0 +1,147 @@
+{
+  "id": "encounter",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+  "version": "latest",
+  "name": "Encounter",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter",
+        "path": "Encounter",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Encounter.ParticipantCode",
+        "path": "Encounter.ParticipantCode",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique identifier of the patient.",
+        "short": "Patient ID"
+      },
+      {
+        "id": "Encounter.Hospital",
+        "path": "Encounter.Hospital",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.Type",
+        "path": "Encounter.Type",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.Service",
+        "path": "Encounter.Service",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.StartDate",
+        "path": "Encounter.StartDate",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "Represents the admission time of the encounter. This date corresponds to the earliest recorded event (e.g., medication administration, surgery) associated with the encounter.",
+        "short": "Admission Time"
+      },
+      {
+        "id": "Encounter.EndDate",
+        "path": "Encounter.EndDate",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "Represents the admission time of the encounter. This date corresponds to the latest recorded event (e.g., medication administration, surgery) associated with the encounter.",
+        "short": "Discharge Time"
+      },
+      {
+        "id": "Encounter.Visita",
+        "path": "Encounter.Visita",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.AttentionArea",
+        "path": "Encounter.AttentionArea",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

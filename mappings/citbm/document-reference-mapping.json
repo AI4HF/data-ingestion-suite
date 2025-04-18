@@ -1,0 +1,150 @@
+{
+  "id": "document-reference-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
+  "name": "document-reference-mapping",
+  "title": "Document Reference Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "Document reference for recording the clinical examination conducted during the encounter if it exists.",
+      "precondition": {
+        "name": "clinicalExaminationExists",
+        "language": "text/fhirpath",
+        "expression": "Clinical_examination.hasValue()"
+      },
+      "expression": {
+        "name": "clinicalExamination",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Clinical Examination')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "34117-2",
+                "display": "History and physical note"
+              }
+            ]
+          },
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{Clinical_examination.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "Description of the interview between the health professional and the participant",
+      "precondition": {
+        "name": "interviewExists",
+        "language": "text/fhirpath",
+        "expression": "Anamnesis.hasValue()"
+      },
+      "expression": {
+        "name": "interview",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Interview')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "34117-2",
+                "display": "History and physical note"
+              }
+            ]
+          },
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{Anamnesis.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "HTML tag for referencing an established procedure",
+      "precondition": {
+        "name": "workPlanExists",
+        "language": "text/fhirpath",
+        "expression": "Work_Plan.hasValue()"
+      },
+      "expression": {
+        "name": "workPlan",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participant_code & Visita.lower() & 'Work Plan')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "11504-8",
+                "display": "Surgical operation note"
+              }
+            ]
+          },
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/html",
+                "language": "es",
+                "data": "{{Work_Plan.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    }
+  ]
+}

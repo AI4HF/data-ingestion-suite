@@ -1,0 +1,297 @@
+{
+  "id": "citbm",
+  "name": "citbm",
+  "description": "Generates FHIR Resources for the CITBM dataset.",
+  "sourceSettings": {
+    "citbm": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "citbm",
+      "sourceUri": "https://ai4hf.eu/data-ingestion-suite/citbm",
+      "dataFolderPath": "test-data/citbm",
+      "asStream": false
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "http://localhost:8080/fhir",
+    "returnMinimal": true
+  },
+  "mappings": [
+    {
+      "name": "organization-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/organization-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH hospitals AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Hospital, type ORDER BY Hospital) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM hospitals\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "nyha-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/nyha-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "condition-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/condition-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ICD10 ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n    WHERE ICD10 is not NULL\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "medication-administration-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH meds AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita, ATC_codes, fecent ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM meds\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "document-reference-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "death-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/death-mapping",
+      "sourceBinding": {
+        "death": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Defunciones.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select distinct * from death;",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "vital-sign-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/vital-sign-mapping",
+      "sourceBinding": {
+        "vitalSigns": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Paciente_Signos_Vitales.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "patient-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/patient-mapping",
+      "sourceBinding": {
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "Pacientes_del_proyecto_AI4HF.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "demographics": {
+          "jsonClass": "FileSystemSource",
+          "path": "Demograficos.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "WITH patientDemographics AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY COD_Participante ORDER BY COD_Participante) AS rn\r\n    FROM demographics\r\n)\r\nSELECT *\r\nFROM patientDemographics\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        },
+        "death": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Defunciones.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select distinct * from death;",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "encounter-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/encounter-mapping",
+      "sourceBinding": {
+        "encounters": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounters.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "practitioner-role-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/practitioner-role-mapping",
+      "sourceBinding": {
+        "procedure": {
+          "jsonClass": "FileSystemSource",
+          "path": "Procedimientos_HEMOD.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select distinct performer from procedure;",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "procedure-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
+      "sourceBinding": {
+        "procedure": {
+          "jsonClass": "FileSystemSource",
+          "path": "Procedimientos_HEMOD.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "WITH prods AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Id_proyecto, procedimiento, Fecha ORDER BY Id_proyecto) AS rn\r\n    FROM procedure\r\n)\r\nSELECT *\r\nFROM prods\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "surgery-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "surgery-condition-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-condition-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH conditions AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participante, encounter, DIAG ORDER BY Participante) AS rn\r\n    FROM surgery\r\n)\r\nSELECT *\r\nFROM conditions\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "employment-status-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/employment-status-mapping",
+      "sourceBinding": {
+        "demographics": {
+          "jsonClass": "FileSystemSource",
+          "path": "Demograficos.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "WITH demog AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY COD_Participante ORDER BY COD_Participante) AS rn\r\n    FROM demographics\r\n)\r\nSELECT *\r\nFROM demog\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        },
+        "visits": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounters.csv",
+          "contentType": "csv",
+          "options": {},
+          "preprocessSql": "select * from visits where Visita = 'Visita1'",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "smoking-status-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/smoking-status-mapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "Incor_Farmaco.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "WITH visits AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Participant_code, Visita ORDER BY Participant_code) AS rn\r\n    FROM medication\r\n)\r\nSELECT *\r\nFROM visits\r\nWHERE rn = 1;\r\n",
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "surgery-practitioner-role-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-practitioner-role-mapping",
+      "sourceBinding": {
+        "surgery": {
+          "jsonClass": "FileSystemSource",
+          "path": "CentroQuirurgico.csv",
+          "contentType": "csv",
+          "options": {
+            "multiLine": "true",
+            "escape": "\""
+          },
+          "preprocessSql": "select distinct Performer from surgery;",
+          "sourceRef": "citbm"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}

@@ -1,0 +1,72 @@
+{
+  "id": "procedure-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
+  "name": "procedure-mapping",
+  "title": "Procedure Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "procedure",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Procedure",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "procedureStatusConcept": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/procedure-status.csv"
+    },
+    "freeTextProcedureCodes": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/free-text-procedure-codes.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The procedure of the patient.",
+      "expression": {
+        "name": "procedure",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Procedure', Id_proyecto & procedimiento & Fecha)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
+            ]
+          },
+          "resourceType": "Procedure",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "387713003",
+                  "display": "Surgical procedure (procedure)"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": {
+              "{{#codingVar}}": "{{mpp:getConcept(%freeTextProcedureCodes, procedimiento)}}",
+              "{{*}}": {
+                "system": "{{%codingVar.target_system}}",
+                "code": "{{%codingVar.target_code}}",
+                "display": "{{%codingVar.target_display}}"
+              }
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Id_proyecto)}}",
+          "occurrenceDateTime": "{{Fecha.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "performer": [
+            {
+              "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', performer)}}"
+            }
+          ],
+          "status": "{{mpp:getConcept(%procedureStatusConcept, Estado_Condicion, 'target_code')}}"
+        }
+      }
+    }
+  ]
+}

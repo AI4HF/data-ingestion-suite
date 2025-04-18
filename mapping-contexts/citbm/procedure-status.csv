@@ -1,0 +1,4 @@
+source_code,target_code,target_system,target_display
+"Hecho","completed","http://hl7.org/fhir/event-status","Completed"
+"Activos","in-progress","http://hl7.org/fhir/event-status","In Progress"
+"Resueltos","completed","http://hl7.org/fhir/event-status","Completed"

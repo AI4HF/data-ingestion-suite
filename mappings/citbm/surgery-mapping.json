@@ -1,0 +1,211 @@
+{
+  "id": "surgery-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
+  "name": "surgery-mapping",
+  "title": "Surgery Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "surgery",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Surgery",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "procedureStatusConcept": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/procedure-status.csv"
+    },
+    "cpmsProcedureCodes": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/cpms-procedure-codes.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The surgery.",
+      "expression": {
+        "name": "surgery",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Procedure', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime )}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
+            ]
+          },
+          "resourceType": "Procedure",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "387713003",
+                  "display": "Surgical procedure (procedure)"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": {
+              "{{#codingVar}}": "{{mpp:getConcept(%cpmsProcedureCodes, COD_CPMS)}}",
+              "{{*}}": {
+                "system": "{{%codingVar.target_system}}",
+                "code": "{{%codingVar.target_code}}",
+                "display": "{{%codingVar.target_display}}"
+              }
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}",
+          "occurrenceDateTime": "{{OcurrenceDateTime.substring(0,10)}}",
+          "performer": [
+            {
+              "actor": "{{mpp:createFhirReferenceWithHashedId('PractitionerRole', Performer)}}"
+            }
+          ],
+          "reason": [
+            {
+              "reference": "{{mpp:createFhirReferenceWithHashedId('Condition', Participante & encounter.lower() & DIAG)}}",
+              "@sliceName": "procedureReason"
+            }
+          ],
+          "status": "{{mpp:getConcept(%procedureStatusConcept, Estado, 'target_code')}}"
+        }
+      }
+    },
+    {
+      "description": "Description of the findings.",
+      "precondition": {
+        "name": "findingExists",
+        "language": "text/fhirpath",
+        "expression": "HALLAZGOS.hasValue()"
+      },
+      "expression": {
+        "name": "findings",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Findings')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "34117-2",
+                "display": "History and physical note"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{HALLAZGOS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "Description of the incidents.",
+      "precondition": {
+        "name": "incidentsExists",
+        "language": "text/fhirpath",
+        "expression": "INCIDENCIAS.hasValue()"
+      },
+      "expression": {
+        "name": "incidents",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Incidents')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "55109-3",
+                "display": "Complications Document"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{INCIDENCIAS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    },
+    {
+      "description": "The detail description of the procedure.",
+      "precondition": {
+        "name": "procedureDescriptionExists",
+        "language": "text/fhirpath",
+        "expression": "PROCEDIMIENTOS.hasValue()"
+      },
+      "expression": {
+        "name": "procedureDescription",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('DocumentReference', Participante & encounter.lower() & COD_CPMS & OcurrenceDateTime & 'Procedure')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-DocumentReference"
+            ]
+          },
+          "resourceType": "DocumentReference",
+          "type": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "11504-8",
+                "display": "Surgical operation note"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participante)}}",
+          "context": [
+            "{{mpp:createFhirReferenceWithHashedId('Encounter', Participante & encounter.lower())}}"
+          ],
+          "content": [
+            {
+              "attachment": {
+                "contentType": "text/plain",
+                "language": "es",
+                "data": "{{PROCEDIMIENTOS.encode()}}"
+              }
+            }
+          ],
+          "status": "current"
+        }
+      }
+    }
+  ]
+}
