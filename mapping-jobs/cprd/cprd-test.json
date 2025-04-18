@@ -27,6 +27,20 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
         }
       }
     },
@@ -53,6 +67,20 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
         }
       }
     },
@@ -63,6 +91,20 @@
         "observation": {
           "jsonClass": "FileSystemSource",
           "path": "Observation.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
@@ -79,6 +121,20 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
         }
       }
     },
@@ -89,6 +145,20 @@
         "observation": {
           "jsonClass": "FileSystemSource",
           "path": "Observation.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "linkageEligibility": {
+          "jsonClass": "FileSystemSource",
+          "path": "LinkageEligibility.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "HesEncounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"

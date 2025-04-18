@@ -34,7 +34,7 @@
           } ]
         },
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', spno)}}",
+        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', (patid + '-' + spno))}}",
         "onsetDateTime" : "{{ admidate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "identifier" : [ {
           "value" : "{{ (patid + '-' + spno + '-' + ICD_Primary) }}"
