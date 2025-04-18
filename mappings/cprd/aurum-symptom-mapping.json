@@ -7,7 +7,15 @@
   "source" : [ {
     "alias" : "observation",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-observation",
-    "joinOn" : [ ]
+    "joinOn" : [ "patid" ]
+  }, {
+    "alias" : "linkageEligibility",
+    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
+    "joinOn" : [ "patid" ]
+  },{
+    "alias": "encounter",
+    "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-hospitalization",
+    "joinOn": [ "patid" ]
   } ],
   "context" : {
     "symptomContext" : {
@@ -53,7 +61,7 @@
         "effectiveDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
         "valueBoolean" : true,
         "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "encounter" : "{{mpp:createFhirReferenceWithHashedId('Encounter', consid)}}",
+        "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
         "identifier" : [ {
           "value" : "{{ obsid }}"
         } ],
