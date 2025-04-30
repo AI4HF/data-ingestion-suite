@@ -1,0 +1,122 @@
+{
+  "id": "lab-results-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/lab-results-mapping",
+  "name": "lab-results-mapping",
+  "title": "The lab results mapping for CITBM LabResults data",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "labResults",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/LabResults",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The sodium",
+      "precondition": {
+        "name": "sodiumExists",
+        "language": "text/fhirpath",
+        "expression": "Sodio.exists()"
+      },
+      "expression": {
+        "name": "sodium",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Sodium')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2951-2",
+                "display": "Sodium",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "mmol/L",
+            "unit": "mmol/L",
+            "value": "{{Sodio.toDecimal()}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "The creatinine.",
+      "precondition": {
+        "name": "creatExists",
+        "language": "text/fhirpath",
+        "expression": "CREAT_mg_dl.exists()"
+      },
+      "expression": {
+        "name": "creatinine",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Creatinine')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2160-0",
+                "display": "Creatinine [Mass/volume] in Serum or Plasma",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "mg/L",
+            "unit": "mg/L",
+            "value": "{{CREAT_mg_dl.toDecimal()}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    }
+  ]
+}

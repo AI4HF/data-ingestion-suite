@@ -1,0 +1,2 @@
+identifier,subject,encounter,effectiveDateTime,peso,talla,TAPSE,S_VD,Ladim,LVEF,FAC_VD,LVEDD,LVES,VD,MITRAL,AORT,TRIC,PULM,HTP,TROMBO,MOT,DD,SHUNT,CMP,MASA,STRAIN_VI,STRAIN_VD,E_A,E_e,vol_index,Peric_effu,OTROS
+P1-visit1-echo1,P1,Visita1,07/26/2020,,,,,44,60,33,31,12,normal,im mod,normal,it leve,normal,27,NO,NORMAL,I,fop,no,NO,,,0.6,,,NO,

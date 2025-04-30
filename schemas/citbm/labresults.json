@@ -1,0 +1,589 @@
+{
+  "id": "labresults",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/LabResults",
+  "version": "latest",
+  "name": "LabResults",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "LabResults",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "LabResults",
+        "path": "LabResults",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "LabResults.identifier",
+        "path": "LabResults.identifier",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer64",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer64"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.subject",
+        "path": "LabResults.subject",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.flag_visit",
+        "path": "LabResults.flag_visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.encounter",
+        "path": "LabResults.encounter",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.effectiveDateTime",
+        "path": "LabResults.effectiveDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.hb",
+        "path": "LabResults.hb",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_hb",
+        "path": "LabResults.inter_hb",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.LEU_u_l",
+        "path": "LabResults.LEU_u_l",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_LEU",
+        "path": "LabResults.inter_LEU",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.plaq",
+        "path": "LabResults.plaq",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_plaq",
+        "path": "LabResults.inter_plaq",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.CREAT_mg_dl",
+        "path": "LabResults.CREAT_mg_dl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.Inter_CREA",
+        "path": "LabResults.Inter_CREA",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.GLU_mg_dl",
+        "path": "LabResults.GLU_mg_dl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_gluco",
+        "path": "LabResults.inter_gluco",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.UREAmg_dl",
+        "path": "LabResults.UREAmg_dl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_urea",
+        "path": "LabResults.inter_urea",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.TP_seg",
+        "path": "LabResults.TP_seg",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_TP",
+        "path": "LabResults.inter_TP",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.ALB_mg_dl",
+        "path": "LabResults.ALB_mg_dl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.BIL_mg_dl",
+        "path": "LabResults.BIL_mg_dl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_BIL",
+        "path": "LabResults.inter_BIL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.K",
+        "path": "LabResults.K",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_K",
+        "path": "LabResults.inter_K",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.troponin",
+        "path": "LabResults.troponin",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_troponin",
+        "path": "LabResults.inter_troponin",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.BNP",
+        "path": "LabResults.BNP",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_BNP",
+        "path": "LabResults.inter_BNP",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.TGP",
+        "path": "LabResults.TGP",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.TGO",
+        "path": "LabResults.TGO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.BILTO",
+        "path": "LabResults.BILTO",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.LDL",
+        "path": "LabResults.LDL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_LDL",
+        "path": "LabResults.inter_LDL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.LYMPH",
+        "path": "LabResults.LYMPH",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_linfocitos",
+        "path": "LabResults.inter_linfocitos",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.Sodio",
+        "path": "LabResults.Sodio",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_sodio",
+        "path": "LabResults.inter_sodio",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.TPCN",
+        "path": "LabResults.TPCN",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.TRIGLISERIDOS",
+        "path": "LabResults.TRIGLISERIDOS",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.inter_trigli",
+        "path": "LabResults.inter_trigli",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

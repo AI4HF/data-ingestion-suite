@@ -287,6 +287,32 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "echo-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/echo-mapping",
+      "sourceBinding": {
+        "echo": {
+          "jsonClass": "FileSystemSource",
+          "path": "Echo.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
+    },
+    {
+      "name": "lab-results-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/lab-results-mapping",
+      "sourceBinding": {
+        "labResults": {
+          "jsonClass": "FileSystemSource",
+          "path": "Lab Results.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {
