@@ -189,20 +189,6 @@
           "options": {},
           "sourceRef": "file-system"
         },
-        "linkageEligibility": {
-          "jsonClass": "FileSystemSource",
-          "path": "LinkageEligibility.csv",
-          "contentType": "csv",
-          "options": {},
-          "sourceRef": "file-system"
-        },
-        "deathRegistration": {
-          "jsonClass": "FileSystemSource",
-          "path": "DeathRegistration.csv",
-          "contentType": "csv",
-          "options": {},
-          "sourceRef": "file-system"
-        },
         "hesPatient": {
           "jsonClass": "FileSystemSource",
           "path": "HesPatient.csv",

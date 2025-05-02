@@ -27,20 +27,6 @@
         "options" : { },
         "sourceRef" : "cprd-with-csv-example"
       },
-      "linkageEligibility" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "Linkage_Eligibility.csv",
-        "contentType" : "csv",
-        "options" : { },
-        "sourceRef" : "cprd-with-csv-example"
-      },
-      "deathRegistration" : {
-        "jsonClass" : "FileSystemSource",
-        "path" : "Death_Data.csv",
-        "contentType" : "csv",
-        "options" : { },
-        "sourceRef" : "cprd-with-csv-example"
-      },
       "hesPatient" : {
         "jsonClass" : "FileSystemSource",
         "path" : "HES_Patient_Data.csv",

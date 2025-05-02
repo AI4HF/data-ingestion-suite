@@ -9,14 +9,6 @@
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
     "joinOn" : [ "patid" ]
   }, {
-    "alias" : "linkageEligibility",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
-    "joinOn" : [ "patid" ]
-  }, {
-    "alias" : "deathRegistration",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Ons-death-registration",
-    "joinOn" : [ "patid" ]
-  }, {
     "alias" : "hesPatient",
     "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-patient",
     "joinOn" : [ "patid" ]
