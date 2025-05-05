@@ -20,7 +20,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "24.0"
+          cpus: "16.0"
           memory: "410G"
   # Elasticsearch, Fluentd and Kibana stack for mapping job log management
   elasticsearch:
