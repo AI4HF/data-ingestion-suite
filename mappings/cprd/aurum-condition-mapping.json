@@ -35,6 +35,10 @@
     "name" : "isCondition",
     "language" : "text/fhirpath",
     "expression" : " %conditionCodes.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
+  }, {
+    "name" : "encounterReference",
+    "language" : "text/fhirpath",
+    "expression" : "? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})"
   } ],
   "mapping" : [ {
     "precondition" : {
@@ -62,7 +66,7 @@
             } ]
           },
           "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "encounter": "{{? %encounterReference}}",
           "onsetDateTime" : "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
           "identifier" : [ {
             "value" : "{{ obsid & '-' & %conditionCode.target_code }}"
@@ -74,9 +78,14 @@
               "display" : "Unknown"
             } ]
           },
-          "category" : [ {
-            "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
-          } ]
+          "category": [
+            {
+              "{{#ref}}" : "{{? %encounterReference}}",
+              "{{?}}" : {
+                "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
+              }
+            }
+          ]
         }
       }
     }
