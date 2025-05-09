@@ -71,7 +71,7 @@
       "precondition": {
         "name": "heightExists",
         "language": "text/fhirpath",
-        "expression": "TALLA.hasValue() and TALLA != '0' and TALLE != '0,00'"
+        "expression": "TALLA.hasValue() and TALLA != '0' and TALLA != '0,00'"
       },
       "expression": {
         "name": "height",
@@ -109,8 +109,60 @@
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "cm",
-            "value": "{{TALLA.toDecimal()}}",
+            "value": "{{TALLA.toDecimal() * 100}}",
             "unit": "Centimeter"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The BMI of the patient.",
+      "precondition": {
+        "name": "heightAndWeightExists",
+        "language": "text/fhirpath",
+        "expression": "TALLA.hasValue() and TALLA != '0' and TALLA != '0,00' and PESO.hasValue() and PESO != '0'"
+      },
+      "expression": {
+        "name": "bmi",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', COD_Proyecto & FECHA_ATENCION & Visita.lower() & 'BMI')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "39156-5",
+                "display": "BMI",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{ FECHA_ATENCION.utl:toFhirDateTime('d/M/yyyy')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "kg/m2",
+            "value": "{{PESO.toDecimal() / (TALLA.toDecimal() * TALLA.toDecimal())}}",
+            "unit": "kg/m2"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', COD_Proyecto)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', COD_Proyecto & Visita.lower())}}",
