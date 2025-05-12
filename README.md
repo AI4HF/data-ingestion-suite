@@ -17,3 +17,160 @@ Mappings are the actual scripts transforming the original EHR data entities to t
 
 ## Mapping jobs
 Mapping jobs are used to configure input and output specifications for mappings: where the data source is located (database or file system) and where the mapped resources will be written to (file system or FHIR server). In addition, each mapping job has one or more mappings to be executed.
+
+---
+
+# Deployment Guideline (with Nginx)
+
+## Requirements
+
+- Git
+- Docker
+
+---
+
+## Downloading DT4H Mapping Configurations
+
+DT4H mapping configurations are maintained in the project’s GitHub repository.
+Create and navigate into a working directory to run the tools: `<workspaceDir>`
+
+```bash
+git clone https://github.com/DataTools4Heart/data-ingestion-suite.git
+git clone https://github.com/DataTools4Heart/common-data-model.git
+```
+
+---
+
+## onFHIR & toFHIR Deployment
+
+There are two options for deploying the AI4HF Data Ingestion Suite: using the CLI and Server with GUI.
+
+### 1. CLI-Only Deployment
+
+Update line 60 in `data-ingestion-suite/docker/engine-only/docker-compose-engine.yml` 
+to instruct the engine which mapping job to run. And run the following command:
+
+```bash
+sh ./data-ingestion-suite/docker/engine-only/run.sh
+```
+
+This will start the engine and run the mapping job specified in the docker-compose file.
+You don't need to do anything else. You can monitor the progress in the console:
+
+```bash
+docker logs -f dt4h-tofhir-server
+```
+
+### 2. Server with GUI Deployment
+
+1. Download the password file for SRDC’s private Docker repository:
+   [Download password file](https://srdcltd.sharepoint.com/:t:/s/DataTools4Heart/ERRInhWGLy5Cvfwn9JFaNOEBUmc1jjjP-bjCz3lAvYu9DQ?e=AsvrVi). Please contact us for access.
+
+2. Copy the file into `<workspaceDir>`.
+
+3. Run the following scripts:
+
+```bash
+sh ./data-ingestion-suite/docker/server/pull.sh
+sh ./data-ingestion-suite/docker/server/run.sh
+```
+
+If needed, give execution access and run the scripts:
+
+```bash
+chmod +x ./data-ingestion-suite/docker/server/pull.sh
+chmod +x ./data-ingestion-suite/docker/server/run.sh
+```
+
+---
+
+4. Running Behind Nginx Configuration
+
+This deployment has been tested with Nginx and its use is recommended.
+To use our predefined Nginx Docker container:
+
+```bash
+sh ./data-ingestion-suite/docker/proxy/run.sh
+```
+
+If your host machine is already running Nginx, add the following proxy configuration and restart your Nginx:
+
+```nginx
+location /dt4h/tofhir/api {
+    proxy_pass http://127.0.0.1:6085/tofhir;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+
+location /dt4h/tofhir {
+    proxy_pass http://127.0.0.1:6082/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+
+location /dt4h/tofhir/kibana/ {
+    proxy_pass http://127.0.0.1:6601/;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+
+location /dt4h/onfhir {
+   proxy_pass http://127.0.0.1:6080/fhir;
+   proxy_set_header Host $host;
+   proxy_set_header X-Real-IP $remote_addr;
+}
+```
+
+---
+
+5. General Execution of Mappings
+
+* Navigate to `http://<hostname>/dt4h/tofhir`
+* Click your project and click **Open**
+* Click **Executions**
+* Click the green arrow next to the “x-deploy” entry
+* Click the double-right-arrow icon to select all mappings
+* Click **Run**
+* Use the **Refresh** icon to monitor execution status and check mapping results inside the “x-deploy” job.
+
+>Logs and errors are also available at: `http://<hostname>/dt4h/tofhir/kibana`
+>
+>In Kibana: click the top-left menu and choose Discover under Analytics
+
+---
+
+## Automated Docker Container Update (Optional)
+
+> If you’re installing for the first time, you can skip this section.
+> This section is only for updating the existing installation.
+
+### 1. Stop all running containers
+
+```bash
+sh ./data-ingestion-suite/docker/server/stop.sh
+sh ./data-ingestion-suite/docker/proxy/stop.sh  # Optional
+```
+
+### 2. Pull the latest updates
+
+```bash
+cd common-data-model
+git pull
+cd ..
+
+cd data-ingestion-suite
+git pull
+cd ..
+sh ./data-ingestion-suite/docker/server/pull.sh
+```
+
+### 3. Restart all containers
+
+```bash
+sh ./data-ingestion-suite/docker/server/run.sh
+sh ./data-ingestion-suite/docker/proxy/run.sh  # Optional
+```
+
+---
+
+For more details, visit [toFHIR.io](https://toFHIR.io) or [onfhir.io](https://onfhir.io).
