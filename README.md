@@ -1,5 +1,5 @@
 # AI4HF Data Ingestion Suite
-This repository includes the mapping definitions to convert  specific data into the DT4H CDM, which is specified in https://github.com/DataTools4Heart/common-data-model.
+This repository includes the mapping definitions to convert specific data into the DT4H CDM, which is specified in https://github.com/DataTools4Heart/common-data-model.
 
 The data ingestion suite contains a number of concepts as pieces of the overall mapping process. These concepts are **schemas**, **terminology services**, **concept maps**, **mappings** and **mapping jobs**. They are instantiated for each clinical site based on the characteristics of the data at each site.
 
@@ -29,14 +29,15 @@ Mapping jobs are used to configure input and output specifications for mappings:
 
 ---
 
-## Downloading DT4H Mapping Configurations
+## Downloading AI4HF Mapping Configurations
 
-DT4H mapping configurations are maintained in the project’s GitHub repository.
+AI4HF mapping configurations are maintained in the project’s GitHub repository.
 Create and navigate into a working directory to run the tools: `<workspaceDir>`
 
 ```bash
-git clone https://github.com/DataTools4Heart/data-ingestion-suite.git
 git clone https://github.com/DataTools4Heart/common-data-model.git
+git clone https://github.com/AI4HF/data-ingestion-suite.git
+
 ```
 
 ---
@@ -123,7 +124,7 @@ location /dt4h/onfhir {
 
 ---
 
-5. General Execution of Mappings
+5. Execution of Mappings
 
 * Navigate to `http://<hostname>/dt4h/tofhir`
 * Click your project and click **Open**
