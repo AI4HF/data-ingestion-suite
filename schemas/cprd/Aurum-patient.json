@@ -42,7 +42,7 @@
     }, {
       "id" : "Aurum-patient.usualgpstaffid",
       "path" : "Aurum-patient.usualgpstaffid",
-      "min" : 1,
+      "min" : 0,
       "max" : "1",
       "type" : [ {
         "code" : "string",
