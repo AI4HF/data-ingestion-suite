@@ -38,7 +38,7 @@
   }, {
     "name" : "encounterReference",
     "language" : "text/fhirpath",
-    "expression" : "? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})"
+    "expression" : "iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})"
   } ],
   "mapping" : [ {
     "precondition" : {
@@ -80,7 +80,7 @@
           },
           "category": [
             {
-              "{{#ref}}" : "{{? %encounterReference}}",
+              "{{#ref}}" : "{{%encounterReference}}",
               "{{?}}" : {
                 "coding" : [ "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}" ]
               }
