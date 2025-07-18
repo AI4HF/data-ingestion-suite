@@ -132,9 +132,9 @@
             "clinicalStatus": {
               "coding": [
                 {
-                  "code": "unknown",
-                  "system": "http://hl7.org/fhir/ValueSet/condition-clinical",
-                  "display": "Unknown"
+                  "code" : "active",
+                  "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
+                  "display" : "Active"
                 }
               ]
             },

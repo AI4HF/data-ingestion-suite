@@ -73,9 +73,9 @@
           } ],
           "clinicalStatus" : {
             "coding" : [ {
-              "code" : "unknown",
+              "code" : "active",
               "system" : "http://hl7.org/fhir/ValueSet/condition-clinical",
-              "display" : "Unknown"
+              "display" : "Active"
             } ]
           },
           "category": [
