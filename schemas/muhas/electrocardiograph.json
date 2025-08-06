@@ -1,0 +1,174 @@
+{
+  "id": "electrocardiograph",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/Electrocardiograph",
+  "version": "latest",
+  "name": "Electrocardiograph",
+  "description": "The schema of MUHAS Electrocardiograph data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Electrocardiograph",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Electrocardiograph",
+        "path": "Electrocardiograph",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Electrocardiograph.pid",
+        "path": "Electrocardiograph.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "Electrocardiograph.visit",
+        "path": "Electrocardiograph.visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "Electrocardiograph.date",
+        "path": "Electrocardiograph.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The date when the electrocardiograph is performed.",
+        "short": "Date"
+      },
+      {
+        "id": "Electrocardiograph.qrs_duration",
+        "path": "Electrocardiograph.qrs_duration",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "QRS duration",
+        "short": "QRS duration"
+      },
+      {
+        "id": "Electrocardiograph.r_axis",
+        "path": "Electrocardiograph.r_axis",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "R-wave axis",
+        "short": "R-wave axis"
+      },
+      {
+        "id": "Electrocardiograph.stElevation",
+        "path": "Electrocardiograph.stElevation",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ],
+        "definition": "A boolean (true/false) value indicating whether ST elevation is observed or not.",
+        "short": "Is ST Elevation"
+      },
+      {
+        "id": "Electrocardiograph.ischemiaWithoutStElevation",
+        "path": "Electrocardiograph.ischemiaWithoutStElevation",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ],
+        "definition": "A boolean (true/false) value indicating whether Shemia Without ST Elevation is observed or not.",
+        "short": "Shemia Without ST Elevation"
+      },
+      {
+        "id": "Electrocardiograph.rhythmType",
+        "path": "Electrocardiograph.rhythmType",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Rhythm Type",
+        "short": "Rhythm Type"
+      },
+      {
+        "id": "Electrocardiograph.QTIntervalCorrectedBazett",
+        "path": "Electrocardiograph.QTIntervalCorrectedBazett",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "QT Interval Corrected Bazett",
+        "short": "QT Interval Corrected Bazett"
+      }
+    ]
+  }
+}
