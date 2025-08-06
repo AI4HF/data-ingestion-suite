@@ -1,0 +1,182 @@
+{
+  "id": "muhas csv",
+  "name": "MUHAS CSV",
+  "description": "Converts the CSV Muhas data into FHIR profiles and writes them to the configured onFHIR instance.",
+  "sourceSettings": {
+    "csv": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "csv",
+      "sourceUri": "https://ai4hf.eu/fhir/source/muhas/csv",
+      "dataFolderPath": "test-data/muhas",
+      "asStream": false
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "http://localhost:8080/fhir",
+    "returnMinimal": true
+  },
+  "mappings": [
+    {
+      "name": "PatientMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/PatientMapping",
+      "sourceBinding": {
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "patients.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "EncounterMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/EncounterMapping",
+      "sourceBinding": {
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "encounters.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "VitalSignMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/VitalSignMapping",
+      "sourceBinding": {
+        "vitalSign": {
+          "jsonClass": "FileSystemSource",
+          "path": "vitals.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "LabResultMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/LabResultMapping",
+      "sourceBinding": {
+        "labResult": {
+          "jsonClass": "FileSystemSource",
+          "path": "lab-results.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "NYHAMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/NYHAMapping",
+      "sourceBinding": {
+        "nyha": {
+          "jsonClass": "FileSystemSource",
+          "path": "nyha.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "SmokingStatusMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/SmokingStatusMapping",
+      "sourceBinding": {
+        "smokingStatus": {
+          "jsonClass": "FileSystemSource",
+          "path": "smoking-status.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "MedicationMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/MedicationMapping",
+      "sourceBinding": {
+        "medication": {
+          "jsonClass": "FileSystemSource",
+          "path": "medications.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "SymptomMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/SymptomMapping",
+      "sourceBinding": {
+        "symptom": {
+          "jsonClass": "FileSystemSource",
+          "path": "symptoms.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "CauseofDeathMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/CauseofDeathMapping",
+      "sourceBinding": {
+        "causeOfDeath": {
+          "jsonClass": "FileSystemSource",
+          "path": "cause-of-death.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "ConditionMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/ConditionMapping",
+      "sourceBinding": {
+        "condition": {
+          "jsonClass": "FileSystemSource",
+          "path": "conditions.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "EchocardiographMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/EchocardiographMapping",
+      "sourceBinding": {
+        "echocardiograph": {
+          "jsonClass": "FileSystemSource",
+          "path": "echo.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "ElectrocardiographMapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/ElectrocardiographMapping",
+      "sourceBinding": {
+        "electrocardiograph": {
+          "jsonClass": "FileSystemSource",
+          "path": "ecg.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}

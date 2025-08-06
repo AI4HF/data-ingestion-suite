@@ -1,0 +1,4 @@
+source_code,source_unit,target_unit,conversion_function
+"Creatinine","μmol/L","mg/L","$this * 0.11312"
+"Hemoglobin","g/dL","g/L","$this * 10"
+"Ferritin","ug/L","mcg/L","$this"
