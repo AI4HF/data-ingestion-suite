@@ -1,1 +1,73 @@
-[ ]
+[
+  {
+    "id": "AI4HFTerminologyService",
+    "name": "AI4HFTerminologyService",
+    "description": "AI4HF Terminology Service",
+    "conceptMaps": [
+      {
+        "id": "snomedToIcd10.csv",
+        "name": "snomedToIcd10.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/snomed-to-icd10",
+        "sourceValueSetUrl": "http://snomed.info/sct",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10"
+      },
+      {
+        "id": "omopToIcd10.csv",
+        "name": "omopToIcd10.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10"
+      },
+      {
+        "id": "omopToRxNorm.csv",
+        "name": "omopToRxNorm.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-rxnorm",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://www.nlm.nih.gov/research/umls/rxnorm"
+      },
+      {
+        "id": "omopToIcd10Pcs.csv",
+        "name": "omopToIcd10Pcs.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10pcs",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10-pcs"
+      },
+      {
+        "id": "omopToLoinc.csv",
+        "name": "omopToLoinc.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-loinc",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://loinc.org"
+      },
+      {
+        "id": "omopToSnomed.csv",
+        "name": "omopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      },
+      {
+        "id": "snomedToIcd10Pcs.csv",
+        "name": "snomedToIcd10Pcs.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/snomed-to-icd10pcs",
+        "sourceValueSetUrl": "http://snomed.info/sct",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10-pcs"
+      },
+      {
+        "id": "ethnicityOmopToSnomed.csv",
+        "name": "ethnicityOmopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/ethnicity-omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      },
+      {
+        "id": "symptomsOmopToSnomed.csv",
+        "name": "symptomsOmopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/symptoms-omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      }
+    ],
+    "codeSystems": []
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "id" : "patient-mapping",
+  "url" : "https://ai4hf.eu/fhir/mappings/abucasis/patient-mapping",
+  "name" : "patient-mapping",
+  "title" : "Mapping from OMOP person to the DT4h-Patient profile",
+  "isDraft" : false,
+  "source" : [ {
+    "alias" : "omopPerson",
+    "url" : "https://ai4hf.eu/fhir/schemas/abucasis/OMOP-Person",
+    "joinOn" : [ "person_id", "location_id" ]
+  }, {
+    "alias" : "omopDeath",
+    "url" : "https://ai4hf.eu/fhir/schemas/abucasis/OMOP-Death",
+    "joinOn" : [ "person_id" ]
+  }, {
+    "alias" : "omopLocation",
+    "url" : "https://ai4hf.eu/fhir/schemas/abucasis/OMOP-Location",
+    "joinOn" : [ null, "location_id" ]
+  } ],
+  "context" : { },
+  "variable" : [ ],
+  "mapping" : [ {
+    "expression" : {
+      "name" : "result",
+      "language" : "application/fhir-template+json",
+      "value" : {
+        "id" : "{{mpp:getHashedId('Patient',person_id.toString())}}",
+        "meta" : {
+          "source" : "{{%sourceSystem.sourceUri}}",
+          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient" ]
+        },
+        "resourceType" : "Patient",
+        "gender" : "{{iif(gender_concept_id=8532, 'female', iif(gender_concept_id=8507, 'male', 'unknown'))}}",
+        "birthDate" : "{{iif(birth_datetime.exists(), birth_datetime.substring(0,10), iif(month_of_birth.exists() and day_of_birth.exists(), (year_of_birth + '-' + month_of_birth + '-' + day_of_birth).utl:toFhirDate('yyyy-MM-dd'), iif(month_of_birth.exists(), (year_of_birth + '-' + month_of_birth).utl:toFhirDate('yyyy-MM'), year_of_birth.utl:toFhirDate('yyyy'))))}}",
+        "deceasedDateTime" : "{{? iif(%omopDeath.death_datetime.exists(), %omopDeath.death_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'), %omopDeath.death_date.utl:toFhirDate('yyyy-MM-dd'))}}",
+        "identifier" : [ {
+          "use" : "official",
+          "system" : "{{%sourceSystem.sourceUri}}",
+          "value" : "{{person_id.toString()}}"
+        } ],
+        "active" : true,
+        "address" : [ {
+          "{{#addressVar}}" : "{{location_id}}",
+          "{{?}}" : {
+            "use" : "home",
+            "city" : "{{? %omopLocation.city}}",
+            "district" : "{{? %omopLocation.county}}",
+            "postalCode" : "{{? %omopLocation.zip}}"
+          }
+        } ],
+        "extension" : [ {
+          "url" : "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Ethnicity",
+          "valueCodeableConcept" : {
+            "coding" : [ "{{* iif(ethnicity_concept_id = 38003564, trms:translateToCoding(race_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/ethnicity-omop-to-snomed'),trms:translateToCoding(ethnicity_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/ethnicity-omop-to-snomed'))}}" ]
+          }
+        } ]
+      }
+    }
+  } ]
+}
