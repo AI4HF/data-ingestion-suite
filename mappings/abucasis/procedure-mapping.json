@@ -1,0 +1,77 @@
+{
+  "id": "procedure-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/abucasis/procedure-mapping",
+  "name": "procedure-mapping",
+  "title": "Mapping of OMOP procedure occurrence to the DT4H-Procedure profile",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "omopProcedure",
+      "url": "https://ai4hf.eu/fhir/schemas/abucasis/OMOP-ProcedureOccurrence",
+      "joinOn": [
+        "person_id"
+      ]
+    },
+    {
+      "alias": "omopVisit",
+      "url": "https://ai4hf.eu/fhir/schemas/abucasis/OMOP-VisitOccurrence",
+      "joinOn": [
+        "person_id"
+      ]
+    }
+  ],
+  "context": {},
+  "variable": [
+    {
+      "name": "procedureCodes",
+      "language": "text/fhirpath",
+      "expression": "trms:translateToCoding(procedure_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10pcs')"
+    }
+  ],
+  "mapping": [
+    {
+      "description": "A FHIR Procedure resource is generated for each row in the source data. If the 'quantity' field indicates a value greater than 1, multiple Procedure resources are created accordingly. For example, if 'quantity' equals 3, three identical Procedure resources are generated, differing only in their unique IDs.",
+      "precondition": {
+        "name": "procedureCodesExist",
+        "language": "text/fhirpath",
+        "expression": "%procedureCodes.exists()"
+      },
+      "expression": {
+        "name": "result",
+        "language": "application/fhir-template+json",
+        "value": {
+          "{{#index}}": "{{utl:indices(1, iif(quantity.exists(),quantity.toInteger(),1))}}",
+          "{{*}}": {
+            "id": "{{mpp:getHashedId('Procedure', procedure_occurrence_id.toString() & %index.toString())}}",
+            "meta": {
+              "profile": [
+                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Procedure"
+              ]
+            },
+            "resourceType": "Procedure",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "387713003",
+                    "display": "Surgical procedure (procedure)"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                "{{* %procedureCodes}}"
+              ]
+            },
+            "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
+            "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.procedure_date and $this.visit_end_date >= %context.procedure_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
+            "occurrenceDateTime": "{{iif(procedure_datetime.empty(), procedure_date, procedure_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}",
+            "status": "completed"
+          }
+        }
+      }
+    }
+  ]
+}

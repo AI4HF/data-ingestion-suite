@@ -1,0 +1,229 @@
+{
+  "id": "abucasis-deploy",
+  "name": "abucasis-deploy",
+  "description": "Executes OMOP mappings and stores the generated FHIR resources in the deployed onFHIR server.",
+  "sourceSettings": {
+    "abucasis-sql-data": {
+      "jsonClass": "SqlSourceSettings",
+      "name": "abucasis-sql-data",
+      "sourceUri": "http://ai4hf.eu/data-ingestion-suite/abucasis-data",
+      "databaseUrl": "jdbc:postgresql://localhost:5432/postgres",
+      "username": "postgres",
+      "password": "password"
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "http://onfhir:8080/fhir",
+    "returnMinimal": true
+  },
+  "terminologyServiceSettings": {
+    "jsonClass": "LocalFhirTerminologyServiceSettings",
+    "folderPath": "./terminology-systems/AI4HFTerminologyService",
+    "conceptMapFiles": [
+      {
+        "id": "snomedToIcd10.csv",
+        "name": "snomedToIcd10.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/snomed-to-icd10",
+        "sourceValueSetUrl": "http://snomed.info/sct",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10"
+      },
+      {
+        "id": "omopToIcd10.csv",
+        "name": "omopToIcd10.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10"
+      },
+      {
+        "id": "omopToRxNorm.csv",
+        "name": "omopToRxNorm.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-rxnorm",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://www.nlm.nih.gov/research/umls/rxnorm"
+      },
+      {
+        "id": "omopToIcd10Pcs.csv",
+        "name": "omopToIcd10Pcs.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10pcs",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10-pcs"
+      },
+      {
+        "id": "omopToLoinc.csv",
+        "name": "omopToLoinc.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-loinc",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://loinc.org"
+      },
+      {
+        "id": "omopToSnomed.csv",
+        "name": "omopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      },
+      {
+        "id": "snomedToIcd10Pcs.csv",
+        "name": "snomedToIcd10Pcs.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/snomed-to-icd10pcs",
+        "sourceValueSetUrl": "http://snomed.info/sct",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10-pcs"
+      },
+      {
+        "id": "ethnicityOmopToSnomed.csv",
+        "name": "ethnicityOmopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/ethnicity-omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      },
+      {
+        "id": "symptomsOmopToSnomed.csv",
+        "name": "symptomsOmopToSnomed.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/symptoms-omop-to-snomed",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://snomed.info/sct"
+      }
+    ],
+    "codeSystemFiles": []
+  },
+  "mappings": [
+    {
+      "name": "cause-of-death-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/cause-of-death-mapping",
+      "sourceBinding": {
+        "omopDeath": {
+          "jsonClass": "SqlSource",
+          "tableName": "death",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "condition-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/condition-mapping",
+      "sourceBinding": {
+        "omopCondition": {
+          "jsonClass": "SqlSource",
+          "tableName": "condition_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopVisit": {
+          "jsonClass": "SqlSource",
+          "tableName": "visit_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "encounter-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/encounter-mapping",
+      "sourceBinding": {
+        "omopVisitOccurrence": {
+          "jsonClass": "SqlSource",
+          "tableName": "visit_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "medication-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/medication-mapping",
+      "sourceBinding": {
+        "omopDrugExposure": {
+          "jsonClass": "SqlSource",
+          "tableName": "drug_exposure",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "patient-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/patient-mapping",
+      "sourceBinding": {
+        "omopPerson": {
+          "jsonClass": "SqlSource",
+          "tableName": "person",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopDeath": {
+          "jsonClass": "SqlSource",
+          "tableName": "death",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopLocation": {
+          "jsonClass": "SqlSource",
+          "tableName": "location",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "procedure-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/procedure-mapping",
+      "sourceBinding": {
+        "omopProcedure": {
+          "jsonClass": "SqlSource",
+          "tableName": "procedure_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopVisit": {
+          "jsonClass": "SqlSource",
+          "tableName": "visit_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "measurement-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/measurement-mapping",
+      "sourceBinding": {
+        "omopMeasurement": {
+          "jsonClass": "SqlSource",
+          "tableName": "measurement",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopVisit": {
+          "jsonClass": "SqlSource",
+          "tableName": "visit_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    },
+    {
+      "name": "observation-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/abucasis/observation-mapping",
+      "sourceBinding": {
+        "observation": {
+          "jsonClass": "SqlSource",
+          "tableName": "observation",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        },
+        "omopVisit": {
+          "jsonClass": "SqlSource",
+          "tableName": "visit_occurrence",
+          "options": {},
+          "sourceRef": "abucasis-sql-data"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}
