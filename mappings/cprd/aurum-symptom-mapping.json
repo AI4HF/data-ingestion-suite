@@ -32,7 +32,7 @@
     "precondition" : {
       "name" : "isSymptomCode",
       "language" : "text/fhirpath",
-      "expression" : " %symptomCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+      "expression" : " %symptomCode.exists() and obsdate.exists() and patid.exists() and obsid.exists()"
     },
     "expression" : {
       "name" : "symptom",

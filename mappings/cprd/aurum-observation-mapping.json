@@ -62,7 +62,7 @@
     {
       "name": "isCondition",
       "language": "text/fhirpath",
-      "expression": " %conditionCodes.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
+      "expression": " %conditionCodes.exists() and patid.exists() and obsdate.exists() and obsid.exists() "
     },
     {
       "name": "encounterReference",
@@ -223,7 +223,7 @@
       "precondition": {
         "name": "isSmokingStatus",
         "language": "text/fhirpath",
-        "expression": " %smokingStatus.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists()"
+        "expression": " %smokingStatus.exists() and patid.exists() and obsdate.exists() and obsid.exists()"
       },
       "expression": {
         "name": "smoking_status",
@@ -342,7 +342,7 @@
       "precondition": {
         "name": "isLabResult",
         "language": "text/fhirpath",
-        "expression": " %labResultCodes.exists() and obsdate.exists() and value.exists() and patid.exists() and consid.exists() and obsid.exists()"
+        "expression": " %labResultCodes.exists() and obsdate.exists() and value.exists() and patid.exists() and obsid.exists()"
       },
       "expression": {
         "name": "lab_result",
@@ -413,7 +413,7 @@
       "precondition": {
         "name": "isNyhaCode",
         "language": "text/fhirpath",
-        "expression": " %nyhaCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+        "expression": " %nyhaCode.exists() and obsdate.exists() and patid.exists() and obsid.exists()"
       },
       "expression": {
         "name": "nyha",

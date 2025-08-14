@@ -34,7 +34,7 @@
   }, {
     "name" : "isCondition",
     "language" : "text/fhirpath",
-    "expression" : " %conditionCodes.exists() and patid.exists() and consid.exists() and obsdate.exists() and obsid.exists() "
+    "expression" : " %conditionCodes.exists() and patid.exists() and obsdate.exists() and obsid.exists() "
   }, {
     "name" : "encounterReference",
     "language" : "text/fhirpath",

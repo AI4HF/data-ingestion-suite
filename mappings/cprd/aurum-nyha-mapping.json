@@ -32,7 +32,7 @@
     "precondition" : {
       "name" : "isNyhaCode",
       "language" : "text/fhirpath",
-      "expression" : " %nyhaCode.exists() and obsdate.exists() and patid.exists() and consid.exists() and obsid.exists()"
+      "expression" : " %nyhaCode.exists() and obsdate.exists() and patid.exists() and obsid.exists()"
     },
     "expression" : {
       "name" : "nyha",
