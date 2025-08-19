@@ -61,8 +61,8 @@
       } ],
       "definition" : "Date of discharge"
     }, {
-      "id" : "Hes-diagnosis.ICD_PRIMARY",
-      "path" : "Hes-diagnosis.ICD_PRIMARY",
+      "id" : "Hes-diagnosis.ICD",
+      "path" : "Hes-diagnosis.ICD",
       "min" : 0,
       "max" : "1",
       "type" : [ {
