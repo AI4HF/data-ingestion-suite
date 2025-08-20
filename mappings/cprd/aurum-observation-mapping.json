@@ -25,6 +25,13 @@
       "joinOn": [
         "patid"
       ]
+    },
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
     }
   ],
   "context": {
@@ -97,6 +104,21 @@
       "name": "nyhaCode",
       "language": "text/fhirpath",
       "expression": " mpp:getConcept(%nyhaContext, medcodeid) "
+    },
+    {
+      "name": "observationDate",
+      "language": "text/fhirpath",
+      "expression": " obsdate.utl:toFhirDateTime('dd/MM/yyyy') "
+    },
+    {
+      "name": "subjectReference",
+      "language": "text/fhirpath",
+      "expression": " mpp:createFhirReferenceWithHashedId('Patient', patid) "
+    },
+    {
+      "name": "isObservationValid",
+      "language": "text/fhirpath",
+      "expression": " %patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %observationDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %observationDate,true)"
     }
   ],
   "mapping": [
@@ -105,7 +127,7 @@
       "precondition": {
         "name": "isCondition",
         "language": "text/fhirpath",
-        "expression": " %isCondition = true "
+        "expression": " %isCondition = true and %isObservationValid"
       },
       "expression": {
         "name": "condition",
@@ -130,9 +152,9 @@
                 }
               ]
             },
-            "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+            "subject": "{{%subjectReference}}",
             "encounter": "{{? %encounterReference}}",
-            "onsetDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+            "onsetDateTime": "{{ %observationDate }}",
             "identifier": [
               {
                 "value": "{{ obsid & '-' & %conditionCode.target_code }}"
@@ -166,7 +188,7 @@
       "precondition": {
         "name": "isCondition",
         "language": "text/fhirpath",
-        "expression": " %isCondition = true "
+        "expression": " %isCondition = true and %isObservationValid "
       },
       "expression": {
         "name": "echo-ef-mapping",
@@ -200,7 +222,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+          "effectiveDateTime": "{{ %observationDate }}",
           "component": [
             {
               "code": {
@@ -221,8 +243,8 @@
               "@sliceName": "echoParameter"
             }
           ],
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "subject": "{{%subjectReference}}",
+          "encounter": "{{? %encounterReference}}",
           "status": "final"
         }
       }
@@ -232,7 +254,7 @@
       "precondition": {
         "name": "isSmokingStatus",
         "language": "text/fhirpath",
-        "expression": " %smokingStatus.exists() and patid.exists() and obsdate.exists() and obsid.exists()"
+        "expression": " %smokingStatus.exists() and patid.exists() and obsdate.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "smoking_status",
@@ -245,10 +267,10 @@
             ]
           },
           "resourceType": "Observation",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "subject": "{{%subjectReference}}",
+          "encounter": "{{? %encounterReference}}",
           "effectivePeriod": {
-            "start": "{{obsdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+            "start": "{{%observationDate}}"
           },
           "category": [
             {
@@ -294,7 +316,7 @@
       "precondition": {
         "name": "isVitalSign",
         "language": "text/fhirpath",
-        "expression": " %vitalSignCode.exists() and obsdate.exists() and value.exists() and patid.exists() and obsid.exists()"
+        "expression": " %vitalSignCode.exists() and obsdate.exists() and value.exists() and patid.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "vitalsign",
@@ -328,15 +350,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+          "effectiveDateTime": "{{ %observationDate }}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "{{ %vitalSignCode.target_unit }}",
             "value": "{{ value }}",
             "unit": "{{ %vitalSignCode.target_unit }}"
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "subject": "{{%subjectReference}}",
+          "encounter": "{{? %encounterReference}}",
           "identifier": [
             {
               "value": "{{ obsid }}"
@@ -351,7 +373,7 @@
       "precondition": {
         "name": "isLabResult",
         "language": "text/fhirpath",
-        "expression": " %labResultCodes.exists() and obsdate.exists() and value.exists() and patid.exists() and obsid.exists()"
+        "expression": " %labResultCodes.exists() and obsdate.exists() and value.exists() and patid.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "lab_result",
@@ -388,15 +410,15 @@
                 }
               ]
             },
-            "effectiveDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+            "effectiveDateTime": "{{ %observationDate }}",
             "valueQuantity": {
               "system": "http://unitsofmeasure.org",
               "code": "{{ %labResultCode.target_unit }}",
               "unit": "{{ %labResultCode.target_unit }}",
               "value": "{{ value }}"
             },
-            "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-            "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+            "subject": "{{%subjectReference}}",
+            "encounter": "{{? %encounterReference}}",
             "identifier": [
               {
                 "value": "{{ obsid }}"
@@ -422,7 +444,7 @@
       "precondition": {
         "name": "isNyhaCode",
         "language": "text/fhirpath",
-        "expression": " %nyhaCode.exists() and obsdate.exists() and patid.exists() and obsid.exists()"
+        "expression": " %nyhaCode.exists() and obsdate.exists() and patid.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "nyha",
@@ -456,7 +478,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+          "effectiveDateTime": "{{ %observationDate }}",
           "valueCodeableConcept": {
             "coding": [
               {
@@ -466,8 +488,8 @@
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "subject": "{{%subjectReference}}",
+          "encounter": "{{? %encounterReference}}",
           "identifier": [
             {
               "value": "{{ obsid }}"
@@ -482,7 +504,7 @@
       "precondition": {
         "name": "isSymptomCode",
         "language": "text/fhirpath",
-        "expression": " %symptomCode.exists() and obsdate.exists() and patid.exists() and obsid.exists()"
+        "expression": " %symptomCode.exists() and obsdate.exists() and patid.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "symptom",
@@ -516,10 +538,10 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ obsdate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+          "effectiveDateTime": "{{ %observationDate }}",
           "valueBoolean": true,
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-          "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.obsdate and $this.discharged >= %context.obsdate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
+          "subject": "{{%subjectReference}}",
+          "encounter": "{{? %encounterReference}}",
           "identifier": [
             {
               "value": "{{ obsid }}"

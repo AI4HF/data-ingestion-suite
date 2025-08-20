@@ -134,6 +134,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
+        },
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumPatient.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
         }
       }
     }
