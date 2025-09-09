@@ -21,13 +21,19 @@
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "isEligibleAndDodExists",
+      "language": "text/fhirpath",
+      "expression": "%linkageEligibility.death_e = 1 and dod.exists()"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
         "name": "isCauseDefined",
         "language": "text/fhirpath",
-        "expression": " cause.exists() "
+        "expression": "%isEligibleAndDodExists and cause.exists() "
       },
       "expression": {
         "name": "causeOfDeath",
@@ -432,7 +438,7 @@
       "precondition": {
         "name": "isEligibleAndDodExists",
         "language": "text/fhirpath",
-        "expression": " %linkageEligibility.death_e = 1 and dod.exists()"
+        "expression": "%isEligibleAndDodExists"
       },
       "fhirInteraction": {
         "type": "patch",
