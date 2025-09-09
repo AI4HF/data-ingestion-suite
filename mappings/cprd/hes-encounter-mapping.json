@@ -1,48 +1,60 @@
 {
-  "id" : "hes-encounter-mapping",
-  "url" : "https://ai4hf.eu/fhir/mappings/cprd/hes-encounter-mapping",
-  "name" : "hes-encounter-mapping",
-  "title" : "hes-encounter-mapping",
-  "isDraft" : false,
-  "source" : [ {
-    "alias" : "hospitalization",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-hospitalization",
-    "joinOn" : [ ]
-  } ],
-  "context" : { },
-  "variable" : [ ],
-  "mapping" : [ {
-    "precondition" : {
-      "name" : "isEncounter",
-      "language" : "text/fhirpath",
-      "expression" : " patid.exists() and admidate.exists() and discharged.exists() and spno.exists() "
-    },
-    "expression" : {
-      "name" : "encounter",
-      "language" : "application/fhir-template+json",
-      "value" : {
-        "id" : "{{mpp:getHashedId('Encounter', (patid + '-' + spno))}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
-        },
-        "resourceType" : "Encounter",
-        "class" : [ {
-          "coding" : [ {
-            "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            "code" : "IMP",
-            "display" : "inpatient encounter"
-          } ]
-        } ],
-        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "actualPeriod" : {
-          "start" : "{{admidate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-          "end" : "{{discharged.utl:toFhirDateTime('dd/MM/yyyy')}}"
-        },
-        "identifier" : [ {
-          "value" : "{{ (patid + '-' + spno) }}"
-        } ],
-        "status" : "completed"
+  "id": "hes-encounter-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/cprd/hes-encounter-mapping",
+  "name": "hes-encounter-mapping",
+  "title": "hes-encounter-mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "hospitalization",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-hospitalization",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "precondition": {
+        "name": "isEncounter",
+        "language": "text/fhirpath",
+        "expression": " patid.exists() and admidate.exists() and discharged.exists() and spno.exists() "
+      },
+      "expression": {
+        "name": "encounter",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Encounter', (patid + '-' + spno))}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter",
+          "class": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "IMP",
+                  "display": "inpatient encounter"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+          "actualPeriod": {
+            "start": "{{admidate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+            "end": "{{discharged.utl:toFhirDateTime('dd/MM/yyyy')}}"
+          },
+          "identifier": [
+            {
+              "value": "{{ (patid + '-' + spno) }}"
+            }
+          ],
+          "status": "completed"
+        }
       }
     }
-  } ]
+  ]
 }

@@ -1,45 +1,62 @@
 {
-  "id" : "aurum-patient-mapping",
-  "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-patient-mapping",
-  "name" : "aurum-patient-mapping",
-  "title" : "aurum-patient-mapping",
-  "isDraft" : false,
-  "source" : [ {
-    "alias" : "patient",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
-    "joinOn" : [ "patid" ]
-  }, {
-    "alias" : "hesPatient",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Hes-patient",
-    "joinOn" : [ "patid" ]
-  } ],
-  "context" : { },
-  "variable" : [ ],
-  "mapping" : [ {
-    "expression" : {
-      "name" : "patient",
-      "language" : "application/fhir-template+json",
-      "value" : {
-        "id" : "{{mpp:getHashedId('Patient', patid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient" ]
-        },
-        "resourceType" : "Patient",
-        "gender" : "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
-        "birthDate" : "{{iif(mob.exists() = false, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).utl:toFhirDate('yyyy-M'))}}",
-        "identifier" : [ {
-          "value" : "{{ patid }}"
-        } ],
-        "extension" : [ {
-          "url" : "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
-          "valueCodeableConcept" : {
-            "coding" : [ {
-              "system" : "http://snomed.info/sct",
-              "code" : "{{ iif(%hesPatient.gen_ethnicity = 'Bangladesi' or %hesPatient.gen_ethnicity = 'Indian' or %hesPatient.gen_ethnicity = 'Chinese' or %hesPatient.gen_ethnicity = 'Pakistani' or %hesPatient.gen_ethnicity = 'Oth_Asian', 'Asian', iif( %hesPatient.gen_ethnicity = 'White', 'Caucasian', iif(%hesPatient.gen_ethnicity = 'Bl_Afric', 'African', 'Unknown'))) }}"
-            } ]
-          }
-        } ]
+  "id": "aurum-patient-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/cprd/aurum-patient-mapping",
+  "name": "aurum-patient-mapping",
+  "title": "aurum-patient-mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias": "hesPatient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-patient",
+      "joinOn": [
+        "patid"
+      ]
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "patient",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Patient', patid)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient"
+            ]
+          },
+          "resourceType": "Patient",
+          "gender": "{{iif( gender = 1, 'male', iif(gender = 2, 'female', iif(gender = 3, 'other', 'unknown')))}}",
+          "birthDate": "{{iif(mob.exists() = false, yob.toString().toDate(), (yob.toString() + '-' + mob.toString()).utl:toFhirDate('yyyy-M'))}}",
+          "identifier": [
+            {
+              "value": "{{ patid }}"
+            }
+          ],
+          "extension": [
+            {
+              "url": "https://ai4hf.eu/fhir/StructureDefinition/Ethnicity",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "{{ iif(%hesPatient.gen_ethnicity = 'Bangladesi' or %hesPatient.gen_ethnicity = 'Indian' or %hesPatient.gen_ethnicity = 'Chinese' or %hesPatient.gen_ethnicity = 'Pakistani' or %hesPatient.gen_ethnicity = 'Oth_Asian', 'Asian', iif( %hesPatient.gen_ethnicity = 'White', 'Caucasian', iif(%hesPatient.gen_ethnicity = 'Bl_Afric', 'African', 'Unknown'))) }}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
       }
     }
-  } ]
+  ]
 }

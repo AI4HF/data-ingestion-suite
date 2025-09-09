@@ -1,43 +1,55 @@
 {
-  "id" : "aurum-encounter-mapping",
-  "url" : "https://ai4hf.eu/fhir/mappings/cprd/aurum-encounter-mapping",
-  "name" : "aurum-encounter-mapping",
-  "title" : "aurum-encounter-mapping",
-  "isDraft" : false,
-  "source" : [ {
-    "alias" : "consultation",
-    "url" : "https://ai4hf.eu/fhir/schemas/cprd/Aurum-consultation",
-    "joinOn" : [ ]
-  } ],
-  "context" : { },
-  "variable" : [ ],
-  "mapping" : [ {
-    "expression" : {
-      "name" : "encounter",
-      "language" : "application/fhir-template+json",
-      "value" : {
-        "id" : "{{mpp:getHashedId('Encounter', consid)}}",
-        "meta" : {
-          "profile" : [ "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter" ]
-        },
-        "resourceType" : "Encounter",
-        "class" : [ {
-          "coding" : [ {
-            "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            "code" : "AMB",
-            "display" : "ambulatory"
-          } ]
-        } ],
-        "subject" : "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
-        "actualPeriod" : {
-          "start" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-          "end" : "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
-        },
-        "identifier" : [ {
-          "value" : "{{ consid }}"
-        } ],
-        "status" : "completed"
+  "id": "aurum-encounter-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/cprd/aurum-encounter-mapping",
+  "name": "aurum-encounter-mapping",
+  "title": "aurum-encounter-mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "consultation",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-consultation",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "encounter",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Encounter', consid)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
+            ]
+          },
+          "resourceType": "Encounter",
+          "class": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                  "code": "AMB",
+                  "display": "ambulatory"
+                }
+              ]
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
+          "actualPeriod": {
+            "start": "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+            "end": "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+          },
+          "identifier": [
+            {
+              "value": "{{ consid }}"
+            }
+          ],
+          "status": "completed"
+        }
       }
     }
-  } ]
+  ]
 }

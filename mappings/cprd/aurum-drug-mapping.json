@@ -13,9 +13,11 @@
       ]
     },
     {
-      "alias" : "linkageEligibility",
-      "url" : "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
-      "joinOn" : [ "patid" ]
+      "alias": "linkageEligibility",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Linkage-eligibility",
+      "joinOn": [
+        "patid"
+      ]
     },
     {
       "alias": "encounter",
