@@ -27,6 +27,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
+        },
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumPatient.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
         }
       }
     },
@@ -37,6 +44,13 @@
         "diagnosis": {
           "jsonClass": "FileSystemSource",
           "path": "HesDiagnosis.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumPatient.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"

@@ -8,17 +8,47 @@
     {
       "alias": "hospitalization",
       "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-hospitalization",
-      "joinOn": []
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "admissionDate",
+      "language": "text/fhirpath",
+      "expression": "admidate.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "dischargeDate",
+      "language": "text/fhirpath",
+      "expression": "discharged.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "isApplicableRecord",
+      "language": "text/fhirpath",
+      "expression": "(%admissionDate >= '01/04/1997'.utl:toFhirDateTime('dd/MM/yyyy') and %admissionDate <= '31/10/2020'.utl:toFhirDateTime('dd/MM/yyyy')) and (%dischargeDate >= '01/04/1997'.utl:toFhirDateTime('dd/MM/yyyy') and %dischargeDate <= '31/10/2020'.utl:toFhirDateTime('dd/MM/yyyy'))"
+    },
+    {
+      "name": "isBetweenPatientRegDates",
+      "language": "text/fhirpath",
+      "expression": "(%patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %admissionDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %admissionDate,true)) and (%patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %dischargeDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %dischargeDate,true))"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
         "name": "isEncounter",
         "language": "text/fhirpath",
-        "expression": " patid.exists() and admidate.exists() and discharged.exists() and spno.exists() "
+        "expression": "%isApplicableRecord and %isBetweenPatientRegDates and patid.exists() and admidate.exists() and discharged.exists() and spno.exists() "
       },
       "expression": {
         "name": "encounter",
@@ -44,8 +74,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
           "actualPeriod": {
-            "start": "{{admidate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-            "end": "{{discharged.utl:toFhirDateTime('dd/MM/yyyy')}}"
+            "start": "{{%admissionDate}}",
+            "end": "{{%dischargeDate}}"
           },
           "identifier": [
             {

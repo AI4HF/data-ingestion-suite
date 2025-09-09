@@ -8,17 +8,42 @@
     {
       "alias": "diagnosis",
       "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-diagnosis",
-      "joinOn": []
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "diagnosisDate",
+      "language": "text/fhirpath",
+      "expression": "admidate.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "isApplicableRecord",
+      "language": "text/fhirpath",
+      "expression": "%diagnosisDate >= '01/04/1997'.utl:toFhirDateTime('dd/MM/yyyy') and %diagnosisDate <= '31/10/2020'.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "isBetweenPatientRegDates",
+      "language": "text/fhirpath",
+      "expression": "%patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %diagnosisDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %diagnosisDate,true)"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
         "name": "isCondition",
         "language": "text/fhirpath",
-        "expression": "ICD.exists() and patid.exists() and spno.exists() and admidate.exists() "
+        "expression": "%isApplicableRecord and %isBetweenPatientRegDates and ICD.exists() and patid.exists() and spno.exists() and admidate.exists() "
       },
       "expression": {
         "name": "condition",
@@ -42,7 +67,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', (patid + '-' + spno))}}",
-          "onsetDateTime": "{{ admidate.utl:toFhirDateTime('dd/MM/yyyy') }}",
+          "onsetDateTime": "{{ %diagnosisDate }}",
           "identifier": [
             {
               "value": "{{ (patid + '-' + spno + '-' + ICD) }}"
