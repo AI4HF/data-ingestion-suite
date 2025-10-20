@@ -8,23 +8,7 @@
     {
       "alias": "patient",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Patient",
-      "joinOn": [
-        "COD_Poryecto"
-      ]
-    },
-    {
-      "alias": "demographics",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Demographics",
-      "joinOn": [
-        "COD_Participante"
-      ]
-    },
-    {
-      "alias": "death",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Death",
-      "joinOn": [
-        "cod_participante"
-      ]
+      "joinOn": []
     }
   ],
   "context": {
@@ -41,25 +25,22 @@
         "name": "patient",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Patient', COD_Poryecto)}}",
+          "id": "{{mpp:getHashedId('Patient', patientId)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient|latest"
             ]
           },
           "resourceType": "Patient",
-          "gender": "{{mpp:getConcept(%genderConceptMap, Sexo, 'target_code')}}",
-          "birthDate": "{{Fecha_Nacimiento.substring(0,10)}}",
-          "deceasedDateTime": "{{? %death.FECHA_DEF.substring(0,10)}}",
+          "gender": "{{mpp:getConcept(%genderConceptMap, gender, 'target_code')}}",
+          "birthDate": "{{birthDate.utl:toFhirDate('d.MM.yyyy')}}",
+          "deceasedDateTime": "{{? deceasedDateTime.utl:toFhirDate('d.MM.yyyy')}}",
           "address": [
             {
               "use": "home",
-              "city": "{{? %demographics.PROVINCIA}}",
-              "district": "{{? %demographics.DISTRITO_R}}",
-              "postalCode": {
-                "{{#postalCodeVar}}": "{{iif(Codigo_Postal != '0',Codigo_Postal.toString(),iif(%demographics.cod_postal.exists() and %demographics.cod_postal != '0', %demographics.cod_postal,{}))}}",
-                "{{?}}": "{{%postalCodeVar}}"
-              }
+              "city": "{{? iif(city = '0', {}, city)}}",
+              "district": "{{? iif(district = '0', {}, district)}}",
+              "postalCode": "{{? postalCode}}"
             }
           ],
           "extension": [

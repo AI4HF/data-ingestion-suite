@@ -1,21 +1,21 @@
 {
-  "id": "echo",
+  "id": "ecg",
   "resourceType": "StructureDefinition",
-  "url": "https://ai4hf.eu/fhir/schemas/citbm/Echo",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/ECG",
   "version": "latest",
-  "name": "Echo",
+  "name": "ECG",
   "status": "draft",
   "fhirVersion": "5.0.0",
   "kind": "logical",
   "abstract": false,
-  "type": "Echo",
+  "type": "ECG",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
   "derivation": "specialization",
   "differential": {
     "element": [
       {
-        "id": "Echo",
-        "path": "Echo",
+        "id": "ECG",
+        "path": "ECG",
         "min": 0,
         "max": "*",
         "type": [
@@ -25,8 +25,8 @@
         ]
       },
       {
-        "id": "Echo.identifier",
-        "path": "Echo.identifier",
+        "id": "ECG.identifier",
+        "path": "ECG.identifier",
         "min": 0,
         "max": "1",
         "type": [
@@ -39,8 +39,8 @@
         ]
       },
       {
-        "id": "Echo.subject",
-        "path": "Echo.subject",
+        "id": "ECG.subject",
+        "path": "ECG.subject",
         "min": 0,
         "max": "1",
         "type": [
@@ -53,8 +53,8 @@
         ]
       },
       {
-        "id": "Echo.encounter",
-        "path": "Echo.encounter",
+        "id": "ECG.encounter",
+        "path": "ECG.encounter",
         "min": 0,
         "max": "1",
         "type": [
@@ -67,8 +67,8 @@
         ]
       },
       {
-        "id": "Echo.effectiveDateTime",
-        "path": "Echo.effectiveDateTime",
+        "id": "ECG.effectiveDateTime",
+        "path": "ECG.effectiveDateTime",
         "min": 0,
         "max": "1",
         "type": [
@@ -81,8 +81,8 @@
         ]
       },
       {
-        "id": "Echo.peso",
-        "path": "Echo.peso",
+        "id": "ECG.QRSduration",
+        "path": "ECG.QRSduration",
         "min": 0,
         "max": "1",
         "type": [
@@ -95,8 +95,134 @@
         ]
       },
       {
-        "id": "Echo.talla",
-        "path": "Echo.talla",
+        "id": "ECG.raxis",
+        "path": "ECG.raxis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.paxis",
+        "path": "ECG.paxis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.taxis",
+        "path": "ECG.taxis",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.QTinterval",
+        "path": "ECG.QTinterval",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.QTintervalCorrected",
+        "path": "ECG.QTintervalCorrected",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.QTintervalCorrectedFormula",
+        "path": "ECG.QTintervalCorrectedFormula",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.QRSComplexCount",
+        "path": "ECG.QRSComplexCount",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.PRinterval",
+        "path": "ECG.PRinterval",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.atrialRate",
+        "path": "ECG.atrialRate",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.ventricularRate",
+        "path": "ECG.ventricularRate",
         "min": 0,
         "max": "1",
         "type": [
@@ -109,36 +235,8 @@
         ]
       },
       {
-        "id": "Echo.TAPSE",
-        "path": "Echo.TAPSE",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.SVD",
-        "path": "Echo.SVD",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.Ladim",
-        "path": "Echo.Ladim",
+        "id": "ECG.samplingFrequency",
+        "path": "ECG.samplingFrequency",
         "min": 0,
         "max": "1",
         "type": [
@@ -151,8 +249,8 @@
         ]
       },
       {
-        "id": "Echo.LVEF",
-        "path": "Echo.LVEF",
+        "id": "ECG.filterSettings",
+        "path": "ECG.filterSettings",
         "min": 0,
         "max": "1",
         "type": [
@@ -165,8 +263,8 @@
         ]
       },
       {
-        "id": "Echo.FACVD",
-        "path": "Echo.FACVD",
+        "id": "ECG.rawMedianBeat",
+        "path": "ECG.rawMedianBeat",
         "min": 0,
         "max": "1",
         "type": [
@@ -179,36 +277,8 @@
         ]
       },
       {
-        "id": "Echo.LVEDD",
-        "path": "Echo.LVEDD",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "decimal",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.LVES",
-        "path": "Echo.LVES",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "decimal",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.VD",
-        "path": "Echo.VD",
+        "id": "ECG.rawRhythm",
+        "path": "ECG.rawRhythm",
         "min": 0,
         "max": "1",
         "type": [
@@ -221,8 +291,8 @@
         ]
       },
       {
-        "id": "Echo.MITRAL",
-        "path": "Echo.MITRAL",
+        "id": "ECG.pacedRhythm",
+        "path": "ECG.pacedRhythm",
         "min": 0,
         "max": "1",
         "type": [
@@ -235,8 +305,8 @@
         ]
       },
       {
-        "id": "Echo.AORT",
-        "path": "Echo.AORT",
+        "id": "ECG.hasAF",
+        "path": "ECG.hasAF",
         "min": 0,
         "max": "1",
         "type": [
@@ -249,8 +319,8 @@
         ]
       },
       {
-        "id": "Echo.TRIC",
-        "path": "Echo.TRIC",
+        "id": "ECG.LBBB",
+        "path": "ECG.LBBB",
         "min": 0,
         "max": "1",
         "type": [
@@ -263,8 +333,8 @@
         ]
       },
       {
-        "id": "Echo.PULM",
-        "path": "Echo.PULM",
+        "id": "ECG.RBBB",
+        "path": "ECG.RBBB",
         "min": 0,
         "max": "1",
         "type": [
@@ -277,8 +347,8 @@
         ]
       },
       {
-        "id": "Echo.HTP",
-        "path": "Echo.HTP",
+        "id": "ECG.LeadI",
+        "path": "ECG.LeadI",
         "min": 0,
         "max": "1",
         "type": [
@@ -291,8 +361,8 @@
         ]
       },
       {
-        "id": "Echo.TROMBO",
-        "path": "Echo.TROMBO",
+        "id": "ECG.LeadII",
+        "path": "ECG.LeadII",
         "min": 0,
         "max": "1",
         "type": [
@@ -305,8 +375,8 @@
         ]
       },
       {
-        "id": "Echo.MOT",
-        "path": "Echo.MOT",
+        "id": "ECG.LeadIII",
+        "path": "ECG.LeadIII",
         "min": 0,
         "max": "1",
         "type": [
@@ -319,8 +389,8 @@
         ]
       },
       {
-        "id": "Echo.DD",
-        "path": "Echo.DD",
+        "id": "ECG.LeadAVR",
+        "path": "ECG.LeadAVR",
         "min": 0,
         "max": "1",
         "type": [
@@ -333,8 +403,8 @@
         ]
       },
       {
-        "id": "Echo.SHUNT",
-        "path": "Echo.SHUNT",
+        "id": "ECG.LeadAVL",
+        "path": "ECG.LeadAVL",
         "min": 0,
         "max": "1",
         "type": [
@@ -347,8 +417,8 @@
         ]
       },
       {
-        "id": "Echo.CMP",
-        "path": "Echo.CMP",
+        "id": "ECG.LeadAVF",
+        "path": "ECG.LeadAVF",
         "min": 0,
         "max": "1",
         "type": [
@@ -361,8 +431,8 @@
         ]
       },
       {
-        "id": "Echo.MASA",
-        "path": "Echo.MASA",
+        "id": "ECG.LeadV1",
+        "path": "ECG.LeadV1",
         "min": 0,
         "max": "1",
         "type": [
@@ -375,8 +445,8 @@
         ]
       },
       {
-        "id": "Echo.STRAINVI",
-        "path": "Echo.STRAINVI",
+        "id": "ECG.LeadV2",
+        "path": "ECG.LeadV2",
         "min": 0,
         "max": "1",
         "type": [
@@ -389,8 +459,8 @@
         ]
       },
       {
-        "id": "Echo.STRAINVD",
-        "path": "Echo.STRAINVD",
+        "id": "ECG.LeadV3",
+        "path": "ECG.LeadV3",
         "min": 0,
         "max": "1",
         "type": [
@@ -403,8 +473,8 @@
         ]
       },
       {
-        "id": "Echo.E_A",
-        "path": "Echo.E_A",
+        "id": "ECG.LeadV4",
+        "path": "ECG.LeadV4",
         "min": 0,
         "max": "1",
         "type": [
@@ -417,8 +487,8 @@
         ]
       },
       {
-        "id": "Echo.E_e",
-        "path": "Echo.E_e",
+        "id": "ECG.LeadV5",
+        "path": "ECG.LeadV5",
         "min": 0,
         "max": "1",
         "type": [
@@ -431,36 +501,8 @@
         ]
       },
       {
-        "id": "Echo.vol_index",
-        "path": "Echo.vol_index",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.Peric_effu",
-        "path": "Echo.Peric_effu",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Echo.OTROS",
-        "path": "Echo.OTROS",
+        "id": "ECG.LeadV6",
+        "path": "ECG.LeadV6",
         "min": 0,
         "max": "1",
         "type": [

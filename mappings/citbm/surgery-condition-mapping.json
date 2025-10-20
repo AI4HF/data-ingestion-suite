@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-condition-mapping",
   "name": "surgery-condition-mapping",
   "title": "Diagnosis leading to the surgery.",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "surgery",

@@ -1,0 +1,95 @@
+{
+  "id": "ecg-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/ecg-mapping",
+  "name": "ecg-mapping",
+  "title": "The electrocardiograph mappings of CITBM Electrocardiograph data.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "ecg",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/ECG",
+      "joinOn": [
+        "subject"
+      ]
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "ecg",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'ecg')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Electrocardiograph"
+            ]
+          },
+          "resourceType": "Observation",
+          "code": {
+            "coding": [
+              {
+                "code": "34534-8",
+                "system": "http://loinc.org",
+                "display": "12 lead EKG panel",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "component": [
+            {
+              "{{#componentVar}}": "{{iif(QRSduration.hasValue(),QRSduration, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "8633-0",
+                      "system": "http://loinc.org",
+                      "display": "QRS duration",
+                      "@sliceName": "loincCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "ms",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{QRSduration}}",
+                  "unit": "millisecond"
+                }
+              },
+              "@sliceName": "qrsDuration"
+            },
+            {
+              "{{#componentVar}}": "{{iif(raxis.hasValue(),raxis, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "8632-2",
+                      "system": "http://loinc.org",
+                      "display": "QRS axis",
+                      "@sliceName": "loincCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "deg",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{raxis}}",
+                  "unit": "degree"
+                }
+              },
+              "@sliceName": "rAxis"
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:SS' |'MM/dd/yyyy')}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}

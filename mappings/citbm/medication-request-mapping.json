@@ -1,0 +1,51 @@
+{
+  "id": "medication-request-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/medication-request-mapping",
+  "name": "medication-request-mapping",
+  "title": "Medication Request Mapping from CITBM's Prescription Data.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "prescription",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Prescription",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "medicationRequest",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('MedicationRequest', subject & encounter & startDate & code)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
+            ]
+          },
+          "resourceType": "MedicationRequest",
+          "medication": {
+            "concept": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "{{code}}",
+                  "@sliceName": "atcCode"
+                }
+              ]
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "status": "completed",
+          "intent": "order",
+          "effectiveDosePeriod": {
+            "start": "{{startDate.utl:toFhirDate('yyyy-MM-dd')}}"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@
   "source": [
     {
       "alias": "medication",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/NYHA",
       "joinOn": []
     }
   ],
@@ -21,16 +21,11 @@
   "mapping": [
     {
       "description": "New York Heart Association classification if exists.",
-      "precondition": {
-        "name": "nyhaExists",
-        "language": "text/fhirpath",
-        "expression": "NYHA_Classification.hasValue()"
-      },
       "expression": {
         "name": "nyha",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita.lower())}}",
+          "id": "{{mpp:getHashedId('Observation', identifier)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
@@ -58,18 +53,18 @@
               }
             ]
           },
-          "effectiveDateTime": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "valueCodeableConcept": {
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA_Classification, 'target_code')}}",
-                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, NYHA_Classification, 'target_display')}}"
+                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, display, 'target_code')}}",
+                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, display, 'target_display')}}"
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
           "status": "final"
         }
       }

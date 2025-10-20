@@ -25,24 +25,8 @@
         ]
       },
       {
-        "id": "Encounter.ParticipantCode",
-        "path": "Encounter.ParticipantCode",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "definition": "The unique identifier of the patient.",
-        "short": "Patient ID"
-      },
-      {
-        "id": "Encounter.Hospital",
-        "path": "Encounter.Hospital",
+        "id": "Encounter.identifier",
+        "path": "Encounter.identifier",
         "min": 0,
         "max": "1",
         "type": [
@@ -55,8 +39,8 @@
         ]
       },
       {
-        "id": "Encounter.Type",
-        "path": "Encounter.Type",
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
         "min": 0,
         "max": "1",
         "type": [
@@ -69,8 +53,8 @@
         ]
       },
       {
-        "id": "Encounter.Service",
-        "path": "Encounter.Service",
+        "id": "Encounter.status",
+        "path": "Encounter.status",
         "min": 0,
         "max": "1",
         "type": [
@@ -83,8 +67,22 @@
         ]
       },
       {
-        "id": "Encounter.StartDate",
-        "path": "Encounter.StartDate",
+        "id": "Encounter.class",
+        "path": "Encounter.class",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.startDate",
+        "path": "Encounter.startDate",
         "min": 0,
         "max": "1",
         "type": [
@@ -94,13 +92,11 @@
               "http://hl7.org/fhir/StructureDefinition/dateTime"
             ]
           }
-        ],
-        "definition": "Represents the admission time of the encounter. This date corresponds to the earliest recorded event (e.g., medication administration, surgery) associated with the encounter.",
-        "short": "Admission Time"
+        ]
       },
       {
-        "id": "Encounter.EndDate",
-        "path": "Encounter.EndDate",
+        "id": "Encounter.endDate",
+        "path": "Encounter.endDate",
         "min": 0,
         "max": "1",
         "type": [
@@ -110,13 +106,11 @@
               "http://hl7.org/fhir/StructureDefinition/dateTime"
             ]
           }
-        ],
-        "definition": "Represents the admission time of the encounter. This date corresponds to the latest recorded event (e.g., medication administration, surgery) associated with the encounter.",
-        "short": "Discharge Time"
+        ]
       },
       {
-        "id": "Encounter.Visita",
-        "path": "Encounter.Visita",
+        "id": "Encounter.admissionOrigin",
+        "path": "Encounter.admissionOrigin",
         "min": 0,
         "max": "1",
         "type": [
@@ -129,8 +123,36 @@
         ]
       },
       {
-        "id": "Encounter.AttentionArea",
-        "path": "Encounter.AttentionArea",
+        "id": "Encounter.adminSource",
+        "path": "Encounter.adminSource",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.admissionDestination",
+        "path": "Encounter.admissionDestination",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Encounter.Visit",
+        "path": "Encounter.Visit",
         "min": 0,
         "max": "1",
         "type": [

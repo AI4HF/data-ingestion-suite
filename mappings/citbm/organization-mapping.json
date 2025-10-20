@@ -7,7 +7,7 @@
   "source": [
     {
       "alias": "medication",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Organization",
       "joinOn": []
     }
   ],
@@ -20,10 +20,18 @@
   "variable": [],
   "mapping": [
     {
+      "description": "The care center where the medication is administered to the patient.",
       "expression": {
         "name": "organization",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Organization', organizationId)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Organization"
+            ]
+          },
+          "resourceType": "Organization",
           "type": [
             {
               "coding": [
@@ -36,17 +44,9 @@
               "@sliceName": "hfrOrganizationType"
             }
           ],
-          "name": "{{Hospital}}",
-          "id": "{{mpp:getHashedId('Organization', Hospital & type)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Organization"
-            ]
-          },
-          "resourceType": "Organization"
+          "name": "{{name}}"
         }
-      },
-      "description": "The care center where the medication is administered to the patient."
+      }
     }
   ]
 }

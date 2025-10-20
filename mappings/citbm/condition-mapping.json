@@ -7,7 +7,7 @@
   "source": [
     {
       "alias": "medication",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Condition",
       "joinOn": []
     }
   ],
@@ -20,7 +20,7 @@
         "name": "diagnosis",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition',Participant_code & Visita.lower() & ICD10)}}",
+          "id": "{{mpp:getHashedId('Condition',subject & encounter.lower() & code)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -30,16 +30,15 @@
           "code": {
             "coding": [
               {
-                "code": "{{ICD10}}",
+                "code": "{{code}}",
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "display": "{{Description_of_diagnosis}}",
                 "@sliceName": "icd10Code"
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
-          "onsetDateTime": "{{Attention_date.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "onsetDateTime": "{{onsetDataTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "clinicalStatus": {
             "coding": [
               {

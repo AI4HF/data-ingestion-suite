@@ -53,7 +53,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{iif(effectiveDateTime.length() = 10, effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy'), effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss'))}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy' | 'd.MM.yyyy' | 'yyyy-MM-dd HH:mm:ss')}}",
           "component": [
             {
               "code": "{{utl:createFhirCodeableConcept('http://loinc.org', '8806-2', 'Left ventricular Ejection fraction by 2D echo')}}",

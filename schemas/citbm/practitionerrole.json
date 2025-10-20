@@ -1,22 +1,21 @@
 {
-  "id": "death",
+  "id": "practitionerrole",
   "resourceType": "StructureDefinition",
-  "url": "https://ai4hf.eu/fhir/schemas/citbm/Death",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/PractitionerRole",
   "version": "latest",
-  "name": "Death",
-  "description": "The detailed record of a patient's death",
+  "name": "PractitionerRole",
   "status": "draft",
   "fhirVersion": "5.0.0",
   "kind": "logical",
   "abstract": false,
-  "type": "Death",
+  "type": "PractitionerRole",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
   "derivation": "specialization",
   "differential": {
     "element": [
       {
-        "id": "Death",
-        "path": "Death",
+        "id": "PractitionerRole",
+        "path": "PractitionerRole",
         "min": 0,
         "max": "*",
         "type": [
@@ -26,8 +25,8 @@
         ]
       },
       {
-        "id": "Death.identifier",
-        "path": "Death.identifier",
+        "id": "PractitionerRole.roleId",
+        "path": "PractitionerRole.roleId",
         "min": 0,
         "max": "1",
         "type": [
@@ -40,8 +39,8 @@
         ]
       },
       {
-        "id": "Death.subject",
-        "path": "Death.subject",
+        "id": "PractitionerRole.code",
+        "path": "PractitionerRole.code",
         "min": 0,
         "max": "1",
         "type": [
@@ -54,36 +53,8 @@
         ]
       },
       {
-        "id": "Death.effectiveDateTime",
-        "path": "Death.effectiveDateTime",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Death.display",
-        "path": "Death.display",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "Death.value",
-        "path": "Death.value",
+        "id": "PractitionerRole.specialty",
+        "path": "PractitionerRole.specialty",
         "min": 0,
         "max": "1",
         "type": [

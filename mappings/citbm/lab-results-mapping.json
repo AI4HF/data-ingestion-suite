@@ -11,7 +11,12 @@
       "joinOn": []
     }
   ],
-  "context": {},
+  "context": {
+    "unitConversionMap": {
+      "category": "unit-conversion",
+      "url": "$CONTEXT_REPO/citbm/lab-result-unit-conversion.csv"
+    }
+  },
   "variable": [],
   "mapping": [
     {
@@ -54,7 +59,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "mmol/L",
@@ -106,13 +111,347 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Creatinine', CREAT_mg_dl.toDecimal(), 'mg/dl')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "The hemoglobin.",
+      "precondition": {
+        "name": "hbExists",
+        "language": "text/fhirpath",
+        "expression": "hb.exists()"
+      },
+      "expression": {
+        "name": "hemoglobin",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Hemoglobin')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "718-7",
+                "display": "Hemoglobin [Mass/volume] in Blood (g/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Hemoglobin', hb.toDecimal(), 'g/dl')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "The Urea nitrogen [Moles/volume] in Serum or Plasma (mmol/L).",
+      "precondition": {
+        "name": "bunExists",
+        "language": "text/fhirpath",
+        "expression": "UREAmg_dl.exists()"
+      },
+      "expression": {
+        "name": "bun",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Bun')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "14937-7",
+                "display": "The Urea nitrogen [Moles/volume] in Serum or Plasma (mmol/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Bun', UREAmg_dl.toDecimal(), 'mg/dl')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "The Potassium [Moles/volume] in Serum or Plasma (mmol/L)",
+      "precondition": {
+        "name": "potassiumExists",
+        "language": "text/fhirpath",
+        "expression": "K.exists()"
+      },
+      "expression": {
+        "name": "potassium",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Potassium')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2823-3",
+                "display": "Potassium [Moles/volume] in Serum or Plasma (mmol/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
-            "code": "mg/L",
-            "unit": "mg/L",
-            "value": "{{CREAT_mg_dl.toDecimal()}}"
+            "code": "mmol/L",
+            "unit": "mmol/L",
+            "value": "{{K.toDecimal()}}"
           },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "Triglyceride [Moles/volume] in Serum or Plasma (mmol/L)",
+      "precondition": {
+        "name": "triGlyExists",
+        "language": "text/fhirpath",
+        "expression": "TRIGLISERIDOS.exists()"
+      },
+      "expression": {
+        "name": "triGly",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-triGly')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "14927-8",
+                "display": "Triglyceride [Moles/volume] in Serum or Plasma (mmol/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', TRIGLISERIDOS.toDecimal(), 'mg/dl')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "Cholesterol in LDL [Moles/volume] in Serum or Plasma (mmol/L)",
+      "precondition": {
+        "name": "ldlExists",
+        "language": "text/fhirpath",
+        "expression": "LDL.exists()"
+      },
+      "expression": {
+        "name": "ldl",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-ldl')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "22748-8",
+                "display": "Cholesterol in LDL [Moles/volume] in Serum or Plasma (mmol/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', LDL.toDecimal(), 'mg/dl')}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "Natriuretic peptide B [Mass/volume] in Serum or Plasma (pg/mL)",
+      "precondition": {
+        "name": "bnpExists",
+        "language": "text/fhirpath",
+        "expression": "BNP.exists()"
+      },
+      "expression": {
+        "name": "bnp",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-bnp')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "30934-4",
+                "display": "Natriuretic peptide B [Mass/volume] in Serum or Plasma (pg/mL)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "pg/mL",
+            "unit": "pg/mL",
+            "value": "{{BNP.toDecimal()}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+        }
+      }
+    },
+    {
+      "description": "Troponin T.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method (mcg/L)",
+      "precondition": {
+        "name": "troponinExists",
+        "language": "text/fhirpath",
+        "expression": "troponin.exists()"
+      },
+      "expression": {
+        "name": "troponin",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-troponin')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "67151-1",
+                "display": "Troponin T.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method (mcg/L)",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Troponin', troponin.toDecimal(), 'ng/mL')}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }

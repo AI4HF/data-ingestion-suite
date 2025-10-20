@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-practitioner-role-mapping",
   "name": "surgery-practitioner-role-mapping",
   "title": "Surgery Practitioner Role Mapping",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "surgery",

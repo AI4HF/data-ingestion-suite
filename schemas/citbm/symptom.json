@@ -1,22 +1,21 @@
 {
-  "id": "patient",
+  "id": "symptom",
   "resourceType": "StructureDefinition",
-  "url": "https://ai4hf.eu/fhir/schemas/citbm/Patient",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Symptom",
   "version": "latest",
-  "name": "Patient",
-  "description": "The detailed record of a patient.",
+  "name": "Symptom",
   "status": "draft",
   "fhirVersion": "5.0.0",
   "kind": "logical",
   "abstract": false,
-  "type": "Patient",
+  "type": "Symptom",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
   "derivation": "specialization",
   "differential": {
     "element": [
       {
-        "id": "Patient",
-        "path": "Patient",
+        "id": "Symptom",
+        "path": "Symptom",
         "min": 0,
         "max": "*",
         "type": [
@@ -26,8 +25,8 @@
         ]
       },
       {
-        "id": "Patient.patientId",
-        "path": "Patient.patientId",
+        "id": "Symptom.identifier",
+        "path": "Symptom.identifier",
         "min": 0,
         "max": "1",
         "type": [
@@ -37,12 +36,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The patient's unique identifier within the project."
+        ]
       },
       {
-        "id": "Patient.gender",
-        "path": "Patient.gender",
+        "id": "Symptom.subject",
+        "path": "Symptom.subject",
         "min": 0,
         "max": "1",
         "type": [
@@ -52,42 +50,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The gender of the patient (e.g., male, female)."
+        ]
       },
       {
-        "id": "Patient.birthDate",
-        "path": "Patient.birthDate",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ],
-        "definition": "The birthdate of the patient."
-      },
-      {
-        "id": "Patient.deceasedDateTime",
-        "path": "Patient.deceasedDateTime",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ],
-        "definition": "The deceased date time of the patient."
-      },
-      {
-        "id": "Patient.ethnicity",
-        "path": "Patient.ethnicity",
+        "id": "Symptom.encounter",
+        "path": "Symptom.encounter",
         "min": 0,
         "max": "1",
         "type": [
@@ -97,12 +64,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The ethnicity of the patient."
+        ]
       },
       {
-        "id": "Patient.city",
-        "path": "Patient.city",
+        "id": "Symptom.category",
+        "path": "Symptom.category",
         "min": 0,
         "max": "1",
         "type": [
@@ -112,12 +78,25 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The city of the patient's address."
+        ]
       },
       {
-        "id": "Patient.district",
-        "path": "Patient.district",
+        "id": "Symptom.numac",
+        "path": "Symptom.numac",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Symptom.code_sym",
+        "path": "Symptom.code_sym",
         "min": 0,
         "max": "1",
         "type": [
@@ -127,12 +106,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The district of the patient's address."
+        ]
       },
       {
-        "id": "Patient.postalCode",
-        "path": "Patient.postalCode",
+        "id": "Symptom.Code",
+        "path": "Symptom.Code",
         "min": 0,
         "max": "1",
         "type": [
@@ -142,8 +120,63 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The postal code of the patient's address."
+        ]
+      },
+      {
+        "id": "Symptom.display_ENG",
+        "path": "Symptom.display_ENG",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Symptom.display_SPA",
+        "path": "Symptom.display_SPA",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Symptom.effectiveDateTime",
+        "path": "Symptom.effectiveDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Symptom.hasSymptom",
+        "path": "Symptom.hasSymptom",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ]
       }
     ]
   }

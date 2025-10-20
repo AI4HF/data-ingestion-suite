@@ -7,7 +7,7 @@
   "source": [
     {
       "alias": "procedure",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Procedure",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/PractitionerRole",
       "joinOn": []
     }
   ],
@@ -25,7 +25,7 @@
         "name": "practitionerRole",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('PractitionerRole', performer)}}",
+          "id": "{{mpp:getHashedId('PractitionerRole', roleId)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-PractitionerRole"
@@ -36,9 +36,9 @@
             {
               "coding": [
                 {
-                  "code": "{{mpp:getConcept(%practitionerRoleConceptMap, performer, 'target_code')}}",
+                  "code": "{{mpp:getConcept(%practitionerRoleConceptMap, roleId, 'target_code')}}",
                   "system": "http://terminology.hl7.org/CodeSystem/practitioner-role",
-                  "display": "{{mpp:getConcept(%practitionerRoleConceptMap, performer, 'target_display')}}"
+                  "display": "{{mpp:getConcept(%practitionerRoleConceptMap, roleId, 'target_display')}}"
                 }
               ],
               "@sliceName": "hfrPractitionerRole"

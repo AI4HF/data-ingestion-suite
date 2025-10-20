@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
   "name": "surgery-mapping",
   "title": "Surgery Mapping",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "surgery",

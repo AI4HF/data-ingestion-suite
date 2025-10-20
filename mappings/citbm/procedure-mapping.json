@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/procedure-mapping",
   "name": "procedure-mapping",
   "title": "Procedure Mapping",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "procedure",

@@ -1,22 +1,21 @@
 {
-  "id": "patient",
+  "id": "condition",
   "resourceType": "StructureDefinition",
-  "url": "https://ai4hf.eu/fhir/schemas/citbm/Patient",
+  "url": "https://ai4hf.eu/fhir/schemas/citbm/Condition",
   "version": "latest",
-  "name": "Patient",
-  "description": "The detailed record of a patient.",
+  "name": "Condition",
   "status": "draft",
   "fhirVersion": "5.0.0",
   "kind": "logical",
   "abstract": false,
-  "type": "Patient",
+  "type": "Condition",
   "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
   "derivation": "specialization",
   "differential": {
     "element": [
       {
-        "id": "Patient",
-        "path": "Patient",
+        "id": "Condition",
+        "path": "Condition",
         "min": 0,
         "max": "*",
         "type": [
@@ -26,8 +25,8 @@
         ]
       },
       {
-        "id": "Patient.patientId",
-        "path": "Patient.patientId",
+        "id": "Condition.identifier",
+        "path": "Condition.identifier",
         "min": 0,
         "max": "1",
         "type": [
@@ -37,12 +36,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The patient's unique identifier within the project."
+        ]
       },
       {
-        "id": "Patient.gender",
-        "path": "Patient.gender",
+        "id": "Condition.subject",
+        "path": "Condition.subject",
         "min": 0,
         "max": "1",
         "type": [
@@ -52,42 +50,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The gender of the patient (e.g., male, female)."
+        ]
       },
       {
-        "id": "Patient.birthDate",
-        "path": "Patient.birthDate",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ],
-        "definition": "The birthdate of the patient."
-      },
-      {
-        "id": "Patient.deceasedDateTime",
-        "path": "Patient.deceasedDateTime",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ],
-        "definition": "The deceased date time of the patient."
-      },
-      {
-        "id": "Patient.ethnicity",
-        "path": "Patient.ethnicity",
+        "id": "Condition.encounter",
+        "path": "Condition.encounter",
         "min": 0,
         "max": "1",
         "type": [
@@ -97,12 +64,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The ethnicity of the patient."
+        ]
       },
       {
-        "id": "Patient.city",
-        "path": "Patient.city",
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
         "min": 0,
         "max": "1",
         "type": [
@@ -112,12 +78,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The city of the patient's address."
+        ]
       },
       {
-        "id": "Patient.district",
-        "path": "Patient.district",
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
         "min": 0,
         "max": "1",
         "type": [
@@ -127,12 +92,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The district of the patient's address."
+        ]
       },
       {
-        "id": "Patient.postalCode",
-        "path": "Patient.postalCode",
+        "id": "Condition.severity",
+        "path": "Condition.severity",
         "min": 0,
         "max": "1",
         "type": [
@@ -142,8 +106,63 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "The postal code of the patient's address."
+        ]
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.onsetDataTime",
+        "path": "Condition.onsetDataTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.abatementDateTime",
+        "path": "Condition.abatementDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.sta",
+        "path": "Condition.sta",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
       }
     ]
   }

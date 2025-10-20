@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
   "name": "medication-administration-mapping",
   "title": "The medication administration",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "medication",

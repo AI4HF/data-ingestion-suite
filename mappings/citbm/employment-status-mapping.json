@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/employment-status-mapping",
   "name": "employment-status-mapping",
   "title": "Employment Status",
-  "isDraft": false,
+  "isDraft": true,
   "source": [
     {
       "alias": "demographics",

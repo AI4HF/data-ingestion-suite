@@ -12,18 +12,7 @@
     }
   ],
   "context": {},
-  "variable": [
-    {
-      "name": "causeOfDeathCode",
-      "language": "text/fhirpath",
-      "expression": "iif(dx_causa_final.hasValue(), dx_causa_final, iif(dx_causa_intermed.hasValue(), dx_causa_intermed, iif(dx_c.hasValue(), dx_c, iif(dx_causa_basica.hasValue(), dx_causa_basica, iif(dx_causa_contrib.hasValue(), dx_causa_contrib, iif(epi_dx_causa_final.hasValue(), epi_dx_causa_final, iif(epi_dx_causa_intermed.hasValue(), epi_dx_causa_intermed, iif(epi_dx_c.hasValue(), epi_dx_c, iif(Causa_basica.hasValue(), Causa_basica, epi_dx_causa_contrib)))))))))"
-    },
-    {
-      "name": "causeOfDeathDescription",
-      "language": "text/fhirpath",
-      "expression": "iif(desc_causa_final.hasValue(), desc_causa_final, iif(desc_causa_intermed.hasValue(), desc_causa_intermed, iif(desc_causa_c.hasValue(), desc_causa_c, iif(desc_causa_basica.hasValue(), desc_causa_basica, iif(desc_causa_contrib.hasValue(), desc_causa_contrib, iif(epi_desc_causa_final.hasValue(), epi_desc_causa_final, iif(epi_desc_causa_intermed.hasValue(), epi_desc_causa_intermed, iif(epi_desc_causa_c.hasValue(), epi_desc_causa_c, iif(descrip.hasValue(), descrip, epi_desc_causa_contrib)))))))))"
-    }
-  ],
+  "variable": [],
   "mapping": [
     {
       "description": "The death of the patient",
@@ -31,7 +20,7 @@
         "name": "death",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', cod_participante & 'Death')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-CauseOfDeath"
@@ -60,17 +49,17 @@
               }
             ]
           },
-          "effectiveDateTime": "{{FECHA_DEF.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('d.MM.yyyy')}}",
           "valueCodeableConcept": {
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "code": "{{%causeOfDeathCode}}",
-                "display": "{{%causeOfDeathDescription}}"
+                "code": "{{value}}",
+                "display": "{{display}}"
               }
             ]
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', cod_participante)}}"
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}"
         }
       }
     }

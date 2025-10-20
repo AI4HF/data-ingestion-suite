@@ -7,7 +7,7 @@
   "source": [
     {
       "alias": "medication",
-      "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/SmokingStatus",
       "joinOn": []
     }
   ],
@@ -17,36 +17,25 @@
       "url": "$CONTEXT_REPO/citbm/smoking-status.csv"
     }
   },
-  "variable": [
-    {
-      "name": "smokingStatus",
-      "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%smokingStatusContext, smoker.toString())"
-    }
-  ],
+  "variable": [],
   "mapping": [
     {
       "description": "The smoking status of patient.",
-      "precondition": {
-        "name": "smokingStatusExists",
-        "language": "text/fhirpath",
-        "expression": "%smokingStatus.hasValue()"
-      },
       "expression": {
         "name": "smokingStatus",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', Participant_code & Visita & 'Smoking Status')}}",
+          "id": "{{mpp:getHashedId('Observation', subject & encounter & 'Smoking Status')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus"
             ]
           },
           "resourceType": "Observation",
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',Participant_code & Visita.lower())}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',subject & encounter.lower())}}",
           "effectivePeriod": {
-            "start": "{{fecent.utl:toFhirDateTime()}}"
+            "start": "{{startDate.utl:toFhirDateTime()}}"
           },
           "category": [
             {
@@ -72,9 +61,9 @@
           "valueCodeableConcept": {
             "coding": [
               {
-                "system": "{{%smokingStatus.target_system}}",
-                "code": "{{%smokingStatus.target_code}}",
-                "display": "{{%smokingStatus.target_display}}"
+                "system": "http://snomed.info/sct",
+                "code": "77176002",
+                "display": "Smoker, current status unknown"
               }
             ]
           },

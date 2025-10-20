@@ -2,6 +2,7 @@
   "id": "vitalsigns",
   "resourceType": "StructureDefinition",
   "url": "https://ai4hf.eu/fhir/schemas/citbm/VitalSigns",
+  "version": "latest",
   "name": "VitalSigns",
   "description": "The vital signs of the patient.",
   "status": "draft",
@@ -25,8 +26,64 @@
         ]
       },
       {
-        "id": "VitalSigns.nro",
-        "path": "VitalSigns.nro",
+        "id": "VitalSigns.identifier",
+        "path": "VitalSigns.identifier",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.subject",
+        "path": "VitalSigns.subject",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.encounter",
+        "path": "VitalSigns.encounter",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.effectiveDateTime",
+        "path": "VitalSigns.effectiveDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.PAS",
+        "path": "VitalSigns.PAS",
         "min": 0,
         "max": "1",
         "type": [
@@ -37,28 +94,12 @@
             ]
           }
         ],
-        "short": "Patient's correlative number",
-        "definition": "The patient's ordered number, such as 0, 1, 2, etc."
+        "definition": "Systolic blood pressure",
+        "short": "Systolic blood pressure"
       },
       {
-        "id": "VitalSigns.PACIENTE",
-        "path": "VitalSigns.PACIENTE",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Patient's full name",
-        "definition": "The full name of the patient, including first name and surname."
-      },
-      {
-        "id": "VitalSigns.TIP_DOC",
-        "path": "VitalSigns.TIP_DOC",
+        "id": "VitalSigns.PAD",
+        "path": "VitalSigns.PAD",
         "min": 0,
         "max": "1",
         "type": [
@@ -69,268 +110,12 @@
             ]
           }
         ],
-        "short": "Document type",
-        "definition": "The type of document used to identify the patient, fixed to 1."
+        "definition": "Diastolic blood pressure",
+        "short": "Diastolic blood pressure"
       },
       {
-        "id": "VitalSigns.NUM_DOC",
-        "path": "VitalSigns.NUM_DOC",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Document number",
-        "definition": "The document number."
-      },
-      {
-        "id": "VitalSigns.COD_Proyecto",
-        "path": "VitalSigns.COD_Proyecto",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Patient project identifier",
-        "definition": "The unique identifier for the patient within the project."
-      },
-      {
-        "id": "VitalSigns.Glag_Visita",
-        "path": "VitalSigns.Glag_Visita",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Encounter number",
-        "definition": "The encounter number for the patient, such as 1, 2, 3, etc."
-      },
-      {
-        "id": "VitalSigns.Visita",
-        "path": "VitalSigns.Visita",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Visit identifier",
-        "definition": "The identifier for the patient's encounter or visit, such as 'visit1', 'visit6', etc."
-      },
-      {
-        "id": "VitalSigns.EDAD",
-        "path": "VitalSigns.EDAD",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Patient's age",
-        "definition": "The age of the patient as of the day of care."
-      },
-      {
-        "id": "VitalSigns.SEXO",
-        "path": "VitalSigns.SEXO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Patient's gender",
-        "definition": "The gender of the patient."
-      },
-      {
-        "id": "VitalSigns.FEC_NAC",
-        "path": "VitalSigns.FEC_NAC",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "dateTime",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
-            ]
-          }
-        ],
-        "short": "Patient's birthdate",
-        "definition": "The birthdate of the patient."
-      },
-      {
-        "id": "VitalSigns.ACTO_MEDICO",
-        "path": "VitalSigns.ACTO_MEDICO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Medical record number",
-        "definition": "The medical record number of the patient."
-      },
-      {
-        "id": "VitalSigns.COD_AREA",
-        "path": "VitalSigns.COD_AREA",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Area code",
-        "definition": "The code of the area where care was provided."
-      },
-      {
-        "id": "VitalSigns.AREA",
-        "path": "VitalSigns.AREA",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Area name",
-        "definition": "The name of the area where care was provided."
-      },
-      {
-        "id": "VitalSigns.COD_SERVICIO",
-        "path": "VitalSigns.COD_SERVICIO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Service code",
-        "definition": "The code of the service where care was provided."
-      },
-      {
-        "id": "VitalSigns.SERVICIO",
-        "path": "VitalSigns.SERVICIO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Service name",
-        "definition": "The name of the service where care was provided."
-      },
-      {
-        "id": "VitalSigns.FECHA_ATENCION",
-        "path": "VitalSigns.FECHA_ATENCION",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Care date",
-        "definition": "The date when the care was provided."
-      },
-      {
-        "id": "VitalSigns.P_A_S",
-        "path": "VitalSigns.P_A_S",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Systolic blood pressure",
-        "definition": "The systolic blood pressure of the patient."
-      },
-      {
-        "id": "VitalSigns.P_A_D",
-        "path": "VitalSigns.P_A_D",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Diastolic blood pressure",
-        "definition": "The diastolic blood pressure of the patient."
-      },
-      {
-        "id": "VitalSigns.PULSO",
-        "path": "VitalSigns.PULSO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Heart rate",
-        "definition": "The patient's pulse or heart rate."
-      },
-      {
-        "id": "VitalSigns.T",
-        "path": "VitalSigns.T",
+        "id": "VitalSigns.PESO",
+        "path": "VitalSigns.PESO",
         "min": 0,
         "max": "1",
         "type": [
@@ -341,56 +126,8 @@
             ]
           }
         ],
-        "short": "Body temperature",
-        "definition": "The body temperature of the patient."
-      },
-      {
-        "id": "VitalSigns.sigvitresp",
-        "path": "VitalSigns.sigvitresp",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Respiratory rate",
-        "definition": "The respiratory rate of the patient."
-      },
-      {
-        "id": "VitalSigns.SAT_O2",
-        "path": "VitalSigns.SAT_O2",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Oxygen saturation",
-        "definition": "The oxygen saturation level in the patient's blood."
-      },
-      {
-        "id": "VitalSigns.PESO",
-        "path": "VitalSigns.PESO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
-            ]
-          }
-        ],
-        "short": "Weight",
-        "definition": "The weight of the patient."
+        "definition": "Body weight",
+        "short": "Weight"
       },
       {
         "id": "VitalSigns.TALLA",
@@ -399,82 +136,18 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ],
-        "short": "Height",
-        "definition": "The height of the patient."
+        "definition": "Body height",
+        "short": "Height"
       },
       {
-        "id": "VitalSigns.P_V_C",
-        "path": "VitalSigns.P_V_C",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Central venous pressure",
-        "definition": "The central venous pressure (CVP) of the patient."
-      },
-      {
-        "id": "VitalSigns.PER_ABD",
-        "path": "VitalSigns.PER_ABD",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Abdominal circumference",
-        "definition": "The circumference of the patient's abdomen."
-      },
-      {
-        "id": "VitalSigns.Esc_Dolor",
-        "path": "VitalSigns.Esc_Dolor",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Pain scale",
-        "definition": "The patient's pain level."
-      },
-      {
-        "id": "VitalSigns.FIO2",
-        "path": "VitalSigns.FIO2",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "short": "Fraction of inspired oxygen",
-        "definition": "The fraction of inspired oxygen (FiO2) delivered to the patient."
-      },
-      {
-        "id": "VitalSigns.GLASGOW",
-        "path": "VitalSigns.GLASGOW",
+        "id": "VitalSigns.BSA",
+        "path": "VitalSigns.BSA",
         "min": 0,
         "max": "1",
         "type": [
@@ -485,24 +158,24 @@
             ]
           }
         ],
-        "short": "Glasgow Coma Scale",
-        "definition": "The patient's score on the Glasgow Coma Scale, which assesses consciousness."
+        "definition": "Body surface area",
+        "short": "BSA"
       },
       {
-        "id": "VitalSigns.MSA",
-        "path": "VitalSigns.MSA",
+        "id": "VitalSigns.BMI",
+        "path": "VitalSigns.BMI",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ],
-        "short": "Body Surface Are",
-        "definition": "The patient's body surface area."
+        "definition": "Body mass index (BMI) ",
+        "short": "BMI"
       }
     ]
   }
