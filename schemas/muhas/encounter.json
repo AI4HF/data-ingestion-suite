@@ -1,0 +1,110 @@
+{
+  "id": "encounter",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/Encounter",
+  "version": "latest",
+  "name": "Encounter",
+  "description": "The schema of MUHAS Encounter data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter",
+        "path": "Encounter",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Encounter.pid",
+        "path": "Encounter.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "Encounter.visit",
+        "path": "Encounter.visit",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "Encounter.startDate",
+        "path": "Encounter.startDate",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The start date of the encounter in the following format yyyy-MM-dd HH:mm",
+        "short": "Start Date"
+      },
+      {
+        "id": "Encounter.endDate",
+        "path": "Encounter.endDate",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The end date of the encounter in the following format yyyy-MM-dd HH:mm:ss",
+        "short": "End Date"
+      },
+      {
+        "id": "Encounter.fromEMD",
+        "path": "Encounter.fromEMD",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/boolean"
+            ]
+          }
+        ],
+        "definition": "Whether the patient is admitted from the emergency department.",
+        "short": "From Emergency Department"
+      }
+    ]
+  }
+}

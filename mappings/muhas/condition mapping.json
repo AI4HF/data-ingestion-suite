@@ -1,0 +1,58 @@
+{
+  "id": "condition mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/ConditionMapping",
+  "name": "Condition Mapping",
+  "title": "The mapping of the MUHAS Condition data into AI4HF Condition profile.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "condition",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/Condition",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The AI4HF Condition profile.",
+      "expression": {
+        "name": "condition",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Condition', pid & date & icd10_code)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
+            ]
+          },
+          "resourceType": "Condition",
+          "code": {
+            "coding": [
+              {
+                "code": "{{icd10_code}}",
+                "system": "http://hl7.org/fhir/sid/icd-10",
+                "display": "{{display}}",
+                "@sliceName": "icd10Code"
+              }
+            ]
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', visit.toString())}}",
+          "onsetDateTime": "{{iif(date.length() = 10,date.utl:toFhirDateTime('yyyy-MM-dd'),date.utl:toFhirDateTime('yyyy-MM-dd HH:mm'))}}",
+          "clinicalStatus": "{{utl:createFhirCodeableConcept('http://hl7.org/fhir/ValueSet/condition-clinical', 'active', 'Active')}}",
+          "category": [
+            {
+              "{{#categoryVar}}": "{{iif(visit.exists(),true,{})}}",
+              "{{?}}": {
+                "coding": [
+                  "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

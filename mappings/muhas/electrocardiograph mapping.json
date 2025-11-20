@@ -1,0 +1,108 @@
+{
+  "id": "electrocardiograph mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/ElectrocardiographMapping",
+  "name": "Electrocardiograph Mapping",
+  "title": "The mapping of the MUHAS Electrocardiograph data into AI4HF Electrocardiograph profile.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "electrocardiograph",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/Electrocardiograph",
+      "joinOn": []
+    }
+  ],
+  "context": {
+    "ecgRhythmType": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/muhas/ecg-rhythm-type.csv"
+    }
+  },
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The AI4HF Electrocardiograph profile.",
+      "expression": {
+        "name": "electrocardiograph",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & date & 'ECG')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Electrocardiograph"
+            ]
+          },
+          "resourceType": "Observation",
+          "code": {
+            "coding": [
+              {
+                "code": "34534-8",
+                "system": "http://loinc.org",
+                "display": "12 lead EKG panel",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "component": [
+            {
+              "code": "{{utl:createFhirCodeableConcept('http://loinc.org','8633-0' , 'QRS duration')}}",
+              "valueQuantity": {
+                "code": "ms",
+                "system": "http://unitsofmeasure.org",
+                "value": "{{qrs_duration}}",
+                "unit": "millisecond"
+              },
+              "@sliceName": "qrsDuration"
+            },
+            {
+              "code": "{{utl:createFhirCodeableConcept('http://loinc.org','8632-2' , 'QRS axis')}}",
+              "valueQuantity": {
+                "code": "deg",
+                "system": "http://unitsofmeasure.org",
+                "value": "{{r_axis}}",
+                "unit": "degree"
+              },
+              "@sliceName": "rAxis"
+            },
+            {
+              "code": "{{utl:createFhirCodeableConcept('https://datatools4heart.eu/fhir/CodeSystem/qt-correction-formula','bazett' , 'Bazett')}}",
+              "valueQuantity": {
+                "code": "ms",
+                "system": "http://unitsofmeasure.org",
+                "value": "{{QTIntervalCorrectedBazett}}",
+                "unit": "millisecond"
+              },
+              "@sliceName": "qtIntervalCorrectedBazett"
+            },
+            {
+              "code": "{{utl:createFhirCodeableConcept('http://loinc.org','76281-5' , 'Rhythm Type')}}",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "code": "{{rhythmType}}",
+                    "system": "http://loinc.org",
+                    "display": "{{mpp:getConcept(%ecgRhythmType, rhythmType, 'target_display')}}"
+                  }
+                ]
+              },
+              "@sliceName": "typeOfRhythm"
+            },
+            {
+              "code": "{{utl:createFhirCodeableConcept('http://snomed.info/sct','52674009' , 'Shemia Without ST Elevation')}}",
+              "valueBoolean": "{{ischemiaWithoutStElevation}}",
+              "@sliceName": "ischemiaWithoutStElevation"
+            },
+            {
+              "code": "{{utl:createFhirCodeableConcept('http://snomed.info/sct','164931005' , 'ST elevation')}}",
+              "valueBoolean": "{{stElevation}}",
+              "@sliceName": "stElevation"
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm' | 'yyyy-MM-dd HH:mm:ss')}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}

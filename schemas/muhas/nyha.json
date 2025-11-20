@@ -1,0 +1,110 @@
+{
+  "id": "nyha",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/NYHA",
+  "version": "latest",
+  "name": "NYHA",
+  "description": "The schema of MUHAS NYHA data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "NYHA",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "NYHA",
+        "path": "NYHA",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "NYHA.pid",
+        "path": "NYHA.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "NYHA.visit",
+        "path": "NYHA.visit",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "NYHA.loinc_code",
+        "path": "NYHA.loinc_code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The Loinc Code which represent the NYHA.",
+        "short": "Loinc Code"
+      },
+      {
+        "id": "NYHA.display",
+        "path": "NYHA.display",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The display of the Loinc code.",
+        "short": "Loinc Display"
+      },
+      {
+        "id": "NYHA.date",
+        "path": "NYHA.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The date time when the NYHA is captured.",
+        "short": "Date"
+      }
+    ]
+  }
+}

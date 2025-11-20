@@ -1,0 +1,126 @@
+{
+  "id": "vitalsign",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/VitalSign",
+  "version": "latest",
+  "name": "VitalSign",
+  "description": "The schema of MUHAS Vital Sign data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "VitalSign",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "VitalSign",
+        "path": "VitalSign",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "VitalSign.pid",
+        "path": "VitalSign.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "VitalSign.visit",
+        "path": "VitalSign.visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "VitalSign.name",
+        "path": "VitalSign.name",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The name of the vital sign.",
+        "short": "Vital Sign Name"
+      },
+      {
+        "id": "VitalSign.value",
+        "path": "VitalSign.value",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ],
+        "definition": "Numeric value of the vital sign.",
+        "short": "Numeric Value"
+      },
+      {
+        "id": "VitalSign.unit",
+        "path": "VitalSign.unit",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unit of the vital sign.",
+        "short": "Unit"
+      },
+      {
+        "id": "VitalSign.date",
+        "path": "VitalSign.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The record date of the vital sign.",
+        "short": "Date"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "patient mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/PatientMapping",
+  "name": "Patient Mapping",
+  "title": "The mapping of the MUHAS patient data into AI4HF Patient profile.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/Patient",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The AI4HF Patient profile.",
+      "expression": {
+        "name": "patient",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Patient', pid)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Patient"
+            ]
+          },
+          "resourceType": "Patient",
+          "gender": "{{gender}}",
+          "birthDate": "{{? birthDate}}",
+          "deceasedDateTime": "{{? deceasedDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "name": [
+            {
+              "use": "official",
+              "text": "{{name}} {{surname}}",
+              "family": "{{surname}}",
+              "given": [
+                "{{name}}"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

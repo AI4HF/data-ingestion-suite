@@ -1,0 +1,126 @@
+{
+  "id": "symptom",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/Symptom",
+  "version": "latest",
+  "name": "Symptom",
+  "description": "The schema of MUHAS Symptom data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Symptom",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Symptom",
+        "path": "Symptom",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Symptom.pid",
+        "path": "Symptom.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "Symptom.visit",
+        "path": "Symptom.visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "Symptom.date",
+        "path": "Symptom.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ],
+        "definition": "The date when the symptom is captured.",
+        "short": "Date"
+      },
+      {
+        "id": "Symptom.snomed_code",
+        "path": "Symptom.snomed_code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The SNOMED code of the symptom.",
+        "short": "Snomed Code"
+      },
+      {
+        "id": "Symptom.display",
+        "path": "Symptom.display",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The display of the SNOMED code",
+        "short": "Display"
+      },
+      {
+        "id": "Symptom.category",
+        "path": "Symptom.category",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "Observation category assigned to the symptom such as exam.",
+        "short": "Observation Category"
+      }
+    ]
+  }
+}

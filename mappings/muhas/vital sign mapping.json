@@ -1,0 +1,382 @@
+{
+  "id": "vital sign mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/VitalSignMapping",
+  "name": "Vital Sign Mapping",
+  "title": "The mapping of the MUHAS vital sign data into AI4HF VitalSign profile.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "vitalSign",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/VitalSign",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The height of the patient.",
+      "precondition": {
+        "name": "heightExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'height'"
+      },
+      "expression": {
+        "name": "height",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8302-2",
+                "display": "Height",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The weight of the patient.",
+      "precondition": {
+        "name": "weightExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'weight'"
+      },
+      "expression": {
+        "name": "weight",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "29463-7",
+                "display": "Weight",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The BMI of the patient.",
+      "precondition": {
+        "name": "bmiExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'bmi'"
+      },
+      "expression": {
+        "name": "bmi",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "39156-5",
+                "display": "BMI",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The systolic blood pressure of the patient.",
+      "precondition": {
+        "name": "systolicBpExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'systolicBp'"
+      },
+      "expression": {
+        "name": "systolicBp",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8480-6",
+                "display": "Systolic Blood Pressure",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The diastolic blood pressure of the patient.",
+      "precondition": {
+        "name": "diastolicBpExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'diastolicBp'"
+      },
+      "expression": {
+        "name": "diastolicBp",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8462-4",
+                "display": "Diastolic Blood Pressure",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The heart rate of the patient.",
+      "precondition": {
+        "name": "heartRateExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'heartRate'"
+      },
+      "expression": {
+        "name": "heartRate",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8867-4",
+                "display": "Heart Rate",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    },
+    {
+      "description": "The oxygen saturation of the patient.",
+      "precondition": {
+        "name": "oxygenSaturationExists",
+        "language": "text/fhirpath",
+        "expression": "name = 'oxygenSaturation'"
+      },
+      "expression": {
+        "name": "oxygenSaturation",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', pid & name & date)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-VitalSign"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2708-6",
+                "display": "SpO2",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "{{unit}}",
+            "value": "{{value}}",
+            "unit": "{{unit}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}

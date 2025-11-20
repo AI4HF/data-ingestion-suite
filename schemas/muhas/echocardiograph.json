@@ -1,0 +1,94 @@
+{
+  "id": "echocardiograph",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/Echocardiograph",
+  "version": "latest",
+  "name": "Echocardiograph",
+  "description": "The schema of MUHAS Echocardiograph data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "Echocardiograph",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "Echocardiograph",
+        "path": "Echocardiograph",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "Echocardiograph.pid",
+        "path": "Echocardiograph.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique patient identifier.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "Echocardiograph.visit",
+        "path": "Echocardiograph.visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "Echocardiograph.date",
+        "path": "Echocardiograph.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "date",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/date"
+            ]
+          }
+        ],
+        "definition": "The date when echocardiograph is performed.",
+        "short": "Date"
+      },
+      {
+        "id": "Echocardiograph.lvef",
+        "path": "Echocardiograph.lvef",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ],
+        "definition": "The percentage of blood pumped out of the left ventricle with each heartbeat.",
+        "short": "Left Ventricular Ejection Fraction "
+      }
+    ]
+  }
+}

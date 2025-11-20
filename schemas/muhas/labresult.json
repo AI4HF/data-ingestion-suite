@@ -1,0 +1,126 @@
+{
+  "id": "labresult",
+  "resourceType": "StructureDefinition",
+  "url": "https://ai4hf.eu/fhir/schemas/muhas/LabResult",
+  "version": "latest",
+  "name": "LabResult",
+  "description": "The schema of MUHAS Lab Result data",
+  "status": "draft",
+  "fhirVersion": "5.0.0",
+  "kind": "logical",
+  "abstract": false,
+  "type": "LabResult",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Element",
+  "derivation": "specialization",
+  "differential": {
+    "element": [
+      {
+        "id": "LabResult",
+        "path": "LabResult",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Element"
+          }
+        ]
+      },
+      {
+        "id": "LabResult.pid",
+        "path": "LabResult.pid",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unique identifier of the patient.",
+        "short": "Patient Identifier"
+      },
+      {
+        "id": "LabResult.visit",
+        "path": "LabResult.visit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ],
+        "definition": "The sequential number of the patient's encounter (e.g., 1 for the first visit, 2 for the second, etc.).",
+        "short": "Visit Number"
+      },
+      {
+        "id": "LabResult.name",
+        "path": "LabResult.name",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The name of the lab result.",
+        "short": "Name"
+      },
+      {
+        "id": "LabResult.value",
+        "path": "LabResult.value",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ],
+        "definition": "The numeric value of lab result.",
+        "short": "Numeric Value"
+      },
+      {
+        "id": "LabResult.unit",
+        "path": "LabResult.unit",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ],
+        "definition": "The unit of the lab result.",
+        "short": "Unit"
+      },
+      {
+        "id": "LabResult.date",
+        "path": "LabResult.date",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/dateTime"
+            ]
+          }
+        ],
+        "definition": "The recorded date of lab result.",
+        "short": "Date"
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "medication mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/MedicationMapping",
+  "name": "Medication Mapping",
+  "title": "The mapping of the MUHAS Medication data into AI4HF MedicationAdministration profile.",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medication",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/Medication",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "description": "The AI4HF MedicationAdministration profile.",
+      "expression": {
+        "name": "medication",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('MedicationAdministration', pid & date & drug & dosage.toString() & unit)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+            ]
+          },
+          "resourceType": "MedicationAdministration",
+          "medication": {
+            "concept": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "{{atcCode}}",
+                  "display": "{{drug}}",
+                  "@sliceName": "atcCode"
+                }
+              ]
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "occurenceDateTime": "{{date.utl:toFhirDate('yyyy-MM-dd')}}",
+          "dosage": {
+            "dose": {
+              "value": "{{dosage}}",
+              "unit": "{{unit}}"
+            }
+          },
+          "status": "completed"
+        }
+      }
+    }
+  ]
+}
