@@ -1,6 +1,6 @@
 {
   "id": "muhas csv",
-  "name": "MUHAS CSV",
+  "name": "MUHAS_CSV",
   "description": "Converts the CSV Muhas data into FHIR profiles and writes them to the configured onFHIR instance.",
   "sourceSettings": {
     "csv": {
@@ -167,6 +167,19 @@
         "electrocardiograph": {
           "jsonClass": "FileSystemSource",
           "path": "ecg.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "csv"
+        }
+      }
+    },
+    {
+      "name": "medication-request-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/muhas/medication-request-mapping",
+      "sourceBinding": {
+        "medicationRequest": {
+          "jsonClass": "FileSystemSource",
+          "path": "med_req.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "csv"

@@ -1,0 +1,49 @@
+{
+  "id": "medication-request-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/muhas/medication-request-mapping",
+  "name": "medication-request-mapping",
+  "title": "Medication Request Mapping",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "medicationRequest",
+      "url": "https://ai4hf.eu/fhir/schemas/muhas/MedicationRequest",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "medicationRequest",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('MedicationRequest', pid & visit & date & atcCode & dosage.toString())}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
+            ]
+          },
+          "resourceType": "MedicationRequest",
+          "medication": {
+            "concept": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "{{atcCode}}",
+                  "display": "{{drug}}",
+                  "@sliceName": "atcCode"
+                }
+              ]
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "status": "completed",
+          "intent": "plan"
+        }
+      }
+    }
+  ]
+}
