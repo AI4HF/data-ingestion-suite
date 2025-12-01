@@ -41,7 +41,10 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
           "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
           "status": "completed",
-          "intent": "plan"
+          "intent": "plan",
+          "effectiveDosePeriod": {
+            "start": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}"
+          }
         }
       }
     }
