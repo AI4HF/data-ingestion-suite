@@ -38,7 +38,7 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', visit.toString())}}",
+          "encounter": "{{? mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString())}}",
           "onsetDateTime": "{{iif(date.length() = 10,date.utl:toFhirDateTime('yyyy-MM-dd'),date.utl:toFhirDateTime('yyyy-MM-dd HH:mm'))}}",
           "clinicalStatus": "{{utl:createFhirCodeableConcept('http://hl7.org/fhir/ValueSet/condition-clinical', 'active', 'Active')}}",
           "category": [
