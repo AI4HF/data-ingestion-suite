@@ -74,19 +74,6 @@
       }
     },
     {
-      "name": "document-reference-mapping",
-      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/document-reference-mapping",
-      "sourceBinding": {
-        "document": {
-          "jsonClass": "FileSystemSource",
-          "path": "DocumentReference.csv",
-          "contentType": "csv",
-          "options": {},
-          "sourceRef": "citbm"
-        }
-      }
-    },
-    {
       "name": "death-mapping",
       "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/death-mapping",
       "sourceBinding": {
@@ -161,22 +148,6 @@
           "contentType": "csv",
           "options": {},
           "preprocessSql": "WITH prods AS (\r\n    SELECT *, ROW_NUMBER() OVER (PARTITION BY Id_proyecto, procedimiento, Fecha ORDER BY Id_proyecto) AS rn\r\n    FROM procedure\r\n)\r\nSELECT *\r\nFROM prods\r\nWHERE rn = 1;\r\n",
-          "sourceRef": "citbm"
-        }
-      }
-    },
-    {
-      "name": "surgery-mapping",
-      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/surgery-mapping",
-      "sourceBinding": {
-        "surgery": {
-          "jsonClass": "FileSystemSource",
-          "path": "CentroQuirurgico.csv",
-          "contentType": "csv",
-          "options": {
-            "multiLine": "true",
-            "escape": "\""
-          },
           "sourceRef": "citbm"
         }
       }
