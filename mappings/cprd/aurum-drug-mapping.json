@@ -42,7 +42,7 @@
   ],
   "mapping": [
     {
-      "description": "The medication.",
+      "description": "The prescription.",
       "precondition": {
         "name": "medicationGroupExists",
         "language": "text/fhirpath",
@@ -52,13 +52,13 @@
         "name": "med",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('MedicationAdministration', issueid)}}",
+          "id": "{{mpp:getHashedId('MedicationRequest', issueid)}}",
           "meta": {
             "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
             ]
           },
-          "resourceType": "MedicationAdministration",
+          "resourceType": "MedicationRequest",
           "medication": {
             "concept": {
               "coding": {
@@ -69,11 +69,10 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
           "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.issuedate and $this.discharged >= %context.issuedate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
-          "occurenceDateTime": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-          "dosage": {
-            "dose": {
-              "value": "{{quantity}}"
-            }
+          "intent": "order",
+          "effectiveDosePeriod": {
+            "start": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+            "end": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy') + utl:createFhirQuantity(duration, 'd')}}"
           },
           "status": "unknown"
         }

@@ -119,6 +119,11 @@
       "name": "isObservationValid",
       "language": "text/fhirpath",
       "expression": " %patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %observationDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %observationDate,true)"
+    },
+    {
+      "name": "genericNyhaCode",
+      "language": "text/fhirpath",
+      "expression": " mpp:getConcept(%nyhaContext, medcodeid + '-' + value.toString()) "
     }
   ],
   "mapping": [
@@ -444,7 +449,7 @@
       "precondition": {
         "name": "isNyhaCode",
         "language": "text/fhirpath",
-        "expression": " %nyhaCode.exists() and obsdate.exists() and patid.exists() and obsid.exists() and %isObservationValid"
+        "expression": " (%nyhaCode.exists() or %genericNyhaCode.exists()) and obsdate.exists() and patid.exists() and obsid.exists() and %isObservationValid"
       },
       "expression": {
         "name": "nyha",
@@ -483,8 +488,8 @@
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{ %nyhaCode.target_code }}",
-                "display": "{{ %nyhaCode.target_name }}"
+                "code": "{{ iif(%nyhaCode.exists(),%nyhaCode.target_code,%genericNyhaCode.target_code) }}",
+                "display": "{{ iif(%nyhaCode.exists(),%nyhaCode.target_name,%genericNyhaCode.target_name) }}"
               }
             ]
           },
