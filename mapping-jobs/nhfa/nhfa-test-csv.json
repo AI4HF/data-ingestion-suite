@@ -1,0 +1,39 @@
+{
+  "id": "nhfa-test-csv",
+  "name": "nhfa-test-csv",
+  "description": "Executes NHFA mappings on the CSV test dataset and stores the results in the local onFHIR server.",
+  "sourceSettings": {
+    "file-system-csv": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "file-system-csv",
+      "sourceUri": "http://file-system-test-csv",
+      "dataFolderPath": "test-data/nhfa",
+      "asStream": false
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FhirRepositorySinkSettings",
+    "fhirRepoUrl": "http://localhost:8080/fhir",
+    "returnMinimal": true
+  },
+  "mappings": [
+    {
+      "name": "NHFA-v5",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/nhfa/NHFA-v5",
+      "sourceBinding": {
+        "nhfa": {
+          "jsonClass": "FileSystemSource",
+          "path": "nhfa.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system-csv"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}
