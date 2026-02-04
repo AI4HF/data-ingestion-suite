@@ -352,7 +352,7 @@
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', LDL.toDecimal(), 'mg/dl')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Ldl', LDL.toDecimal(), 'mg/dl')}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
