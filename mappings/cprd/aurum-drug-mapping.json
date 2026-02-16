@@ -72,7 +72,7 @@
           "intent": "order",
           "effectiveDosePeriod": {
             "start": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-            "end": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy') + utl:createFhirQuantity(duration, 'd')}}"
+            "end": "{{? iif(duration >= 0,issuedate.utl:toFhirDateTime('dd/MM/yyyy') + utl:createFhirQuantity(duration, 'd'),{})}}"
           },
           "status": "unknown"
         }
