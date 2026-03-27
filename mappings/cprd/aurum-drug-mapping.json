@@ -25,6 +25,13 @@
       "joinOn": [
         "patid"
       ]
+    },
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
     }
   ],
   "context": {
@@ -38,6 +45,16 @@
       "name": "medicationGroups",
       "language": "text/fhirpath",
       "expression": "mpp:getConcept(%medicationGroupContext, prodcodeid)"
+    },
+    {
+      "name": "drugDate",
+      "language": "text/fhirpath",
+      "expression": "issuedate.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "isBetweenPatientRegDates",
+      "language": "text/fhirpath",
+      "expression": "%patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %drugDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %drugDate,true)"
     }
   ],
   "mapping": [
@@ -46,7 +63,7 @@
       "precondition": {
         "name": "medicationGroupExists",
         "language": "text/fhirpath",
-        "expression": "%medicationGroups.exists()"
+        "expression": "%medicationGroups.exists() and %isBetweenPatientRegDates"
       },
       "expression": {
         "name": "med",
@@ -71,7 +88,7 @@
           "encounter": "{{? iif(%linkageEligibility.hes_e = 1,%encounter.select(iif($this.admidate <= %context.issuedate and $this.discharged >= %context.issuedate,mpp:createFhirReferenceWithHashedId('Encounter', ($this.patid + '-' + $this.spno)),{})).first(),{})}}",
           "intent": "order",
           "effectiveDosePeriod": {
-            "start": "{{issuedate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+            "start": "{{%drugDate}}",
             "end": "{{? iif(duration >= 0,issuedate.utl:toFhirDateTime('dd/MM/yyyy') + utl:createFhirQuantity(duration, 'd'),{})}}"
           },
           "status": "unknown"

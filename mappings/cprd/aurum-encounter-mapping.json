@@ -8,13 +8,38 @@
     {
       "alias": "consultation",
       "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-consultation",
-      "joinOn": []
+      "joinOn": [
+        "patid"
+      ]
+    },
+    {
+      "alias": "patient",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
+      "joinOn": [
+        "patid"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "encounterDate",
+      "language": "text/fhirpath",
+      "expression": "consdate.utl:toFhirDateTime('dd/MM/yyyy')"
+    },
+    {
+      "name": "isBetweenPatientRegDates",
+      "language": "text/fhirpath",
+      "expression": "%patient.regstartdate.utl:toFhirDateTime('dd/MM/yyyy') <= %encounterDate and iif(%patient.regenddate.exists(),%patient.regenddate.utl:toFhirDateTime('dd/MM/yyyy') >= %encounterDate,true)"
+    }
+  ],
   "mapping": [
     {
+      "precondition": {
+        "name": "medicationGroupExists",
+        "language": "text/fhirpath",
+        "expression": "%isBetweenPatientRegDates"
+      },
       "expression": {
         "name": "encounter",
         "language": "application/fhir-template+json",
@@ -39,8 +64,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', patid)}}",
           "actualPeriod": {
-            "start": "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-            "end": "{{consdate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+            "start": "{{%encounterDate}}",
+            "end": "{{%encounterDate}}"
           },
           "identifier": [
             {
