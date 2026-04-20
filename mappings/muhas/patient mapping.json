@@ -30,6 +30,11 @@
           "gender": "{{gender}}",
           "birthDate": "{{? birthDate}}",
           "deceasedDateTime": "{{? deceasedDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}",
+          "identifier": [
+            {
+              "value": "{{pid}}"
+            }
+          ],
           "name": [
             {
               "use": "official",

@@ -35,6 +35,11 @@
           "gender": "{{mpp:getConcept(%genderConceptMap, gender, 'target_code')}}",
           "birthDate": "{{birthDate.utl:toFhirDate('d.MM.yyyy')}}",
           "deceasedDateTime": "{{? deceasedDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "identifier": [
+            {
+              "value": "{{patientId}}"
+            }
+          ],
           "address": [
             {
               "use": "home",
