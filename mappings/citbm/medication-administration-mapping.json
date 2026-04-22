@@ -20,7 +20,7 @@
         "name": "medication",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('MedicationAdministration', Participant_code & Visita.lower() & ATC_codes & fecent)}}",
+          "id": "{{mpp:getHashedId('MedicationAdministration', identifier)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
@@ -38,8 +38,8 @@
               ]
             }
           },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', Participant_code)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', Participant_code & Visita.lower())}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
           "occurenceDateTime": "{{fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "dosage": {
             "dose": {

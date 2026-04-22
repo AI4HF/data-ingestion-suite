@@ -35,7 +35,7 @@
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',subject & encounter.lower())}}",
           "effectivePeriod": {
-            "start": "{{startDate.utl:toFhirDateTime()}}"
+            "start": "{{startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}"
           },
           "category": [
             {

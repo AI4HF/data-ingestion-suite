@@ -33,8 +33,8 @@
           },
           "resourceType": "Patient",
           "gender": "{{mpp:getConcept(%genderConceptMap, gender, 'target_code')}}",
-          "birthDate": "{{birthDate.utl:toFhirDate('d.MM.yyyy')}}",
-          "deceasedDateTime": "{{? deceasedDateTime.utl:toFhirDate('d.MM.yyyy')}}",
+          "birthDate": "{{birthDate.utl:toFhirDate('yyyy-MM-dd')}}",
+          "deceasedDateTime": "{{? deceasedDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
           "identifier": [
             {
               "value": "{{patientId}}"

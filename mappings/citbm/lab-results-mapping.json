@@ -59,13 +59,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": {
-            "system": "http://unitsofmeasure.org",
-            "code": "mmol/L",
-            "unit": "mmol/L",
-            "value": "{{Sodio.toDecimal()}}"
-          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Sodium', Sodio.toDecimal(), Unit_Sodio)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -76,7 +71,7 @@
       "precondition": {
         "name": "creatExists",
         "language": "text/fhirpath",
-        "expression": "CREAT_mg_dl.exists()"
+        "expression": "CREAT.exists()"
       },
       "expression": {
         "name": "creatinine",
@@ -111,8 +106,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Creatinine', CREAT_mg_dl.toDecimal(), 'mg/dl')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Creatinine', CREAT.toDecimal(), Unit_Creat)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -158,8 +153,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Hemoglobin', hb.toDecimal(), 'g/dl')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Hemoglobin', hb.toDecimal(), Unit_hb)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -170,7 +165,7 @@
       "precondition": {
         "name": "bunExists",
         "language": "text/fhirpath",
-        "expression": "UREAmg_dl.exists()"
+        "expression": "UREA.exists()"
       },
       "expression": {
         "name": "bun",
@@ -205,8 +200,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Bun', UREAmg_dl.toDecimal(), 'mg/dl')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Bun', UREA.toDecimal(), Unit_UREA)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -252,13 +247,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": {
-            "system": "http://unitsofmeasure.org",
-            "code": "mmol/L",
-            "unit": "mmol/L",
-            "value": "{{K.toDecimal()}}"
-          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Potassium', K.toDecimal(), Unit_K)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -269,7 +259,7 @@
       "precondition": {
         "name": "triGlyExists",
         "language": "text/fhirpath",
-        "expression": "TRIGLISERIDOS.exists()"
+        "expression": "TRIGLICERIDOS.exists() and Unit_Triglicerido.exists()"
       },
       "expression": {
         "name": "triGly",
@@ -304,8 +294,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', TRIGLISERIDOS.toDecimal(), 'mg/dl')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', TRIGLICERIDOS.toDecimal(), Unit_Triglicerido)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -351,8 +341,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Ldl', LDL.toDecimal(), 'mg/dl')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Ldl', LDL.toDecimal(), Unit_LDL)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -398,13 +388,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": {
-            "system": "http://unitsofmeasure.org",
-            "code": "pg/mL",
-            "unit": "pg/mL",
-            "value": "{{BNP.toDecimal()}}"
-          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'BNP', BNP.toDecimal(), Unit_BNP)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }
@@ -415,10 +400,10 @@
       "precondition": {
         "name": "troponinExists",
         "language": "text/fhirpath",
-        "expression": "troponin.exists()"
+        "expression": "troponin_t.exists()"
       },
       "expression": {
-        "name": "troponin",
+        "name": "troponin_t",
         "language": "application/fhir-template+json",
         "value": {
           "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-troponin')}}",
@@ -450,8 +435,8 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('d.MM.yyyy')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Troponin', troponin.toDecimal(), 'ng/mL')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Troponin', troponin_t.toDecimal(), Unit_Troponin)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
         }

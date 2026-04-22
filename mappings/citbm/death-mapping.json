@@ -49,7 +49,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('d.MM.yyyy')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd')}}",
           "valueCodeableConcept": {
             "coding": [
               {
