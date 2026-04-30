@@ -53,6 +53,11 @@
               }
             }
           },
+          "serviceType": [
+            {
+              "concept": "{{utl:createFhirCodeableConcept('http://snomed.info/sct', '394579002', 'Cardiology')}}"
+            }
+          ],
           "status": "completed"
         }
       }
