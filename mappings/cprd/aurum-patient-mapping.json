@@ -53,6 +53,13 @@
                   }
                 ]
               }
+            },
+            {
+              "url": "https://datatools4heart.eu/fhir/StructureDefinition/HFR-RegistrationPeriod",
+              "valuePeriod": {
+                "start": "{{regstartdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+                "end": "{{? regenddate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+              }
             }
           ]
         }
