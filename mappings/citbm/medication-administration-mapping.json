@@ -3,7 +3,7 @@
   "url": "https://ai4hf.eu/fhir/mappings/citbm/medication-administration-mapping",
   "name": "medication-administration-mapping",
   "title": "The medication administration",
-  "isDraft": true,
+  "isDraft": false,
   "source": [
     {
       "alias": "medication",
@@ -11,8 +11,19 @@
       "joinOn": []
     }
   ],
-  "context": {},
-  "variable": [],
+  "context": {
+    "medicationContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/medication-atc-dosage.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "medication",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%medicationContext, name)"
+    }
+  ],
   "mapping": [
     {
       "description": "Medication administration",
@@ -32,7 +43,8 @@
               "coding": [
                 {
                   "system": "http://www.whocc.no/atc",
-                  "code": "{{ATC_codes}}",
+                  "code": "{{%medication.target_code}}",
+                  "display": "{{%medication.target_display}}",
                   "@sliceName": "atcCode"
                 }
               ]
@@ -40,10 +52,11 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "occurenceDateTime": "{{fecent.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "occurenceDateTime": "{{startDate.utl:toFhirDateTime('dd/MM/yyyy')}}",
           "dosage": {
             "dose": {
-              "value": "{{? movcntmat.toDecimal()}}"
+              "value": "{{iif(%medication.dosage.exists(),%medication.dosage.toDecimal() * dosageValue,dosageValue)}}",
+              "unit": "{{iif(%medication.dosage_unit.exists(),%medication.dosage_unit,dosageUnit)}}"
             }
           },
           "status": "completed"

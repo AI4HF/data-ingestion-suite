@@ -1,0 +1,12 @@
+source_code,target_code,target_display,target_system
+Sinus,LA17718-0,Sinus rhythm,http://loinc.org
+sinus,LA17718-0,Sinus rhythm,http://loinc.org
+Atrial fibrillation,LA17084-7,Atrial fibrillation,http://loinc.org
+atrial fibrillation,LA17084-7,Atrial fibrillation,http://loinc.org
+junctional,LA17090-4,Junctional,http://loinc.org
+atrial flutter,LA17085-4,Atrial flutter,http://loinc.org
+pacemaker,LA17059-9,Other (not listed),http://loinc.org
+Pacemaker,LA17059-9,Other (not listed),http://loinc.org
+Taquicardia ventricular,LA17059-9,Other (not listed),http://loinc.org
+ventricular,LA17059-9,Other (not listed),http://loinc.org
+supraventricular,LA17059-9,Other (not listed),http://loinc.org

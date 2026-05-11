@@ -39,20 +39,6 @@
         ]
       },
       {
-        "id": "Prescription.NRO",
-        "path": "Prescription.NRO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ]
-      },
-      {
         "id": "Prescription.subject",
         "path": "Prescription.subject",
         "min": 0,
@@ -87,9 +73,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "integer",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]
@@ -101,9 +87,9 @@
         "max": "1",
         "type": [
           {
-            "code": "date",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -171,9 +157,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "integer",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]
@@ -209,6 +195,34 @@
       {
         "id": "Prescription.dosageSystem",
         "path": "Prescription.dosageSystem",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Prescription.ATCcode",
+        "path": "Prescription.ATCcode",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Prescription.name",
+        "path": "Prescription.name",
         "min": 0,
         "max": "1",
         "type": [

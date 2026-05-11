@@ -11,15 +11,26 @@
       "joinOn": []
     }
   ],
-  "context": {},
-  "variable": [],
+  "context": {
+    "prescriptionFrequencyContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/prescription-frequency.csv"
+    }
+  },
+  "variable": [
+    {
+      "name": "frequencyCount",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%prescriptionFrequencyContext, frequency , 'target_count').toDecimal()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
         "name": "medicationRequest",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('MedicationRequest', subject & encounter & startDate & code)}}",
+          "id": "{{mpp:getHashedId('MedicationRequest', subject & encounter & startDate & ATCcode)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
@@ -31,7 +42,8 @@
               "coding": [
                 {
                   "system": "http://www.whocc.no/atc",
-                  "code": "{{code}}",
+                  "code": "{{ATCcode}}",
+                  "display": "{{name}}",
                   "@sliceName": "atcCode"
                 }
               ]
@@ -42,8 +54,35 @@
           "status": "completed",
           "intent": "order",
           "effectiveDosePeriod": {
-            "start": "{{startDate.utl:toFhirDate('yyyy-MM-dd')}}"
-          }
+            "start": "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}"
+          },
+          "dosageInstruction": [
+            {
+              "timing": {
+                "repeat": {
+                  "boundsDuration": {
+                    "system": "http://unitsofmeasure.org",
+                    "code": "d",
+                    "value": "{{dosageValue / %frequencyCount}}",
+                    "unit": "days"
+                  },
+                  "frequency": "{{%frequencyCount}}",
+                  "period": 1,
+                  "periodUnit": "d"
+                }
+              },
+              "doseAndRate": [
+                {
+                  "doseQuantity": {
+                    "system": "http://unitsofmeasure.org",
+                    "code": "tbl",
+                    "value": 1,
+                    "unit": "tablet"
+                  }
+                }
+              ]
+            }
+          ]
         }
       }
     }

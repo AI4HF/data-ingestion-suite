@@ -181,6 +181,34 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Medication.ATCcode",
+        "path": "Medication.ATCcode",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.name",
+        "path": "Medication.name",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
       }
     ]
   }

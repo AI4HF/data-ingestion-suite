@@ -13,7 +13,12 @@
       ]
     }
   ],
-  "context": {},
+  "context": {
+    "ecgRhythmType": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/ecg-rhythm-type.csv"
+    }
+  },
   "variable": [],
   "mapping": [
     {
@@ -82,6 +87,138 @@
                 }
               },
               "@sliceName": "rAxis"
+            },
+            {
+              "{{#componentVar}}": "{{iif(QTinterval.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "8634-8",
+                      "system": "http://loinc.org",
+                      "@sliceName": "loincCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "ms",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{QTinterval.toDecimal()}}",
+                  "unit": "millisecond"
+                }
+              },
+              "@sliceName": "qtInterval"
+            },
+            {
+              "{{#componentVar}}": "{{iif(ventricularRate.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "VentricularRate",
+                      "system": "https://datatools4heart.eu/fhir/CodeSystem/ecg-parameter",
+                      "@sliceName": "hfrCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "/min",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{ventricularRate}}",
+                  "unit": "/min"
+                }
+              },
+              "@sliceName": "ventricularRate"
+            },
+            {
+              "{{#componentVar}}": "{{iif(atrialRate.hasValue() and atrialRate.convertsToDecimal(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "AtrialRate",
+                      "system": "https://datatools4heart.eu/fhir/CodeSystem/ecg-parameter",
+                      "@sliceName": "hfrCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "{beats}/min",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{atrialRate.toDecimal()}}",
+                  "unit": "heart beats per minute"
+                }
+              },
+              "@sliceName": "atrialRate"
+            },
+            {
+              "{{#componentVar}}": "{{iif(PRinterval.hasValue() and PRinterval.convertsToDecimal(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "8625-6",
+                      "system": "http://loinc.org",
+                      "@sliceName": "loincCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "code": "ms",
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{PRinterval.toDecimal()}}",
+                  "unit": "millisecond"
+                }
+              },
+              "@sliceName": "prInterval"
+            },
+            {
+              "{{#componentVar}}": "{{iif(QTintervalCorrectedFormula = 'Fridericia I2 / ( (60 / O2) ^ (1/3) )' and QTintervalCorrected.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "frederica",
+                      "system": "https://datatools4heart.eu/fhir/CodeSystem/qt-correction-formula",
+                      "@sliceName": "fredericaCode"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "system": "http://unitsofmeasure.org",
+                  "value": "{{QTintervalCorrected.toDecimal()}}",
+                  "code": "ms",
+                  "unit": "millisecond"
+                }
+              },
+              "@sliceName": "qtIntervalCorrectedFrederica"
+            },
+            {
+              "{{#componentVar}}": "{{iif(rawRhythm.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "code": "76281-5",
+                      "system": "http://loinc.org",
+                      "@sliceName": "loincCode"
+                    }
+                  ]
+                },
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "{{#rhythm}}": "{{mpp:getConcept(%ecgRhythmType, rawRhythm)}}",
+                      "{{?}}": {
+                        "code": "{{%rhythm.target_code}}",
+                        "system": "{{%rhythm.target_system}}",
+                        "display": "{{%rhythm.target_display}}"
+                      }
+                    }
+                  ]
+                }
+              },
+              "@sliceName": "typeOfRhythm"
             }
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
