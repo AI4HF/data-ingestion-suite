@@ -9,19 +9,35 @@
       "alias": "patient",
       "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-patient",
       "joinOn": [
-        "patid"
+        "patid",
+        "pracid"
+      ]
+    },
+    {
+      "alias": "practice",
+      "url": "https://ai4hf.eu/fhir/schemas/cprd/Aurum-practice",
+      "joinOn": [
+        null,
+        "pracid"
       ]
     },
     {
       "alias": "hesPatient",
       "url": "https://ai4hf.eu/fhir/schemas/cprd/Hes-patient",
       "joinOn": [
-        "patid"
+        "patid",
+        null
       ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "minDate",
+      "language": "text/fhirpath",
+      "expression": "(regenddate.utl:toFhirDateTime('dd/MM/yyyy') | %practice.lcd.utl:toFhirDateTime('dd/MM/yyyy')).min()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
@@ -57,8 +73,8 @@
             {
               "url": "https://datatools4heart.eu/fhir/StructureDefinition/HFR-RegistrationPeriod",
               "valuePeriod": {
-                "start": "{{regstartdate.utl:toFhirDateTime('dd/MM/yyyy')}}",
-                "end": "{{? regenddate.utl:toFhirDateTime('dd/MM/yyyy')}}"
+                "start": "{{iif(%minDate = regenddate.utl:toFhirDateTime('dd/MM/yyyy'),regstartdate.utl:toFhirDateTime('dd/MM/yyyy'),%practice.lcd.utl:toFhirDateTime('dd/MM/yyyy'))}}",
+                "end": "{{? %minDate}}"
               }
             }
           ]

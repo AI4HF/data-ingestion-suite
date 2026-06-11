@@ -68,6 +68,13 @@
           "options": {},
           "sourceRef": "file-system"
         },
+        "practice": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumPractice.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
         "hesPatient": {
           "jsonClass": "FileSystemSource",
           "path": "HesPatient.csv",
@@ -118,6 +125,13 @@
         "encounter": {
           "jsonClass": "FileSystemSource",
           "path": "HesEncounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "file-system"
+        },
+        "patient": {
+          "jsonClass": "FileSystemSource",
+          "path": "AurumPatient.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "file-system"
