@@ -361,8 +361,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_ALB",
-        "path": "LabResults.Unit_ALB",
+        "id": "LabResults.Unit_ALB_mg_dl",
+        "path": "LabResults.Unit_ALB_mg_dl",
         "min": 0,
         "max": "1",
         "type": [

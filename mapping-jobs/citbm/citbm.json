@@ -211,6 +211,19 @@
           "sourceRef": "citbm"
         }
       }
+    },
+    {
+      "name": "catheterization-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/citbm/catheterization-mapping",
+      "sourceBinding": {
+        "catheterization": {
+          "jsonClass": "FileSystemSource",
+          "path": "Catheterization.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        }
+      }
     }
   ],
   "dataProcessingSettings": {

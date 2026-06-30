@@ -38,7 +38,7 @@
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "onsetDateTime": "{{onsetDataTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "onsetDateTime": "{{onsetDataTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}",
           "clinicalStatus": {
             "coding": [
               {

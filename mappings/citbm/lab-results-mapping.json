@@ -30,7 +30,7 @@
         "name": "sodium",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Sodium')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Sodium')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -77,7 +77,7 @@
         "name": "creatinine",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Creatinine')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Creatinine')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -124,7 +124,7 @@
         "name": "hemoglobin",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Hemoglobin')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Hemoglobin')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -171,7 +171,7 @@
         "name": "bun",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Bun')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Bun')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -218,7 +218,7 @@
         "name": "potassium",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-Potassium')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Potassium')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -265,7 +265,7 @@
         "name": "triGly",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-triGly')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-triGly')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -312,7 +312,7 @@
         "name": "ldl",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-ldl')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-ldl')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -359,7 +359,7 @@
         "name": "bnp",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-bnp')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-bnp')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -406,7 +406,7 @@
         "name": "troponin_t",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', subject & encounter & effectiveDateTime & 'LabResult-troponin')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-troponin')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"

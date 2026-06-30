@@ -1,0 +1,202 @@
+{
+  "id": "catheterization-mapping",
+  "url": "https://ai4hf.eu/fhir/mappings/citbm/catheterization-mapping",
+  "name": "catheterization-mapping",
+  "title": "Catheterization",
+  "isDraft": false,
+  "source": [
+    {
+      "alias": "catheterization",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Catheterization",
+      "joinOn": []
+    }
+  ],
+  "context": {},
+  "variable": [],
+  "mapping": [
+    {
+      "expression": {
+        "name": "catheterization",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{identifier}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-RightHeartCatheterization"
+            ]
+          },
+          "resourceType": "Observation",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "procedure",
+                  "display": "Procedure"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "78930-5",
+                "display": "Right heart catheterization performed",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime()}}",
+          "component": [
+            {
+              "{{#componentVar}}": "{{iif(Indice_Cardiaco_L_min_m2.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://datatools4heart.eu/fhir/CodeSystem/rhc-parameter",
+                      "code": "COi",
+                      "display": "Cardiac output index (COi)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{Indice_Cardiaco_L_min_m2}}",
+                  "unit": "L/min/m²"
+                }
+              },
+              "@sliceName": "rhcParameter"
+            },
+            {
+              "{{#componentVar}}": "{{iif(PCWP_mean_mmHg.hasValue(), true, {})}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://loinc.org",
+                      "code": "75994-4",
+                      "display": "Pulmonary artery wedge pressure (PCWP)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{PCWP_mean_mmHg}}",
+                  "unit": "mmHg"
+                }
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8414-5",
+                    "display": "Pulmonary artery Mean blood pressure (mPAP)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{PA_mean_mmHg}}",
+                "unit": "mmHg"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8385-7",
+                    "display": "Pulmonary artery Diastolic blood pressure (PADP)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{PA_diastolic_mmHg}}",
+                "unit": "mmHg"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8440-0",
+                    "display": "Pulmonary artery Systolic blood pressure (PASP)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{PA_systolic_mmHg}}",
+                "unit": "mmHg"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "60996-6",
+                    "display": "Right atrial pressure (RAP)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{RA_mean_mmHg}}",
+                "unit": "mmHg"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8741-1",
+                    "display": "Cardiac output (CO)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{Gasto_Cardiaco_Sistemico_L_min}}",
+                "unit": "L/min"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8831-0",
+                    "display": "Systemic vascular resistance (SVR)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{Resistencia_Vascular_Sistemica_U_Wood * 80}}",
+                "unit": "dyn·sec/cm5"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8828-6",
+                    "display": "Pulmonary vascular resistance (PVR)"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": "{{Resistencia_Vascular_Pulmonar_U_Wood * 80}}",
+                "unit": "dyn·sec/cm5"
+              }
+            }
+          ],
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "status": "final"
+        }
+      }
+    }
+  ]
+}

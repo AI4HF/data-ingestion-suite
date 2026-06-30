@@ -15,6 +15,10 @@
     "prescriptionFrequencyContext": {
       "category": "concept-map",
       "url": "$CONTEXT_REPO/citbm/prescription-frequency.csv"
+    },
+    "medicationAtcDosageContext": {
+      "category": "concept-map",
+      "url": "$CONTEXT_REPO/citbm/medication-atc-dosage.csv"
     }
   },
   "variable": [
@@ -22,6 +26,11 @@
       "name": "frequencyCount",
       "language": "text/fhirpath",
       "expression": "mpp:getConcept(%prescriptionFrequencyContext, frequency , 'target_count').toDecimal()"
+    },
+    {
+      "name": "medication",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%medicationAtcDosageContext, dosageSystem)"
     }
   ],
   "mapping": [
@@ -30,59 +39,66 @@
         "name": "medicationRequest",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('MedicationRequest', subject & encounter & startDate & ATCcode)}}",
-          "meta": {
-            "profile": [
-              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
-            ]
-          },
-          "resourceType": "MedicationRequest",
-          "medication": {
-            "concept": {
-              "coding": [
-                {
-                  "system": "http://www.whocc.no/atc",
-                  "code": "{{ATCcode}}",
-                  "display": "{{name}}",
-                  "@sliceName": "atcCode"
-                }
+          "{{#rootVar}}": "{{iif(dosageSystem.exists(),true)}}",
+          "{{?}}": {
+            "id": "{{mpp:getHashedId('MedicationRequest', identifier & startDate)}}",
+            "meta": {
+              "profile": [
+                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
               ]
-            }
-          },
-          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "status": "completed",
-          "intent": "order",
-          "effectiveDosePeriod": {
-            "start": "{{startDate.utl:toFhirDate('dd/MM/yyyy')}}"
-          },
-          "dosageInstruction": [
-            {
-              "timing": {
-                "repeat": {
-                  "boundsDuration": {
-                    "system": "http://unitsofmeasure.org",
-                    "code": "d",
-                    "value": "{{dosageValue / %frequencyCount}}",
-                    "unit": "days"
-                  },
-                  "frequency": "{{%frequencyCount}}",
-                  "period": 1,
-                  "periodUnit": "d"
-                }
-              },
-              "doseAndRate": [
-                {
-                  "doseQuantity": {
-                    "system": "http://unitsofmeasure.org",
-                    "code": "tbl",
-                    "value": 1,
-                    "unit": "tablet"
+            },
+            "resourceType": "MedicationRequest",
+            "medication": {
+              "concept": {
+                "coding": [
+                  {
+                    "system": "http://www.whocc.no/atc",
+                    "code": "{{%medication.target_code}}",
+                    "display": "{{dosageSystem}}",
+                    "@sliceName": "atcCode"
                   }
-                }
-              ]
-            }
-          ]
+                ]
+              }
+            },
+            "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+            "status": "completed",
+            "intent": "order",
+            "effectiveDosePeriod": {
+              "start": "{{startDate.utl:toFhirDate('dd/MM/yyyy' | 'yyyy-MM-dd')}}"
+            },
+            "dosageInstruction": [
+              {
+                "timing": {
+                  "{{#timingVar}}": "{{iif(%frequencyCount.hasValue() and dosageValue.hasValue() and dosageValue != 'INR', true)}}",
+                  "{{?}}": {
+                    "repeat": {
+                      "boundsDuration": {
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d",
+                        "value": "{{dosageValue / %frequencyCount}}",
+                        "unit": "days"
+                      },
+                      "frequency": "{{%frequencyCount}}",
+                      "period": 1,
+                      "periodUnit": "d"
+                    }
+                  }
+                },
+                "doseAndRate": [
+                  {
+                    "doseQuantity": {
+                      "{{#doseQuantityVar}}": "{{iif(%medication.dosage.exists() or (dosageValue.hasValue() and dosageValue != 'INR'),true)}}",
+                      "{{?}}": {
+                        "value": "{{iif(%medication.dosage.exists(),%medication.dosage.toDecimal(),dosageValue)}}",
+                        "unit": "{{iif(%medication.dosage_unit.exists(),%medication.dosage_unit,dosageUnit)}}"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
         }
       }
     }

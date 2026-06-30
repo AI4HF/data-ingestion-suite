@@ -55,8 +55,8 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "actualPeriod": {
-            "start": "{{? startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
-            "end": "{{? endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}"
+            "start": "{{? startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}",
+            "end": "{{? endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy').nav:orElse(startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy'))}}"
           },
           "status": "completed",
           "serviceType": [

@@ -81,8 +81,8 @@
         ]
       },
       {
-        "id": "ECG.QRSduration",
-        "path": "ECG.QRSduration",
+        "id": "ECG.QRSduration_milliseconds",
+        "path": "ECG.QRSduration_milliseconds",
         "min": 0,
         "max": "1",
         "type": [
@@ -101,9 +101,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -137,29 +137,29 @@
         ]
       },
       {
-        "id": "ECG.QTinterval",
-        "path": "ECG.QTinterval",
+        "id": "ECG.Qtinterval_milliseconds",
+        "path": "ECG.Qtinterval_milliseconds",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "ECG.QTintervalCorrected",
-        "path": "ECG.QTintervalCorrected",
+        "id": "ECG.QTintervalCorrected_milliseconds",
+        "path": "ECG.QTintervalCorrected_milliseconds",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -193,8 +193,8 @@
         ]
       },
       {
-        "id": "ECG.PRinterval",
-        "path": "ECG.PRinterval",
+        "id": "ECG.Printerval_milliseconds",
+        "path": "ECG.Printerval_milliseconds",
         "min": 0,
         "max": "1",
         "type": [
