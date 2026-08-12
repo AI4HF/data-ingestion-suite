@@ -374,7 +374,17 @@
             "value": "{{value}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}"
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "interpretation": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+                  "code": "{{iif(value > 0.1,'H','L')}}"
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -936,7 +946,17 @@
             "value": "{{value}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', pid)}}",
-          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}"
+          "encounter": "{{? iif(visit.exists(),mpp:createFhirReferenceWithHashedId('Encounter', pid & visit.toString()),{})}}",
+          "interpretation": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+                  "code": "{{iif(value > 600,'H','L')}}"
+                }
+              ]
+            }
+          ]
         }
       }
     },
