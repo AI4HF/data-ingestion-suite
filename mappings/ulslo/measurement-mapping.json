@@ -97,7 +97,18 @@
           "effectiveDateTime": "{{iif(measurement_datetime.empty(), measurement_date, measurement_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, measurement_concept_id.toString(), value_as_number, unit_concept_id.toString())}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.measurement_date and $this.visit_end_date >= %context.measurement_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}"
+          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.measurement_date and $this.visit_end_date >= %context.measurement_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
+          "interpretation": {
+            "{{#interpretationVar}}": "{{iif(measurement_concept_id = 40769783 or measurement_concept_id = 4020703 or measurement_concept_id = 3019800 or measurement_concept_id = 45882654 or measurement_concept_id = 40655960 or measurement_concept_id = 1014771 or measurement_concept_id = 37075779, true)}}",
+            "{{*}}": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+                  "code": "{{iif(unit_concept_id = 8725,iif(value_as_number > 14,'H','N'),{})}}"
+                }
+              ]
+            }
+          }
         }
       }
     },
