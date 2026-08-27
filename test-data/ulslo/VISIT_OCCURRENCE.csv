@@ -1,1 +1,6 @@
 visit_occurrence_id,person_id,visit_concept_id,visit_start_date,visit_start_datetime,visit_end_date,visit_end_datetime,visit_type_concept_id,provider_id,care_site_id,visit_source_value,visit_source_concept_id,admitted_from_concept_id,admitted_from_source_value,discharged_to_concept_id,discharged_to_source_value,preceding_visit_occurrence_id
+1,1,9201,2024-01-10,2024-01-10 08:00:00.000,2024-01-15,2024-01-15 12:00:00.000,44818517,,,,,,,,,
+2,1,9202,2024-04-02,2024-04-02 09:00:00.000,2024-04-02,2024-04-02 10:30:00.000,44818517,,,,,,,,,
+3,1,9203,2024-02-01,2024-02-01 20:00:00.000,2024-02-02,2024-02-02 01:00:00.000,44818517,,,,,,,,,
+4,1,9202,2024-02-15,2024-02-15 09:00:00.000,2024-02-15,2024-02-15 10:00:00.000,44818517,,,,,,,,,
+5,2,9201,2024-05-25,2024-05-25 10:00:00.000,2024-05-30,2024-05-30 14:00:00.000,44818517,,,,,,,,,

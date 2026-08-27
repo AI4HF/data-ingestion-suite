@@ -60,7 +60,8 @@
             },
             "dosage": {
               "dose": {
-                "value": "{{effective_drug_dose}}"
+                "value": "{{quantity}}",
+                "unit": "{{dose_unit_source_value}}"
               }
             },
             "status": "completed"
