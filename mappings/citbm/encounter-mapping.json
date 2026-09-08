@@ -26,6 +26,11 @@
       "name": "encounterClassConcept",
       "language": "text/fhirpath",
       "expression": "iif(admissionDestination.hasValue(), mpp:getConcept(%encounterClassConceptMap, admissionDestination), mpp:getConcept(%encounterClassConceptMap, 'CONSULTA EXTERNA'))"
+    },
+    {
+      "name": "serviceTypeConcept",
+      "language": "text/fhirpath",
+      "expression": "mpp:getConcept(%serviceTypeConceptMap, adminSource)"
     }
   ],
   "mapping": [
@@ -35,7 +40,7 @@
         "name": "encounter",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Encounter', subject & Visit.lower())}}",
+          "id": "{{mpp:getHashedId('Encounter', subject & identifier)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Encounter"
@@ -55,26 +60,26 @@
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
           "actualPeriod": {
-            "start": "{{? startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}",
-            "end": "{{? endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy').nav:orElse(startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy'))}}"
+            "start": "{{? startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
+            "end": "{{? endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').nav:orElse(startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd'))}}"
           },
-          "status": "completed",
           "serviceType": [
             {
-              "{{#serviceTypeVar}}": "{{iif(adminSource.hasValue(), true, {})}}",
+              "{{#serviceTypeVar}}": "{{iif(%serviceTypeConcept.hasValue(), true, {})}}",
               "{{?}}": {
                 "concept": {
                   "coding": [
                     {
                       "system": "http://snomed.info/sct",
-                      "code": "{{mpp:getConcept(%serviceTypeConceptMap, adminSource, 'target_code')}}",
-                      "display": "{{mpp:getConcept(%serviceTypeConceptMap, adminSource, 'target_display')}}"
+                      "code": "{{%serviceTypeConcept.target_code}}",
+                      "display": "{{%serviceTypeConcept.target_display}}"
                     }
                   ]
                 }
               }
             }
           ],
+          "status": "completed",
           "serviceProvider": {
             "{{#serviceProviderVar}}": "{{iif(admissionOrigin.hasValue(), true, {})}}",
             "{{?}}": "{{mpp:createFhirReferenceWithHashedId('Organization', admissionOrigin)}}"

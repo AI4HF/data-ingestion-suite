@@ -73,9 +73,9 @@
         "max": "1",
         "type": [
           {
-            "code": "dateTime",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/dateTime"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -95,8 +95,22 @@
         ]
       },
       {
-        "id": "SmokingStatus.code",
-        "path": "SmokingStatus.code",
+        "id": "SmokingStatus.smoking_status",
+        "path": "SmokingStatus.smoking_status",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "SmokingStatus.associated_condition_code",
+        "path": "SmokingStatus.associated_condition_code",
         "min": 0,
         "max": "1",
         "type": [

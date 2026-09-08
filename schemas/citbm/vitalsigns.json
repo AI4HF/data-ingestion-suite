@@ -32,9 +32,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "integer",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]
@@ -74,96 +74,16 @@
         "max": "1",
         "type": [
           {
-            "code": "date",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/date"
-            ]
-          }
-        ]
-      },
-      {
-        "id": "VitalSigns.PAS",
-        "path": "VitalSigns.PAS",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "definition": "Systolic blood pressure",
-        "short": "Systolic blood pressure"
-      },
-      {
-        "id": "VitalSigns.PAD",
-        "path": "VitalSigns.PAD",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "integer",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
-            ]
-          }
-        ],
-        "definition": "Diastolic blood pressure",
-        "short": "Diastolic blood pressure"
-      },
-      {
-        "id": "VitalSigns.PESO",
-        "path": "VitalSigns.PESO",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "decimal",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
-            ]
-          }
-        ],
-        "definition": "Body weight",
-        "short": "Weight"
-      },
-      {
-        "id": "VitalSigns.TALLA",
-        "path": "VitalSigns.TALLA",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "decimal",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/decimal"
-            ]
-          }
-        ],
-        "definition": "Body height",
-        "short": "Height"
-      },
-      {
-        "id": "VitalSigns.BSA",
-        "path": "VitalSigns.BSA",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "Body surface area",
-        "short": "BSA"
+        ]
       },
       {
-        "id": "VitalSigns.BMI",
-        "path": "VitalSigns.BMI",
+        "id": "VitalSigns.SBP_8480_6",
+        "path": "VitalSigns.SBP_8480_6",
         "min": 0,
         "max": "1",
         "type": [
@@ -173,9 +93,119 @@
               "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
-        ],
-        "definition": "Body mass index (BMI) ",
-        "short": "BMI"
+        ]
+      },
+      {
+        "id": "VitalSigns.DBP_8462_4",
+        "path": "VitalSigns.DBP_8462_4",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.Weight_29463_7",
+        "path": "VitalSigns.Weight_29463_7",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.Height_8302_2",
+        "path": "VitalSigns.Height_8302_2",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.BSA_8277_6",
+        "path": "VitalSigns.BSA_8277_6",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.BMI_39156_5",
+        "path": "VitalSigns.BMI_39156_5",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.MAP_mmHg",
+        "path": "VitalSigns.MAP_mmHg",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.PulsePressure_mmHg",
+        "path": "VitalSigns.PulsePressure_mmHg",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "VitalSigns.is_valid_BP",
+        "path": "VitalSigns.is_valid_BP",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
       }
     ]
   }

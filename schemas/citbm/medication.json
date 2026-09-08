@@ -37,8 +37,7 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "Identifier of medication administration."
+        ]
       },
       {
         "id": "Medication.subject",
@@ -52,8 +51,7 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "Patient id"
+        ]
       },
       {
         "id": "Medication.encounter",
@@ -67,12 +65,11 @@
               "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
-        ],
-        "definition": "Encounter id"
+        ]
       },
       {
-        "id": "Medication.Visita",
-        "path": "Medication.Visita",
+        "id": "Medication.visitNumber",
+        "path": "Medication.visitNumber",
         "min": 0,
         "max": "1",
         "type": [
@@ -183,6 +180,20 @@
         ]
       },
       {
+        "id": "Medication.ATC_code",
+        "path": "Medication.ATC_code",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
         "id": "Medication.name",
         "path": "Medication.name",
         "min": 0,
@@ -192,6 +203,76 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.is_inotrope",
+        "path": "Medication.is_inotrope",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.is_loop_diuretic",
+        "path": "Medication.is_loop_diuretic",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.is_immunosuppressive",
+        "path": "Medication.is_immunosuppressive",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.is_anticoagulant",
+        "path": "Medication.is_anticoagulant",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.is_opioid_sedation",
+        "path": "Medication.is_opioid_sedation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]

@@ -8,11 +8,26 @@
     {
       "alias": "echo",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Echo",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy' | 'yyyy-MM-dd' | 'd.MM.yyyy' | 'yyyy-MM-dd HH:mm:ss').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy' | 'yyyy-MM-dd' | 'd.MM.yyyy' | 'yyyy-MM-dd HH:mm:ss').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "The echocardiographs.",
@@ -53,7 +68,7 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy' | 'yyyy-MM-dd' | | 'd.MM.yyyy' | 'yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('MM/dd/yyyy' | 'yyyy-MM-dd' | 'd.MM.yyyy' | 'yyyy-MM-dd HH:mm:ss')}}",
           "component": [
             {
               "code": "{{utl:createFhirCodeableConcept('http://loinc.org', '8806-2', 'Left ventricular Ejection fraction by 2D echo')}}",
@@ -61,10 +76,40 @@
                 "value": "{{LVEF.toDecimal()}}"
               },
               "@sliceName": "echoParameter"
+            },
+            {
+              "{{#componentVar}}": "{{iif(E_A.exists(),true)}}",
+              "{{?}}": {
+                "code": "{{utl:createFhirCodeableConcept('http://loinc.org', '59129-7', 'Left ventricular E-wave/A-wave by US')}}",
+                "valueQuantity": {
+                  "value": "{{E_A.toDecimal()}}"
+                }
+              },
+              "@sliceName": "echoParameter"
+            },
+            {
+              "{{#componentVar}}": "{{iif(S_VD.exists(),true)}}",
+              "{{?}}": {
+                "code": "{{utl:createFhirCodeableConcept('http://loinc.org', '11712-7', 'Tricuspid valve Peak systolic flow velocity by US.doppler')}}",
+                "valueQuantity": {
+                  "value": "{{S_VD.toDecimal()}}"
+                }
+              },
+              "@sliceName": "echoParameter"
+            },
+            {
+              "{{#componentVar}}": "{{iif(FAC_VD.exists(),true)}}",
+              "{{?}}": {
+                "code": "{{utl:createFhirCodeableConcept('https://datatools4heart.eu/fhir/CodeSystem/echo-parameter', 'FAC', 'Fractional area change')}}",
+                "valueQuantity": {
+                  "value": "{{FAC_VD.toDecimal()}}"
+                }
+              },
+              "@sliceName": "echoParameter"
             }
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }

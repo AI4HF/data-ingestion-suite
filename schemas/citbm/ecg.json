@@ -101,9 +101,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -193,15 +193,15 @@
         ]
       },
       {
-        "id": "ECG.Printerval_milliseconds",
-        "path": "ECG.Printerval_milliseconds",
+        "id": "ECG.PRinterval_milliseconds",
+        "path": "ECG.PRinterval_milliseconds",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -213,9 +213,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -311,9 +311,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "integer",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/integer"
             ]
           }
         ]
@@ -510,6 +510,104 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.hasFlutter",
+        "path": "ECG.hasFlutter",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.hasPacedRhythm",
+        "path": "ECG.hasPacedRhythm",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.hasAVBlock",
+        "path": "ECG.hasAVBlock",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.hasNodalRhythm",
+        "path": "ECG.hasNodalRhythm",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.AV_Block_1st_degree",
+        "path": "ECG.AV_Block_1st_degree",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.Prolonged_QRS_flag",
+        "path": "ECG.Prolonged_QRS_flag",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ECG.Prolonged_QTc_flag",
+        "path": "ECG.Prolonged_QTc_flag",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]

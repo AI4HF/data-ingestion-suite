@@ -81,8 +81,8 @@
         ]
       },
       {
-        "id": "NYHA.value",
-        "path": "NYHA.value",
+        "id": "NYHA.nyha_class",
+        "path": "NYHA.nyha_class",
         "min": 0,
         "max": "1",
         "type": [
@@ -95,8 +95,22 @@
         ]
       },
       {
-        "id": "NYHA.display",
-        "path": "NYHA.display",
+        "id": "NYHA.nyha_ordinal",
+        "path": "NYHA.nyha_ordinal",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "integer",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/integer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "NYHA.associated_condition_code",
+        "path": "NYHA.associated_condition_code",
         "min": 0,
         "max": "1",
         "type": [

@@ -1,10 +1,12 @@
 source_code,source_unit,target_unit,conversion_function
-"Creatinine","mg/dl","mg/L","$this * 10"
+"Creatinine","mg/dL","mg/L","$this * 10"
 "Hemoglobin",g/dL,"g/L","$this * 10"
-"Bun","mg/dl","mmol/l","$this * 0.0555"
+"Bun","mg/dL","mmol/l","$this * 0.0555"
 "Triglyceride",mg/dL,"mmol/l","$this * 0.0555"
 "Ldl","mg/dL","mmol/l","$this * 0.0555"
 "Troponin","ng/mL","mcg/L","$this"
-"BNP","pg/mL ","pg/mL","$this"
+"NTproBNP","pg/mL","pg/mL","$this"
 "Sodium","mEq/L","mmol/L","$this"
 "Potassium","mEq/L","mmol/L","$this"
+"Bilirubin","mg/dL","mg/dL","$this"
+"ASAT","mg/dL","U/L",

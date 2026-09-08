@@ -8,17 +8,33 @@
     {
       "alias": "symptom",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Symptom",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
         "name": "symptom",
         "language": "application/fhir-template+json",
         "value": {
+          "id": "{{mpp:getHashedId('Observation', subject & encounter.lower() & Code)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom"
@@ -46,11 +62,10 @@
               }
             ]
           },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
           "valueBoolean": true,
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "id": "{{mpp:getHashedId('Observation', subject & encounter.lower() & Code)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }

@@ -73,9 +73,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "string",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/string"
             ]
           }
         ]
@@ -151,8 +151,8 @@
         ]
       },
       {
-        "id": "Encounter.Visit",
-        "path": "Encounter.Visit",
+        "id": "Encounter.visitNumber",
+        "path": "Encounter.visitNumber",
         "min": 0,
         "max": "1",
         "type": [

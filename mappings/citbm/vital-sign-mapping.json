@@ -8,18 +8,33 @@
     {
       "alias": "vitalSigns",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/VitalSigns",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "The weight of patient.",
       "precondition": {
         "name": "weightExists",
         "language": "text/fhirpath",
-        "expression": "PESO.hasValue() and PESO != 0"
+        "expression": "Weight_29463_7.hasValue() and Weight_29463_7 != 0"
       },
       "expression": {
         "name": "weight",
@@ -53,15 +68,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "kg",
-            "value": "{{PESO}}",
+            "value": "{{Weight_29463_7}}",
             "unit": "Kilogram"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }
@@ -71,7 +86,7 @@
       "precondition": {
         "name": "heightExists",
         "language": "text/fhirpath",
-        "expression": "TALLA.hasValue() and TALLA != 0"
+        "expression": "Height_8302_2.hasValue() and Height_8302_2 != 0"
       },
       "expression": {
         "name": "height",
@@ -105,15 +120,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "cm",
-            "value": "{{TALLA.toDecimal() * 100}}",
+            "value": "{{Height_8302_2.toDecimal()}}",
             "unit": "Centimeter"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }
@@ -123,7 +138,7 @@
       "precondition": {
         "name": "heightAndWeightExists",
         "language": "text/fhirpath",
-        "expression": "TALLA.hasValue() and TALLA != 0 and PESO.hasValue() and PESO != 0"
+        "expression": "Height_8302_2.hasValue() and Height_8302_2 != 0 and Weight_29463_7.hasValue() and Weight_29463_7 != 0"
       },
       "expression": {
         "name": "bmi",
@@ -157,15 +172,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
             "system": "http://unitsofmeasure.org",
             "code": "kg/m2",
-            "value": "{{PESO.toDecimal() / (TALLA.toDecimal() * TALLA.toDecimal())}}",
+            "value": "{{Weight_29463_7.toDecimal() / (Height_8302_2.toDecimal() * Height_8302_2.toDecimal())}}",
             "unit": "kg/m2"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }
@@ -175,7 +190,7 @@
       "precondition": {
         "name": "systolicBloodPressureExists",
         "language": "text/fhirpath",
-        "expression": "PAS.hasValue() and PAS != 0"
+        "expression": "SBP_8480_6.hasValue() and SBP_8480_6 != 0"
       },
       "expression": {
         "name": "systolicBloodPressure",
@@ -202,15 +217,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
-            "value": "{{PAS}}",
+            "value": "{{SBP_8480_6}}",
             "unit": "millimeters of mercury",
             "system": "http://unitsofmeasure.org",
             "code": "mm[Hg]"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final",
           "id": "{{mpp:getHashedId('Observation', subject & effectiveDateTime & encounter.lower() & 'Systolic Blood Pressure')}}",
           "meta": {
@@ -227,7 +242,7 @@
       "precondition": {
         "name": "diastolicBloodPressureExists",
         "language": "text/fhirpath",
-        "expression": "PAD.hasValue() and PAD != 0"
+        "expression": "DBP_8462_4.hasValue() and DBP_8462_4 != 0"
       },
       "expression": {
         "name": "diastolicBloodPressure",
@@ -254,15 +269,15 @@
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
-            "value": "{{PAD}}",
+            "value": "{{DBP_8462_4}}",
             "unit": "millimeters of mercury",
             "system": "http://unitsofmeasure.org",
             "code": "mm[Hg]"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final",
           "id": "{{mpp:getHashedId('Observation', subject & effectiveDateTime & encounter.lower() & 'Diastolic Blood Pressure')}}",
           "meta": {
@@ -279,7 +294,7 @@
       "precondition": {
         "name": "bodySurfaceAreaExists",
         "language": "text/fhirpath",
-        "expression": "BSA.hasValue() and BSA != 0"
+        "expression": "BSA_8277_6.hasValue() and BSA_8277_6 != 0"
       },
       "expression": {
         "name": "bodySurfaceArea",
@@ -301,20 +316,20 @@
               {
                 "system": "http://loinc.org",
                 "code": "8277-6",
-                "display": "BSA",
+                "display": "BSA_8277_6",
                 "@sliceName": "loincCode"
               }
             ]
           },
-          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('d/M/yyyy')}}",
+          "effectiveDateTime": "{{ effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "valueQuantity": {
-            "value": "{{BSA.replace(',','.').toDecimal()}}",
+            "value": "{{BSA_8277_6}}",
             "unit": "square meter",
             "system": "http://unitsofmeasure.org",
             "code": "m2"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final",
           "id": "{{mpp:getHashedId('Observation', subject & effectiveDateTime & encounter.lower() & 'BSA')}}",
           "meta": {

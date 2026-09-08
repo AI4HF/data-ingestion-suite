@@ -107,6 +107,34 @@
             ]
           }
         ]
+      },
+      {
+        "id": "DocumentReference.char_length",
+        "path": "DocumentReference.char_length",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "DocumentReference.word_count",
+        "path": "DocumentReference.word_count",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
       }
     ]
   }

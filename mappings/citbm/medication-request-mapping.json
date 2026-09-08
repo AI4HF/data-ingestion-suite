@@ -8,7 +8,16 @@
     {
       "alias": "prescription",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Prescription",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -30,7 +39,12 @@
     {
       "name": "medication",
       "language": "text/fhirpath",
-      "expression": "mpp:getConcept(%medicationAtcDosageContext, dosageSystem)"
+      "expression": "mpp:getConcept(%medicationAtcDosageContext, name)"
+    },
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.startDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.startDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf()).first()"
     }
   ],
   "mapping": [
@@ -39,66 +53,63 @@
         "name": "medicationRequest",
         "language": "application/fhir-template+json",
         "value": {
-          "{{#rootVar}}": "{{iif(dosageSystem.exists(),true)}}",
-          "{{?}}": {
-            "id": "{{mpp:getHashedId('MedicationRequest', identifier & startDate)}}",
-            "meta": {
-              "profile": [
-                "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
-              ]
-            },
-            "resourceType": "MedicationRequest",
-            "medication": {
-              "concept": {
-                "coding": [
-                  {
-                    "system": "http://www.whocc.no/atc",
-                    "code": "{{%medication.target_code}}",
-                    "display": "{{dosageSystem}}",
-                    "@sliceName": "atcCode"
-                  }
-                ]
-              }
-            },
-            "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-            "status": "completed",
-            "intent": "order",
-            "effectiveDosePeriod": {
-              "start": "{{startDate.utl:toFhirDate('dd/MM/yyyy' | 'yyyy-MM-dd')}}"
-            },
-            "dosageInstruction": [
-              {
-                "timing": {
-                  "{{#timingVar}}": "{{iif(%frequencyCount.hasValue() and dosageValue.hasValue() and dosageValue != 'INR', true)}}",
-                  "{{?}}": {
-                    "repeat": {
-                      "boundsDuration": {
-                        "system": "http://unitsofmeasure.org",
-                        "code": "d",
-                        "value": "{{dosageValue / %frequencyCount}}",
-                        "unit": "days"
-                      },
-                      "frequency": "{{%frequencyCount}}",
-                      "period": 1,
-                      "periodUnit": "d"
-                    }
-                  }
-                },
-                "doseAndRate": [
-                  {
-                    "doseQuantity": {
-                      "{{#doseQuantityVar}}": "{{iif(%medication.dosage.exists() or (dosageValue.hasValue() and dosageValue != 'INR'),true)}}",
-                      "{{?}}": {
-                        "value": "{{iif(%medication.dosage.exists(),%medication.dosage.toDecimal(),dosageValue)}}",
-                        "unit": "{{iif(%medication.dosage_unit.exists(),%medication.dosage_unit,dosageUnit)}}"
-                      }
-                    }
-                  }
-                ]
-              }
+          "id": "{{mpp:getHashedId('MedicationRequest', identifier & startDate)}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationRequest"
             ]
-          }
+          },
+          "resourceType": "MedicationRequest",
+          "medication": {
+            "concept": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "{{%medication.target_code}}",
+                  "display": "{{name}}",
+                  "@sliceName": "atcCode"
+                }
+              ]
+            }
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
+          "status": "completed",
+          "intent": "order",
+          "effectiveDosePeriod": {
+            "start": "{{startDate.utl:toFhirDate('dd/MM/yyyy' | 'yyyy-MM-dd')}}"
+          },
+          "dosageInstruction": [
+            {
+              "timing": {
+                "{{#timingVar}}": "{{iif(%frequencyCount.hasValue() and dosageValue.hasValue() and dosageValue != 'INR', true)}}",
+                "{{?}}": {
+                  "repeat": {
+                    "boundsDuration": {
+                      "system": "http://unitsofmeasure.org",
+                      "code": "d",
+                      "value": "{{dosageValue.toDecimal() / %frequencyCount}}",
+                      "unit": "days"
+                    },
+                    "frequency": "{{%frequencyCount}}",
+                    "period": 1,
+                    "periodUnit": "d"
+                  }
+                }
+              },
+              "doseAndRate": [
+                {
+                  "doseQuantity": {
+                    "{{#doseQuantityVar}}": "{{iif(%medication.dosage.exists() or (dosageValue.hasValue() and dosageValue != 'INR'),true)}}",
+                    "{{?}}": {
+                      "value": "{{iif(%medication.dosage.exists(),%medication.dosage.toDecimal(),dosageValue)}}",
+                      "unit": "{{iif(%medication.dosage_unit.exists(),%medication.dosage_unit,dosageUnit)}}"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         }
       }
     }

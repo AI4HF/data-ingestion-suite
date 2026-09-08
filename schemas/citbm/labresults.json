@@ -53,8 +53,8 @@
         ]
       },
       {
-        "id": "LabResults.flag_visit",
-        "path": "LabResults.flag_visit",
+        "id": "LabResults.visit_flag",
+        "path": "LabResults.visit_flag",
         "min": 0,
         "max": "1",
         "type": [
@@ -165,8 +165,8 @@
         ]
       },
       {
-        "id": "LabResults.inter-LEU",
-        "path": "LabResults.inter-LEU",
+        "id": "LabResults.inter_LEU",
+        "path": "LabResults.inter_LEU",
         "min": 0,
         "max": "1",
         "type": [
@@ -179,8 +179,8 @@
         ]
       },
       {
-        "id": "LabResults.plaq",
-        "path": "LabResults.plaq",
+        "id": "LabResults.PLT",
+        "path": "LabResults.PLT",
         "min": 0,
         "max": "1",
         "type": [
@@ -193,8 +193,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_plaq",
-        "path": "LabResults.Unit_plaq",
+        "id": "LabResults.Unit_PLT",
+        "path": "LabResults.Unit_PLT",
         "min": 0,
         "max": "1",
         "type": [
@@ -207,8 +207,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_plaq",
-        "path": "LabResults.inter_plaq",
+        "id": "LabResults.inter_PLT",
+        "path": "LabResults.inter_PLT",
         "min": 0,
         "max": "1",
         "type": [
@@ -235,8 +235,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_Creat",
-        "path": "LabResults.Unit_Creat",
+        "id": "LabResults.Unit_CREAT",
+        "path": "LabResults.Unit_CREAT",
         "min": 0,
         "max": "1",
         "type": [
@@ -249,8 +249,8 @@
         ]
       },
       {
-        "id": "LabResults.Inter_CREA",
-        "path": "LabResults.Inter_CREA",
+        "id": "LabResults.inter_CREAT",
+        "path": "LabResults.inter_CREAT",
         "min": 0,
         "max": "1",
         "type": [
@@ -291,8 +291,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_urea",
-        "path": "LabResults.inter_urea",
+        "id": "LabResults.inter_UREA",
+        "path": "LabResults.inter_UREA",
         "min": 0,
         "max": "1",
         "type": [
@@ -305,8 +305,8 @@
         ]
       },
       {
-        "id": "LabResults.TP",
-        "path": "LabResults.TP",
+        "id": "LabResults.PT",
+        "path": "LabResults.PT",
         "min": 0,
         "max": "1",
         "type": [
@@ -319,8 +319,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_TP",
-        "path": "LabResults.Unit_TP",
+        "id": "LabResults.Unit_PT",
+        "path": "LabResults.Unit_PT",
         "min": 0,
         "max": "1",
         "type": [
@@ -333,8 +333,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_TP",
-        "path": "LabResults.inter_TP",
+        "id": "LabResults.inter_PT",
+        "path": "LabResults.inter_PT",
         "min": 0,
         "max": "1",
         "type": [
@@ -361,8 +361,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_ALB_mg_dl",
-        "path": "LabResults.Unit_ALB_mg_dl",
+        "id": "LabResults.Unit_ALB",
+        "path": "LabResults.Unit_ALB",
         "min": 0,
         "max": "1",
         "type": [
@@ -375,8 +375,8 @@
         ]
       },
       {
-        "id": "LabResults.BIL",
-        "path": "LabResults.BIL",
+        "id": "LabResults.Direct_Bilirubin",
+        "path": "LabResults.Direct_Bilirubin",
         "min": 0,
         "max": "1",
         "type": [
@@ -389,8 +389,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_BIL",
-        "path": "LabResults.Unit_BIL",
+        "id": "LabResults.Unit_Direct_Bilirubin",
+        "path": "LabResults.Unit_Direct_Bilirubin",
         "min": 0,
         "max": "1",
         "type": [
@@ -403,8 +403,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_BIL",
-        "path": "LabResults.inter_BIL",
+        "id": "LabResults.inter_Direct_Bilirubin",
+        "path": "LabResults.inter_Direct_Bilirubin",
         "min": 0,
         "max": "1",
         "type": [
@@ -459,8 +459,8 @@
         ]
       },
       {
-        "id": "LabResults.troponin_t",
-        "path": "LabResults.troponin_t",
+        "id": "LabResults.Troponin_T",
+        "path": "LabResults.Troponin_T",
         "min": 0,
         "max": "1",
         "type": [
@@ -473,8 +473,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_Troponin",
-        "path": "LabResults.Unit_Troponin",
+        "id": "LabResults.Unit_Troponin_T",
+        "path": "LabResults.Unit_Troponin_T",
         "min": 0,
         "max": "1",
         "type": [
@@ -487,8 +487,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_troponin",
-        "path": "LabResults.inter_troponin",
+        "id": "LabResults.inter_Troponin_T",
+        "path": "LabResults.inter_Troponin_T",
         "min": 0,
         "max": "1",
         "type": [
@@ -501,8 +501,8 @@
         ]
       },
       {
-        "id": "LabResults.BNP",
-        "path": "LabResults.BNP",
+        "id": "LabResults.Pro_BNP",
+        "path": "LabResults.Pro_BNP",
         "min": 0,
         "max": "1",
         "type": [
@@ -515,8 +515,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_BNP",
-        "path": "LabResults.Unit_BNP",
+        "id": "LabResults.Unit_Pro_BNP",
+        "path": "LabResults.Unit_Pro_BNP",
         "min": 0,
         "max": "1",
         "type": [
@@ -529,8 +529,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_BNP",
-        "path": "LabResults.inter_BNP",
+        "id": "LabResults.inter_Pro_BNP",
+        "path": "LabResults.inter_Pro_BNP",
         "min": 0,
         "max": "1",
         "type": [
@@ -543,8 +543,8 @@
         ]
       },
       {
-        "id": "LabResults.TGP",
-        "path": "LabResults.TGP",
+        "id": "LabResults.ALT_TGP",
+        "path": "LabResults.ALT_TGP",
         "min": 0,
         "max": "1",
         "type": [
@@ -557,8 +557,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_TGP",
-        "path": "LabResults.Unit_TGP",
+        "id": "LabResults.Unit_ALT_TGP",
+        "path": "LabResults.Unit_ALT_TGP",
         "min": 0,
         "max": "1",
         "type": [
@@ -571,8 +571,8 @@
         ]
       },
       {
-        "id": "LabResults.TGO",
-        "path": "LabResults.TGO",
+        "id": "LabResults.AST_TGO",
+        "path": "LabResults.AST_TGO",
         "min": 0,
         "max": "1",
         "type": [
@@ -585,8 +585,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_TGO",
-        "path": "LabResults.Unit_TGO",
+        "id": "LabResults.Unit_AST_TGO",
+        "path": "LabResults.Unit_AST_TGO",
         "min": 0,
         "max": "1",
         "type": [
@@ -599,8 +599,8 @@
         ]
       },
       {
-        "id": "LabResults.BILTO",
-        "path": "LabResults.BILTO",
+        "id": "LabResults.Total_Bilirubin",
+        "path": "LabResults.Total_Bilirubin",
         "min": 0,
         "max": "1",
         "type": [
@@ -613,8 +613,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_BILTO",
-        "path": "LabResults.Unit_BILTO",
+        "id": "LabResults.Unit_Total_Bilirubin",
+        "path": "LabResults.Unit_Total_Bilirubin",
         "min": 0,
         "max": "1",
         "type": [
@@ -697,8 +697,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_linfocitos",
-        "path": "LabResults.inter_linfocitos",
+        "id": "LabResults.inter_LYMPH",
+        "path": "LabResults.inter_LYMPH",
         "min": 0,
         "max": "1",
         "type": [
@@ -711,8 +711,8 @@
         ]
       },
       {
-        "id": "LabResults.Sodio",
-        "path": "LabResults.Sodio",
+        "id": "LabResults.Sodium",
+        "path": "LabResults.Sodium",
         "min": 0,
         "max": "1",
         "type": [
@@ -725,8 +725,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_Sodio",
-        "path": "LabResults.Unit_Sodio",
+        "id": "LabResults.Unit_Sodium",
+        "path": "LabResults.Unit_Sodium",
         "min": 0,
         "max": "1",
         "type": [
@@ -739,8 +739,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_sodio",
-        "path": "LabResults.inter_sodio",
+        "id": "LabResults.inter_Sodium",
+        "path": "LabResults.inter_Sodium",
         "min": 0,
         "max": "1",
         "type": [
@@ -753,8 +753,8 @@
         ]
       },
       {
-        "id": "LabResults.TRIGLICERIDOS",
-        "path": "LabResults.TRIGLICERIDOS",
+        "id": "LabResults.Triglycerides",
+        "path": "LabResults.Triglycerides",
         "min": 0,
         "max": "1",
         "type": [
@@ -767,8 +767,8 @@
         ]
       },
       {
-        "id": "LabResults.Unit_Triglicerido",
-        "path": "LabResults.Unit_Triglicerido",
+        "id": "LabResults.Unit_Triglycerides",
+        "path": "LabResults.Unit_Triglycerides",
         "min": 0,
         "max": "1",
         "type": [
@@ -781,8 +781,8 @@
         ]
       },
       {
-        "id": "LabResults.inter_trigli",
-        "path": "LabResults.inter_trigli",
+        "id": "LabResults.inter_Triglycerides",
+        "path": "LabResults.inter_Triglycerides",
         "min": 0,
         "max": "1",
         "type": [
@@ -790,6 +790,62 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.eGFR_CKD_EPI_2021_mL_min_1_73m2",
+        "path": "LabResults.eGFR_CKD_EPI_2021_mL_min_1_73m2",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.CKD_Stage",
+        "path": "LabResults.CKD_Stage",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.BUN_estimated_mg_dL",
+        "path": "LabResults.BUN_estimated_mg_dL",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "LabResults.BUN_to_Creat_Ratio",
+        "path": "LabResults.BUN_to_Creat_Ratio",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]

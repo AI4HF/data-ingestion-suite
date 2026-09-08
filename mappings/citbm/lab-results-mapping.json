@@ -8,7 +8,16 @@
     {
       "alias": "labResults",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/LabResults",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -17,14 +26,20 @@
       "url": "$CONTEXT_REPO/citbm/lab-result-unit-conversion.csv"
     }
   },
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDate('yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDate('yyyy-MM-dd').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "The sodium",
       "precondition": {
         "name": "sodiumExists",
         "language": "text/fhirpath",
-        "expression": "Sodio.exists()"
+        "expression": "Sodium.exists()"
       },
       "expression": {
         "name": "sodium",
@@ -60,9 +75,9 @@
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Sodium', Sodio.toDecimal(), Unit_Sodio)}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Sodium', Sodium.toDecimal(), Unit_Sodium)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -107,9 +122,9 @@
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Creatinine', CREAT.toDecimal(), Unit_Creat)}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Creatinine', CREAT.toDecimal(), Unit_CREAT)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -156,7 +171,7 @@
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Hemoglobin', hb.toDecimal(), Unit_hb)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -203,7 +218,7 @@
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Bun', UREA.toDecimal(), Unit_UREA)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -250,7 +265,7 @@
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Potassium', K.toDecimal(), Unit_K)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -259,7 +274,7 @@
       "precondition": {
         "name": "triGlyExists",
         "language": "text/fhirpath",
-        "expression": "TRIGLICERIDOS.exists() and Unit_Triglicerido.exists()"
+        "expression": "Triglycerides.exists() and Unit_Triglycerides.exists()"
       },
       "expression": {
         "name": "triGly",
@@ -295,9 +310,9 @@
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', TRIGLICERIDOS.toDecimal(), Unit_Triglicerido)}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Triglyceride', Triglycerides.toDecimal(), Unit_Triglycerides)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -344,22 +359,22 @@
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
           "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Ldl', LDL.toDecimal(), Unit_LDL)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
     {
-      "description": "Natriuretic peptide B [Mass/volume] in Serum or Plasma (pg/mL)",
+      "description": "Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma",
       "precondition": {
-        "name": "bnpExists",
+        "name": "NTproBNPExists",
         "language": "text/fhirpath",
-        "expression": "BNP.exists()"
+        "expression": "Pro_BNP.exists()"
       },
       "expression": {
-        "name": "bnp",
+        "name": "NTproBNP",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-bnp')}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-NTproBNP')}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
@@ -382,16 +397,16 @@
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "30934-4",
-                "display": "Natriuretic peptide B [Mass/volume] in Serum or Plasma (pg/mL)",
+                "code": "33762-6",
+                "display": "Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma",
                 "@sliceName": "loincCode"
               }
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'BNP', BNP.toDecimal(), Unit_BNP)}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'NTproBNP', Pro_BNP.toDecimal(), Unit_Pro_BNP)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     },
@@ -400,10 +415,10 @@
       "precondition": {
         "name": "troponinExists",
         "language": "text/fhirpath",
-        "expression": "troponin_t.exists()"
+        "expression": "Troponin_T.exists()"
       },
       "expression": {
-        "name": "troponin_t",
+        "name": "Troponin_T",
         "language": "application/fhir-template+json",
         "value": {
           "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-troponin')}}",
@@ -436,9 +451,212 @@
             ]
           },
           "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
-          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Troponin', troponin_t.toDecimal(), Unit_Troponin)}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Troponin', Troponin_T.toDecimal(), Unit_Troponin_T)}}",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}"
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
+          "interpretation": [
+            {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+                  "code": "{{iif(value > 0.030,'H','N')}}"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "description": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood",
+      "precondition": {
+        "name": "eGFRExists",
+        "language": "text/fhirpath",
+        "expression": "eGFR_CKD_EPI_2021_mL_min_1_73m2.exists()"
+      },
+      "expression": {
+        "name": "egfr",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-egfr')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "69405-9",
+                "display": "Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": {
+            "system": "http://unitsofmeasure.org",
+            "code": "ml/min/1.73m2",
+            "unit": "ml/min/1.73m2",
+            "value": "{{eGFR_CKD_EPI_2021_mL_min_1_73m2}}"
+          },
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
+        }
+      }
+    },
+    {
+      "description": "Bilirubin.total [Mass/volume] in Serum or Plasma",
+      "precondition": {
+        "name": "bilirubinExists",
+        "language": "text/fhirpath",
+        "expression": "Total_Bilirubin.exists()"
+      },
+      "expression": {
+        "name": "bilirubin",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-Bilirubin')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "1975-2",
+                "display": "Bilirubin.total [Mass/volume] in Serum or Plasma",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'Bilirubin', Total_Bilirubin.toDecimal(), Unit_Total_Bilirubin)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
+        }
+      }
+    },
+    {
+      "description": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+      "precondition": {
+        "name": "ASATExists",
+        "language": "text/fhirpath",
+        "expression": "AST_TGO.exists()"
+      },
+      "expression": {
+        "name": "asat",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-ASAT')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "1920-8",
+                "display": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'ASAT', AST_TGO.toDecimal(), Unit_AST_TGO)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
+        }
+      }
+    },
+    {
+      "description": "Albumin [Mass/volume] in Serum or Plasma",
+      "precondition": {
+        "name": "albExists",
+        "language": "text/fhirpath",
+        "expression": "ALB.exists()"
+      },
+      "expression": {
+        "name": "ALB",
+        "language": "application/fhir-template+json",
+        "value": {
+          "id": "{{mpp:getHashedId('Observation', identifier & 'LabResult-AlbuminBS')}}",
+          "meta": {
+            "profile": [
+              "https://datatools4heart.eu/fhir/StructureDefinition/HFR-LabResult"
+            ]
+          },
+          "resourceType": "Observation",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "laboratory",
+                  "display": "Laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "1751-7",
+                "display": "Albumin [Mass/volume] in Serum or Plasma",
+                "@sliceName": "loincCode"
+              }
+            ]
+          },
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDate('yyyy-MM-dd')}}",
+          "valueQuantity": "{{mpp:convertAndReturnQuantity(%unitConversionMap, 'AlbuminBS', ALB.toDecimal(), Unit_ALB)}}",
+          "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}"
         }
       }
     }

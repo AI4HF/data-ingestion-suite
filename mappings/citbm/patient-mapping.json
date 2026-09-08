@@ -45,7 +45,7 @@
               "use": "home",
               "city": "{{? iif(city = '0', {}, city)}}",
               "district": "{{? iif(district = '0', {}, district)}}",
-              "postalCode": "{{? postalCode}}"
+              "postalCode": "{{? postalCode.toString()}}"
             }
           ],
           "extension": [

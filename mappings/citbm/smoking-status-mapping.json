@@ -8,7 +8,16 @@
     {
       "alias": "medication",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/SmokingStatus",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -17,7 +26,13 @@
       "url": "$CONTEXT_REPO/citbm/smoking-status.csv"
     }
   },
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "The smoking status of patient.",
@@ -33,9 +48,9 @@
           },
           "resourceType": "Observation",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter',subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "effectivePeriod": {
-            "start": "{{startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}"
+            "start": "{{startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd' | 'dd/MM/yyyy')}}"
           },
           "category": [
             {
@@ -62,8 +77,8 @@
             "coding": [
               {
                 "system": "http://snomed.info/sct",
-                "code": "77176002",
-                "display": "Smoker, current status unknown"
+                "code": "{{mpp:getConcept(%smokingStatusContext, smoking_status, 'target_code')}}",
+                "display": "{{mpp:getConcept(%smokingStatusContext, smoking_status, 'target_display')}}"
               }
             ]
           },

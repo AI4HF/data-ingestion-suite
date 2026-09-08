@@ -8,7 +8,16 @@
     {
       "alias": "medication",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/NYHA",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -17,7 +26,13 @@
       "url": "$CONTEXT_REPO/citbm/nyha-classification.csv"
     }
   },
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "New York Heart Association classification if exists.",
@@ -25,7 +40,7 @@
         "name": "nyha",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', identifier)}}",
+          "id": "{{mpp:getHashedId('Observation', identifier & effectiveDateTime)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
@@ -53,18 +68,18 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss')}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd')}}",
           "valueCodeableConcept": {
             "coding": [
               {
                 "system": "http://loinc.org",
-                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, display, 'target_code')}}",
-                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, display, 'target_display')}}"
+                "code": "{{mpp:getConcept(%nyhaClassificationConceptMap, nyha_class, 'target_code')}}",
+                "display": "{{mpp:getConcept(%nyhaClassificationConceptMap, nyha_class, 'target_display')}}"
               }
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }

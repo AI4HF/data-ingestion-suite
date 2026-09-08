@@ -8,7 +8,16 @@
     {
       "alias": "medication",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Medication",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -22,6 +31,11 @@
       "name": "medication",
       "language": "text/fhirpath",
       "expression": "mpp:getConcept(%medicationContext, name)"
+    },
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.startDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.startDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf()).first()"
     }
   ],
   "mapping": [
@@ -31,7 +45,7 @@
         "name": "medication",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('MedicationAdministration', identifier)}}",
+          "id": "{{mpp:getHashedId('MedicationAdministration', identifier.nav:orElse(subject & encounter & visitNumber.toString()))}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
@@ -51,8 +65,8 @@
             }
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "occurenceDateTime": "{{startDate.utl:toFhirDateTime('dd/MM/yyyy')}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
+          "occurenceDateTime": "{{startDate.utl:toFhirDateTime('dd/MM/yyyy' | 'yyyy-MM-dd')}}",
           "dosage": {
             "dose": {
               "value": "{{iif(%medication.dosage.exists(),%medication.dosage.toDecimal() * dosageValue,dosageValue)}}",

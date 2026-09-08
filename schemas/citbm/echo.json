@@ -81,8 +81,8 @@
         ]
       },
       {
-        "id": "Echo.peso",
-        "path": "Echo.peso",
+        "id": "Echo.weight",
+        "path": "Echo.weight",
         "min": 0,
         "max": "1",
         "type": [
@@ -95,8 +95,8 @@
         ]
       },
       {
-        "id": "Echo.talla",
-        "path": "Echo.talla",
+        "id": "Echo.height",
+        "path": "Echo.height",
         "min": 0,
         "max": "1",
         "type": [
@@ -115,23 +115,23 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.SVD",
-        "path": "Echo.SVD",
+        "id": "Echo.S_VD",
+        "path": "Echo.S_VD",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -157,23 +157,23 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.FACVD",
-        "path": "Echo.FACVD",
+        "id": "Echo.FAC_VD",
+        "path": "Echo.FAC_VD",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -213,9 +213,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -283,16 +283,16 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.TROMBO",
-        "path": "Echo.TROMBO",
+        "id": "Echo.thrombus",
+        "path": "Echo.thrombus",
         "min": 0,
         "max": "1",
         "type": [
@@ -305,8 +305,8 @@
         ]
       },
       {
-        "id": "Echo.MOT",
-        "path": "Echo.MOT",
+        "id": "Echo.wall_motion_abnormality",
+        "path": "Echo.wall_motion_abnormality",
         "min": 0,
         "max": "1",
         "type": [
@@ -319,15 +319,15 @@
         ]
       },
       {
-        "id": "Echo.DD",
-        "path": "Echo.DD",
+        "id": "Echo.diastolic_dysfunction",
+        "path": "Echo.diastolic_dysfunction",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -361,43 +361,43 @@
         ]
       },
       {
-        "id": "Echo.MASA",
-        "path": "Echo.MASA",
+        "id": "Echo.mass",
+        "path": "Echo.mass",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.STRAINVI",
-        "path": "Echo.STRAINVI",
+        "id": "Echo.STRAIN_VI",
+        "path": "Echo.STRAIN_VI",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.STRAINVD",
-        "path": "Echo.STRAINVD",
+        "id": "Echo.STRAIN_VD",
+        "path": "Echo.STRAIN_VD",
         "min": 0,
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -409,9 +409,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -423,9 +423,9 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
@@ -437,16 +437,16 @@
         "max": "1",
         "type": [
           {
-            "code": "string",
+            "code": "decimal",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/string"
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]
       },
       {
-        "id": "Echo.Peric_effu",
-        "path": "Echo.Peric_effu",
+        "id": "Echo.pericardial_effusion",
+        "path": "Echo.pericardial_effusion",
         "min": 0,
         "max": "1",
         "type": [
@@ -459,8 +459,36 @@
         ]
       },
       {
-        "id": "Echo.OTROS",
-        "path": "Echo.OTROS",
+        "id": "Echo.other_findings",
+        "path": "Echo.other_findings",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Echo.LVEF_pct",
+        "path": "Echo.LVEF_pct",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Echo.HF_Phenotype_LVEF",
+        "path": "Echo.HF_Phenotype_LVEF",
         "min": 0,
         "max": "1",
         "type": [
@@ -468,6 +496,20 @@
             "code": "string",
             "profile": [
               "http://hl7.org/fhir/StructureDefinition/string"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Echo.RV_Dysfunction_TAPSE",
+        "path": "Echo.RV_Dysfunction_TAPSE",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "decimal",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/decimal"
             ]
           }
         ]

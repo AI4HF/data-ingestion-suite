@@ -54,8 +54,7 @@
             "coding": [
               {
                 "system": "http://hl7.org/fhir/sid/icd-10",
-                "code": "{{value}}",
-                "display": "{{display}}"
+                "code": "{{icd10_code}}"
               }
             ]
           },

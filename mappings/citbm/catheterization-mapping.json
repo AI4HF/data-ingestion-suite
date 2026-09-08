@@ -8,11 +8,26 @@
     {
       "alias": "catheterization",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Catheterization",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
@@ -47,10 +62,10 @@
               }
             ]
           },
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime()}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd' | 'dd/MM/yyyy')}}",
           "component": [
             {
-              "{{#componentVar}}": "{{iif(Indice_Cardiaco_L_min_m2.hasValue(), true, {})}}",
+              "{{#componentVar}}": "{{iif(Cardiac_Index_Lminm2.hasValue(), true, {})}}",
               "{{?}}": {
                 "code": {
                   "coding": [
@@ -62,7 +77,7 @@
                   ]
                 },
                 "valueQuantity": {
-                  "value": "{{Indice_Cardiaco_L_min_m2}}",
+                  "value": "{{Cardiac_Index_Lminm2}}",
                   "unit": "L/min/m²"
                 }
               },
@@ -157,7 +172,7 @@
                 ]
               },
               "valueQuantity": {
-                "value": "{{Gasto_Cardiaco_Sistemico_L_min}}",
+                "value": "{{Cardiac_Output_Lmin}}",
                 "unit": "L/min"
               }
             },
@@ -172,7 +187,7 @@
                 ]
               },
               "valueQuantity": {
-                "value": "{{Resistencia_Vascular_Sistemica_U_Wood * 80}}",
+                "value": "{{Systemic_Vascular_Resistance_WoodUnits * 80}}",
                 "unit": "dyn·sec/cm5"
               }
             },
@@ -187,13 +202,49 @@
                 ]
               },
               "valueQuantity": {
-                "value": "{{Resistencia_Vascular_Pulmonar_U_Wood * 80}}",
+                "value": "{{Pulmonary_Vascular_Resistance_WoodUnits * 80}}",
                 "unit": "dyn·sec/cm5"
+              }
+            },
+            {
+              "{{#componentVar}}": "{{iif(RV_systolic_mmHg.exists(),true)}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://loinc.org",
+                      "code": "8432-7",
+                      "display": "Right ventricular Intrachamber systolic pressure"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{RV_systolic_mmHg}}",
+                  "unit": "mmHg"
+                }
+              }
+            },
+            {
+              "{{#componentVar}}": "{{iif(RV_diastolic_mmHg.exists(),true)}}",
+              "{{?}}": {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "http://loinc.org",
+                      "code": "8377-4",
+                      "display": "Right ventricular Intrachamber diastolic pressure"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": "{{RV_diastolic_mmHg}}",
+                  "unit": "mmHg"
+                }
               }
             }
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
           "status": "final"
         }
       }

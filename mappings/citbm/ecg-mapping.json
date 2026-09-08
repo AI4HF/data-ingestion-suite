@@ -11,6 +11,13 @@
       "joinOn": [
         "subject"
       ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {
@@ -19,7 +26,13 @@
       "url": "$CONTEXT_REPO/citbm/ecg-rhythm-type.csv"
     }
   },
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:SS'  | 'MM/dd/yyyy' | 'yyyy-MM-ss') .utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:SS'  | 'MM/dd/yyyy' | 'yyyy-MM-ss') .utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "expression": {
@@ -152,7 +165,7 @@
               "@sliceName": "atrialRate"
             },
             {
-              "{{#componentVar}}": "{{iif(Printerval_milliseconds.hasValue() and Printerval_milliseconds.convertsToDecimal(), true, {})}}",
+              "{{#componentVar}}": "{{iif(PRinterval_milliseconds.hasValue() and PRinterval_milliseconds.convertsToDecimal(), true, {})}}",
               "{{?}}": {
                 "code": {
                   "coding": [
@@ -166,7 +179,7 @@
                 "valueQuantity": {
                   "code": "ms",
                   "system": "http://unitsofmeasure.org",
-                  "value": "{{Printerval_milliseconds.toDecimal()}}",
+                  "value": "{{PRinterval_milliseconds.toDecimal()}}",
                   "unit": "millisecond"
                 }
               },
@@ -185,9 +198,9 @@
                   ]
                 },
                 "valueQuantity": {
+                  "code": "ms",
                   "system": "http://unitsofmeasure.org",
                   "value": "{{QTintervalCorrected_milliseconds.toDecimal()}}",
-                  "code": "ms",
                   "unit": "millisecond"
                 }
               },
@@ -219,11 +232,23 @@
                 }
               },
               "@sliceName": "typeOfRhythm"
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "code": "233917008",
+                    "system": "http://snomed.info/sct",
+                    "display": "Atrioventricular block"
+                  }
+                ]
+              },
+              "valueBoolean": "{{iif(hasAVBlock = 1, true, false)}}"
             }
           ],
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:SS' |'MM/dd/yyyy')}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
+          "effectiveDateTime": "{{effectiveDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:SS'  | 'MM/dd/yyyy' | 'yyyy-MM-ss') }}",
           "status": "final"
         }
       }

@@ -8,11 +8,26 @@
     {
       "alias": "medication",
       "url": "https://ai4hf.eu/fhir/schemas/citbm/Condition",
-      "joinOn": []
+      "joinOn": [
+        "subject"
+      ]
+    },
+    {
+      "alias": "encounter",
+      "url": "https://ai4hf.eu/fhir/schemas/citbm/Encounter",
+      "joinOn": [
+        "subject"
+      ]
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "referenceEncounter",
+      "language": "text/fhirpath",
+      "expression": "%encounter.where($this.startDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() >= %context.onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf() and $this.endDate.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'yyyy-MM-dd').utl:dateOf() <= %context.onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy' | 'yyyy-MM-dd').utl:dateOf()).first()"
+    }
+  ],
   "mapping": [
     {
       "description": "The patient's diagnosis.",
@@ -20,7 +35,7 @@
         "name": "diagnosis",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition',subject & encounter.lower() & code)}}",
+          "id": "{{mpp:getHashedId('Condition',subject & encounter.lower() & code & onsetDateTime)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -37,8 +52,8 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', subject)}}",
-          "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', subject & encounter.lower())}}",
-          "onsetDateTime": "{{onsetDataTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy')}}",
+          "encounter": "{{? iif(%referenceEncounter.exists(),mpp:createFhirReferenceWithHashedId('Encounter', %referenceEncounter.subject & %referenceEncounter.identifier))}}",
+          "onsetDateTime": "{{onsetDateTime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss' | 'dd/MM/yyyy' | 'yyyy-MM-dd')}}",
           "clinicalStatus": {
             "coding": [
               {
@@ -50,9 +65,12 @@
           },
           "category": [
             {
-              "coding": [
-                "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}"
-              ]
+              "{{#categoryVar}}": "{{iif(%referenceEncounter.exists(), true)}}",
+              "{{?}}": {
+                "coding": [
+                  "{{utl:createFhirCoding('http://terminology.hl7.org/CodeSystem/condition-category', 'encounter-diagnosis', 'Encounter Diagnosis')}}"
+                ]
+              }
             }
           ]
         }

@@ -193,8 +193,8 @@
         ]
       },
       {
-        "id": "Prescription.dosageSystem",
-        "path": "Prescription.dosageSystem",
+        "id": "Prescription.name",
+        "path": "Prescription.name",
         "min": 0,
         "max": "1",
         "type": [

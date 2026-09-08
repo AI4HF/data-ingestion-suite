@@ -40,6 +40,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
         }
       }
     },
@@ -50,6 +57,13 @@
         "medication": {
           "jsonClass": "FileSystemSource",
           "path": "Condition.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
@@ -76,6 +90,13 @@
         "vitalSigns": {
           "jsonClass": "FileSystemSource",
           "path": "VitalSign.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
@@ -131,6 +152,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
         }
       }
     },
@@ -141,6 +169,13 @@
         "echo": {
           "jsonClass": "FileSystemSource",
           "path": "Echo.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
@@ -157,6 +192,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
         }
       }
     },
@@ -167,6 +209,13 @@
         "symptom": {
           "jsonClass": "FileSystemSource",
           "path": "Symptom.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
@@ -183,6 +232,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
         }
       }
     },
@@ -193,6 +249,13 @@
         "prescription": {
           "jsonClass": "FileSystemSource",
           "path": "Prescription.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
@@ -209,6 +272,13 @@
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
         }
       }
     },
@@ -219,6 +289,13 @@
         "catheterization": {
           "jsonClass": "FileSystemSource",
           "path": "Catheterization.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "citbm"
+        },
+        "encounter": {
+          "jsonClass": "FileSystemSource",
+          "path": "Encounter.csv",
           "contentType": "csv",
           "options": {},
           "sourceRef": "citbm"
