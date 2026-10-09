@@ -44,7 +44,19 @@
           "intent": "plan",
           "effectiveDosePeriod": {
             "start": "{{date.utl:toFhirDateTime('yyyy-MM-dd HH:mm')}}"
-          }
+          },
+          "dosageInstruction": [
+            {
+              "doseAndRate": [
+                {
+                  "doseQuantity": {
+                    "value": "{{dosage}}",
+                    "unit": "{{unit}}"
+                  }
+                }
+              ]
+            }
+          ]
         }
       }
     }
