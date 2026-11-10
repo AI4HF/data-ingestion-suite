@@ -18,7 +18,7 @@
       "precondition": {
         "name": "causeExists",
         "language": "text/fhirpath",
-        "expression": "cause_concept_id.exists() or cause_source_concept_id.exists() or cause_source_value.exists()"
+        "expression": "cause_concept_id.exists() or cause_source_concept_id.exists()"
       },
       "expression": {
         "name": "result",

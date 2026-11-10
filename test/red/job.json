@@ -1,0 +1,58 @@
+{
+  "id": "red-cause-of-death-unmapped",
+  "name": "red-cause-of-death-unmapped",
+  "description": "RED fixture: proves cause-of-death-mapping.json admits DEATH rows carrying only cause_source_value (no cause_concept_id / cause_source_concept_id) via its precondition, yet never populates valueCodeableConcept.coding from cause_source_value, so the produced Observation ends up with empty coding while HFR-CauseOfDeath requires min=1.",
+  "sourceSettings": {
+    "ulslo-data": {
+      "jsonClass": "FileSystemSourceSettings",
+      "name": "ulslo-data",
+      "sourceUri": "http://ai4hf.eu/data-ingestion-suite/ulslo-data",
+      "dataFolderPath": "test/red/fixtures",
+      "asStream": false
+    }
+  },
+  "sinkSettings": {
+    "jsonClass": "FileSystemSinkSettings",
+    "name": "red-output",
+    "path": "/work/test/red/output",
+    "numOfPartitions": 1,
+    "contentType": "ndjson",
+    "options": {},
+    "partitionByResourceType": false,
+    "partitioningColumns": {}
+  },
+  "terminologyServiceSettings": {
+    "jsonClass": "LocalFhirTerminologyServiceSettings",
+    "folderPath": "./terminology-systems/AI4HFTerminologyService",
+    "conceptMapFiles": [
+      {
+        "id": "omopToIcd10.csv",
+        "name": "omopToIcd10.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://hl7.org/fhir/sid/icd-10"
+      }
+    ],
+    "codeSystemFiles": []
+  },
+  "mappings": [
+    {
+      "name": "cause-of-death-mapping",
+      "mappingRef": "https://ai4hf.eu/fhir/mappings/ulslo/cause-of-death-mapping",
+      "sourceBinding": {
+        "omopDeath": {
+          "jsonClass": "FileSystemSource",
+          "path": "DEATH.csv",
+          "contentType": "csv",
+          "options": {},
+          "sourceRef": "ulslo-data"
+        }
+      }
+    }
+  ],
+  "dataProcessingSettings": {
+    "saveErroneousRecords": false,
+    "archiveMode": "off"
+  },
+  "useFhirSinkAsIdentityService": false
+}
