@@ -269513,3 +269513,44 @@ https://www.ohdsi.org/omop,45875994,http://loinc.org,VOLUME.MOLEC,Volume (specim
 "https://www.ohdsi.org/omop","4074649","http://loinc.org","14937-7","Urea nitrogen [Moles/volume] in Serum or Plasma"
 "https://www.ohdsi.org/omop","4184637","http://loinc.org","41995-2","Hemoglobin A1c [Mass/volume] in Blood"
 "https://www.ohdsi.org/omop","4074649","http://loinc.org","6299-2","Urea nitrogen [Mass/volume] in Blood"
+https://www.ohdsi.org/omop,4020121,http://loinc.org,"3091-6",Urea [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4149519,http://loinc.org,"2345-7",Glucose [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4012918,http://loinc.org,"2532-0",Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4243005,http://loinc.org,"19123-9",Magnesium [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4118986,http://loinc.org,"1975-2",Bilirubin.total [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4216722,http://loinc.org,"17861-6",Calcium [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4017907,http://loinc.org,"2777-1",Phosphate [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4313992,http://loinc.org,"3084-1",Urate [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4119650,http://loinc.org,"2885-2",Protein [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,44808695,http://loinc.org,"3040-3",Lipase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4055661,http://loinc.org,"13980-8",Albumin/Protein.total in Serum or Plasma by Electrophoresis
+https://www.ohdsi.org/omop,4276028,http://loinc.org,"1798-8",Amylase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4015482,http://loinc.org,"48065-7",Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma
+https://www.ohdsi.org/omop,46272018,http://loinc.org,"56888-1",HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum or Plasma by Immunoassay
+https://www.ohdsi.org/omop,4273104,http://loinc.org,"16128-1",Hepatitis C virus Ab [Presence] in Serum
+https://www.ohdsi.org/omop,4241990,http://loinc.org,"16933-4",Hepatitis B virus core Ab [Presence] in Serum
+https://www.ohdsi.org/omop,4188066,http://loinc.org,"2075-0",Chloride [Moles/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4163378,http://loinc.org,"2465-3",IgG [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4017648,http://loinc.org,"2284-8",Folate [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4161826,http://loinc.org,"2157-6",Creatine kinase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,44788835,http://loinc.org,"1742-6",Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,37208512,http://loinc.org,"1920-8",Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4230636,http://loinc.org,"6768-6",Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4168615,http://loinc.org,"5196-1",Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Immunoassay
+https://www.ohdsi.org/omop,4058393,http://loinc.org,"20507-0",Reagin Ab [Presence] in Serum by RPR
+https://www.ohdsi.org/omop,4263307,http://loinc.org,"14957-5",Microalbumin [Mass/volume] in Urine
+https://www.ohdsi.org/omop,4212065,http://loinc.org,"30341-2",Erythrocyte sedimentation rate
+https://www.ohdsi.org/omop,4230543,http://loinc.org,"1975-2",Bilirubin.total [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4032173,http://loinc.org,"2132-9",Cobalamin (Vitamin B12) [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4235028,http://loinc.org,"2500-7",Iron binding capacity [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4175016,http://loinc.org,"14979-9",aPTT in Platelet poor plasma by Coagulation assay
+https://www.ohdsi.org/omop,4216632,http://loinc.org,"1968-7",Bilirubin.direct [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4235029,http://loinc.org,"3034-6",Transferrin [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4153270,http://loinc.org,"2075-0",Chloride [Moles/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4197603,http://loinc.org,"2842-3",Prolactin [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4135810,http://loinc.org,"2458-8",IgA [Mass/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4191837,http://loinc.org,"13457-7",Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation
+https://www.ohdsi.org/omop,4021154,http://loinc.org,"2951-2",Sodium [Moles/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4154489,http://loinc.org,"2823-3",Potassium [Moles/volume] in Serum or Plasma
+https://www.ohdsi.org/omop,4151358,http://loinc.org,"20570-8",Hematocrit [Volume Fraction] of Blood
+https://www.ohdsi.org/omop,4281085,http://loinc.org,"30385-9",Erythrocyte distribution width [Ratio]

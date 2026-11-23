@@ -9,14 +9,14 @@
       "alias": "observation",
       "url": "https://ai4hf.eu/fhir/schemas/ulslo/OMOP-Observation",
       "joinOn": [
-        "person_id"
+        "visit_occurrence_id"
       ]
     },
     {
       "alias": "omopVisit",
       "url": "https://ai4hf.eu/fhir/schemas/ulslo/OMOP-VisitOccurrence",
       "joinOn": [
-        "person_id"
+        "visit_occurrence_id"
       ]
     }
   ],
@@ -37,13 +37,13 @@
       "precondition": {
         "name": "isSmokingStatus",
         "language": "text/fhirpath",
-        "expression": "observation_concept_id = 43054909"
+        "expression": "observation_concept_id = 43054909 and mpp:getConcept(%smokingStatusConceptMap, iif(value_source_value.exists(), value_source_value, observation_source_value)).exists()"
       },
       "expression": {
         "name": "smoking",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', observation_id.toString())}}",
+          "id": "{{mpp:getHashedId('Observation', observation_id)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-SmokingStatus"
@@ -51,9 +51,9 @@
           },
           "resourceType": "Observation",
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.observation_date and $this.visit_end_date >= %context.observation_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
+          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id), %omopVisit.select(iif($this.visit_start_date <= %context.observation_date and $this.visit_end_date >= %context.observation_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id),{})).first())}}",
           "effectivePeriod": {
-            "start": "{{iif(observation_datetime.exists(),observation_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'),observation_date)}}"
+            "start": "{{iif(observation_datetime.exists(),observation_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'),observation_date)}}"
           },
           "category": [
             {
@@ -77,7 +77,7 @@
             ]
           },
           "valueCodeableConcept": {
-            "{{#concept}}": "{{mpp:getConcept(%smokingStatusConceptMap, observation_source_value)}}",
+            "{{#concept}}": "{{mpp:getConcept(%smokingStatusConceptMap, iif(value_source_value.exists(), value_source_value, observation_source_value))}}",
             "{{?}}": "{{utl:createFhirCodeableConcept(%concept.target_system, %concept.target_code, %concept.target_display)}}"
           },
           "status": "final"
@@ -89,13 +89,13 @@
       "precondition": {
         "name": "isNYHA",
         "language": "text/fhirpath",
-        "expression": "observation_concept_id = 36305765"
+        "expression": "observation_concept_id = 36305765 and mpp:getConcept(%nyhaConceptMap, iif(value_source_value.exists(), value_source_value, observation_source_value)).exists()"
       },
       "expression": {
         "name": "nyha",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Observation', observation_id.toString())}}",
+          "id": "{{mpp:getHashedId('Observation', observation_id)}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-NYHAAssessment"
@@ -123,13 +123,13 @@
               }
             ]
           },
-          "effectiveDateTime": "{{iif(observation_datetime.exists(),observation_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'),observation_date)}}",
+          "effectiveDateTime": "{{iif(observation_datetime.exists(),observation_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'),observation_date)}}",
           "valueCodeableConcept": {
-            "{{#concept}}": "{{mpp:getConcept(%nyhaConceptMap,observation_source_value)}}",
+            "{{#concept}}": "{{mpp:getConcept(%nyhaConceptMap, iif(value_source_value.exists(), value_source_value, observation_source_value))}}",
             "{{?}}": "{{utl:createFhirCodeableConcept(%concept.target_system, %concept.target_code, %concept.target_display)}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.observation_date and $this.visit_end_date >= %context.observation_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
+          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id), %omopVisit.select(iif($this.visit_start_date <= %context.observation_date and $this.visit_end_date >= %context.observation_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id),{})).first())}}",
           "status": "final"
         }
       }

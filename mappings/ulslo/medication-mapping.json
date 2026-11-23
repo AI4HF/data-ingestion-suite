@@ -42,7 +42,7 @@
         "value": {
           "{{#ingredient}}": "{{%atcIngredientCodes}}",
           "{{*}}": {
-            "id": "{{mpp:getHashedId('MedicationAdministration', drug_exposure_id.toString() & '_' & %ingredient)}}",
+            "id": "{{mpp:getHashedId('MedicationAdministration', drug_exposure_id & '_' & %ingredient)}}",
             "meta": {
               "profile": [
                 "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
@@ -53,15 +53,16 @@
               "concept": "{{utl:createFhirCodeableConcept('http://www.whocc.no/atc', %ingredient, {})}}"
             },
             "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString())}}",
+            "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id)}}",
             "occurencePeriod": {
-              "start": "{{iif(drug_exposure_start_datetime.exists(),drug_exposure_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'),drug_exposure_start_date)}}",
-              "end": "{{? iif(drug_exposure_end_datetime.exists(), drug_exposure_end_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'), drug_exposure_end_date)}}"
+              "start": "{{iif(drug_exposure_start_datetime.exists(),drug_exposure_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'),drug_exposure_start_date)}}",
+              "end": "{{? iif(drug_exposure_end_datetime.exists(), drug_exposure_end_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'), drug_exposure_end_date)}}"
             },
             "dosage": {
+              "text": "{{? sig}}",
               "dose": {
-                "value": "{{quantity}}",
-                "unit": "{{dose_unit_source_value}}"
+                "value": "{{? quantity}}",
+                "unit": "{{? dose_unit_source_value}}"
               }
             },
             "status": "completed"

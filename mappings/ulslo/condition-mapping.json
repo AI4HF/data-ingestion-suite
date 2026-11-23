@@ -50,7 +50,7 @@
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition', condition_occurrence_id.toString())}}",
+          "id": "{{mpp:getHashedId('Condition', condition_occurrence_id.toString() & '|' & person_id.toString() & '|' & condition_concept_id.toString() & '|' & condition_start_date.toString() & '|' & condition_start_datetime.toString() & '|' & condition_end_date.toString() & '|' & condition_end_datetime.toString() & '|' & condition_type_concept_id.toString() & '|' & condition_status_concept_id.toString() & '|' & stop_reason.toString() & '|' & provider_id.toString() & '|' & visit_occurrence_id.toString() & '|' & visit_detail_id.toString() & '|' & condition_source_value.toString() & '|' & condition_source_concept_id.toString() & '|' & condition_status_source_value.toString())}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Condition"
@@ -70,8 +70,8 @@
             ]
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.condition_start_date and $this.visit_end_date >= %context.condition_start_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
-          "onsetDateTime": "{{iif(condition_start_datetime.empty(), condition_start_date, condition_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}",
+          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id), %omopVisit.select(iif($this.visit_start_date <= %context.condition_start_date and $this.visit_end_date >= %context.condition_start_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id),{})).first())}}",
+          "onsetDateTime": "{{iif(condition_start_datetime.empty(), condition_start_date, condition_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}",
           "clinicalStatus": {
             "coding": [
               {
@@ -98,7 +98,7 @@
         "name": "symptom",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Condition', condition_occurrence_id.toString())}}",
+          "id": "{{mpp:getHashedId('Condition', condition_occurrence_id.toString() & '|' & person_id.toString() & '|' & condition_concept_id.toString() & '|' & condition_start_date.toString() & '|' & condition_start_datetime.toString() & '|' & condition_end_date.toString() & '|' & condition_end_datetime.toString() & '|' & condition_type_concept_id.toString() & '|' & condition_status_concept_id.toString() & '|' & stop_reason.toString() & '|' & provider_id.toString() & '|' & visit_occurrence_id.toString() & '|' & visit_detail_id.toString() & '|' & condition_source_value.toString() & '|' & condition_source_concept_id.toString() & '|' & condition_status_source_value.toString())}}",
           "meta": {
             "profile": [
               "https://datatools4heart.eu/fhir/StructureDefinition/HFR-Symptom"
@@ -122,10 +122,10 @@
               }
             ]
           },
-          "effectiveDateTime": "{{iif(condition_start_datetime.empty(), condition_start_date, condition_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}",
+          "effectiveDateTime": "{{iif(condition_start_datetime.empty(), condition_start_date, condition_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}",
           "valueBoolean": true,
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
-          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id.toString()), %omopVisit.select(iif($this.visit_start_date <= %context.condition_start_date and $this.visit_end_date >= %context.condition_start_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id.toString()),{})).first())}}",
+          "encounter": "{{? iif(visit_occurrence_id.exists(), mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id), %omopVisit.select(iif($this.visit_start_date <= %context.condition_start_date and $this.visit_end_date >= %context.condition_start_date,mpp:createFhirReferenceWithHashedId('Encounter', $this.visit_occurrence_id),{})).first())}}",
           "status": "final"
         }
       }

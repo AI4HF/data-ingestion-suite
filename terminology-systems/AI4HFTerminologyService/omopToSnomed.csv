@@ -418016,3 +418016,6 @@ https://www.ohdsi.org/omop,4002443,http://snomed.info/sct,"10023009",Cotylurus f
 https://www.ohdsi.org/omop,3523185,http://snomed.info/sct,"100231000000105",Stoma pancaking
 https://www.ohdsi.org/omop,36712666,http://snomed.info/sct,"100231000119101",Acquired pericardial cyst
 https://www.ohdsi.org/omop,3587711,http://snomed.info/sct,"1002401000001105",Keralyt 6% gel 55g
+https://www.ohdsi.org/omop,9189,http://snomed.info/sct,"260385009",Negative
+https://www.ohdsi.org/omop,9191,http://snomed.info/sct,"10828004",Positive
+https://www.ohdsi.org/omop,4069590,http://snomed.info/sct,"17621005",Normal

@@ -30,7 +30,7 @@
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
-          "id": "{{mpp:getHashedId('Encounter', visit_occurrence_id.toString())}}",
+          "id": "{{mpp:getHashedId('Encounter', visit_occurrence_id)}}",
           "meta": {
             "source": "{{%sourceSystem.sourceUri}}",
             "profile": [
@@ -50,15 +50,10 @@
           ],
           "subject": "{{? mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
           "actualPeriod": {
-            "start": "{{? iif(visit_start_datetime.empty(), visit_start_date, visit_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}",
-            "end": "{{? iif(visit_end_datetime.empty(), visit_end_date, visit_end_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS'))}}"
+            "start": "{{? iif(visit_start_datetime.empty(), visit_start_date, visit_start_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}",
+            "end": "{{? iif(visit_end_datetime.empty(), visit_end_date, visit_end_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}"
           },
-          "status": "completed",
-          "diagnosis": [
-            {
-              "condition": "{{? mpp:createFhirReferenceWithHashedId('Condition', condition_occurrence_id.toString())}}"
-            }
-          ]
+          "status": "completed"
         }
       }
     }

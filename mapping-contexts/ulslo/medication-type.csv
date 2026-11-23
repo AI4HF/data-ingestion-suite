@@ -8,3 +8,4 @@ source_code,source_display
 "43542356","Physician administered drug (identified from EHR problem list)"
 "44787730","Patient Self-Reported Medication"
 "44789745","Personally Administered Medication"
+"32838","EHR prescription"

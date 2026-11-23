@@ -32,9 +32,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "unsignedInt",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/unsignedInt"
             ]
           }
         ]
@@ -144,9 +144,9 @@
         "max": "1",
         "type": [
           {
-            "code": "integer",
+            "code": "unsignedInt",
             "profile": [
-              "http://hl7.org/fhir/StructureDefinition/integer"
+              "http://hl7.org/fhir/StructureDefinition/unsignedInt"
             ]
           }
         ]
