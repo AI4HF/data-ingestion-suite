@@ -19,14 +19,9 @@
   },
   "variable": [
     {
-      "name": "rxNormCodes",
+      "name": "atcCodings",
       "language": "text/fhirpath",
-      "expression": "trms:translateToCoding(drug_concept_id.toString(),'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-rxnorm').code"
-    },
-    {
-      "name": "atcIngredientCodes",
-      "language": "text/fhirpath",
-      "expression": "rxn:getMedicationDetails(%rxNormCodes).ingredientAndStrength.select(rxn:getATC(activeIngredientRxcui)).where($this.exists())"
+      "expression": "trms:translateToCoding(drug_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-atc')"
     }
   ],
   "mapping": [
@@ -40,9 +35,9 @@
         "name": "result",
         "language": "application/fhir-template+json",
         "value": {
-          "{{#ingredient}}": "{{%atcIngredientCodes}}",
+          "{{#atc}}": "{{%atcCodings}}",
           "{{*}}": {
-            "id": "{{mpp:getHashedId('MedicationAdministration', drug_exposure_id & '_' & %ingredient)}}",
+            "id": "{{mpp:getHashedId('MedicationAdministration', drug_exposure_id & '_' & %atc.code)}}",
             "meta": {
               "profile": [
                 "https://datatools4heart.eu/fhir/StructureDefinition/HFR-MedicationAdministration"
@@ -50,7 +45,7 @@
             },
             "resourceType": "MedicationAdministration",
             "medication": {
-              "concept": "{{utl:createFhirCodeableConcept('http://www.whocc.no/atc', %ingredient, {})}}"
+              "concept": "{{utl:createFhirCodeableConcept('http://www.whocc.no/atc', %atc.code, %atc.display)}}"
             },
             "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}",
             "encounter": "{{mpp:createFhirReferenceWithHashedId('Encounter', visit_occurrence_id)}}",

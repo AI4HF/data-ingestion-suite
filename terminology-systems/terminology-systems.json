@@ -26,6 +26,13 @@
         "targetValueSetUrl": "http://www.nlm.nih.gov/research/umls/rxnorm"
       },
       {
+        "id": "omopToAtc.csv",
+        "name": "omopToAtc.csv",
+        "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-atc",
+        "sourceValueSetUrl": "https://www.ohdsi.org/omop",
+        "targetValueSetUrl": "http://www.whocc.no/atc"
+      },
+      {
         "id": "omopToIcd10Pcs.csv",
         "name": "omopToIcd10Pcs.csv",
         "conceptMapUrl": "https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10pcs",
