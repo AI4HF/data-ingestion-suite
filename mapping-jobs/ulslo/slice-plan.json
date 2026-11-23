@@ -1,0 +1,23 @@
+{
+  "_comment": "person_id-bounded slicing plan for the ulslo-deploy toFHIR job (ai4hf-dis critical path). toFHIR accumulates its whole mapped result set before writing (FhirMappingJobManager.scala:762, ErroneousRecordWriter.scala:94) - there is no streaming/foreachBatch path, so Spark JDBC partitioning does NOT bound memory. The only lever is SqlSource.query with an explicit row-range predicate. Slices are person-ORDINAL ranges (row_number() over person_id order), never raw person_id literals, so the plan never encodes patient-identifying values.",
+  "_sizing_method": "Measured 2026-09-10 via .github/diag/ai4hf_dis_slice_distribution.sql (uls-lisboa-ocidental/teras-cluster-uls-lisboa-ocidental) against 200-person ordinal buckets, run 34442391625. Linear fit of RSS(Mi) = 425 + 0.0412 * rows from the two established RSS/rowcount points (20776 rows -> 1281Mi, 102921 rows -> 4664Mi). Target ceiling 4500Mi (below the demonstrated-safe 4664Mi point) => ~98.9K rows/slice-execution. Applied a further 10% margin against extrapolation error since bucket widths below are scaled, not independently measured => target ~89-95K rows/slice. bucket_width_persons per mapping = 200 * (target_rows / measured_max_rows_at_200), rounded down to a clean number.",
+  "measured_at_200_person_buckets": {
+    "condition_occurrence": {"n_buckets": 46, "min_rows": 2850, "max_rows": 24589, "avg_rows": 13474, "p95_rows": 20082},
+    "visit_occurrence":     {"n_buckets": 46, "min_rows": 6231, "max_rows": 26033, "avg_rows": 17679, "p95_rows": 22543},
+    "drug_exposure":        {"n_buckets": 46, "min_rows": 10088, "max_rows": 31957, "avg_rows": 22527, "p95_rows": 30190},
+    "measurement":          {"n_buckets": 46, "min_rows": 3299, "max_rows": 50613, "avg_rows": 24116, "p95_rows": 40884},
+    "procedure_occurrence": {"n_buckets": 46, "min_rows": 37318, "max_rows": 102312, "avg_rows": 76143, "p95_rows": 96311}
+  },
+  "cohort_persons": 9183,
+  "mappings": {
+    "cause-of-death-mapping": {"sliced": false, "reason": "death table is 3793 rows total, well under any per-slice ceiling"},
+    "patient-mapping":        {"sliced": false, "reason": "person(9183)+death(3793)+location(0) totals well under ceiling"},
+    "condition-mapping":      {"sliced": true, "sources": ["condition_occurrence", "visit_occurrence"], "bucket_width_persons": 300, "slice_count": 31, "worst_slice_est_rows": 75933},
+    "encounter-mapping":      {"sliced": true, "sources": ["visit_occurrence"], "bucket_width_persons": 600, "slice_count": 16, "worst_slice_est_rows": 78099},
+    "medication-mapping":     {"sliced": true, "sources": ["drug_exposure"], "bucket_width_persons": 500, "slice_count": 19, "worst_slice_est_rows": 79893},
+    "measurement-mapping":    {"sliced": true, "sources": ["measurement", "visit_occurrence"], "bucket_width_persons": 200, "slice_count": 46, "worst_slice_est_rows": 76646},
+    "observation-mapping":    {"sliced": true, "sources": ["observation", "visit_occurrence"], "bucket_width_persons": 600, "slice_count": 16, "worst_slice_est_rows": 78099},
+    "procedure-mapping":      {"sliced": true, "sources": ["procedure_occurrence", "visit_occurrence"], "bucket_width_persons": 125, "slice_count": 74, "worst_slice_est_rows": 80195}
+  },
+  "_caveat": "worst_slice_est_rows extrapolates linearly from the 200-person-bucket measurement; it is NOT independently measured at the listed bucket_width_persons. TASK 5 (green proof) must confirm at least the largest mapping's largest slice against this estimate before the plan is trusted at scale."
+}
