@@ -276,7 +276,7 @@
       "precondition": {
         "name": "isPatientObservation903650",
         "language": "text/fhirpath",
-        "expression": "measurement_concept_id = 903650 and value_as_number.exists() and (unit_concept_id.empty() or unit_concept_id = 0)"
+        "expression": "measurement_concept_id = 903650 and value_as_number.exists() and value_as_number > 0 and (unit_concept_id.empty() or unit_concept_id = 0)"
       },
       "expression": {
         "name": "patientObservation903650",
