@@ -10,3 +10,5 @@ checkpoint
 
 # Ignore ignifyr-db
 ignifyr-db
+# Ignifyr Enterprise license (internal development license, never commit)
+ignifyr.license

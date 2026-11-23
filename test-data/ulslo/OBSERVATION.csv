@@ -2,3 +2,6 @@ observation_id,person_id,observation_concept_id,observation_date,observation_dat
 1,1,43054909,2024-01-10,2024-01-10 08:30:00.000,32817,,,,,,,1,,"Smokes tobacco daily (finding)",,,,,,
 2,1,36305765,2024-01-10,2024-01-10 08:30:00.000,32817,,,,,,,1,,"Class III",,,,,,
 3,2,43054909,2024-05-25,2024-05-25 10:30:00.000,32817,,,,,,,5,,"Never smoked tobacco (finding)",,,,,,
+4,2,36305765,2024-05-25,2024-05-25 10:30:00.000,32817,,,,,,,5,,NYHA,,,,variable:value/nyha_class:ii/value,,
+5,1,43054909,2024-04-02,2024-04-02 09:00:00.000,32817,,,,,,,2,,Smoking status,,,,variable:value/smoking_status:former_smoker/value,,
+6,1,43054909,2024-02-15,2024-02-15 09:00:00.000,32817,,,,,,,4,,Smoking status,,,,variable:value/smoking_status:unknown/value,,

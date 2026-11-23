@@ -67,15 +67,10 @@ https://www.ohdsi.org/omop,732309,http://www.whocc.no/atc,N04BC02,pergolide
 https://www.ohdsi.org/omop,733301,http://www.whocc.no/atc,N05BE01,buspirone
 https://www.ohdsi.org/omop,733523,http://www.whocc.no/atc,N06DA03,rivastigmine
 https://www.ohdsi.org/omop,734354,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,734354,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,734356,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,734356,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,734360,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,734360,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,734394,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,734394,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,734396,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,734396,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,735850,http://www.whocc.no/atc,N07BB01,disulfiram
 https://www.ohdsi.org/omop,735850,http://www.whocc.no/atc,P03AA04,disulfiram
 https://www.ohdsi.org/omop,735979,http://www.whocc.no/atc,N05AX08,risperidone
@@ -132,7 +127,6 @@ https://www.ohdsi.org/omop,766923,http://www.whocc.no/atc,N05AH04,quetiapine
 https://www.ohdsi.org/omop,766931,http://www.whocc.no/atc,N05AH04,quetiapine
 https://www.ohdsi.org/omop,777221,http://www.whocc.no/atc,N05BB01,hydroxyzine
 https://www.ohdsi.org/omop,778296,http://www.whocc.no/atc,N06AA02,imipramine
-https://www.ohdsi.org/omop,778296,http://www.whocc.no/atc,N06AA03,imipramine oxide
 https://www.ohdsi.org/omop,778474,http://www.whocc.no/atc,M03BX02,tizanidine
 https://www.ohdsi.org/omop,778478,http://www.whocc.no/atc,M03BX02,tizanidine
 https://www.ohdsi.org/omop,778765,http://www.whocc.no/atc,M03BX08,cyclobenzaprine
@@ -152,7 +146,6 @@ https://www.ohdsi.org/omop,785821,http://www.whocc.no/atc,N05AH03,olanzapine
 https://www.ohdsi.org/omop,785842,http://www.whocc.no/atc,N05AH03,olanzapine
 https://www.ohdsi.org/omop,786426,http://www.whocc.no/atc,N04BC09,rotigotine
 https://www.ohdsi.org/omop,789578,http://www.whocc.no/atc,N04BA01,levodopa
-https://www.ohdsi.org/omop,789578,http://www.whocc.no/atc,N04BA04,melevodopa
 https://www.ohdsi.org/omop,789581,http://www.whocc.no/atc,N04BA02,levodopa and decarboxylase inhibitor
 https://www.ohdsi.org/omop,789612,http://www.whocc.no/atc,N04BA02,levodopa and decarboxylase inhibitor
 https://www.ohdsi.org/omop,789621,http://www.whocc.no/atc,N04BA02,levodopa and decarboxylase inhibitor
@@ -173,7 +166,6 @@ https://www.ohdsi.org/omop,793658,http://www.whocc.no/atc,M02AA15,diclofenac
 https://www.ohdsi.org/omop,794147,http://www.whocc.no/atc,N06AA21,maprotiline
 https://www.ohdsi.org/omop,794852,http://www.whocc.no/atc,N05AA01,chlorpromazine
 https://www.ohdsi.org/omop,797399,http://www.whocc.no/atc,N02BF01,gabapentin
-https://www.ohdsi.org/omop,797399,http://www.whocc.no/atc,N03AX12,[U] gabapentin
 https://www.ohdsi.org/omop,797617,http://www.whocc.no/atc,N06AB04,citalopram
 https://www.ohdsi.org/omop,797632,http://www.whocc.no/atc,N06AB04,citalopram
 https://www.ohdsi.org/omop,798834,http://www.whocc.no/atc,N06AA04,clomipramine
@@ -232,7 +224,6 @@ https://www.ohdsi.org/omop,908951,http://www.whocc.no/atc,D05AX52,"calcipotriol,
 https://www.ohdsi.org/omop,909795,http://www.whocc.no/atc,S01BC10,nepafenac
 https://www.ohdsi.org/omop,910232,http://www.whocc.no/atc,S01FA04,cyclopentolate
 https://www.ohdsi.org/omop,911735,http://www.whocc.no/atc,A02BC04,rabeprazole
-https://www.ohdsi.org/omop,911735,http://www.whocc.no/atc,A02BC07,dexrabeprazole
 https://www.ohdsi.org/omop,914533,http://www.whocc.no/atc,R01AA08,naphazoline
 https://www.ohdsi.org/omop,914533,http://www.whocc.no/atc,R01AB02,naphazoline
 https://www.ohdsi.org/omop,914533,http://www.whocc.no/atc,S01GA01,naphazoline
@@ -339,7 +330,6 @@ https://www.ohdsi.org/omop,939871,http://www.whocc.no/atc,A06AG01,sodium phospha
 https://www.ohdsi.org/omop,939871,http://www.whocc.no/atc,B05XA09,sodium phosphate
 https://www.ohdsi.org/omop,939871,http://www.whocc.no/atc,V03AG05,sodium phosphate
 https://www.ohdsi.org/omop,939881,http://www.whocc.no/atc,M02AB01,capsaicin
-https://www.ohdsi.org/omop,939881,http://www.whocc.no/atc,M02AB02,zucapsaicin
 https://www.ohdsi.org/omop,939881,http://www.whocc.no/atc,N01BX04,capsaicin
 https://www.ohdsi.org/omop,940426,http://www.whocc.no/atc,A06AC08,polycarbophil calcium
 https://www.ohdsi.org/omop,940864,http://www.whocc.no/atc,D01AC03,econazole
@@ -389,15 +379,12 @@ https://www.ohdsi.org/omop,956944,http://www.whocc.no/atc,C03CA01,furosemide
 https://www.ohdsi.org/omop,957136,http://www.whocc.no/atc,C03CA01,furosemide
 https://www.ohdsi.org/omop,960820,http://www.whocc.no/atc,A06AB06,senna glycosides
 https://www.ohdsi.org/omop,961047,http://www.whocc.no/atc,A02BA02,ranitidine
-https://www.ohdsi.org/omop,961047,http://www.whocc.no/atc,A02BA07,ranitidine bismuth citrate
 https://www.ohdsi.org/omop,961050,http://www.whocc.no/atc,A02BA02,ranitidine
 https://www.ohdsi.org/omop,961082,http://www.whocc.no/atc,A02BA02,ranitidine
 https://www.ohdsi.org/omop,961145,http://www.whocc.no/atc,A06AG04,glycerol
 https://www.ohdsi.org/omop,961145,http://www.whocc.no/atc,A06AX01,glycerol
 https://www.ohdsi.org/omop,961304,http://www.whocc.no/atc,A06AG06,oil
 https://www.ohdsi.org/omop,964407,http://www.whocc.no/atc,D01AE12,salicylic acid
-https://www.ohdsi.org/omop,964407,http://www.whocc.no/atc,N02BA04,sodium salicylate
-https://www.ohdsi.org/omop,964407,http://www.whocc.no/atc,N02BA12,potassium salicylate
 https://www.ohdsi.org/omop,964407,http://www.whocc.no/atc,S01BC08,salicylic acid
 https://www.ohdsi.org/omop,964780,http://www.whocc.no/atc,D07XC01,betamethasone
 https://www.ohdsi.org/omop,966956,http://www.whocc.no/atc,D06BA01,silver sulfadiazine
@@ -405,7 +392,6 @@ https://www.ohdsi.org/omop,967012,http://www.whocc.no/atc,A03AX13,silicones
 https://www.ohdsi.org/omop,967823,http://www.whocc.no/atc,A12CA01,sodium chloride
 https://www.ohdsi.org/omop,967823,http://www.whocc.no/atc,B05CB01,sodium chloride
 https://www.ohdsi.org/omop,967823,http://www.whocc.no/atc,B05XA03,sodium chloride
-https://www.ohdsi.org/omop,967823,http://www.whocc.no/atc,S01XA03,"sodium chloride, hypertonic"
 https://www.ohdsi.org/omop,967949,http://www.whocc.no/atc,B05CB01,sodium chloride
 https://www.ohdsi.org/omop,968426,http://www.whocc.no/atc,A07EC02,mesalazine
 https://www.ohdsi.org/omop,968429,http://www.whocc.no/atc,A07EC02,mesalazine
@@ -426,9 +412,6 @@ https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,A01AC03,hydrocortisone
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,A07EA02,hydrocortisone
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,C05AA01,hydrocortisone
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,D07AA02,hydrocortisone
-https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,D07AB02,hydrocortisone butyrate
-https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,D07AB11,hydrocortisone buteprate
-https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,D07AC16,hydrocortisone aceponate
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,H02AB09,hydrocortisone
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,S01BA02,hydrocortisone
 https://www.ohdsi.org/omop,975125,http://www.whocc.no/atc,S01CB03,hydrocortisone
@@ -437,9 +420,6 @@ https://www.ohdsi.org/omop,975168,http://www.whocc.no/atc,H02AB09,hydrocortisone
 https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,A07EA02,hydrocortisone
 https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,C05AA01,hydrocortisone
 https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,D07AA02,hydrocortisone
-https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,D07AB02,hydrocortisone butyrate
-https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,D07AB11,hydrocortisone buteprate
-https://www.ohdsi.org/omop,975171,http://www.whocc.no/atc,D07AC16,hydrocortisone aceponate
 https://www.ohdsi.org/omop,976545,http://www.whocc.no/atc,A12BA02,potassium citrate
 https://www.ohdsi.org/omop,976778,http://www.whocc.no/atc,D11AX11,hydroquinone
 https://www.ohdsi.org/omop,977421,http://www.whocc.no/atc,H02AB12,rimexolone
@@ -470,7 +450,6 @@ https://www.ohdsi.org/omop,985247,http://www.whocc.no/atc,A02AB02,algeldrate
 https://www.ohdsi.org/omop,985708,http://www.whocc.no/atc,D01AC08,ketoconazole
 https://www.ohdsi.org/omop,985708,http://www.whocc.no/atc,G01AF11,ketoconazole
 https://www.ohdsi.org/omop,985708,http://www.whocc.no/atc,H02CA03,ketoconazole
-https://www.ohdsi.org/omop,985708,http://www.whocc.no/atc,H02CA04,levoketoconazole
 https://www.ohdsi.org/omop,985708,http://www.whocc.no/atc,J02AB02,ketoconazole
 https://www.ohdsi.org/omop,986117,http://www.whocc.no/atc,R06AX17,ketotifen
 https://www.ohdsi.org/omop,986117,http://www.whocc.no/atc,S01GX08,ketotifen
@@ -511,7 +490,6 @@ https://www.ohdsi.org/omop,990678,http://www.whocc.no/atc,N05BA02,chlordiazepoxi
 https://www.ohdsi.org/omop,991825,http://www.whocc.no/atc,G04BD09,trospium
 https://www.ohdsi.org/omop,991855,http://www.whocc.no/atc,A07FA02,saccharomyces boulardii
 https://www.ohdsi.org/omop,991876,http://www.whocc.no/atc,A07DA03,loperamide
-https://www.ohdsi.org/omop,991876,http://www.whocc.no/atc,A07DA05,loperamide oxide
 https://www.ohdsi.org/omop,992956,http://www.whocc.no/atc,A02AA04,magnesium hydroxide
 https://www.ohdsi.org/omop,992956,http://www.whocc.no/atc,G04BX01,magnesium hydroxide
 https://www.ohdsi.org/omop,996416,http://www.whocc.no/atc,D11AX10,finasteride
@@ -534,7 +512,6 @@ https://www.ohdsi.org/omop,1000995,http://www.whocc.no/atc,D11AC30,others
 https://www.ohdsi.org/omop,1036231,http://www.whocc.no/atc,A02BX02,sucralfate
 https://www.ohdsi.org/omop,1036233,http://www.whocc.no/atc,A02BX02,sucralfate
 https://www.ohdsi.org/omop,1101558,http://www.whocc.no/atc,M04AC01,colchicine
-https://www.ohdsi.org/omop,1101898,http://www.whocc.no/atc,L04AA13,[U] leflunomide
 https://www.ohdsi.org/omop,1101898,http://www.whocc.no/atc,L04AK01,leflunomide
 https://www.ohdsi.org/omop,1103006,http://www.whocc.no/atc,R06AX27,desloratadine
 https://www.ohdsi.org/omop,1103314,http://www.whocc.no/atc,N02AX02,tramadol
@@ -558,13 +535,11 @@ https://www.ohdsi.org/omop,1113143,http://www.whocc.no/atc,B01AC06,acetylsalicyl
 https://www.ohdsi.org/omop,1113143,http://www.whocc.no/atc,N02BA01,acetylsalicylic acid
 https://www.ohdsi.org/omop,1115008,http://www.whocc.no/atc,G02CC02,naproxen
 https://www.ohdsi.org/omop,1115008,http://www.whocc.no/atc,M01AE02,naproxen
-https://www.ohdsi.org/omop,1115008,http://www.whocc.no/atc,M01AE18,naproxcinod
 https://www.ohdsi.org/omop,1115008,http://www.whocc.no/atc,M02AA12,naproxen
 https://www.ohdsi.org/omop,1115063,http://www.whocc.no/atc,G02CC02,naproxen
 https://www.ohdsi.org/omop,1115063,http://www.whocc.no/atc,M01AE02,naproxen
 https://www.ohdsi.org/omop,1115063,http://www.whocc.no/atc,M02AA12,naproxen
 https://www.ohdsi.org/omop,1115069,http://www.whocc.no/atc,M01AE02,naproxen
-https://www.ohdsi.org/omop,1115069,http://www.whocc.no/atc,M01AE18,naproxcinod
 https://www.ohdsi.org/omop,1115572,http://www.whocc.no/atc,A07EA07,beclometasone
 https://www.ohdsi.org/omop,1115572,http://www.whocc.no/atc,D07AC15,beclometasone
 https://www.ohdsi.org/omop,1115572,http://www.whocc.no/atc,R01AD01,beclometasone
@@ -625,9 +600,7 @@ https://www.ohdsi.org/omop,1149196,http://www.whocc.no/atc,R06AE07,cetirizine
 https://www.ohdsi.org/omop,1149196,http://www.whocc.no/atc,S01GX12,cetirizine
 https://www.ohdsi.org/omop,1149380,http://www.whocc.no/atc,D07AC17,fluticasone
 https://www.ohdsi.org/omop,1149380,http://www.whocc.no/atc,R01AD08,fluticasone
-https://www.ohdsi.org/omop,1149380,http://www.whocc.no/atc,R01AD12,fluticasone furoate
 https://www.ohdsi.org/omop,1149380,http://www.whocc.no/atc,R03BA05,fluticasone
-https://www.ohdsi.org/omop,1149380,http://www.whocc.no/atc,R03BA09,fluticasone furoate
 https://www.ohdsi.org/omop,1150345,http://www.whocc.no/atc,M01AC06,meloxicam
 https://www.ohdsi.org/omop,1150347,http://www.whocc.no/atc,M01AC06,meloxicam
 https://www.ohdsi.org/omop,1150351,http://www.whocc.no/atc,M01AC06,meloxicam
@@ -647,7 +620,6 @@ https://www.ohdsi.org/omop,1154343,http://www.whocc.no/atc,R03CC02,salbutamol
 https://www.ohdsi.org/omop,1154380,http://www.whocc.no/atc,R03AC02,salbutamol
 https://www.ohdsi.org/omop,1156378,http://www.whocc.no/atc,M01AE09,flurbiprofen
 https://www.ohdsi.org/omop,1156378,http://www.whocc.no/atc,M02AA19,flurbiprofen
-https://www.ohdsi.org/omop,1156378,http://www.whocc.no/atc,M02AA29,esflurbiprofen
 https://www.ohdsi.org/omop,1156378,http://www.whocc.no/atc,R02AX01,flurbiprofen
 https://www.ohdsi.org/omop,1156378,http://www.whocc.no/atc,S01BC04,flurbiprofen
 https://www.ohdsi.org/omop,1166126,http://www.whocc.no/atc,R03AC02,salbutamol
@@ -730,11 +702,8 @@ https://www.ohdsi.org/omop,1311276,http://www.whocc.no/atc,G04BE09,vardenafil
 https://www.ohdsi.org/omop,1312007,http://www.whocc.no/atc,A14AA07,prasterone
 https://www.ohdsi.org/omop,1312007,http://www.whocc.no/atc,G03XX01,prasterone
 https://www.ohdsi.org/omop,1314002,http://www.whocc.no/atc,C07AB03,atenolol
-https://www.ohdsi.org/omop,1314002,http://www.whocc.no/atc,C07AB11,s-atenolol
 https://www.ohdsi.org/omop,1314006,http://www.whocc.no/atc,C07AB03,atenolol
-https://www.ohdsi.org/omop,1314006,http://www.whocc.no/atc,C07AB11,s-atenolol
 https://www.ohdsi.org/omop,1314008,http://www.whocc.no/atc,C07AB03,atenolol
-https://www.ohdsi.org/omop,1314008,http://www.whocc.no/atc,C07AB11,s-atenolol
 https://www.ohdsi.org/omop,1314577,http://www.whocc.no/atc,C07AB12,nebivolol
 https://www.ohdsi.org/omop,1315286,http://www.whocc.no/atc,L02BB02,nilutamide
 https://www.ohdsi.org/omop,1315946,http://www.whocc.no/atc,L02BG04,letrozole
@@ -829,7 +798,6 @@ https://www.ohdsi.org/omop,1377023,http://www.whocc.no/atc,V03AB33,hydroxocobala
 https://www.ohdsi.org/omop,1377141,http://www.whocc.no/atc,L01XX05,hydroxycarbamide
 https://www.ohdsi.org/omop,1379969,http://www.whocc.no/atc,L03AB04,interferon alfa-2a
 https://www.ohdsi.org/omop,1380068,http://www.whocc.no/atc,L03AB05,interferon alfa-2b
-https://www.ohdsi.org/omop,1380068,http://www.whocc.no/atc,S01AD05,interferon
 https://www.ohdsi.org/omop,1381504,http://www.whocc.no/atc,C01EA01,alprostadil
 https://www.ohdsi.org/omop,1381504,http://www.whocc.no/atc,G04BE01,alprostadil
 https://www.ohdsi.org/omop,1383815,http://www.whocc.no/atc,C01DA14,isosorbide mononitrate
@@ -853,7 +821,6 @@ https://www.ohdsi.org/omop,1395573,http://www.whocc.no/atc,M01AX25,chondroitin s
 https://www.ohdsi.org/omop,1395592,http://www.whocc.no/atc,M01AX25,chondroitin sulfate
 https://www.ohdsi.org/omop,1395773,http://www.whocc.no/atc,B03AB02,saccharated iron oxide
 https://www.ohdsi.org/omop,1396012,http://www.whocc.no/atc,B03AA03,ferrous gluconate
-https://www.ohdsi.org/omop,1396012,http://www.whocc.no/atc,B03AD05,ferrous gluconate and folic acid
 https://www.ohdsi.org/omop,1397059,http://www.whocc.no/atc,N05CM09,Valerianae radix
 https://www.ohdsi.org/omop,1398399,http://www.whocc.no/atc,L02BG06,exemestane
 https://www.ohdsi.org/omop,1398937,http://www.whocc.no/atc,C02AC01,clonidine
@@ -867,18 +834,15 @@ https://www.ohdsi.org/omop,1500211,http://www.whocc.no/atc,L02AB02,medroxyproges
 https://www.ohdsi.org/omop,1501617,http://www.whocc.no/atc,C10AC02,colestipol
 https://www.ohdsi.org/omop,1501700,http://www.whocc.no/atc,H03AA01,levothyroxine sodium
 https://www.ohdsi.org/omop,1502826,http://www.whocc.no/atc,A10BX03,nateglinide
-https://www.ohdsi.org/omop,1502905,http://www.whocc.no/atc,A10AD02,insulin (beef)
 https://www.ohdsi.org/omop,1502905,http://www.whocc.no/atc,A10AE04,insulin glargine
 https://www.ohdsi.org/omop,1503297,http://www.whocc.no/atc,A10BA02,metformin
 https://www.ohdsi.org/omop,1504672,http://www.whocc.no/atc,H03BB02,thiamazole
 https://www.ohdsi.org/omop,1505346,http://www.whocc.no/atc,H03AA02,liothyronine sodium
 https://www.ohdsi.org/omop,1506270,http://www.whocc.no/atc,D07AA01,methylprednisolone
-https://www.ohdsi.org/omop,1506270,http://www.whocc.no/atc,D07AC14,methylprednisolone aceponate
 https://www.ohdsi.org/omop,1506270,http://www.whocc.no/atc,D10AA02,methylprednisolone
 https://www.ohdsi.org/omop,1506270,http://www.whocc.no/atc,H02AB04,methylprednisolone
 https://www.ohdsi.org/omop,1506426,http://www.whocc.no/atc,H02AB04,methylprednisolone
 https://www.ohdsi.org/omop,1506479,http://www.whocc.no/atc,H02AB04,methylprednisolone
-https://www.ohdsi.org/omop,1510627,http://www.whocc.no/atc,L04AA37,[U] baricitinib
 https://www.ohdsi.org/omop,1510627,http://www.whocc.no/atc,L04AF02,baricitinib
 https://www.ohdsi.org/omop,1510813,http://www.whocc.no/atc,C10AA07,rosuvastatin
 https://www.ohdsi.org/omop,1512480,http://www.whocc.no/atc,M05BA06,ibandronic acid
@@ -981,9 +945,7 @@ https://www.ohdsi.org/omop,1596977,http://www.whocc.no/atc,A10AB01,insulin (huma
 https://www.ohdsi.org/omop,1596977,http://www.whocc.no/atc,A10AD01,insulin (human)
 https://www.ohdsi.org/omop,1597756,http://www.whocc.no/atc,A10BB12,glimepiride
 https://www.ohdsi.org/omop,1597773,http://www.whocc.no/atc,A10BB12,glimepiride
-https://www.ohdsi.org/omop,1636780,http://www.whocc.no/atc,A14AA01,androstanolone
 https://www.ohdsi.org/omop,1636780,http://www.whocc.no/atc,G03BA03,testosterone
-https://www.ohdsi.org/omop,1636780,http://www.whocc.no/atc,G03BB02,androstanolone
 https://www.ohdsi.org/omop,1701928,http://www.whocc.no/atc,A07BA01,medicinal charcoal
 https://www.ohdsi.org/omop,1702559,http://www.whocc.no/atc,G01AF21,tinidazole
 https://www.ohdsi.org/omop,1702559,http://www.whocc.no/atc,J01XD02,tinidazole
@@ -1079,7 +1041,6 @@ https://www.ohdsi.org/omop,1754999,http://www.whocc.no/atc,J02AC01,fluconazole
 https://www.ohdsi.org/omop,1755000,http://www.whocc.no/atc,J02AC01,fluconazole
 https://www.ohdsi.org/omop,1755001,http://www.whocc.no/atc,J02AC01,fluconazole
 https://www.ohdsi.org/omop,1758536,http://www.whocc.no/atc,J05AG04,etravirine
-https://www.ohdsi.org/omop,1758673,http://www.whocc.no/atc,A10AD02,insulin (beef)
 https://www.ohdsi.org/omop,1758673,http://www.whocc.no/atc,A10AE04,insulin glargine
 https://www.ohdsi.org/omop,1759270,http://www.whocc.no/atc,P02CC01,pyrantel
 https://www.ohdsi.org/omop,1759455,http://www.whocc.no/atc,J04AK01,pyrazinamide
@@ -1166,7 +1127,6 @@ https://www.ohdsi.org/omop,19003946,http://www.whocc.no/atc,N05BA10,ketazolam
 https://www.ohdsi.org/omop,19003964,http://www.whocc.no/atc,N07CA02,cinnarizine
 https://www.ohdsi.org/omop,19004476,http://www.whocc.no/atc,N05BA08,bromazepam
 https://www.ohdsi.org/omop,19004539,http://www.whocc.no/atc,C08CA09,lacidipine
-https://www.ohdsi.org/omop,19005046,http://www.whocc.no/atc,A05BA09,metadoxine
 https://www.ohdsi.org/omop,19005046,http://www.whocc.no/atc,A11HA02,pyridoxine (vit B6)
 https://www.ohdsi.org/omop,19005129,http://www.whocc.no/atc,D07AB01,clobetasone
 https://www.ohdsi.org/omop,19005129,http://www.whocc.no/atc,S01BA09,clobetasone
@@ -1226,7 +1186,6 @@ https://www.ohdsi.org/omop,19011021,http://www.whocc.no/atc,C02AC05,moxonidine
 https://www.ohdsi.org/omop,19011355,http://www.whocc.no/atc,M01AH05,etoricoxib
 https://www.ohdsi.org/omop,19011356,http://www.whocc.no/atc,M01AH05,etoricoxib
 https://www.ohdsi.org/omop,19011440,http://www.whocc.no/atc,L01EG02,everolimus
-https://www.ohdsi.org/omop,19011440,http://www.whocc.no/atc,L04AA18,[U] everolimus
 https://www.ohdsi.org/omop,19011440,http://www.whocc.no/atc,L04AH02,everolimus
 https://www.ohdsi.org/omop,19011669,http://www.whocc.no/atc,N02BA03,choline salicylate
 https://www.ohdsi.org/omop,19011773,http://www.whocc.no/atc,A11GA01,ascorbic acid (vit C)
@@ -1277,9 +1236,7 @@ https://www.ohdsi.org/omop,19019073,http://www.whocc.no/atc,R02AX02,ibuprofen
 https://www.ohdsi.org/omop,19019113,http://www.whocc.no/atc,N05BA06,lorazepam
 https://www.ohdsi.org/omop,19019131,http://www.whocc.no/atc,A12CC05,magnesium aspartate
 https://www.ohdsi.org/omop,19019272,http://www.whocc.no/atc,M01AE02,naproxen
-https://www.ohdsi.org/omop,19019272,http://www.whocc.no/atc,M01AE18,naproxcinod
 https://www.ohdsi.org/omop,19019273,http://www.whocc.no/atc,M01AE02,naproxen
-https://www.ohdsi.org/omop,19019273,http://www.whocc.no/atc,M01AE18,naproxcinod
 https://www.ohdsi.org/omop,19019411,http://www.whocc.no/atc,J01MA06,norfloxacin
 https://www.ohdsi.org/omop,19019415,http://www.whocc.no/atc,J01MA01,ofloxacin
 https://www.ohdsi.org/omop,19019418,http://www.whocc.no/atc,A02BC01,omeprazole
@@ -1343,9 +1300,7 @@ https://www.ohdsi.org/omop,19027883,http://www.whocc.no/atc,A02AC01,calcium carb
 https://www.ohdsi.org/omop,19027883,http://www.whocc.no/atc,A12AA04,calcium carbonate
 https://www.ohdsi.org/omop,19027958,http://www.whocc.no/atc,G04BD11,fesoterodine
 https://www.ohdsi.org/omop,19028684,http://www.whocc.no/atc,L04AD01,ciclosporin
-https://www.ohdsi.org/omop,19028901,http://www.whocc.no/atc,L04AA13,[U] leflunomide
 https://www.ohdsi.org/omop,19028901,http://www.whocc.no/atc,L04AK01,leflunomide
-https://www.ohdsi.org/omop,19028902,http://www.whocc.no/atc,L04AA13,[U] leflunomide
 https://www.ohdsi.org/omop,19028902,http://www.whocc.no/atc,L04AK01,leflunomide
 https://www.ohdsi.org/omop,19028935,http://www.whocc.no/atc,C09CA07,telmisartan
 https://www.ohdsi.org/omop,19028947,http://www.whocc.no/atc,D04AA13,dimetindene
@@ -1388,9 +1343,7 @@ https://www.ohdsi.org/omop,19036946,http://www.whocc.no/atc,P03AX01,benzyl benzo
 https://www.ohdsi.org/omop,19037038,http://www.whocc.no/atc,A12AA03,calcium gluconate
 https://www.ohdsi.org/omop,19037038,http://www.whocc.no/atc,B05XA19,calcium gluconate
 https://www.ohdsi.org/omop,19037038,http://www.whocc.no/atc,D11AX03,calcium gluconate
-https://www.ohdsi.org/omop,19037401,http://www.whocc.no/atc,A11HA31,calcium pantothenate
 https://www.ohdsi.org/omop,19037401,http://www.whocc.no/atc,A12AA01,calcium phosphate
-https://www.ohdsi.org/omop,19037401,http://www.whocc.no/atc,D03AX04,calcium pantothenate
 https://www.ohdsi.org/omop,19037560,http://www.whocc.no/atc,D01AC10,bifonazole
 https://www.ohdsi.org/omop,19037833,http://www.whocc.no/atc,A03FA03,domperidone
 https://www.ohdsi.org/omop,19037834,http://www.whocc.no/atc,A03FA03,domperidone
@@ -1417,7 +1370,7 @@ https://www.ohdsi.org/omop,19046291,http://www.whocc.no/atc,P02CB01,piperazine
 https://www.ohdsi.org/omop,19046654,http://www.whocc.no/atc,N06BX03,piracetam
 https://www.ohdsi.org/omop,19047598,http://www.whocc.no/atc,J07BA02,"encephalitis, Japanese, inactivated, whole virus"
 https://www.ohdsi.org/omop,19048026,http://www.whocc.no/atc,B03BA04,cobamamide
-https://www.ohdsi.org/omop,19048037,http://www.whocc.no/atc,P01BE52,[U] artemether and lumefantrine
+https://www.ohdsi.org/omop,19048037,http://www.whocc.no/atc,P01BF01,artemether and lumefantrine
 https://www.ohdsi.org/omop,19049038,http://www.whocc.no/atc,G03CA04,estriol
 https://www.ohdsi.org/omop,19049038,http://www.whocc.no/atc,G03CC06,estriol
 https://www.ohdsi.org/omop,19049105,http://www.whocc.no/atc,A12BA01,potassium chloride
@@ -1450,7 +1403,6 @@ https://www.ohdsi.org/omop,19057346,http://www.whocc.no/atc,V03AB20,copper sulfa
 https://www.ohdsi.org/omop,19057607,http://www.whocc.no/atc,N05AL05,amisulpride
 https://www.ohdsi.org/omop,19057608,http://www.whocc.no/atc,N05AL05,amisulpride
 https://www.ohdsi.org/omop,19058896,http://www.whocc.no/atc,A12AA05,calcium lactate
-https://www.ohdsi.org/omop,19058896,http://www.whocc.no/atc,A12AA06,calcium lactate gluconate
 https://www.ohdsi.org/omop,19058933,http://www.whocc.no/atc,R05CB15,erdosteine
 https://www.ohdsi.org/omop,19059056,http://www.whocc.no/atc,B01AC06,acetylsalicylic acid
 https://www.ohdsi.org/omop,19059056,http://www.whocc.no/atc,N02BA01,acetylsalicylic acid
@@ -1493,9 +1445,7 @@ https://www.ohdsi.org/omop,19063926,http://www.whocc.no/atc,G03AB06,gestodene an
 https://www.ohdsi.org/omop,19063981,http://www.whocc.no/atc,C05CA01,rutoside
 https://www.ohdsi.org/omop,19064061,http://www.whocc.no/atc,D01AE16,amorolfine
 https://www.ohdsi.org/omop,19064246,http://www.whocc.no/atc,N06BX06,citicoline
-https://www.ohdsi.org/omop,19064285,http://www.whocc.no/atc,A14AA01,androstanolone
 https://www.ohdsi.org/omop,19064285,http://www.whocc.no/atc,G03BA03,testosterone
-https://www.ohdsi.org/omop,19064285,http://www.whocc.no/atc,G03BB02,androstanolone
 https://www.ohdsi.org/omop,19064364,http://www.whocc.no/atc,N05BA12,alprazolam
 https://www.ohdsi.org/omop,19064800,http://www.whocc.no/atc,R06AX22,ebastine
 https://www.ohdsi.org/omop,19064967,http://www.whocc.no/atc,A07EC02,mesalazine
@@ -1571,13 +1521,9 @@ https://www.ohdsi.org/omop,19077498,http://www.whocc.no/atc,C10AA04,fluvastatin
 https://www.ohdsi.org/omop,19077499,http://www.whocc.no/atc,C10AA04,fluvastatin
 https://www.ohdsi.org/omop,19077514,http://www.whocc.no/atc,B03AD02,ferrous fumarate and folic acid
 https://www.ohdsi.org/omop,19077547,http://www.whocc.no/atc,N02BF01,gabapentin
-https://www.ohdsi.org/omop,19077547,http://www.whocc.no/atc,N03AX12,[U] gabapentin
 https://www.ohdsi.org/omop,19077548,http://www.whocc.no/atc,N02BF01,gabapentin
-https://www.ohdsi.org/omop,19077548,http://www.whocc.no/atc,N03AX12,[U] gabapentin
 https://www.ohdsi.org/omop,19077549,http://www.whocc.no/atc,N02BF01,gabapentin
-https://www.ohdsi.org/omop,19077549,http://www.whocc.no/atc,N03AX12,[U] gabapentin
 https://www.ohdsi.org/omop,19077550,http://www.whocc.no/atc,N02BF01,gabapentin
-https://www.ohdsi.org/omop,19077550,http://www.whocc.no/atc,N03AX12,[U] gabapentin
 https://www.ohdsi.org/omop,19077577,http://www.whocc.no/atc,C10AB04,gemfibrozil
 https://www.ohdsi.org/omop,19077601,http://www.whocc.no/atc,S01AA11,gentamicin
 https://www.ohdsi.org/omop,19077601,http://www.whocc.no/atc,S03AA06,gentamicin
@@ -1590,7 +1536,6 @@ https://www.ohdsi.org/omop,19078461,http://www.whocc.no/atc,M01AE01,ibuprofen
 https://www.ohdsi.org/omop,19078461,http://www.whocc.no/atc,R02AX02,ibuprofen
 https://www.ohdsi.org/omop,19078555,http://www.whocc.no/atc,A10AB01,insulin (human)
 https://www.ohdsi.org/omop,19078555,http://www.whocc.no/atc,A10AD01,insulin (human)
-https://www.ohdsi.org/omop,19078559,http://www.whocc.no/atc,A10AD02,insulin (beef)
 https://www.ohdsi.org/omop,19078559,http://www.whocc.no/atc,A10AE04,insulin glargine
 https://www.ohdsi.org/omop,19078728,http://www.whocc.no/atc,J02AC02,itraconazole
 https://www.ohdsi.org/omop,19078938,http://www.whocc.no/atc,C04AX17,vinburnine
@@ -1747,9 +1692,7 @@ https://www.ohdsi.org/omop,19111620,http://www.whocc.no/atc,V04CX02,folic acid
 https://www.ohdsi.org/omop,19112569,http://www.whocc.no/atc,C10BA02,simvastatin and ezetimibe
 https://www.ohdsi.org/omop,19112640,http://www.whocc.no/atc,C10AB05,fenofibrate
 https://www.ohdsi.org/omop,19112670,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,19112670,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,19112671,http://www.whocc.no/atc,N02BF02,pregabalin
-https://www.ohdsi.org/omop,19112671,http://www.whocc.no/atc,N03AX16,[U] pregabalin
 https://www.ohdsi.org/omop,19112761,http://www.whocc.no/atc,R03BB04,tiotropium bromide
 https://www.ohdsi.org/omop,19112791,http://www.whocc.no/atc,A10AB06,insulin glulisine
 https://www.ohdsi.org/omop,19112979,http://www.whocc.no/atc,C08CA05,nifedipine
@@ -1849,7 +1792,7 @@ https://www.ohdsi.org/omop,21031321,http://www.whocc.no/atc,A11CC05,colecalcifer
 https://www.ohdsi.org/omop,21035172,http://www.whocc.no/atc,A07EC02,mesalazine
 https://www.ohdsi.org/omop,21041304,http://www.whocc.no/atc,C09AA04,perindopril
 https://www.ohdsi.org/omop,21056210,http://www.whocc.no/atc,C09AA04,perindopril
-https://www.ohdsi.org/omop,21063213,http://www.whocc.no/atc,L04AA13,[U] leflunomide
+https://www.ohdsi.org/omop,21063213,http://www.whocc.no/atc,L04AK01,leflunomide
 https://www.ohdsi.org/omop,21065049,http://www.whocc.no/atc,R03BA02,budesonide
 https://www.ohdsi.org/omop,21066825,http://www.whocc.no/atc,A12BA01,potassium chloride
 https://www.ohdsi.org/omop,21070867,http://www.whocc.no/atc,C09BA04,perindopril and diuretics
@@ -1902,7 +1845,6 @@ https://www.ohdsi.org/omop,35412142,http://www.whocc.no/atc,G01AF11,ketoconazole
 https://www.ohdsi.org/omop,35412933,http://www.whocc.no/atc,D06BB03,aciclovir
 https://www.ohdsi.org/omop,35412940,http://www.whocc.no/atc,D06AX01,fusidic acid
 https://www.ohdsi.org/omop,35412940,http://www.whocc.no/atc,D09AA02,fusidic acid
-https://www.ohdsi.org/omop,35602717,http://www.whocc.no/atc,A10AD05,insulin aspart
 https://www.ohdsi.org/omop,35602717,http://www.whocc.no/atc,A10AE06,insulin degludec
 https://www.ohdsi.org/omop,35602725,http://www.whocc.no/atc,A10AE06,insulin degludec
 https://www.ohdsi.org/omop,35603136,http://www.whocc.no/atc,J01DD52,ceftazidime and beta-lactamase inhibitor
@@ -1931,9 +1873,7 @@ https://www.ohdsi.org/omop,36120676,http://www.whocc.no/atc,D07AC13,mometasone
 https://www.ohdsi.org/omop,36250079,http://www.whocc.no/atc,R01AD58,"fluticasone, combinations"
 https://www.ohdsi.org/omop,36250097,http://www.whocc.no/atc,R01AD09,mometasone
 https://www.ohdsi.org/omop,36250122,http://www.whocc.no/atc,R01AD08,fluticasone
-https://www.ohdsi.org/omop,36250122,http://www.whocc.no/atc,R01AD12,fluticasone furoate
 https://www.ohdsi.org/omop,36250141,http://www.whocc.no/atc,R01AD08,fluticasone
-https://www.ohdsi.org/omop,36250141,http://www.whocc.no/atc,R01AD12,fluticasone furoate
 https://www.ohdsi.org/omop,36256940,http://www.whocc.no/atc,D07XC01,betamethasone
 https://www.ohdsi.org/omop,36257155,http://www.whocc.no/atc,R03AL04,indacaterol and glycopyrronium bromide
 https://www.ohdsi.org/omop,36259798,http://www.whocc.no/atc,M05BB03,alendronic acid and colecalciferol
@@ -1962,7 +1902,6 @@ https://www.ohdsi.org/omop,36813122,http://www.whocc.no/atc,R03BA02,budesonide
 https://www.ohdsi.org/omop,36813940,http://www.whocc.no/atc,R03AC02,salbutamol
 https://www.ohdsi.org/omop,36878783,http://www.whocc.no/atc,N06AX22,agomelatine
 https://www.ohdsi.org/omop,36878831,http://www.whocc.no/atc,D10AF05,nadifloxacin
-https://www.ohdsi.org/omop,36878831,http://www.whocc.no/atc,J01MA24,levonadifloxacin
 https://www.ohdsi.org/omop,36879119,http://www.whocc.no/atc,G04BX14,dapoxetine
 https://www.ohdsi.org/omop,36879144,http://www.whocc.no/atc,R06AX28,rupatadine
 https://www.ohdsi.org/omop,36881053,http://www.whocc.no/atc,A02BC02,pantoprazole
@@ -2028,9 +1967,7 @@ https://www.ohdsi.org/omop,40163213,http://www.whocc.no/atc,N03AB02,phenytoin
 https://www.ohdsi.org/omop,40163271,http://www.whocc.no/atc,C09AA04,perindopril
 https://www.ohdsi.org/omop,40163275,http://www.whocc.no/atc,C09AA04,perindopril
 https://www.ohdsi.org/omop,40163283,http://www.whocc.no/atc,A02BC04,rabeprazole
-https://www.ohdsi.org/omop,40163283,http://www.whocc.no/atc,A02BC07,dexrabeprazole
 https://www.ohdsi.org/omop,40163285,http://www.whocc.no/atc,A02BC04,rabeprazole
-https://www.ohdsi.org/omop,40163285,http://www.whocc.no/atc,A02BC07,dexrabeprazole
 https://www.ohdsi.org/omop,40163312,http://www.whocc.no/atc,C07AA05,propranolol
 https://www.ohdsi.org/omop,40163342,http://www.whocc.no/atc,C07AA05,propranolol
 https://www.ohdsi.org/omop,40163356,http://www.whocc.no/atc,C07AA05,propranolol
@@ -2136,9 +2073,7 @@ https://www.ohdsi.org/omop,40184184,http://www.whocc.no/atc,C09DA01,losartan and
 https://www.ohdsi.org/omop,40184187,http://www.whocc.no/atc,C09DA01,losartan and diuretics
 https://www.ohdsi.org/omop,40184217,http://www.whocc.no/atc,C09DA01,losartan and diuretics
 https://www.ohdsi.org/omop,40184727,http://www.whocc.no/atc,A07DA03,loperamide
-https://www.ohdsi.org/omop,40184727,http://www.whocc.no/atc,A07DA05,loperamide oxide
 https://www.ohdsi.org/omop,40184730,http://www.whocc.no/atc,A07DA03,loperamide
-https://www.ohdsi.org/omop,40184730,http://www.whocc.no/atc,A07DA05,loperamide oxide
 https://www.ohdsi.org/omop,40185276,http://www.whocc.no/atc,C09CA01,losartan
 https://www.ohdsi.org/omop,40185304,http://www.whocc.no/atc,C09CA01,losartan
 https://www.ohdsi.org/omop,40222065,http://www.whocc.no/atc,N06AX12,bupropion
@@ -2215,10 +2150,8 @@ https://www.ohdsi.org/omop,40727762,http://www.whocc.no/atc,R03BB01,ipratropium 
 https://www.ohdsi.org/omop,40735547,http://www.whocc.no/atc,N02AJ14,tramadol and dexketoprofen
 https://www.ohdsi.org/omop,40738558,http://www.whocc.no/atc,N02AJ06,codeine and paracetamol
 https://www.ohdsi.org/omop,40822665,http://www.whocc.no/atc,D07AA01,methylprednisolone
-https://www.ohdsi.org/omop,40822665,http://www.whocc.no/atc,D07AC14,methylprednisolone aceponate
 https://www.ohdsi.org/omop,40823597,http://www.whocc.no/atc,N02AJ13,tramadol and paracetamol
 https://www.ohdsi.org/omop,40835197,http://www.whocc.no/atc,D07AA01,methylprednisolone
-https://www.ohdsi.org/omop,40835197,http://www.whocc.no/atc,D07AC14,methylprednisolone aceponate
 https://www.ohdsi.org/omop,40864885,http://www.whocc.no/atc,N03AG01,valproic acid
 https://www.ohdsi.org/omop,40896955,http://www.whocc.no/atc,D11AH02,pimecrolimus
 https://www.ohdsi.org/omop,40898756,http://www.whocc.no/atc,G01AF05,econazole
@@ -2311,13 +2244,11 @@ https://www.ohdsi.org/omop,42902238,http://www.whocc.no/atc,G03FB05,norethistero
 https://www.ohdsi.org/omop,42902275,http://www.whocc.no/atc,G03DC02,norethisterone
 https://www.ohdsi.org/omop,42902404,http://www.whocc.no/atc,N02AB03,fentanyl
 https://www.ohdsi.org/omop,42902447,http://www.whocc.no/atc,R03BA05,fluticasone
-https://www.ohdsi.org/omop,42902447,http://www.whocc.no/atc,R03BA09,fluticasone furoate
 https://www.ohdsi.org/omop,42902560,http://www.whocc.no/atc,N02AB03,fentanyl
 https://www.ohdsi.org/omop,42902587,http://www.whocc.no/atc,A10AB30,"insulins and analogues for injection, fast-acting - combinations"
 https://www.ohdsi.org/omop,42902666,http://www.whocc.no/atc,R03AK06,salmeterol and fluticasone
 https://www.ohdsi.org/omop,42902679,http://www.whocc.no/atc,L03AB07,interferon beta-1a
 https://www.ohdsi.org/omop,42902727,http://www.whocc.no/atc,N02AE01,buprenorphine
-https://www.ohdsi.org/omop,42902742,http://www.whocc.no/atc,A10AD02,insulin (beef)
 https://www.ohdsi.org/omop,42902742,http://www.whocc.no/atc,A10AE04,insulin glargine
 https://www.ohdsi.org/omop,42902745,http://www.whocc.no/atc,R03AK06,salmeterol and fluticasone
 https://www.ohdsi.org/omop,42902746,http://www.whocc.no/atc,R03AK06,salmeterol and fluticasone
@@ -2329,7 +2260,6 @@ https://www.ohdsi.org/omop,42902821,http://www.whocc.no/atc,A10AE05,insulin dete
 https://www.ohdsi.org/omop,42902864,http://www.whocc.no/atc,N02AE01,buprenorphine
 https://www.ohdsi.org/omop,42902906,http://www.whocc.no/atc,B01AB05,enoxaparin
 https://www.ohdsi.org/omop,42902934,http://www.whocc.no/atc,R03BA05,fluticasone
-https://www.ohdsi.org/omop,42902934,http://www.whocc.no/atc,R03BA09,fluticasone furoate
 https://www.ohdsi.org/omop,42902945,http://www.whocc.no/atc,A10AB30,"insulins and analogues for injection, fast-acting - combinations"
 https://www.ohdsi.org/omop,42902992,http://www.whocc.no/atc,A10BJ02,liraglutide
 https://www.ohdsi.org/omop,42903006,http://www.whocc.no/atc,N02AE01,buprenorphine
@@ -2344,7 +2274,6 @@ https://www.ohdsi.org/omop,42903330,http://www.whocc.no/atc,R03AC12,salmeterol
 https://www.ohdsi.org/omop,42903377,http://www.whocc.no/atc,N07BA01,nicotine
 https://www.ohdsi.org/omop,42904177,http://www.whocc.no/atc,N03AX22,perampanel
 https://www.ohdsi.org/omop,42925087,http://www.whocc.no/atc,R03BA05,fluticasone
-https://www.ohdsi.org/omop,42925087,http://www.whocc.no/atc,R03BA09,fluticasone furoate
 https://www.ohdsi.org/omop,42929304,http://www.whocc.no/atc,A02BC02,pantoprazole
 https://www.ohdsi.org/omop,42931130,http://www.whocc.no/atc,R03AC02,salbutamol
 https://www.ohdsi.org/omop,42937016,http://www.whocc.no/atc,A10AB01,insulin (human)
@@ -2403,19 +2332,14 @@ https://www.ohdsi.org/omop,44025887,http://www.whocc.no/atc,D01AC01,clotrimazole
 https://www.ohdsi.org/omop,44025887,http://www.whocc.no/atc,G01AF02,clotrimazole
 https://www.ohdsi.org/omop,44032705,http://www.whocc.no/atc,R03AK06,salmeterol and fluticasone
 https://www.ohdsi.org/omop,44045687,http://www.whocc.no/atc,R03BA05,fluticasone
-https://www.ohdsi.org/omop,44045687,http://www.whocc.no/atc,R03BA09,fluticasone furoate
 https://www.ohdsi.org/omop,44055903,http://www.whocc.no/atc,B03BB51,"folic acid, combinations"
 https://www.ohdsi.org/omop,44058287,http://www.whocc.no/atc,A12BA01,potassium chloride
 https://www.ohdsi.org/omop,44058698,http://www.whocc.no/atc,R01AD08,fluticasone
-https://www.ohdsi.org/omop,44058698,http://www.whocc.no/atc,R01AD12,fluticasone furoate
 https://www.ohdsi.org/omop,44071308,http://www.whocc.no/atc,D06AX09,mupirocin
 https://www.ohdsi.org/omop,44071432,http://www.whocc.no/atc,A03BB01,butylscopolamine
 https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,A07EA02,hydrocortisone
 https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,C05AA01,hydrocortisone
 https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,D07AA02,hydrocortisone
-https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,D07AB02,hydrocortisone butyrate
-https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,D07AB11,hydrocortisone buteprate
-https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,D07AC16,hydrocortisone aceponate
 https://www.ohdsi.org/omop,44084346,http://www.whocc.no/atc,S02BA01,hydrocortisone
 https://www.ohdsi.org/omop,44084408,http://www.whocc.no/atc,D06AX01,fusidic acid
 https://www.ohdsi.org/omop,44084408,http://www.whocc.no/atc,D09AA02,fusidic acid
@@ -2433,9 +2357,6 @@ https://www.ohdsi.org/omop,44085053,http://www.whocc.no/atc,A11GA01,ascorbic aci
 https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,A07EA02,hydrocortisone
 https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,C05AA01,hydrocortisone
 https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,D07AA02,hydrocortisone
-https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,D07AB02,hydrocortisone butyrate
-https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,D07AB11,hydrocortisone buteprate
-https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,D07AC16,hydrocortisone aceponate
 https://www.ohdsi.org/omop,44097247,http://www.whocc.no/atc,S02BA01,hydrocortisone
 https://www.ohdsi.org/omop,44097310,http://www.whocc.no/atc,D06AX01,fusidic acid
 https://www.ohdsi.org/omop,44097310,http://www.whocc.no/atc,D09AA02,fusidic acid
@@ -2468,9 +2389,7 @@ https://www.ohdsi.org/omop,45774893,http://www.whocc.no/atc,A10BK03,empagliflozi
 https://www.ohdsi.org/omop,45774943,http://www.whocc.no/atc,N02AA55,oxycodone and naloxone
 https://www.ohdsi.org/omop,45775116,http://www.whocc.no/atc,R03AC19,olodaterol
 https://www.ohdsi.org/omop,45775570,http://www.whocc.no/atc,V03AE01,polystyrene sulfonate
-https://www.ohdsi.org/omop,45775571,http://www.whocc.no/atc,A03AB02,glycopyrronium bromide
 https://www.ohdsi.org/omop,45775571,http://www.whocc.no/atc,D11AA01,glycopyrronium
-https://www.ohdsi.org/omop,45775571,http://www.whocc.no/atc,R03BB06,glycopyrronium bromide
 https://www.ohdsi.org/omop,45775584,http://www.whocc.no/atc,A06AB08,sodium picosulfate
 https://www.ohdsi.org/omop,45775622,http://www.whocc.no/atc,A10BD15,metformin and dapagliflozin
 https://www.ohdsi.org/omop,45775636,http://www.whocc.no/atc,J07AH09,"meningococcus B, multicomponent vaccine"
@@ -2485,7 +2404,6 @@ https://www.ohdsi.org/omop,45892419,http://www.whocc.no/atc,S03AA06,gentamicin
 https://www.ohdsi.org/omop,45892847,http://www.whocc.no/atc,B01AF03,edoxaban
 https://www.ohdsi.org/omop,45892856,http://www.whocc.no/atc,B01AF03,edoxaban
 https://www.ohdsi.org/omop,45892860,http://www.whocc.no/atc,B01AF03,edoxaban
-https://www.ohdsi.org/omop,46221558,http://www.whocc.no/atc,A10AD02,insulin (beef)
 https://www.ohdsi.org/omop,46221558,http://www.whocc.no/atc,A10AE04,insulin glargine
 https://www.ohdsi.org/omop,46233977,http://www.whocc.no/atc,A10AB04,insulin lispro
 https://www.ohdsi.org/omop,46233977,http://www.whocc.no/atc,A10AC04,insulin lispro

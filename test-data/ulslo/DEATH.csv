@@ -1,2 +1,4 @@
 person_id,death_date,death_datetime,death_type_concept_id,cause_concept_id,cause_source_value,cause_source_concept_id
 2,2024-06-10,2024-06-10 09:15:00.000,38003569,319835,,
+3,2024-07-01,,38003569,,,
+4,2024-08-15,2024-08-15 14:00:00.000,38003569,0,,0
