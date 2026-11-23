@@ -12,13 +12,19 @@
     }
   ],
   "context": {},
-  "variable": [],
+  "variable": [
+    {
+      "name": "causeExists",
+      "language": "text/fhirpath",
+      "expression": "(cause_concept_id.exists() and cause_concept_id != 0) or (cause_source_concept_id.exists() and cause_source_concept_id != 0)"
+    }
+  ],
   "mapping": [
     {
       "precondition": {
-        "name": "causeExists",
+        "name": "deathDateExists",
         "language": "text/fhirpath",
-        "expression": "(cause_concept_id.exists() and cause_concept_id != 0) or (cause_source_concept_id.exists() and cause_source_concept_id != 0)"
+        "expression": "death_date.exists() or death_datetime.exists()"
       },
       "expression": {
         "name": "result",
@@ -55,7 +61,7 @@
           },
           "effectiveDateTime": "{{iif(death_datetime.empty(), death_date, death_datetime.utl:toFhirDateTime('yyyy-MM-dd HH:mm:ss.SSS' | 'yyyy-MM-dd HH:mm:ss'))}}",
           "valueCodeableConcept": {
-            "coding": "{{* iif(cause_concept_id.exists() and cause_concept_id != 0,trms:translateToCoding(cause_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10'),iif(cause_source_concept_id.exists() and cause_source_concept_id != 0, trms:translateToCoding(cause_source_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10'), {}))}}"
+            "coding": "{{* iif(%causeExists.not(), utl:createFhirCoding('http://hl7.org/fhir/sid/icd-10', 'R99', 'Other ill-defined and unspecified causes of mortality'), iif(cause_concept_id.exists() and cause_concept_id != 0,trms:translateToCoding(cause_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10'),iif(cause_source_concept_id.exists() and cause_source_concept_id != 0, trms:translateToCoding(cause_source_concept_id.toString(), 'https://www.ohdsi.org/omop', 'https://ai4hf.eu/fhir/mappings/ConceptMap/omop-to-icd10'), {})))}}"
           },
           "subject": "{{mpp:createFhirReferenceWithHashedId('Patient', person_id.toString())}}"
         }
