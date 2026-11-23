@@ -7,3 +7,6 @@ log-service.conf
 **/target
 projects.json
 checkpoint
+
+# Ignore ignifyr-db
+ignifyr-db
