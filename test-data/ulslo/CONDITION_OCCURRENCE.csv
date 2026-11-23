@@ -64,3 +64,5 @@ condition_occurrence_id,person_id,condition_concept_id,condition_start_date,cond
 64,1,35209276,2024-02-15,2024-02-15 09:15:00.000,,,32020,32902,,,4,,"N18.3 Chronic kidney disease (readmission)",,
 65,2,319835,2024-05-25,2024-05-25 10:15:00.000,,,32020,32902,,,5,,"I50.0 Congestive heart failure",,
 66,2,1326588,2024-05-25,2024-05-25 10:15:00.000,,,32020,,,,5,,"I21.9 Acute myocardial infarction",,
+67,2,316139,2024-06-02,2024-06-02 08:00:00.000,,,32020,,,,,,"I50.9 Heart failure",,
+68,2,0,2024-06-02,2024-06-02 08:00:00.000,,,32020,,,,6,,"unmapped",,

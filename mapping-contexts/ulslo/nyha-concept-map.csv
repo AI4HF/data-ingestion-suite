@@ -1,2 +1,6 @@
 source_code,target_code,target_system,target_display
 "Class III","LA28406-9","http://loinc.org","Class-III"
+"variable:value/nyha_class:i/value","LA28404-4","http://loinc.org","Class-I"
+"variable:value/nyha_class:ii/value","LA28405-1","http://loinc.org","Class-II"
+"variable:value/nyha_class:iii/value","LA28406-9","http://loinc.org","Class-III"
+"variable:value/nyha_class:iv/value","LA28407-7","http://loinc.org","Class-IV"
